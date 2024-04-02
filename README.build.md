@@ -13,7 +13,6 @@ components, however they can be acquired separately.
 
 2. Clone meta-amd-adaptive-socs and dependency repository.
 ```
-$ git clone -b <release-branch> https://git.yoctoproject.org/meta-security
 $ git clone -b <rel-version> https://github.com/Xilinx/meta-openamp
 $ git clone -b <rel-version> https://gitenterprise.xilinx.com/Yocto/meta-amd-adaptive-socs
 ```
@@ -34,11 +33,10 @@ $ bitbake-layers add-layer ./<path-to-layer>/meta-openembedded/meta-python
 $ bitbake-layers add-layer ./<path-to-layer>/meta-openembedded/meta-filesystems
 $ bitbake-layers add-layer ./<path-to-layer>/meta-openembedded/meta-networking
 $ bitbake-layers add-layer ./<path-to-layer>/meta-virtualization
-$ bitbake-layers add-layer ./<path-to-layer>/meta-security
-$ bitbake-layers add-layer ./<path-to-layer>/meta-security/meta-tpm
 $ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-xilinx-core
 $ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-xilinx-standalone
 $ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-xilinx-standalone-experimental
+$ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-microblaze
 $ bitbake-layers add-layer ./<path-to-layer>/meta-amd-adaptive-socs/meta-amd-vek280-versal-sdt
 ```
 
