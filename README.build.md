@@ -6,7 +6,7 @@ layers.
 The following instructions require OE-Core meta and BitBake. Poky provides these
 components, however they can be acquired separately.
 
-> **Pre-requisites:** See [Preparing Build Host](https://docs.yoctoproject.org/4.1.4/singleindex.html#preparing-the-build-host) documentation.
+> **Pre-requisites:** See [Preparing Build Host](https://docs.yoctoproject.org/5.0.1/singleindex.html#preparing-the-build-host) documentation.
 
 1. Follow [Building Instructions](https://github.com/Xilinx/meta-xilinx/blob/master/README.building.md)
    upto step 2.
@@ -35,7 +35,7 @@ $ bitbake-layers add-layer ./<path-to-layer>/meta-openembedded/meta-networking
 $ bitbake-layers add-layer ./<path-to-layer>/meta-virtualization
 $ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-xilinx-core
 $ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-xilinx-standalone
-$ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-xilinx-standalone-experimental
+$ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-xilinx-standalone-sdt
 $ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-microblaze
 $ bitbake-layers add-layer ./<path-to-layer>/meta-amd-adaptive-socs/meta-amd-vek280-versal-sdt
 ```
