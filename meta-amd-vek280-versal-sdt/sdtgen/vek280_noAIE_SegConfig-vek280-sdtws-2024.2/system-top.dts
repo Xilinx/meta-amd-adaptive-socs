@@ -10,17 +10,23 @@
 	slrcount = <1>;
 	axi_bram_ctrl_0_memory: memory@20100000000 {
 		compatible = "xlnx,axi-bram-ctrl-4.1";
+		xlnx,ip-name = "axi_bram_ctrl";
 		device_type = "memory";
+		memory_type = "memory";
 		reg = <0x00000201 0x00000000 0x0 0x2000>;
 	};
-	axi_noc_0_memory: memory@00000000 {
+	axi_noc_0_ddr_memory: memory@00000000 {
 		compatible = "xlnx,axi-noc-1.1";
+		xlnx,ip-name = "axi_noc";
 		device_type = "memory";
 		reg = <0x0 0x00000000 0x0 0x80000000>, <0x00000008 0x80000000 0x0 0x80000000>;
+		memory_type = "memory";
 	};
 	versal_cips_0_pspmc_0_psv_ocm_ram_0_memory: memory@fffc0000 {
 		compatible = "xlnx,psv-ocm-ram-0-1.0" , "mmio-sram";
+		xlnx,ip-name = "psv_ocm_ram_0";
 		device_type = "memory";
+		memory_type = "memory";
 		reg = <0x0 0xFFFC0000 0x0 0x40000>;
 	};
 	chosen {
@@ -40,8 +46,9 @@
 			      <0x0 0xf9000000 &amba_apu 0x0 0xf9000000 0x0 0x80000>, 
 			      <0x00000201 0x00000000 &axi_bram_ctrl_0_memory 0x00000201 0x00000000 0x0 0x2000>, 
 			      <0x00000201 0x00000000 &axi_bram_ctrl_0 0x00000201 0x00000000 0x0 0x2000>, 
-			      <0x0 0x00000000 &axi_noc_0_memory 0x0 0x00000000 0x0 0x80000000>, 
-			      <0x00000008 0x80000000 &axi_noc_0_memory 0x00000008 0x80000000 0x0 0x80000000>, 
+			      <0x0 0x00000000 &axi_noc_0_ddr_memory 0x0 0x00000000 0x0 0x80000000>, 
+			      <0x00000008 0x80000000 &axi_noc_0_ddr_memory 0x00000008 0x80000000 0x0 0x80000000>, 
+			      <0x0 0xf9020000 &gic_its 0x0 0xf9020000 0x0 0x20000>, 
 			      <0x0 0xff330000 &ipi0 0x0 0xff330000 0x0 0x10000>, 
 			      <0x0 0xff340000 &ipi1 0x0 0xff340000 0x0 0x10000>, 
 			      <0x0 0xff350000 &ipi2 0x0 0xff350000 0x0 0x10000>, 
@@ -102,7 +109,7 @@
 			      <0x0 0xf6000000 &versal_cips_0_pspmc_0_psv_pmc_ram_npi 0x0 0xf6000000 0x0 0x2000000>, 
 			      <0x0 0xf9000000 &gic_a72 0x0 0xf9000000 0x0 0x70000>, 
 			      <0x0 0 &versal_cips_0_pspmc_0_psv_cpm 0x0 0 0x0 0xfd000000>, 
-			      <0x0 0xfd000000 &versal_cips_0_pspmc_0_psv_fpd_maincci_0 0x0 0xfd000000 0x0 0x100000>, 
+			      <0x0 0xfd000000 &cci 0x0 0xfd000000 0x0 0x100000>, 
 			      <0x0 0xfd1a0000 &versal_cips_0_pspmc_0_psv_crf_0 0x0 0xfd1a0000 0x0 0x140000>, 
 			      <0x0 0xfd360000 &versal_cips_0_pspmc_0_psv_fpd_afi_0 0x0 0xfd360000 0x0 0x10000>, 
 			      <0x0 0xfd380000 &versal_cips_0_pspmc_0_psv_fpd_afi_2 0x0 0xfd380000 0x0 0x10000>, 
@@ -154,7 +161,7 @@
 		compatible = "cpus,cluster";
 		address-map = <0xf0000000 &amba 0xf0000000 0x10000000>, 
 			      <0xf9000000 &amba_rpu 0xf9000000 0x3000>, 
-			      <0x40000 &axi_noc_0_memory 0x40000 0x7ffc0000>, 
+			      <0x40000 &axi_noc_0_ddr_memory 0x40000 0x7ffc0000>, 
 			      <0xFFFC0000 &versal_cips_0_pspmc_0_psv_ocm_ram_0_memory 0xFFFC0000 0x40000>, 
 			      <0xf0310000 &versal_cips_0_pspmc_0_psv_pmc_ppu1_mdm_0 0xf0310000 0x8000>, 
 			      <0xf0800000 &coresight 0xf0800000 0x10000>, 
@@ -206,7 +213,7 @@
 			      <0xf1310000 &pmc_xppu 0xf1310000 0x10000>, 
 			      <0xf2100000 &versal_cips_0_pspmc_0_psv_pmc_slave_boot_stream 0xf2100000 0x10000>, 
 			      <0xf6000000 &versal_cips_0_pspmc_0_psv_pmc_ram_npi 0xf6000000 0x2000000>, 
-			      <0xfd000000 &versal_cips_0_pspmc_0_psv_fpd_maincci_0 0xfd000000 0x100000>, 
+			      <0xfd000000 &cci 0xfd000000 0x100000>, 
 			      <0xfd1a0000 &versal_cips_0_pspmc_0_psv_crf_0 0xfd1a0000 0x140000>, 
 			      <0xfd360000 &versal_cips_0_pspmc_0_psv_fpd_afi_0 0xfd360000 0x10000>, 
 			      <0xfd380000 &versal_cips_0_pspmc_0_psv_fpd_afi_2 0xfd380000 0x10000>, 
@@ -262,7 +269,7 @@
 		compatible = "cpus,cluster";
 		address-map = <0xf0000000 &amba 0xf0000000 0x10000000>, 
 			      <0xf9000000 &amba_rpu 0xf9000000 0x3000>, 
-			      <0x40000 &axi_noc_0_memory 0x40000 0x7ffc0000>, 
+			      <0x40000 &axi_noc_0_ddr_memory 0x40000 0x7ffc0000>, 
 			      <0xFFFC0000 &versal_cips_0_pspmc_0_psv_ocm_ram_0_memory 0xFFFC0000 0x40000>, 
 			      <0xf0310000 &versal_cips_0_pspmc_0_psv_pmc_ppu1_mdm_0 0xf0310000 0x8000>, 
 			      <0xf0800000 &coresight 0xf0800000 0x10000>, 
@@ -314,7 +321,7 @@
 			      <0xf1310000 &pmc_xppu 0xf1310000 0x10000>, 
 			      <0xf2100000 &versal_cips_0_pspmc_0_psv_pmc_slave_boot_stream 0xf2100000 0x10000>, 
 			      <0xf6000000 &versal_cips_0_pspmc_0_psv_pmc_ram_npi 0xf6000000 0x2000000>, 
-			      <0xfd000000 &versal_cips_0_pspmc_0_psv_fpd_maincci_0 0xfd000000 0x100000>, 
+			      <0xfd000000 &cci 0xfd000000 0x100000>, 
 			      <0xfd1a0000 &versal_cips_0_pspmc_0_psv_crf_0 0xfd1a0000 0x140000>, 
 			      <0xfd360000 &versal_cips_0_pspmc_0_psv_fpd_afi_0 0xfd360000 0x10000>, 
 			      <0xfd380000 &versal_cips_0_pspmc_0_psv_fpd_afi_2 0xfd380000 0x10000>, 
@@ -369,7 +376,7 @@
 	cpus_microblaze_0: cpus_microblaze@0 {
 		compatible = "cpus,cluster";
 		address-map = <0xf0000000 &amba 0xf0000000 0x10000000>, 
-			      <0x00000000 &axi_noc_0_memory 0x00000000 0x80000000>, 
+			      <0x00000000 &axi_noc_0_ddr_memory 0x00000000 0x80000000>, 
 			      <0xff320000 &ipi_pmc 0xff320000 0x10000>, 
 			      <0xff390000 &ipi_pmc_nobuf 0xff390000 0x10000>, 
 			      <0xFFFC0000 &versal_cips_0_pspmc_0_psv_ocm_ram_0_memory 0xFFFC0000 0x40000>, 
@@ -423,7 +430,7 @@
 			      <0xf2100000 &versal_cips_0_pspmc_0_psv_pmc_slave_boot_stream 0xf2100000 0x10000>, 
 			      <0xf6000000 &versal_cips_0_pspmc_0_psv_pmc_ram_npi 0xf6000000 0x2000000>, 
 			      <0 &versal_cips_0_pspmc_0_psv_cpm 0 0xfd000000>, 
-			      <0xfd000000 &versal_cips_0_pspmc_0_psv_fpd_maincci_0 0xfd000000 0x100000>, 
+			      <0xfd000000 &cci 0xfd000000 0x100000>, 
 			      <0xfd1a0000 &versal_cips_0_pspmc_0_psv_crf_0 0xfd1a0000 0x140000>, 
 			      <0xfd360000 &versal_cips_0_pspmc_0_psv_fpd_afi_0 0xfd360000 0x10000>, 
 			      <0xfd380000 &versal_cips_0_pspmc_0_psv_fpd_afi_2 0xfd380000 0x10000>, 
@@ -476,7 +483,7 @@
 	cpus_microblaze_1: cpus_microblaze@1 {
 		compatible = "cpus,cluster";
 		address-map = <0xf0000000 &amba 0xf0000000 0x10000000>, 
-			      <0x00000000 &axi_noc_0_memory 0x00000000 0x80000000>, 
+			      <0x00000000 &axi_noc_0_ddr_memory 0x00000000 0x80000000>, 
 			      <0xff310000 &ipi_psm 0xff310000 0x10000>, 
 			      <0xFFFC0000 &versal_cips_0_pspmc_0_psv_ocm_ram_0_memory 0xFFFC0000 0x40000>, 
 			      <0xf0310000 &versal_cips_0_pspmc_0_psv_pmc_ppu1_mdm_0 0xf0310000 0x8000>, 
@@ -528,7 +535,7 @@
 			      <0xf1310000 &pmc_xppu 0xf1310000 0x10000>, 
 			      <0xf2100000 &versal_cips_0_pspmc_0_psv_pmc_slave_boot_stream 0xf2100000 0x10000>, 
 			      <0xf6000000 &versal_cips_0_pspmc_0_psv_pmc_ram_npi 0xf6000000 0x2000000>, 
-			      <0xfd000000 &versal_cips_0_pspmc_0_psv_fpd_maincci_0 0xfd000000 0x100000>, 
+			      <0xfd000000 &cci 0xfd000000 0x100000>, 
 			      <0xfd1a0000 &versal_cips_0_pspmc_0_psv_crf_0 0xfd1a0000 0x140000>, 
 			      <0xfd360000 &versal_cips_0_pspmc_0_psv_fpd_afi_0 0xfd360000 0x10000>, 
 			      <0xfd380000 &versal_cips_0_pspmc_0_psv_fpd_afi_2 0xfd380000 0x10000>, 
