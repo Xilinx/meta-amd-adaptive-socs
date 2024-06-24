@@ -1,6 +1,9 @@
 # meta-amd-adaptive-socs-core
 
-This layer enables AMD Adaptive SoC's core features.
+This layer enables AMD Adaptive SoC's core features. This layer enables AMD adaptive
+socs core metadata features such as recipes for cache output of system device tree
+generator(sdtgen), system device tree files, boot pdi and common image fectures
+etc.
 
 ## Dependencies
 
@@ -17,7 +20,8 @@ This layer depends on:
 	URI:
         https://git.yoctoproject.org/meta-xilinx (official version)
         https://github.com/Xilinx/meta-xilinx (development and amd xilinx release)
-	layers: meta-xilinx-core, meta-xilinx-standalone, meta-xilinx-standalone-experimental
+	layers: meta-xilinx-core, meta-xilinx-standalone, meta-xilinx-standalone-sdt,
+	        meta-microblaze.
 	branch: langdale or amd xilinx release version (e.g. rel-v2024.1)
 
 	URI: https://git.yoctoproject.org/meta-security
