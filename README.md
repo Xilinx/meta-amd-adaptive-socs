@@ -2,11 +2,6 @@
 
 Collection of layers to enable AMD Apdative SoC's bsp cache metadata.
 
-* **meta-amd-vek280-versal-sdt**: layer containing the AMD Versal VEK280 evaluation
-board system device tree metadata such as cache output of system device tree
-generator(sdtgen), machine configurations files, system device tree files, boot pdi,
-kernel configuration fragments, series configuration compiler(.scc) files etc.
-
 > **See:** AMD Xilinx devices:
 	https://www.xilinx.com/products/silicon-devices.html
 
