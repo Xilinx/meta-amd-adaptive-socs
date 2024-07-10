@@ -2,6 +2,17 @@
 
 Collection of layers to enable AMD Apdative SoC's bsp cache metadata.
 
+* **meta-amd-adaptive-socs-core**: layer containing AMD Adaptive SoC's core features.
+This layer enables AMD adaptive socs core metadata features such as recipes for
+cache output of system device tree generator(sdtgen), system device tree files,
+boot pdi and common image features etc.
+
+* **meta-amd-adaptive-socs-bsp**: layer containing the AMD Adaptive SoC's bsp features
+such as evaluation board system device tree build metadata such as machine configurations
+files, multiconfig files, system device tree files, boot pdi, kernel configuration
+fragments, series configuration compiler(.scc) files etc. This layer also supports
+to enable Xen hypervisor.
+
 > **See:** AMD Xilinx devices:
 	https://www.xilinx.com/products/silicon-devices.html
 
