@@ -2,7 +2,7 @@
 
 This layer enables AMD Adaptive SoC's core features. This layer enables AMD adaptive
 socs core metadata features such as recipes for cache output of system device tree
-generator(sdtgen), system device tree files, boot pdi and common image fectures
+generator(sdtgen), system device tree files, boot pdi and common image features
 etc.
 
 ## Dependencies
