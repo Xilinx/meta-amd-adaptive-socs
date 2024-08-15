@@ -37,7 +37,8 @@ $ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-xilinx-core
 $ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-xilinx-standalone
 $ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-xilinx-standalone-sdt
 $ bitbake-layers add-layer ./<path-to-layer>/meta-xilinx/meta-microblaze
-$ bitbake-layers add-layer ./<path-to-layer>/meta-amd-adaptive-socs/meta-amd-vek280-versal-sdt
+$ bitbake-layers add-layer ./<path-to-layer>/meta-amd-adaptive-socs/meta-amd-adaptive-socs-core
+$ bitbake-layers add-layer ./<path-to-layer>/meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp
 ```
 
 5. Set hardware `MACHINE` configuration variable in build/conf/local.conf
@@ -47,7 +48,7 @@ MACHINE = "<target_machine_name>"
 ```
 * For list of available target machines see meta layer conf/machine/*.conf file.
 
- * [meta-amd-vek280-versal-sdt machine conf file](meta-amd-vek280-versal-sdt/conf/machine)
+ * [meta-amd-adaptive-socs-bsp machine conf file](meta-amd-adaptive-socs-bsp/conf/machine)
 
 6. Continue [Building Instructions](https://github.com/Xilinx/meta-xilinx/blob/master/README.building.md)
    from step 6.
