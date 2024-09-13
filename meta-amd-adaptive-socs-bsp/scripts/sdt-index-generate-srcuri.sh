@@ -47,8 +47,6 @@ else
     cd ${urlpath}
 fi
 
-find . -type f
-
 for each_file in $(find . -type f -name '*.tar.gz' | sort) ; do
     case ${each_file} in
         *index.html)  continue ;;
