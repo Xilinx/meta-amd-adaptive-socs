@@ -142,7 +142,7 @@
                         compatible = "arm,cortex-a72", "arm,armv8";
                         device_type = "cpu";
                         enable-method = "psci";
-                        operating-points-v2 = <0x6f>;
+                        operating-points-v2 = <&cpu_opp_table>;
                         reg = <0x0>;
                         cpu-idle-states = <&CPU_SLEEP_0>;
                         power-domains = <&versal_firmware 0x18110003>;
@@ -162,7 +162,7 @@
                         compatible = "arm,cortex-a72", "arm,armv8";
                         device_type = "cpu";
                         enable-method = "psci";
-                        operating-points-v2 = <0x6f>;
+                        operating-points-v2 = <&cpu_opp_table>;
                         reg = <0x1>;
                         cpu-idle-states = <&CPU_SLEEP_0>;
                         power-domains = <&versal_firmware 0x18110004>;
@@ -182,7 +182,7 @@
 
                         CPU_SLEEP_0: cpu-sleep-0 {
                                 compatible = "arm,idle-state";
-                                arm,psci-suspend-param = "@", "", "";
+                                arm,psci-suspend-param = <0x40000000>;
                                 local-timer-stop;
                                 entry-latency-us = <0x12c>;
                                 exit-latency-us = <0x258>;
@@ -310,7 +310,7 @@
                         compatible = "pmc-microblaze";
                         device_type = "cpu";
                         reg = <0x0>;
-                        operating-points-v2 = <0x6f>;
+                        operating-points-v2 = <&cpu_opp_table>;
                         xlnx,d-axi = <0x1>;
                         xlnx,addr-tag-bits = <0x0>;
                         xlnx,m-axi-dc-thread-id-width = <0x1>;
@@ -657,7 +657,7 @@
                         compatible = "psm-microblaze";
                         device_type = "cpu";
                         reg = <0x1>;
-                        operating-points-v2 = <0x6f>;
+                        operating-points-v2 = <&cpu_opp_table>;
                         xlnx,d-axi = <0x1>;
                         xlnx,addr-tag-bits = <0x0>;
                         xlnx,m-axi-dc-thread-id-width = <0x1>;
@@ -1009,7 +1009,7 @@
                         compatible = "arm,cortex-r5";
                         device_type = "cpu";
                         reg = <0x0>;
-                        operating-points-v2 = <0x6f>;
+                        operating-points-v2 = <&cpu_opp_table>;
                         power-domains = <&versal_firmware 0x18110005>;
                         xlnx,rable = <0x0>;
                         xlnx,is-cache-coherent = <0x0>;
@@ -1144,7 +1144,7 @@
                         compatible = "arm,cortex-r5";
                         device_type = "cpu";
                         reg = <0x1>;
-                        operating-points-v2 = <0x6f>;
+                        operating-points-v2 = <&cpu_opp_table>;
                         power-domains = <&versal_firmware 0x18110006>;
                         xlnx,rable = <0x0>;
                         xlnx,is-cache-coherent = <0x0>;
@@ -1197,7 +1197,7 @@
 
         fpga: fpga {
                 compatible = "fpga-region";
-                fpga-mgr = <0x8d>;
+                fpga-mgr = <&versal_fpga>;
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
                 phandle = <0xa3>;
@@ -1396,8 +1396,7 @@
                         rx-fifo-depth = <0x40>;
                         tx-mailbox-count = <0x20>;
                         clocks = <&can0_clk>,
-                         <&versal_clk>,
-                         <&versal_cips_0_pspmc_0_psv_lpd_iou_secure_slcr_0>;
+                         <&versal_clk 0x52>;
                         power-domains = <&versal_firmware 0x1822401f>;
                         xlnx,rable = <0x0>;
                         xlnx,can-rx-dpth = <0x40>;
@@ -1422,8 +1421,7 @@
                         rx-fifo-depth = <0x40>;
                         tx-mailbox-count = <0x20>;
                         clocks = <&can1_clk>,
-                         <&versal_clk>,
-                         <&versal_cips_0_pspmc_0_psv_lpd_iou_secure_slcr_0>;
+                         <&versal_clk 0x52>;
                         power-domains = <&versal_firmware 0x18224020>;
                         xlnx,rable = <0x0>;
                         xlnx,can-rx-dpth = <0x40>;
