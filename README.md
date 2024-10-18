@@ -13,8 +13,8 @@ files, multiconfig files, system device tree files, boot pdi, kernel configurati
 fragments, series configuration compiler(.scc) files etc. This layer also supports
 to enable Xen hypervisor.
 
-> **See:** AMD Xilinx devices:
-	https://www.xilinx.com/products/silicon-devices.html
+> **Note:** Additional information on AMD Adaptive SoC's and FPGA's can be found at:
+	https://www.amd.com/en/products/adaptive-socs-and-fpgas.html
 
 Please see the respective READMEs and docs in the layer subdirectories.
 
@@ -29,10 +29,10 @@ with ['meta-amd-adaptive-socs'] in the subject:
 When sending patches, please make sure the email subject line includes
 `[meta-amd-adaptive-socs][<BRANCH_NAME>][PATCH]` and cc'ing the maintainers.
 
-For more details follow the OE community patch submission guidelines, as described in:
+For more details follow the Yocto Project community patch submission guidelines,
+as described in:
 
-https://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+https://docs.yoctoproject.org/dev/contributor-guide/submit-changes.html#
 
 `git send-email --to meta-xilinx@lists.yoctoproject.org *.patch`
 
@@ -45,7 +45,7 @@ https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
 `git format-patch -s --subject-prefix="meta-amd-adaptive-socs][<BRANCH_NAME>][PATCH" -1`
 
 **Example:**
-`git format-patch -s --subject-prefix="meta-amd-adaptive-socs][langdale][PATCH" -1`
+`git format-patch -s --subject-prefix="meta-amd-adaptive-socs][scarthgap][PATCH" -1`
 
 **Maintainers:**
 
@@ -58,4 +58,4 @@ https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
 ## Additional Documentation
 
 * [Building Instructions](README.build.md)
-* [AMD Xilinx Yocto layers](https://github.com/Xilinx/meta-xilinx/blob/master/README.md)
+* [AMD Yocto layers](https://github.com/Xilinx/meta-xilinx/blob/master/README.md)
