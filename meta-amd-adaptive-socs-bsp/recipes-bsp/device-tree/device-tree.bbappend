@@ -1,2 +1,2 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
-EXTRA_OVERLAYS:append:versal-vek280-sdt-seg = " versal-vek280-sdt-seg-system-conf.dtsi"
+EXTRA_DT_INCLUDE_FILES:append:versal-vek280-sdt-seg = " versal-vek280-sdt-seg-system-conf.dtsi"
