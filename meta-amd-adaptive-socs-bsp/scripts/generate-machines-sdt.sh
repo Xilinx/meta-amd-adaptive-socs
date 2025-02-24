@@ -1,10 +1,10 @@
 #! /bin/bash -e
 
 ### The following table controls the automatic generated of the machine .conf files (lines start with #M#)
-### Machine                 OVERLAY    PRE     POST
-#M# versal-vek280-sdt-seg   full       none    QB_MEM = \"-m 12G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-versal-ps-vek280.dtb\"\\nQEMU_HW_DTB_PMC = \"${QEMU_HW_DTB_PATH}/board-versal-pmc-virt.dtb\"\\n
-#M# zynqmp-zcu104-sdt-full  full       none    QB_MEM = \"-m 4G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-zynqmp-zcu104.dtb\"\\nQEMU_HW_DTB_PMU = \"${QEMU_HW_DTB_PATH}/zynqmp-pmu.dtb\"\\n
-#M# zynqmp-zcu111-sdt-full  full       none    QB_MEM = \"-m 4G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-zynqmp-zcu102.dtb\"\\nQEMU_HW_DTB_PMU = \"${QEMU_HW_DTB_PATH}/zynqmp-pmu.dtb\"\\n
+### Machine                 MULTICONFIGS  OVERLAY  DOMAIN   PRE   POST
+#M# versal-vek280-sdt-seg   default       full     default  none  QB_MEM = \"-m 12G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-versal-ps-vek280.dtb\"\\nQEMU_HW_DTB_PMC = \"${QEMU_HW_DTB_PATH}/board-versal-pmc-virt.dtb\"\\n
+#M# zynqmp-zcu104-sdt-full  default       full     default  none  QB_MEM = \"-m 4G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-zynqmp-zcu104.dtb\"\\nQEMU_HW_DTB_PMU = \"${QEMU_HW_DTB_PATH}/zynqmp-pmu.dtb\"\\n
+#M# zynqmp-zcu111-sdt-full  default       full     default  none  QB_MEM = \"-m 4G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-zynqmp-zcu102.dtb\"\\nQEMU_HW_DTB_PMU = \"${QEMU_HW_DTB_PATH}/zynqmp-pmu.dtb\"\\n
 
 this=$(realpath $0)
 
@@ -41,13 +41,39 @@ done < ${mach_index}
 
 # Load in the arrays from this script
 count=0
-while read marker machine overlay pre post ; do
+while read marker machine multiconfigs overlay domain pre post ; do
   if [ "${marker}" != "#M#" ]; then
       continue
   fi
 
+  # machines
   MACHINES[$count]=${machine}
+
+  # multiconfigs
+  if [ "$multiconfigs" = "full" ]; then
+    multiconfigs=" --multiconfigfull "
+  elif [ "$multiconfigs" = "default" ]; then
+    multiconfigs=""
+  fi
+  MULTICONFIGS[$count]=${multiconfigs}
+
+  # overlays
+  if [ "$overlay" = "full" ]; then
+    overlay=" -g full "
+  else
+    overlay=""
+  fi
   OVERLAYS[$count]=${overlay}
+
+  # domains
+  if [ "$domain" = "default" ]; then
+    domain=""
+  else
+    domain=" --domain-file ${domain} "
+  fi
+  DOMAINS[$count]=${domain}
+
+  # URLs
   for mach in ${!MACHINE_ID[@]}; do
     if [ ${MACHINE_ID[${mach}]} = ${machine} ]; then
       URLS[$count]=${MACHINE_URL[${mach}]}
@@ -58,10 +84,14 @@ while read marker machine overlay pre post ; do
     echo "ERROR: Unable to find ${machine} in ${mach_index}" >&2
     exit 1
   fi
+
+  # pre
   if [ "$pre" = "none" ]; then
     pre=
   fi
   PRE[$count]=${pre}
+
+  # post
   POST[$count]=${post}
 
   count=$(expr $count + 1)
@@ -73,33 +103,27 @@ for mach in ${!MACHINES[@]}; do
     continue
   fi
 
-  echo "Machine: ${MACHINES[${mach}]}"
-  echo "Overlay: ${OVERLAYS[${mach}]}"
-  echo "URL:     ${URLS[${mach}]}"
+  echo "Machine:      ${MACHINES[${mach}]}"
+  echo "Multiconfigs: ${MULTICONFIGS[${mach}]}"
+  echo "Overlay:      ${OVERLAYS[${mach}]}"
+  echo "Domain:       ${DOMAINS[${mach}]}"
+  echo "URL:          ${URLS[${mach}]}"
+  echo "Pre:          ${PRE[${mach}]}"
+  echo "Post:         ${POST[${mach}]}"
   echo
-  if [ ${OVERLAYS[${mach}]} = 'none' ]; then
-      set -x
-      rm -rf output
-      gen-machineconf parse-sdt --hw-description ${URLS[${mach}]} -c ${conf_path} --machine-name ${MACHINES[${mach}]} --multiconfigfull
-      rm -rf output
-      gen-machineconf parse-sdt --hw-description ${URLS[${mach}]} -c ${conf_path} --machine-name ${MACHINES[${mach}]}
-      set +x
-  else
-      set -x
-      rm -rf output
-      gen-machineconf parse-sdt --hw-description ${URLS[${mach}]} -g ${OVERLAYS[${mach}]} -c ${conf_path} --machine-name ${MACHINES[${mach}]} --multiconfigfull
-      rm -rf output
-      gen-machineconf parse-sdt --hw-description ${URLS[${mach}]} -g ${OVERLAYS[${mach}]} -c ${conf_path} --machine-name ${MACHINES[${mach}]}
-      set +x
-  fi
+
+  set -x
+  rm -rf output
+  gen-machineconf parse-sdt --hw-description ${URLS[${mach}]} -c ${conf_path} --machine-name ${MACHINES[${mach}]} ${MULTICONFIGS[${mach}]} ${OVERLAYS[${mach}]} ${DOMAINS[${mach}]}
+  set +x
 
   ######### Post gen-machineconf changes
   #
   if [ -n "${PRE[${mach}]}" ]; then
-    sed -i ${conf_path}/machine/${MACHINES[${mach}]}.conf -e 's,\(# Required generic machine inclusion\),'"${PRE[${mach}]}"'\n\1,'
+    sed -i ${conf_path}/machine/${MACHINES[${mach}]}.conf -e 's!\(# Required generic machine inclusion\)!'"${PRE[${mach}]}"'\n\1!'
   fi
 
   if [ -n "${POST[${mach}]}" ]; then
-    sed -i ${conf_path}/machine/${MACHINES[${mach}]}.conf -e 's,\(^require conf/machine/.*\.conf\),\1\n\n'"${POST[${mach}]}"','
+    sed -i ${conf_path}/machine/${MACHINES[${mach}]}.conf -e 's!\(^require conf/machine/.*\.conf\)!\1\n\n'"${POST[${mach}]}"'!'
   fi
 done
