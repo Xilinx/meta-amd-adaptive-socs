@@ -566,6 +566,26 @@
                         phandle = <0xba>;
                 };
 
+                mc0: memory-controller@f6150000 {
+                        compatible = "xlnx,versal-ddrmc";
+                        status = "disabled";
+                        reg = <0x0 0xf6150000 0x0 0x2000 0x0 0xf6070000 0x0 0x20000>;
+                        reg-names = "base", "noc";
+                        interrupts = <0x0 0x93 0x4>;
+                        interrupt-parent = <&gic>;
+                        phandle = <0xbb>;
+                };
+
+                mc1: memory-controller@f62c0000 {
+                        compatible = "xlnx,versal-ddrmc";
+                        status = "disabled";
+                        reg = <0x0 0xf62c0000 0x0 0x2000 0x0 0xf6210000 0x0 0x20000>;
+                        reg-names = "base", "noc";
+                        interrupts = <0x0 0x93 0x4>;
+                        interrupt-parent = <&gic>;
+                        phandle = <0xbc>;
+                };
+
                 mc2: memory-controller@f6430000 {
                         compatible = "xlnx,versal-ddrmc";
                         status = "disabled";
@@ -1368,6 +1388,22 @@
                         phandle = <0x66>;
                 };
 
+                ddrmc_xmpu_0: xmpu@f6080000 {
+                        compatible = "xlnx,xmpu";
+                        #firewall-cells = <0x0>;
+                        reg = <0x0 0xf6080000 0x0 0x1000>;
+                        status = "disabled";
+                        phandle = <0x13b>;
+                };
+
+                ddrmc_xmpu_1: xmpu@f6220000 {
+                        compatible = "xlnx,xmpu";
+                        #firewall-cells = <0x0>;
+                        reg = <0x0 0xf6220000 0x0 0x1000>;
+                        status = "disabled";
+                        phandle = <0x13c>;
+                };
+
                 ddrmc_xmpu_2: xmpu@f6390000 {
                         compatible = "xlnx,xmpu";
                         #firewall-cells = <0x0>;
@@ -1602,6 +1638,8 @@
                 i2c1 = "/axi/i2c@ff030000";
                 eeprom = "/axi/i2c@ff030000/eeprom@54";
                 i2c2 = "/axi/i2c@f1000000";
+                mc0 = "/axi/memory-controller@f6150000";
+                mc1 = "/axi/memory-controller@f62c0000";
                 mc2 = "/axi/memory-controller@f6430000";
                 mc3 = "/axi/memory-controller@f65a0000";
                 ocm = "/axi/memory-controller@ff960000";
@@ -1644,6 +1682,8 @@
                 fpd_xmpu = "/indirect-bus@2/xmpu@fd390000";
                 pmc_xmpu = "/indirect-bus@2/xmpu@f12f0000";
                 ocm_xmpu = "/indirect-bus@2/xmpu@ff980000";
+                ddrmc_xmpu_0 = "/indirect-bus@2/xmpu@f6080000";
+                ddrmc_xmpu_1 = "/indirect-bus@2/xmpu@f6220000";
                 ddrmc_xmpu_2 = "/indirect-bus@2/xmpu@f6390000";
                 ddrmc_xmpu_3 = "/indirect-bus@2/xmpu@f6500000";
                 pl_alt_ref_clk = "/pl_alt_ref_clk";
