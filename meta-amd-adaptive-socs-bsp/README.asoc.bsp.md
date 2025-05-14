@@ -20,7 +20,8 @@ scripts.
 
 | Devices | Evaluation Board  | Machine Configuration file | Reference Design | QEMU tested | HW tested |
 |---------|-------------------|----------------------------|------------------|-------------|-----------|
-| ZynqMP  | [ZCU104](https://www.xilinx.com/products/boards-and-kits/zcu104.html) | [zynqmp-zcu104-sdt-full](conf/machine/zynqmp-zcu104-sdt-full.conf) | `full`| Yes | Yes |
+| ZynqMP  | [ZCU104](https://www.amd.com/en/products/adaptive-socs-and-fpgas/evaluation-boards/zcu104.html) | [zynqmp-zcu104-sdt-full](conf/machine/zynqmp-zcu104-sdt-full.conf) | `full`| Yes | Yes |
+|         | [ZCU111](https://www.amd.com/en/products/adaptive-socs-and-fpgas/evaluation-boards/zcu111.html) | [zynqmp-zcu111-sdt-full](conf/machine/zynqmp-zcu111-sdt-full.conf) | `full`| Yes | Yes |
 | Versal  | [VEK280](https://www.xilinx.com/products/boards-and-kits/vek280.html) | [versal-vek280-sdt-seg](conf/machine/versal-vek280-sdt-seg.conf)   | `seg` | Yes | Yes |
 
 > **Note:** Additional information on AMD Adaptive SoC's and FPGA's can be found at:
