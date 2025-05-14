@@ -6,6 +6,7 @@
 #M# zynqmp-zcu104-sdt-full  default       full     default  none  QB_MEM = \"-m 4G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-zynqmp-zcu104.dtb\"\\nQEMU_HW_DTB_PMU = \"${QEMU_HW_DTB_PATH}/zynqmp-pmu.dtb\"\\n
 #M# zynqmp-zcu111-sdt-full  default       full     default  none  QB_MEM = \"-m 4G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-zynqmp-zcu102.dtb\"\\nQEMU_HW_DTB_PMU = \"${QEMU_HW_DTB_PATH}/zynqmp-pmu.dtb\"\\n
 
+#M# versal-vck190-sdt-seg   default       full     default  none  QB_MEM = \"-m 8G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-versal-ps-vck190.dtb\"\\nQEMU_HW_DTB_PMC = \"${QEMU_HW_DTB_PATH}/board-versal-pmc-virt.dtb\"\\nQB_ROOTFS_OPT = \"-drive \if=sd\\,\index=3\\,\file=@ROOTFS@\\,\format=raw\"\\n
 this=$(realpath $0)
 
 if [ $# -lt 2 ]; then
