@@ -22,7 +22,7 @@ This layer depends on:
         https://github.com/Xilinx/meta-xilinx (development and AMD release)
 	layers: meta-xilinx-core, meta-xilinx-standalone, meta-xilinx-standalone-sdt,
 	        meta-microblaze.
-	branch: scarthgap or AMD release version (e.g. rel-v2025.1)
+	branch: scarthgap or AMD release version (e.g. rel-v2025.2)
 
 	URI: https://git.yoctoproject.org/meta-security
 	layers: meta-tpm
@@ -31,12 +31,12 @@ This layer depends on:
 	URI:
         https://git.yoctoproject.org/meta-virtualization (official version)
         https://github.com/Xilinx/meta-virtualization (development and AMD release)
-	branch: scarthgap or AMD release version (e.g. rel-v2025.1)
+	branch: scarthgap or AMD release version (e.g. rel-v2025.2)
 
 	URI:
         https://github.com/OpenAMP/meta-openamp (official version)
         https://github.com/Xilinx/meta-openamp (development and AMD release)
-	branch: scarthgap or AMD release version (e.g. rel-v2025.1)
+	branch: scarthgap or AMD release version (e.g. rel-v2025.2)
 
 	URI: https://git.yoctoproject.org/meta-arm
 	layers: meta-arm, meta-arm-toolchain
