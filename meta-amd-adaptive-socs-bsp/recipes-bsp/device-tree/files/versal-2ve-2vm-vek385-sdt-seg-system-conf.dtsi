@@ -1,0 +1,244 @@
+/*
+ * Temporary DT nodes for VEK385 Evaluation board.
+ */
+
+/ {
+	chosen {
+		bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
+		stdout-path = "serial1:115200n8";
+	};
+	aliases {
+		nvmem1 = &eeprom;
+		/* Since UART0 is disabled below, so remove the unused alias dt property */
+		/delete-property/ serial0;
+	};
+	
+	/* Carving out the mem reservations for PLM, TFA, OPTEE and ISP.
+	This is a workaround, later this will be handled through domain.yaml
+	shel flow */
+	reserved-memory {
+               #address-cells = <2>;
+               #size-cells = <2>;
+               ranges;
+
+               /* PLM region - 16MB */
+               plm_region: buffer@0 {
+                       no-map;
+                       reg = <0x0 0x0 0x0 0x1000000>;
+               };
+
+               /* TFA region - 6MB*/
+               tfa_region: buffer@1000000 {
+                       no-map;
+                       reg = <0x0 0x1000000 0x0 0x600000>;
+               };
+
+               /* TFA core region -2MB */
+               tfa_core_region: buffer@1600000 {
+                       no-map;
+                       reg = <0x0 0x1600000 0x0 0x200000>;
+               };
+
+               /* TFA core region -128MB */
+               optee_region:  buffer@1800000 {
+                       no-map;
+                       reg = <0x0 0x1800000 0x0 0x8000000>;
+               };
+
+               /* TFA core region - 40MB */
+               rpu_openamp_region: buffer@9800000 {
+                       no-map;
+                       reg = <0x0 0x9800000 0x0 0x02800000>;
+               };
+
+               /* ISP mem reservations - 320MB */
+               rproc_D_0_6_calib_load: rpu6_calib_load {
+                        no-map;
+                        reg = <0x0 0x11126000 0x0 0x28000>;
+                };
+                rproc_D_0_6_hal_mem_priv: rpu6_hal_mem_priv {
+                        no-map;
+                        reg = <0x0 0x1114E000 0x0 0x01001000>;
+                };
+
+                rproc_D_1_7_calib_load: rpu7_calib_load {
+                        no-map;
+                        reg = <0x0 0x17275000 0x0 0x28000>;
+                };
+                rproc_D_1_7_hal_mem_priv: rpu7_hal_mem_priv {
+                        no-map;
+                        reg = <0x0 0x1729D000 0x0 0x01001000>;
+                };
+
+                rproc_E_0_8_calib_load: rpu8_calib_load {
+                        no-map;
+                        reg = <0x0 0x1a7df000 0x0 0x28000>;
+                };
+		rproc_E_0_8_hal_mem_priv: rpu8_hal_mem_priv {
+                        no-map;
+                        reg = <0x0 0x1a807000 0x0 0x01001000>;
+                };
+
+                rproc_E_1_9_calib_load: rpu9_calib_load {
+                        no-map;
+                        reg = <0x0 0x1D908000 0x0 0x28000>;
+                };
+                rproc_E_1_9_hal_mem_priv: rpu9_hal_mem_priv {
+                        no-map;
+                        reg = <0x0 0x1D930000 0x0 0x01001000>;
+                };
+
+                isp_mbox_buffer: isp_mbox_buffer@1829E000 {
+                        no-map;
+                        reg = <0x00 0x1829E000 0x00 0x400000>;
+                };
+                rpu_shared_mem: rpu_shared_mem@1869E000 {
+                        no-map;
+                        reg = <0x0 0x1869E000 0x0 0x40000>;
+                };
+		cma_reserved: cma_reserved@800000000 {
+			compatible = "shared-dma-pool";
+			reusable;
+			reg = <0x8 0x0 0x0 0x40000000>;
+			linux,cma-default;
+		};
+        };
+
+
+	/* System-ready metadata partitions for bank0 and bank1 with uuid info*/
+        firmware {
+                fwu-mdata {
+                        compatible = "u-boot,fwu-mdata-mtd";
+                        fwu-mdata-store = <&flash0>;
+                        mdata-parts = "SystemReady-DT Update Metadata", "SystemReady-DT Update Metadata Backup";
+                        fwu-bank0 {
+                                id = <0>;
+                                label = "Bank A Space";
+                                fwu-image0 {
+                                        id = <0>;
+                                        offset = <0>;
+                                        size = <0x7200000>;
+                                        uuid = "0b931b7e-b2f6-11ef-8565-eb65d140066b";
+                                };
+                        };
+                        fwu-bank1 {
+                                id = <1>;
+                                label = "Bank B Space";
+                                fwu-image0 {
+                                        id = <0>;
+                                        offset = <0>;
+                                        size = <0x7200000>;
+                                        uuid = "1243d800-b2f6-11ef-8f4f-8bddc3aa326d";
+                                };
+                        };
+                };
+        };
+
+	 /* IPI nobuf handling for mailbox node for ISP
+	 This is workaround once domain.yaml flow available will remove this*/
+        /delete-node/ mailbox@eb380000;
+        mailbox@eb380000 {
+                status = "okay";
+                compatible = "xlnx,versal-ipi-mailbox";
+                interrupt-parent = <0x01>;
+                interrupts = <0x00 0x3e 0x04>;
+                reg = <0x00 0xeb380000 0x00 0x10000 0x00 0xeb3f0e00 0x00 0x200>;
+                xlnx,ipi-bitmask = <0x80>;
+                xlnx,ipi-id = <0x07>;
+                xlnx,ipi-buf-index = <0x07>;
+                #address-cells = <0x02>;
+                #size-cells = <0x02>;
+                ranges;
+                xlnx,cpu-name = "A78_0";
+                xlnx,buffer-base = <0xeb3f0e00>;
+                xlnx,buffer-index = <0x07>;
+                xlnx,ip-name = "ipi";
+                xlnx,ipi-target-count = <0x10>;
+                reg-names = "ctrl\0msg";
+                xlnx,int-id = <0x5e>;
+                xlnx,bit-position = <0x07>;
+                xlnx,name = "ps_wizard_0_ps11_0_ipi_5";
+                phandle = <0x12>;
+
+                child0:child@0 {
+                        xlnx,ipi-bitmask = <0x1000>;
+                        compatible = "xlnx,versal-ipi-dest-mailbox";
+                        #mbox-cells = <0x01>;
+                        reg = <0x00 0xeb3b2000 0x00 0x1000>;
+                        xlnx,ipi-id = <0x0c>;
+                        xlnx,ipi-buf-index = <0xffff>;
+                        reg-names = "ctrl";
+                        phandle = <0x1a3>;
+                };
+
+                child1:child@1 {
+                        xlnx,ipi-bitmask = <0x2000>;
+                        compatible = "xlnx,versal-ipi-dest-mailbox";
+                        #mbox-cells = <0x01>;
+                        reg = <0x00 0xeb3b3000 0x00 0x1000>;
+                        xlnx,ipi-id = <0x0d>;
+                        xlnx,ipi-buf-index = <0xffff>;
+                        reg-names = "ctrl";
+                        phandle = <0x1a5>;
+                };
+		child2:child@2 {
+                        xlnx,ipi-bitmask = <0x4000>;
+                        compatible = "xlnx,versal-ipi-dest-mailbox";
+                        #mbox-cells = <0x01>;
+                        reg = <0x00 0xeb3b4000 0x00 0x1000>;
+                        xlnx,ipi-id = <0x0e>;
+                        xlnx,ipi-buf-index = <0xffff>;
+                        reg-names = "ctrl";
+                        phandle = <0x1a7>;
+                };
+
+                child3:child@3 {
+                        xlnx,ipi-bitmask = <0x8000>;
+                        compatible = "xlnx,versal-ipi-dest-mailbox";
+                        #mbox-cells = <0x01>;
+                        reg = <0x00 0xeb3b5000 0x00 0x1000>;
+                        xlnx,ipi-id = <0x0f>;
+                        xlnx,ipi-buf-index = <0xffff>;
+                        reg-names = "ctrl";
+                        phandle = <0x1a9>;
+                };
+
+        };
+
+};
+
+/*
+ * UART0 is reserved for RPU, Hence temporarily disable UART0 for U-boot and
+ * Linux. This should be handled from domain.yaml once solution is available.
+ */
+&serial0 {
+	status = "disabled";
+};
+/*
+I2C Node (i2c@f1940000) in the PS device tree
+I2C access should be disabled from APU Linux as I2C0 is allocated
+for ISP/sensor processing in the RPU firmware. This ensures I2C0 is not
+accessed by Linux and remains dedicated to RPU operation.
+*/
+&i2c0 {
+	status = "disabled";
+};
+/*
+TTC timer nodes (timer@f1ea0000 to timer@f1ed0000) in the PS device tree causing conflict with
+the RPU firmware execution during Linux boot.So disabling them to ensures successful RPU log prints
+*/
+&ttc4 {
+	status = "disabled";
+};
+
+&ttc5 {
+        status = "disabled";
+};
+
+&ttc6 {
+        status = "disabled";
+};
+
+&ttc7 {
+        status = "disabled";
+};
