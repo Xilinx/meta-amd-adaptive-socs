@@ -122,6 +122,9 @@ for mach in ${!MACHINES[@]}; do
      --add-config CONFIG_SUBSYSTEM_OP-TEE_SERIAL_SERIAL1_SELECT=y \
      --add-config CONFIG_SUBSYSTEM_SERIAL_OP-TEE_IP_NAME="1" \
      --add-config CONFIG_SUBSYSTEM_OPTEE=y \
+     --add-config CONFIG_SUBSYSTEM_TF-A_MEMORY_SETTINGS=y \
+     --add-config CONFIG_SUBSYSTEM_TF-A_MEM_BASE=0x1600000 \
+     --add-config CONFIG_SUBSYSTEM_TF-A_MEM_SIZE=0x200000 \
      --add-config CONFIG_SUBSYSTEM_UBOOT_APPEND_BASEADDR=disable \
      "
   else
