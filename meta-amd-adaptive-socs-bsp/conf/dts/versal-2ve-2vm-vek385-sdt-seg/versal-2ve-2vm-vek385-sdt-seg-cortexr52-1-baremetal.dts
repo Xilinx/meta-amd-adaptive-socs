@@ -207,44 +207,44 @@
                         cluster0 {
 
                                 core0 {
-                                        cpu = <0xb1>;
+                                        cpu = <&cortexa78_0>;
                                 };
 
                                 core1 {
-                                        cpu = <0xb2>;
+                                        cpu = <&cortexa78_1>;
                                 };
                         };
 
                         cluster1 {
 
                                 core0 {
-                                        cpu = <0xb3>;
+                                        cpu = <&cortexa78_2>;
                                 };
 
                                 core1 {
-                                        cpu = <0xb4>;
+                                        cpu = <&cortexa78_3>;
                                 };
                         };
 
                         cluster2 {
 
                                 core0 {
-                                        cpu = <0xb5>;
+                                        cpu = <&cortexa78_4>;
                                 };
 
                                 core1 {
-                                        cpu = <0xb6>;
+                                        cpu = <&cortexa78_5>;
                                 };
                         };
 
                         cluster3 {
 
                                 core0 {
-                                        cpu = <0xb7>;
+                                        cpu = <&cortexa78_6>;
                                 };
 
                                 core1 {
-                                        cpu = <0xb8>;
+                                        cpu = <&cortexa78_7>;
                                 };
                         };
                 };
@@ -2477,7 +2477,8 @@
                                 compatible = "xlnx,zynqmp-power";
                                 interrupt-parent = <&gic_r52>;
                                 interrupts = <0x0 0x39 0x4>;
-                                mboxes = <0xe3 0x0 0xe3 0x1>;
+                                mboxes = <&ipi_mailbox_pmu1 0x0>,
+                                 <&ipi_mailbox_pmu1 0x1>;
                                 mbox-names = "tx", "rx";
                                 phandle = <0x119>;
                         };
@@ -2710,8 +2711,8 @@
                                 gpu_resource_group@a0000 {
                                         compatible = "arm,mali-gpu-resource-group";
                                         reg = <0x0 0xa0000 0x0 0x10000>;
-                                        partition-config = <0xe5>;
-                                        partition-control = <0xe6>;
+                                        partition-config = <&gpu_partition_config_a_0>;
+                                        partition-control = <&gpu_partition_control_a_0>;
                                         interrupt-parent = <&gic_r52>;
                                         interrupt-names = "PTM_GROUP_IRQ";
                                         interrupts = <0x0 0xb5 0x4>;
@@ -2732,9 +2733,9 @@
                                         interrupt-parent = <&gic_r52>;
                                         interrupt-names = "JOB", "MMU", "GPU";
                                         interrupts = <0x0 0xb4 0x4 0x0 0xb4 0x4 0x0 0xb4 0x4>;
-                                        arbiter-if = <0xe7>;
+                                        arbiter-if = <&gpu_aw_message_a_0>;
                                         system-coherency = <0x1f>;
-                                        physical-memory-group-manager = <0xe8>;
+                                        physical-memory-group-manager = <&gpu_physical_memory_group_manager>;
                                 };
                         };
                 };
@@ -2763,7 +2764,7 @@
                                         reg = <0x0>;
 
                                         dptx_in_0: endpoint {
-                                                remote-endpoint = <0xe9>;
+                                                remote-endpoint = <&dc_out_0>;
                                                 phandle = <0xef>;
                                         };
                                 };
@@ -2772,7 +2773,7 @@
                                         reg = <0x1>;
 
                                         dptx_in_1: endpoint {
-                                                remote-endpoint = <0xea>;
+                                                remote-endpoint = <&dc_out_1>;
                                                 phandle = <0xf0>;
                                         };
                                 };
@@ -2781,7 +2782,7 @@
                                         reg = <0x2>;
 
                                         dptx_in_2: endpoint {
-                                                remote-endpoint = <0xeb>;
+                                                remote-endpoint = <&dc_out_2>;
                                                 phandle = <0xf1>;
                                         };
                                 };
@@ -2790,7 +2791,7 @@
                                         reg = <0x3>;
 
                                         dptx_in_3: endpoint {
-                                                remote-endpoint = <0xec>;
+                                                remote-endpoint = <&dc_out_3>;
                                                 phandle = <0xf2>;
                                         };
                                 };
@@ -2817,7 +2818,14 @@
                         interrupts = <0x0 0xb3 0x4>;
                         interrupt-parent = <&gic_r52>;
                         dma-names = "vid.0.0", "vid.0.1", "vid.0.2", "vid.1.0", "vid.1.1", "vid.1.2", "aud", "cur";
-                        dmas = <0xa 0x0 0xa 0x1 0xa 0x2 0xa 0x3 0xa 0x4 0xa 0x5 0xa 0x6 0xa 0x7>;
+                        dmas = <&mmi_dcdma 0x0>,
+                         <&mmi_dcdma 0x1>,
+                         <&mmi_dcdma 0x2>,
+                         <&mmi_dcdma 0x3>,
+                         <&mmi_dcdma 0x4>,
+                         <&mmi_dcdma 0x5>,
+                         <&mmi_dcdma 0x6>,
+                         <&mmi_dcdma 0x7>;
                         clock-names = "ps_vid_clk";
                         clocks = <&versal2_clk 0xdc>;
                         resets = <&versal2_reset 0xc104119>;
@@ -2901,7 +2909,7 @@
                                         reg = <0xc>;
 
                                         dc_out_0: endpoint {
-                                                remote-endpoint = <0xef>;
+                                                remote-endpoint = <&dptx_in_0>;
                                                 phandle = <0xe9>;
                                         };
                                 };
@@ -2910,7 +2918,7 @@
                                         reg = <0xd>;
 
                                         dc_out_1: endpoint {
-                                                remote-endpoint = <0xf0>;
+                                                remote-endpoint = <&dptx_in_1>;
                                                 phandle = <0xea>;
                                         };
                                 };
@@ -2919,7 +2927,7 @@
                                         reg = <0xe>;
 
                                         dc_out_2: endpoint {
-                                                remote-endpoint = <0xf1>;
+                                                remote-endpoint = <&dptx_in_2>;
                                                 phandle = <0xeb>;
                                         };
                                 };
@@ -2928,7 +2936,7 @@
                                         reg = <0xf>;
 
                                         dc_out_3: endpoint {
-                                                remote-endpoint = <0xf2>;
+                                                remote-endpoint = <&dptx_in_3>;
                                                 phandle = <0xec>;
                                         };
                                 };
@@ -4514,7 +4522,7 @@
                                 hub_2_0: hub@1 {
                                         compatible = "usb424,2744";
                                         reg = <0x1>;
-                                        i2c-bus = <0xf6>;
+                                        i2c-bus = <&hub>;
                                         reset-gpios = <&gpio0 0xe 0x1>;
                                         phandle = <0x146>;
                                 };
@@ -4568,7 +4576,7 @@
                          <0x0 0x0 0x0 0x2 &mdb_intc_0 0x1>,
                          <0x0 0x0 0x0 0x3 &mdb_intc_0 0x2>,
                          <0x0 0x0 0x0 0x4 &mdb_intc_0 0x3>;
-                        msi-map = <0x0 0xf9 0x0 0x10000>;
+                        msi-map = <0x0 &its 0x0 0x10000>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
                         xlnx,csr-slcr = <0x1000 0x0 0x0>;
@@ -4603,7 +4611,7 @@
                          <0x0 0x0 0x0 0x2 &mdb_intc_1 0x1>,
                          <0x0 0x0 0x0 0x3 &mdb_intc_1 0x2>,
                          <0x0 0x0 0x0 0x4 &mdb_intc_1 0x3>;
-                        msi-map = <0x0 0xf9 0x10000 0x10000>;
+                        msi-map = <0x0 &its 0x10000 0x10000>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
                         xlnx,csr-slcr = <0x1400 0x0 0x0>;
@@ -9325,7 +9333,7 @@
         pwm-fan {
                 compatible = "pwm-fan";
                 status = "okay";
-                pwms = <0xa2 0x2 0x9c40 0x1>;
+                pwms = <&ttc0 0x2 0x9c40 0x1>;
         };
 
         __symbols__ {

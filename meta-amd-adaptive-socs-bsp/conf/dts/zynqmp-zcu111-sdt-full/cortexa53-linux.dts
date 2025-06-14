@@ -233,7 +233,8 @@
                                 compatible = "xlnx,zynqmp-power";
                                 interrupt-parent = <&gic>;
                                 interrupts = <0x0 0x23 0x4>;
-                                mboxes = <0x8c 0x0 0x8c 0x1>;
+                                mboxes = <&ipi_mailbox_pmu1 0x0>,
+                                 <&ipi_mailbox_pmu1 0x1>;
                                 mbox-names = "tx", "rx";
                                 phandle = <0xc0>;
                         };
@@ -619,13 +620,42 @@
 
         ams {
                 compatible = "iio-hwmon";
-                io-channels = <0x1e 0x0 0x1e 0x1 0x1e 0x2 0x1e 0x3 0x1e 0x4 0x1e 0x5 0x1e 0x6 0x1e 0x7 0x1e 0x8 0x1e 0x9 0x1e 0xa 0x1e 0xb 0x1e 0xc 0x1e 0xd 0x1e 0xe 0x1e 0xf 0x1e 0x10 0x1e 0x11 0x1e 0x12 0x1e 0x13 0x1e 0x14 0x1e 0x15 0x1e 0x16 0x1e 0x17 0x1e 0x18 0x1e 0x19 0x1e 0x1a 0x1e 0x1b 0x1e 0x1c 0x1e 0x1d>;
+                io-channels = <&xilinx_ams 0x0>,
+                 <&xilinx_ams 0x1>,
+                 <&xilinx_ams 0x2>,
+                 <&xilinx_ams 0x3>,
+                 <&xilinx_ams 0x4>,
+                 <&xilinx_ams 0x5>,
+                 <&xilinx_ams 0x6>,
+                 <&xilinx_ams 0x7>,
+                 <&xilinx_ams 0x8>,
+                 <&xilinx_ams 0x9>,
+                 <&xilinx_ams 0xa>,
+                 <&xilinx_ams 0xb>,
+                 <&xilinx_ams 0xc>,
+                 <&xilinx_ams 0xd>,
+                 <&xilinx_ams 0xe>,
+                 <&xilinx_ams 0xf>,
+                 <&xilinx_ams 0x10>,
+                 <&xilinx_ams 0x11>,
+                 <&xilinx_ams 0x12>,
+                 <&xilinx_ams 0x13>,
+                 <&xilinx_ams 0x14>,
+                 <&xilinx_ams 0x15>,
+                 <&xilinx_ams 0x16>,
+                 <&xilinx_ams 0x17>,
+                 <&xilinx_ams 0x18>,
+                 <&xilinx_ams 0x19>,
+                 <&xilinx_ams 0x1a>,
+                 <&xilinx_ams 0x1b>,
+                 <&xilinx_ams 0x1c>,
+                 <&xilinx_ams 0x1d>;
         };
 
         tsens_apu: thermal-sensor-apu {
                 compatible = "generic-adc-thermal";
                 #thermal-sensor-cells = <0x0>;
-                io-channels = <0x1e 0x7>;
+                io-channels = <&xilinx_ams 0x7>;
                 io-channel-names = "sensor-channel";
                 phandle = <0x93>;
         };
@@ -633,7 +663,7 @@
         tsens_rpu: thermal-sensor-rpu {
                 compatible = "generic-adc-thermal";
                 #thermal-sensor-cells = <0x0>;
-                io-channels = <0x1e 0x8>;
+                io-channels = <&xilinx_ams 0x8>;
                 io-channel-names = "sensor-channel";
                 phandle = <0x95>;
         };
@@ -641,7 +671,7 @@
         tsens_pl: thermal-sensor-pl {
                 compatible = "generic-adc-thermal";
                 #thermal-sensor-cells = <0x0>;
-                io-channels = <0x1e 0x14>;
+                io-channels = <&xilinx_ams 0x14>;
                 io-channel-names = "sensor-channel";
                 phandle = <0x96>;
         };
@@ -651,7 +681,7 @@
                 apu-thermal {
                         polling-delay-passive = <0x3e8>;
                         polling-delay = <0x1388>;
-                        thermal-sensors = <0x93>;
+                        thermal-sensors = <&tsens_apu>;
 
                         trips {
 
@@ -673,15 +703,18 @@
                         cooling-maps {
 
                                 map {
-                                        trip = <0x94>;
-                                        cooling-device = <0x88 0xffffffff 0xffffffff 0x89 0xffffffff 0xffffffff 0x8a 0xffffffff 0xffffffff 0x8b 0xffffffff 0xffffffff>;
+                                        trip = <&apu_passive>;
+                                        cooling-device = <&psu_cortexa53_0 0xffffffff 0xffffffff>,
+                                         <&psu_cortexa53_1 0xffffffff 0xffffffff>,
+                                         <&psu_cortexa53_2 0xffffffff 0xffffffff>,
+                                         <&psu_cortexa53_3 0xffffffff 0xffffffff>;
                                 };
                         };
                 };
 
                 rpu-thermal {
                         polling-delay = <0x2710>;
-                        thermal-sensors = <0x95>;
+                        thermal-sensors = <&tsens_rpu>;
 
                         trips {
 
@@ -695,7 +728,7 @@
 
                 pl-thermal {
                         polling-delay = <0x2710>;
-                        thermal-sensors = <0x96>;
+                        thermal-sensors = <&tsens_pl>;
 
                         trips {
 
@@ -770,7 +803,7 @@
                         compatible = "arm,coresight-cpu-debug", "arm,primecell";
                         reg = <0x0 0xfec10000 0x0 0x1000>;
                         clock-names = "apb_pclk";
-                        cpu = <0x88>;
+                        cpu = <&psu_cortexa53_0>;
                         clocks = <&zynqmp_clk 0xc>;
                         phandle = <0xd9>;
                 };
@@ -779,7 +812,7 @@
                         compatible = "arm,coresight-cpu-debug", "arm,primecell";
                         reg = <0x0 0xfed10000 0x0 0x1000>;
                         clock-names = "apb_pclk";
-                        cpu = <0x89>;
+                        cpu = <&psu_cortexa53_1>;
                         clocks = <&zynqmp_clk 0xc>;
                         phandle = <0xda>;
                 };
@@ -788,7 +821,7 @@
                         compatible = "arm,coresight-cpu-debug", "arm,primecell";
                         reg = <0x0 0xfee10000 0x0 0x1000>;
                         clock-names = "apb_pclk";
-                        cpu = <0x8a>;
+                        cpu = <&psu_cortexa53_2>;
                         clocks = <&zynqmp_clk 0xc>;
                         phandle = <0xdb>;
                 };
@@ -797,7 +830,7 @@
                         compatible = "arm,coresight-cpu-debug", "arm,primecell";
                         reg = <0x0 0xfef10000 0x0 0x1000>;
                         clock-names = "apb_pclk";
-                        cpu = <0x8b>;
+                        cpu = <&psu_cortexa53_3>;
                         clocks = <&zynqmp_clk 0xc>;
                         phandle = <0xdc>;
                 };
@@ -1853,7 +1886,7 @@
                         interrupt-parent = <&gic>;
                         interrupts = <0x0 0x76 0x4 0x0 0x75 0x4 0x0 0x74 0x4 0x0 0x73 0x4 0x0 0x72 0x4>;
                         interrupt-names = "misc", "dummy", "intx", "msi1", "msi0";
-                        msi-parent = <0xa0>;
+                        msi-parent = <&pcie>;
                         reg = <0x0 0xfd0e0000 0x0 0x1000 0x0 0xfd480000 0x0 0x1000 0x80 0x0 0x0 0x10000000>;
                         reg-names = "breg", "pcireg", "cfg";
                         ranges = <0x2000000 0x0 0xe0000000 0x0 0xe0000000 0x0 0x10000000 0x43000000 0x6 0x0 0x6 0x0 0x2 0x0>;
@@ -2391,7 +2424,12 @@
                         power-domains = <&zynqmp_firmware 0x29>;
                         resets = <&zynqmp_reset 0x3>;
                         dma-names = "vid0", "vid1", "vid2", "gfx0", "aud0", "aud1";
-                        dmas = <0x36 0x0 0x36 0x1 0x36 0x2 0x36 0x3 0x36 0x4 0x36 0x5>;
+                        dmas = <&zynqmp_dpdma 0x0>,
+                         <&zynqmp_dpdma 0x1>,
+                         <&zynqmp_dpdma 0x2>,
+                         <&zynqmp_dpdma 0x3>,
+                         <&zynqmp_dpdma 0x4>,
+                         <&zynqmp_dpdma 0x5>;
                         clocks = <&zynqmp_clk 0x1c>,
                          <&zynqmp_clk 0x11>,
                          <&zynqmp_clk 0x10>;
@@ -2440,7 +2478,7 @@
                                         phandle = <0xf9>;
 
                                         dpsub_dp_out: endpoint {
-                                                remote-endpoint = <0xa7>;
+                                                remote-endpoint = <&dpcon_in>;
                                                 phandle = <0xb6>;
                                         };
                                 };
@@ -2757,7 +2795,7 @@
 
                 switch-19 {
                         label = "sw19";
-                        gpios = <0x46 0x16 0x0>;
+                        gpios = <&gpio 0x16 0x0>;
                         linux,code = <0x6c>;
                         wakeup-source;
                         autorepeat;
@@ -2769,79 +2807,121 @@
 
                 heartbeat-led {
                         label = "heartbeat";
-                        gpios = <0x46 0x17 0x0>;
+                        gpios = <&gpio 0x17 0x0>;
                         linux,default-trigger = "heartbeat";
                 };
         };
 
         ina226-u67 {
                 compatible = "iio-hwmon";
-                io-channels = <0xa8 0x0 0xa8 0x1 0xa8 0x2 0xa8 0x3>;
+                io-channels = <&u67 0x0>,
+                 <&u67 0x1>,
+                 <&u67 0x2>,
+                 <&u67 0x3>;
         };
 
         ina226-u59 {
                 compatible = "iio-hwmon";
-                io-channels = <0xa9 0x0 0xa9 0x1 0xa9 0x2 0xa9 0x3>;
+                io-channels = <&u59 0x0>,
+                 <&u59 0x1>,
+                 <&u59 0x2>,
+                 <&u59 0x3>;
         };
 
         ina226-u61 {
                 compatible = "iio-hwmon";
-                io-channels = <0xaa 0x0 0xaa 0x1 0xaa 0x2 0xaa 0x3>;
+                io-channels = <&u61 0x0>,
+                 <&u61 0x1>,
+                 <&u61 0x2>,
+                 <&u61 0x3>;
         };
 
         ina226-u60 {
                 compatible = "iio-hwmon";
-                io-channels = <0xab 0x0 0xab 0x1 0xab 0x2 0xab 0x3>;
+                io-channels = <&u60 0x0>,
+                 <&u60 0x1>,
+                 <&u60 0x2>,
+                 <&u60 0x3>;
         };
 
         ina226-u64 {
                 compatible = "iio-hwmon";
-                io-channels = <0xac 0x0 0xac 0x1 0xac 0x2 0xac 0x3>;
+                io-channels = <&u64 0x0>,
+                 <&u64 0x1>,
+                 <&u64 0x2>,
+                 <&u64 0x3>;
         };
 
         ina226-u69 {
                 compatible = "iio-hwmon";
-                io-channels = <0xad 0x0 0xad 0x1 0xad 0x2 0xad 0x3>;
+                io-channels = <&u69 0x0>,
+                 <&u69 0x1>,
+                 <&u69 0x2>,
+                 <&u69 0x3>;
         };
 
         ina226-u66 {
                 compatible = "iio-hwmon";
-                io-channels = <0xae 0x0 0xae 0x1 0xae 0x2 0xae 0x3>;
+                io-channels = <&u66 0x0>,
+                 <&u66 0x1>,
+                 <&u66 0x2>,
+                 <&u66 0x3>;
         };
 
         ina226-u65 {
                 compatible = "iio-hwmon";
-                io-channels = <0xaf 0x0 0xaf 0x1 0xaf 0x2 0xaf 0x3>;
+                io-channels = <&u65 0x0>,
+                 <&u65 0x1>,
+                 <&u65 0x2>,
+                 <&u65 0x3>;
         };
 
         ina226-u63 {
                 compatible = "iio-hwmon";
-                io-channels = <0xb0 0x0 0xb0 0x1 0xb0 0x2 0xb0 0x3>;
+                io-channels = <&u63 0x0>,
+                 <&u63 0x1>,
+                 <&u63 0x2>,
+                 <&u63 0x3>;
         };
 
         ina226-u3 {
                 compatible = "iio-hwmon";
-                io-channels = <0xb1 0x0 0xb1 0x1 0xb1 0x2 0xb1 0x3>;
+                io-channels = <&u3 0x0>,
+                 <&u3 0x1>,
+                 <&u3 0x2>,
+                 <&u3 0x3>;
         };
 
         ina226-u71 {
                 compatible = "iio-hwmon";
-                io-channels = <0xb2 0x0 0xb2 0x1 0xb2 0x2 0xb2 0x3>;
+                io-channels = <&u71 0x0>,
+                 <&u71 0x1>,
+                 <&u71 0x2>,
+                 <&u71 0x3>;
         };
 
         ina226-u77 {
                 compatible = "iio-hwmon";
-                io-channels = <0xb3 0x0 0xb3 0x1 0xb3 0x2 0xb3 0x3>;
+                io-channels = <&u77 0x0>,
+                 <&u77 0x1>,
+                 <&u77 0x2>,
+                 <&u77 0x3>;
         };
 
         ina226-u73 {
                 compatible = "iio-hwmon";
-                io-channels = <0xb4 0x0 0xb4 0x1 0xb4 0x2 0xb4 0x3>;
+                io-channels = <&u73 0x0>,
+                 <&u73 0x1>,
+                 <&u73 0x2>,
+                 <&u73 0x3>;
         };
 
         ina226-u79 {
                 compatible = "iio-hwmon";
-                io-channels = <0xb5 0x0 0xb5 0x1 0xb5 0x2 0xb5 0x3>;
+                io-channels = <&u79 0x0>,
+                 <&u79 0x1>,
+                 <&u79 0x2>,
+                 <&u79 0x3>;
         };
 
         ref48: ref48M {
@@ -2859,7 +2939,7 @@
                 port {
 
                         dpcon_in: endpoint {
-                                remote-endpoint = <0xb6>;
+                                remote-endpoint = <&dpsub_dp_out>;
                                 phandle = <0xa7>;
                         };
                 };
