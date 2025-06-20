@@ -27,7 +27,7 @@
                  <0xfffc0000 &ps_wizard_0_pmcps_0_psv_ocm_ram_0_memory 0xfffc0000 0x40000>,
                  <0xff320000 &ipi_pmc 0xff320000 0x10000>,
                  <0xff390000 &ipi_pmc_nobuf 0xff390000 0x10000>,
-                 <0xf0310000 &ps_wizard_0_pmcps_0_psv_pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
                  <0xf0980000 &ps_wizard_0_pmcps_0_psv_coresight_lpd_atm 0xf0980000 0x10000>,
                  <0xf0b70000 &ps_wizard_0_pmcps_0_psv_coresight_fpd_stm 0xf0b70000 0x10000>,
                  <0xf0b80000 &ps_wizard_0_pmcps_0_psv_coresight_fpd_atm 0xf0b80000 0x10000>,
@@ -54,14 +54,14 @@
                  <0xf1200000 &ps_wizard_0_pmcps_0_psv_pmc_rsa 0xf1200000 0x10000>,
                  <0xf1210000 &ps_wizard_0_pmcps_0_psv_pmc_sha 0xf1210000 0x10000>,
                  <0xf1220000 &ps_wizard_0_pmcps_0_psv_pmc_slave_boot 0xf1220000 0x10000>,
-                 <0xf1230000 &ps_wizard_0_pmcps_0_psv_pmc_trng 0xf1230000 0x10000>,
+                 <0xf1230000 &pmc_trng 0xf1230000 0x10000>,
                  <0xf1240000 &ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl 0xf1240000 0x10000>,
                  <0xf1250000 &ps_wizard_0_pmcps_0_psv_pmc_efuse_cache 0xf1250000 0x10000>,
                  <0xf1260000 &ps_wizard_0_pmcps_0_psv_crp_0 0xf1260000 0x10000>,
                  <0xf1270000 &sysmon0 0xf1270000 0x30000>,
                  <0xf12a0000 &rtc 0xf12a0000 0x10000>,
-                 <0xf12b0000 &ps_wizard_0_pmcps_0_psv_pmc_cfu_apb_0 0xf12b0000 0x10000>,
-                 <0xf12d0000 &ps_wizard_0_pmcps_0_psv_pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
                  <0xf12f0000 &pmc_xmpu 0xf12f0000 0x10000>,
                  <0xf1300000 &pmc_xppu_npi 0xf1300000 0x10000>,
                  <0xf1310000 &pmc_xppu 0xf1310000 0x10000>,
@@ -1139,6 +1139,43 @@
                         phandle = <0x20>;
                 };
 
+                pmc_trng: pmc_trng@f1230000 {
+                        compatible = "xlnx,psv-pmc-trng-1.0";
+                        status = "okay";
+                        reg = <0x0 0xf1230000 0x0 0x10000>;
+                        xlnx,device-id = <0x0>;
+                        xlnx,ip-name = "psv_pmc_trng";
+                        xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_trng";
+                        phandle = <0x26>;
+                };
+
+                pmc_cfi_cframe_0: cframe@f12d0000 {
+                        compatible = "xlnx,psv-pmc-cfi-cframe-1.0";
+                        status = "okay";
+                        reg = <0x0 0xf12d0000 0x0 0x1000>;
+                        xlnx,ip-name = "psv_pmc_cfi_cframe";
+                        xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_cfi_cframe_0";
+                        phandle = <0x2d>;
+                };
+
+                pmc_cfu_apb_0: cfu_apb@f12b0000 {
+                        compatible = "xlnx,psv-pmc-cfu-apb-1.0";
+                        status = "okay";
+                        reg = <0x0 0xf12b0000 0x0 0x10000>;
+                        xlnx,ip-name = "psv_pmc_cfu_apb";
+                        xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_cfu_apb_0";
+                        phandle = <0x2c>;
+                };
+
+                pmc_ppu1_mdm_0: ppu1_mdm@f0310000 {
+                        compatible = "xlnx,psv-pmc-ppu1-mdm-1.0";
+                        status = "okay";
+                        reg = <0x0 0xf0310000 0x0 0x8000>;
+                        xlnx,ip-name = "psv_pmc_ppu1_mdm";
+                        xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_ppu1_mdm_0";
+                        phandle = <0xa>;
+                };
+
                 iomodule0: iomodule@f0280000 {
                         status = "okay";
                         compatible = "xlnx,iomodule-3.1";
@@ -1471,24 +1508,6 @@
                         reg = <0x0 0xf11f0000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl";
                         phandle = <0x22>;
-                };
-
-                ps_wizard_0_pmcps_0_psv_pmc_cfi_cframe_0: ps_wizard_0_pmcps_0_psv_pmc_cfi_cframe_0@f12d0000 {
-                        compatible = "xlnx,psv-pmc-cfi-cframe-11.0";
-                        status = "okay";
-                        xlnx,ip-name = "psv_pmc_cfi_cframe";
-                        reg = <0x0 0xf12d0000 0x0 0x1000>;
-                        xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_cfi_cframe_0";
-                        phandle = <0x2d>;
-                };
-
-                ps_wizard_0_pmcps_0_psv_pmc_cfu_apb_0: ps_wizard_0_pmcps_0_psv_pmc_cfu_apb_0@f12b0000 {
-                        compatible = "xlnx,psv-pmc-cfu-apb-11.0";
-                        status = "okay";
-                        xlnx,ip-name = "psv_pmc_cfu_apb";
-                        reg = <0x0 0xf12b0000 0x0 0x10000>;
-                        xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_cfu_apb_0";
-                        phandle = <0x2c>;
                 };
 
                 ps_wizard_0_pmcps_0_psv_crf_0: ps_wizard_0_pmcps_0_psv_crf_0@fd1a0000 {
@@ -1880,15 +1899,6 @@
                         phandle = <0x67>;
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_ppu1_mdm_0: ps_wizard_0_pmcps_0_psv_pmc_ppu1_mdm_0@f0310000 {
-                        compatible = "xlnx,psv-pmc-ppu1-mdm-11.0";
-                        status = "okay";
-                        xlnx,ip-name = "psv_pmc_ppu1_mdm";
-                        reg = <0x0 0xf0310000 0x0 0x8000>;
-                        xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_ppu1_mdm_0";
-                        phandle = <0xa>;
-                };
-
                 ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr: ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr@f0240000 {
                         xlnx,edk-special = "BRAM_CTRL";
                         xlnx,write-access = <0x2>;
@@ -1998,16 +2008,6 @@
                         reg = <0x0 0xffc90000 0x0 0xf000>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_psm_global_reg";
                         phandle = <0x5d>;
-                };
-
-                ps_wizard_0_pmcps_0_psv_pmc_trng: ps_wizard_0_pmcps_0_psv_pmc_trng@f1230000 {
-                        xlnx,device-id = <0x0>;
-                        compatible = "xlnx,psv-pmc-trng-11.0";
-                        status = "okay";
-                        xlnx,ip-name = "psv_pmc_trng";
-                        reg = <0x0 0xf1230000 0x0 0x10000>;
-                        xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_trng";
-                        phandle = <0x26>;
                 };
 
                 ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep: ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep@ffe10000 {
@@ -2398,6 +2398,10 @@
                 dwc3_0 = "/axi/usb@ff9d0000/usb@fe200000";
                 dma0 = "/axi/pmcdma@f11c0000";
                 dma1 = "/axi/pmcdma@f11d0000";
+                pmc_trng = "/axi/pmc_trng@f1230000";
+                pmc_cfi_cframe_0 = "/axi/cframe@f12d0000";
+                pmc_cfu_apb_0 = "/axi/cfu_apb@f12b0000";
+                pmc_ppu1_mdm_0 = "/axi/ppu1_mdm@f0310000";
                 iomodule0 = "/axi/iomodule@f0280000";
                 ipi_pmc = "/axi/mailbox@ff320000";
                 ps_wizard_0_pmcps_0_psv_ipi_pmc_0 = "/axi/mailbox@ff320000/child@0";
@@ -2423,8 +2427,6 @@
                 ps_wizard_0_pmcps_0_psv_ipi_pmc_nobuf_9 = "/axi/mailbox@ff390000/child@9";
                 ps_wizard_0_pmcps_0_psv_pmc_aes = "/axi/ps_wizard_0_pmcps_0_psv_pmc_aes@f11e0000";
                 ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl = "/axi/ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl@f11f0000";
-                ps_wizard_0_pmcps_0_psv_pmc_cfi_cframe_0 = "/axi/ps_wizard_0_pmcps_0_psv_pmc_cfi_cframe_0@f12d0000";
-                ps_wizard_0_pmcps_0_psv_pmc_cfu_apb_0 = "/axi/ps_wizard_0_pmcps_0_psv_pmc_cfu_apb_0@f12b0000";
                 ps_wizard_0_pmcps_0_psv_crf_0 = "/axi/ps_wizard_0_pmcps_0_psv_crf_0@fd1a0000";
                 ps_wizard_0_pmcps_0_psv_crl_0 = "/axi/ps_wizard_0_pmcps_0_psv_crl_0@ff5e0000";
                 ps_wizard_0_pmcps_0_psv_crp_0 = "/axi/ps_wizard_0_pmcps_0_psv_crp_0@f1260000";
@@ -2466,12 +2468,10 @@
                 ps_wizard_0_pmcps_0_psv_pmc_slave_boot = "/axi/ps_wizard_0_pmcps_0_psv_pmc_slave_boot@f1220000";
                 ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream = "/axi/ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream@f2100000";
                 ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0 = "/axi/ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0@f0083000";
-                ps_wizard_0_pmcps_0_psv_pmc_ppu1_mdm_0 = "/axi/ps_wizard_0_pmcps_0_psv_pmc_ppu1_mdm_0@f0310000";
                 ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr = "/axi/ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr@f0240000";
                 ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr = "/axi/ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr@f0200000";
                 ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0 = "/axi/ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0@f0283000";
                 ps_wizard_0_pmcps_0_psv_psm_global_reg = "/axi/ps_wizard_0_pmcps_0_psv_psm_global_reg@ffc90000";
-                ps_wizard_0_pmcps_0_psv_pmc_trng = "/axi/ps_wizard_0_pmcps_0_psv_pmc_trng@f1230000";
                 ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep = "/axi/ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep@ffe10000";
                 ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep = "/axi/ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep@ffe30000";
                 ps_wizard_0_pmcps_0_psv_pmc_sha = "/axi/ps_wizard_0_pmcps_0_psv_pmc_sha@f1210000";
