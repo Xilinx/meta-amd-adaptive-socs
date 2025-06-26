@@ -24,7 +24,7 @@
                 compatible = "cpus,cluster";
                 #ranges-address-cells = <0x2>;
                 #ranges-size-cells = <0x2>;
-                phandle = <0xff>;
+                phandle = <0x100>;
 
                 cpu-map {
 
@@ -249,7 +249,7 @@
                 psci: psci {
                         compatible = "arm,psci-1.0";
                         method = "smc";
-                        phandle = <0x118>;
+                        phandle = <0x119>;
                 };
 
                 versal2_firmware: versal2-firmware {
@@ -282,73 +282,73 @@
                                 mboxes = <&ipi_mailbox_pmu1 0x0>,
                                  <&ipi_mailbox_pmu1 0x1>;
                                 mbox-names = "tx", "rx";
-                                phandle = <0x119>;
+                                phandle = <0x11a>;
                         };
 
                         versal_sec_cfg: versal-sec-cfg {
                                 compatible = "xlnx,versal-sec-cfg";
                                 #address-cells = <0x1>;
                                 #size-cells = <0x1>;
-                                phandle = <0x11a>;
+                                phandle = <0x11b>;
 
                                 bbram_zeroize: bbram-zeroize@4 {
                                         reg = <0x4 0x4>;
-                                        phandle = <0x11b>;
+                                        phandle = <0x11c>;
                                 };
 
                                 bbram_key: bbram-key@10 {
                                         reg = <0x10 0x20>;
-                                        phandle = <0x11c>;
+                                        phandle = <0x11d>;
                                 };
 
                                 bbram_usr: bbram-usr@30 {
                                         reg = <0x30 0x4>;
-                                        phandle = <0x11d>;
+                                        phandle = <0x11e>;
                                 };
 
                                 bbram_lock: bbram-lock@48 {
                                         reg = <0x48 0x4>;
-                                        phandle = <0x11e>;
+                                        phandle = <0x11f>;
                                 };
 
                                 user_key0: user-key@110 {
                                         reg = <0x110 0x20>;
-                                        phandle = <0x11f>;
+                                        phandle = <0x120>;
                                 };
 
                                 user_key1: user-key@130 {
                                         reg = <0x130 0x20>;
-                                        phandle = <0x120>;
+                                        phandle = <0x121>;
                                 };
 
                                 user_key2: user-key@150 {
                                         reg = <0x150 0x20>;
-                                        phandle = <0x121>;
+                                        phandle = <0x122>;
                                 };
 
                                 user_key3: user-key@170 {
                                         reg = <0x170 0x20>;
-                                        phandle = <0x122>;
+                                        phandle = <0x123>;
                                 };
 
                                 user_key4: user-key@190 {
                                         reg = <0x190 0x20>;
-                                        phandle = <0x123>;
+                                        phandle = <0x124>;
                                 };
 
                                 user_key5: user-key@1b0 {
                                         reg = <0x1b0 0x20>;
-                                        phandle = <0x124>;
+                                        phandle = <0x125>;
                                 };
 
                                 user_key6: user-key@1d0 {
                                         reg = <0x1d0 0x20>;
-                                        phandle = <0x125>;
+                                        phandle = <0x126>;
                                 };
 
                                 user_key7: user-key@1f0 {
                                         reg = <0x1f0 0x20>;
-                                        phandle = <0x126>;
+                                        phandle = <0x127>;
                                 };
                         };
                 };
@@ -359,13 +359,13 @@
                 fpga-mgr = <&versal_fpga>;
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
-                phandle = <0x127>;
+                phandle = <0x128>;
         };
 
         timer: timer {
                 compatible = "arm,armv8-timer";
                 interrupts = <0x1 0xd 0x4 0x1 0xe 0x4 0x1 0xb 0x4 0x1 0xa 0x4>;
-                phandle = <0x128>;
+                phandle = <0x129>;
         };
 
         versal_fpga: versal-fpga {
@@ -994,7 +994,7 @@
                          <&versal2_clk 0x58>,
                          <&versal2_clk 0x31>,
                          <&versal2_clk 0x30>,
-                         <&versal2_clk 0x2b>;
+                         <&tsu_ext_clk>;
                         power-domains = <&versal2_firmware 0x18224019>;
                         xlnx,is-cache-coherent = <0x0>;
                         xlnx,enet-tsu-clk-source = "MIO";
@@ -1008,14 +1008,14 @@
                         xlnx,eth-mode = "RGMII";
                         xlnx,enet-clk-freq-hz = <0x7735464>;
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
-                        phy-handle = <0xf3>;
+                        phy-handle = <0xf4>;
                         dma-coherent;
                         phandle = <0xa0>;
 
                         mdio: mdio {
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
-                                phandle = <0x129>;
+                                phandle = <0x12a>;
 
                                 phy0: ethernet-phy@1 {
                                         #phy-cells = <0x1>;
@@ -1028,7 +1028,7 @@
                                         reset-assert-us = <0x64>;
                                         reset-deassert-us = <0x118>;
                                         reset-gpios = <&gpio0 0x19 0x1>;
-                                        phandle = <0xf3>;
+                                        phandle = <0xf4>;
                                 };
                         };
                 };
@@ -1046,7 +1046,7 @@
                          <&versal2_clk 0x32>,
                          <&versal2_clk 0x2b>;
                         power-domains = <&versal2_firmware 0x1822401a>;
-                        phandle = <0x12a>;
+                        phandle = <0x12b>;
                 };
 
                 mmi_10gbe: ethernet@ed920000 {
@@ -1059,7 +1059,7 @@
                         clocks = <&clk150>,
                          <&clk150>,
                          <&clk150>,
-                         <&clk250>;
+                         <&mmi_tsu_ext_clk>;
                         xlnx,mdio-io = "None";
                         xlnx,has-mdio = <0x0>;
                         xlnx,enet-tsu-clk-source = "MIO";
@@ -1105,7 +1105,7 @@
                         interrupt-controller;
                         clocks = <&versal2_clk 0x3d>;
                         power-domains = <&versal2_firmware 0x1822402c>;
-                        phandle = <0x12b>;
+                        phandle = <0x12c>;
                 };
 
                 i2c0: i2c@f1940000 {
@@ -1158,14 +1158,14 @@
                                                 reg = <0x20>;
                                                 #gpio-cells = <0x2>;
                                                 gpio-controller;
-                                                phandle = <0xfa>;
+                                                phandle = <0xfb>;
                                         };
 
                                         eeprom: eeprom@54 {
                                                 compatible = "atmel,24c128";
                                                 bootph-all;
                                                 reg = <0x54>;
-                                                phandle = <0x12c>;
+                                                phandle = <0x12d>;
                                         };
 
                                         i2c-mux@77 {
@@ -1207,7 +1207,7 @@
                                                         hub: usb-hub@2d {
                                                                 compatible = "microchip,usb5744";
                                                                 reg = <0x2d>;
-                                                                phandle = <0xf6>;
+                                                                phandle = <0xf7>;
                                                         };
                                                 };
                                         };
@@ -1223,7 +1223,7 @@
                         interrupts = <0x0 0xb 0x4>;
                         clocks = <&versal2_clk 0xbd>;
                         power-domains = <&versal2_firmware 0x18224117>;
-                        phandle = <0x12d>;
+                        phandle = <0x12e>;
                 };
 
                 i2c3: i2c@f1970000 {
@@ -1234,7 +1234,7 @@
                         interrupts = <0x0 0xc 0x4>;
                         clocks = <&versal2_clk 0xbc>;
                         power-domains = <&versal2_firmware 0x18224118>;
-                        phandle = <0x12e>;
+                        phandle = <0x12f>;
                 };
 
                 i2c4: i2c@f1980000 {
@@ -1245,7 +1245,7 @@
                         interrupts = <0x0 0xd 0x4>;
                         clocks = <&versal2_clk 0xbb>;
                         power-domains = <&versal2_firmware 0x18224119>;
-                        phandle = <0x12f>;
+                        phandle = <0x130>;
                 };
 
                 i2c5: i2c@f1990000 {
@@ -1256,7 +1256,7 @@
                         interrupts = <0x0 0x64 0x4>;
                         clocks = <&versal2_clk 0xc7>;
                         power-domains = <&versal2_firmware 0x1822411a>;
-                        phandle = <0x130>;
+                        phandle = <0x131>;
                 };
 
                 i2c6: i2c@f19a0000 {
@@ -1267,7 +1267,7 @@
                         interrupts = <0x0 0x65 0x4>;
                         clocks = <&versal2_clk 0xc4>;
                         power-domains = <&versal2_firmware 0x1822411b>;
-                        phandle = <0x131>;
+                        phandle = <0x132>;
                 };
 
                 i2c7: i2c@f19b0000 {
@@ -1278,7 +1278,7 @@
                         interrupts = <0x0 0x66 0x4>;
                         clocks = <&versal2_clk 0xc3>;
                         power-domains = <&versal2_firmware 0x1822411c>;
-                        phandle = <0x132>;
+                        phandle = <0x133>;
                 };
 
                 i2c8: i2c@f1000000 {
@@ -1289,7 +1289,7 @@
                         interrupts = <0x0 0xcb 0x4>;
                         clocks = <&versal2_clk 0x3e>;
                         power-domains = <&versal2_firmware 0x1822402d>;
-                        phandle = <0x133>;
+                        phandle = <0x134>;
                 };
 
                 i3c0: i3c@f1948000 {
@@ -1302,7 +1302,7 @@
                         interrupts = <0x0 0x15 0x4>;
                         clocks = <&versal2_clk 0x9d>;
                         power-domains = <&versal2_firmware 0x1822401d>;
-                        phandle = <0x134>;
+                        phandle = <0x135>;
                 };
 
                 i3c1: i3c@f1958000 {
@@ -1315,7 +1315,7 @@
                         interrupts = <0x0 0x16 0x4>;
                         clocks = <&versal2_clk 0x9f>;
                         power-domains = <&versal2_firmware 0x1822401e>;
-                        phandle = <0x135>;
+                        phandle = <0x136>;
                 };
 
                 i3c2: i3c@f1968000 {
@@ -1328,7 +1328,7 @@
                         interrupts = <0x0 0xb 0x4>;
                         clocks = <&versal2_clk 0xbd>;
                         power-domains = <&versal2_firmware 0x18224117>;
-                        phandle = <0x136>;
+                        phandle = <0x137>;
                 };
 
                 i3c3: i3c@f1978000 {
@@ -1341,7 +1341,7 @@
                         interrupts = <0x0 0xc 0x4>;
                         clocks = <&versal2_clk 0xbc>;
                         power-domains = <&versal2_firmware 0x18224118>;
-                        phandle = <0x137>;
+                        phandle = <0x138>;
                 };
 
                 i3c4: i3c@f1988000 {
@@ -1354,7 +1354,7 @@
                         interrupts = <0x0 0xd 0x4>;
                         clocks = <&versal2_clk 0xbb>;
                         power-domains = <&versal2_firmware 0x18224119>;
-                        phandle = <0x138>;
+                        phandle = <0x139>;
                 };
 
                 i3c5: i3c@f1998000 {
@@ -1367,7 +1367,7 @@
                         interrupts = <0x0 0x64 0x4>;
                         clocks = <&versal2_clk 0xc7>;
                         power-domains = <&versal2_firmware 0x1822411a>;
-                        phandle = <0x139>;
+                        phandle = <0x13a>;
                 };
 
                 i3c6: i3c@f19a8000 {
@@ -1380,7 +1380,7 @@
                         interrupts = <0x0 0x65 0x4>;
                         clocks = <&versal2_clk 0xc4>;
                         power-domains = <&versal2_firmware 0x1822411b>;
-                        phandle = <0x13a>;
+                        phandle = <0x13b>;
                 };
 
                 i3c7: i3c@f19b8000 {
@@ -1393,7 +1393,7 @@
                         interrupts = <0x0 0x66 0x4>;
                         clocks = <&versal2_clk 0xc3>;
                         power-domains = <&versal2_firmware 0x1822411c>;
-                        phandle = <0x13b>;
+                        phandle = <0x13c>;
                 };
 
                 i3c8: i3c@f1008000 {
@@ -1406,7 +1406,7 @@
                         interrupts = <0x0 0xcb 0x4>;
                         clocks = <&versal2_clk 0x3e>;
                         power-domains = <&versal2_firmware 0x1822402d>;
-                        phandle = <0x13c>;
+                        phandle = <0x13d>;
                 };
 
                 ospi: spi@f1010000 {
@@ -1476,7 +1476,7 @@
                         interrupts = <0x0 0xec 0x1 0x0 0xed 0x1 0x0 0xee 0x1 0x0 0xef 0x1>;
                         interrupt-parent = <&gic>;
                         timeout-sec = <0x1e>;
-                        phandle = <0x13d>;
+                        phandle = <0x13e>;
                 };
 
                 pmc_trng: pmc_trng@f1230000 {
@@ -1498,7 +1498,7 @@
                         clocks = <&versal2_clk 0x39>,
                          <&versal2_clk 0x52>;
                         power-domains = <&versal2_firmware 0x1822402b>;
-                        phandle = <0x13e>;
+                        phandle = <0x13f>;
                 };
 
                 rtc: rtc@f12a0000 {
@@ -1527,7 +1527,7 @@
                          <&versal2_clk 0x52>,
                          <&versal2_clk 0x4a>;
                         power-domains = <&versal2_firmware 0x1822402e>;
-                        phandle = <0x13f>;
+                        phandle = <0x140>;
                 };
 
                 sdhci1: mmc@f1050000 {
@@ -1543,7 +1543,7 @@
                          <&versal2_clk 0x52>,
                          <&versal2_clk 0x4a>;
                         power-domains = <&versal2_firmware 0x1822402f>;
-                        phandle = <0x140>;
+                        phandle = <0x141>;
                 };
 
                 serial0: serial@f1920000 {
@@ -1601,7 +1601,7 @@
                         interrupt-parent = <&gic>;
                         interrupts = <0x0 0xa9 0x4>;
                         dma-coherent;
-                        phandle = <0x141>;
+                        phandle = <0x142>;
                 };
 
                 spi0: spi@f19c0000 {
@@ -1613,7 +1613,7 @@
                         clocks = <&versal2_clk 0x5e>,
                          <&versal2_clk 0x52>;
                         power-domains = <&versal2_firmware 0x1822401b>;
-                        phandle = <0x142>;
+                        phandle = <0x143>;
                 };
 
                 spi1: spi@f19d0000 {
@@ -1625,7 +1625,7 @@
                         clocks = <&versal2_clk 0x5f>,
                          <&versal2_clk 0x52>;
                         power-domains = <&versal2_firmware 0x1822401c>;
-                        phandle = <0x143>;
+                        phandle = <0x144>;
                 };
 
                 sysmon0: sysmon@f1270000 {
@@ -2023,7 +2023,7 @@
                          <&versal2_clk 0x5b>;
                         power-domains = <&versal2_firmware 0x18224018>;
                         resets = <&versal2_reset 0xc104036>;
-                        phandle = <0x144>;
+                        phandle = <0x145>;
 
                         dwc3_0: usb@f1b00000 {
                                 compatible = "snps,dwc3";
@@ -2038,7 +2038,7 @@
                                 snps,usb3_lpm_capable;
                                 clock-names = "ref";
                                 clocks = <&versal2_clk 0x5b>;
-                                phandle = <0x145>;
+                                phandle = <0x146>;
                         };
                 };
 
@@ -2086,7 +2086,7 @@
                                         reg = <0x1>;
                                         i2c-bus = <&hub>;
                                         reset-gpios = <&gpio0 0xe 0x1>;
-                                        phandle = <0x146>;
+                                        phandle = <0x147>;
                                 };
                         };
                 };
@@ -2102,7 +2102,7 @@
                          <&versal2_clk 0xd0>;
                         resets = <&versal2_reset 0xc10407b>;
                         power-domains = <&versal2_firmware 0x18224135>;
-                        phandle = <0x147>;
+                        phandle = <0x148>;
 
                         mmi_dwc3: usb@edec0000 {
                                 compatible = "snps,dwc3";
@@ -2154,7 +2154,7 @@
                                 #address-cells = <0x0>;
                                 #interrupt-cells = <0x1>;
                                 interrupt-controller;
-                                phandle = <0xf8>;
+                                phandle = <0xf9>;
                         };
                 };
 
@@ -2180,13 +2180,13 @@
                         #size-cells = <0x2>;
                         #interrupt-cells = <0x1>;
                         device_type = "pci";
-                        phandle = <0x148>;
+                        phandle = <0x149>;
 
                         mdb_intc_1: interrupt-controller {
                                 #address-cells = <0x0>;
                                 #interrupt-cells = <0x1>;
                                 interrupt-controller;
-                                phandle = <0xfb>;
+                                phandle = <0xfc>;
                         };
                 };
 
@@ -2200,7 +2200,7 @@
                         timeout-sec = <0x1e>;
                         clocks = <&versal2_clk 0xb5>;
                         power-domains = <&versal2_firmware 0x182240db>;
-                        phandle = <0x149>;
+                        phandle = <0x14a>;
                 };
 
                 wwdt1: watchdog@ecd10000 {
@@ -2213,7 +2213,7 @@
                         timeout-sec = <0x1e>;
                         clocks = <&versal2_clk 0xb6>;
                         power-domains = <&versal2_firmware 0x182240dc>;
-                        phandle = <0x14a>;
+                        phandle = <0x14b>;
                 };
 
                 wwdt2: watchdog@ece10000 {
@@ -2226,7 +2226,7 @@
                         timeout-sec = <0x1e>;
                         clocks = <&versal2_clk 0xb7>;
                         power-domains = <&versal2_firmware 0x182240dd>;
-                        phandle = <0x14b>;
+                        phandle = <0x14c>;
                 };
 
                 wwdt3: watchdog@ecf10000 {
@@ -2239,7 +2239,7 @@
                         timeout-sec = <0x1e>;
                         clocks = <&versal2_clk 0xb8>;
                         power-domains = <&versal2_firmware 0x182240de>;
-                        phandle = <0x14c>;
+                        phandle = <0x14d>;
                 };
 
                 lpd_wwdt0: watchdog@eb000000 {
@@ -2250,7 +2250,7 @@
                         interrupts = <0x0 0xec 0x1 0x0 0xed 0x1 0x0 0xee 0x1 0x0 0xef 0x1>;
                         interrupt-parent = <&gic>;
                         timeout-sec = <0x1e>;
-                        phandle = <0x14d>;
+                        phandle = <0x14e>;
                 };
 
                 lpd_wwdt1: watchdog@eb010000 {
@@ -2261,7 +2261,7 @@
                         interrupts = <0x0 0xf0 0x1 0x0 0xf1 0x1 0x0 0xf2 0x1 0x0 0xf3 0x1>;
                         interrupt-parent = <&gic>;
                         timeout-sec = <0x1e>;
-                        phandle = <0x14e>;
+                        phandle = <0x14f>;
                 };
 
                 lpd_wwdt2: watchdog@eb020000 {
@@ -2272,7 +2272,7 @@
                         interrupts = <0x0 0xf4 0x1 0x0 0xf5 0x1 0x0 0xf6 0x1 0x0 0xf7 0x1>;
                         interrupt-parent = <&gic>;
                         timeout-sec = <0x1e>;
-                        phandle = <0x14f>;
+                        phandle = <0x150>;
                 };
 
                 lpd_wwdt3: watchdog@eb030000 {
@@ -2283,7 +2283,7 @@
                         interrupts = <0x0 0xf8 0x1 0x0 0xf9 0x1 0x0 0xfa 0x1 0x0 0xfb 0x1>;
                         interrupt-parent = <&gic>;
                         timeout-sec = <0x1e>;
-                        phandle = <0x150>;
+                        phandle = <0x151>;
                 };
 
                 lpd_wwdt4: watchdog@eb040000 {
@@ -2294,7 +2294,7 @@
                         interrupts = <0x0 0xfc 0x1 0x0 0xfd 0x1 0x0 0xfe 0x1 0x0 0xff 0x1>;
                         interrupt-parent = <&gic>;
                         timeout-sec = <0x1e>;
-                        phandle = <0x151>;
+                        phandle = <0x152>;
                 };
 
                 coresight: coresight@f0800000 {
@@ -2414,7 +2414,7 @@
                         compatible = "arm,gic-v3";
 
                         its: msi-controller@e2040000 {
-                                phandle = <0xf9>;
+                                phandle = <0xfa>;
                                 reg = <0x0 0xe2040000 0x0 0x20000>;
                                 #msi-cells = <0x1>;
                                 msi-controller;
@@ -2438,7 +2438,7 @@
                 clocks = <&versal2_clk 0x9e>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0x256>;
+                phandle = <0x257>;
         };
 
         can1_clk: can1-clk {
@@ -2447,7 +2447,7 @@
                 clocks = <&versal2_clk 0xac>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0x257>;
+                phandle = <0x258>;
         };
 
         can2_clk: can2-clk {
@@ -2456,7 +2456,7 @@
                 clocks = <&versal2_clk 0xc1>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0x258>;
+                phandle = <0x259>;
         };
 
         can3_clk: can3-clk {
@@ -2465,7 +2465,7 @@
                 clocks = <&versal2_clk 0xc6>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0x259>;
+                phandle = <0x25a>;
         };
 
         clk50: clk50 {
@@ -2479,21 +2479,21 @@
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x8f0d180>;
-                phandle = <0xf4>;
+                phandle = <0xf5>;
         };
 
         clk250: clk250 {
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0xee6b280>;
-                phandle = <0xf5>;
+                phandle = <0x25b>;
         };
 
         clk256: clk256 {
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0xf424000>;
-                phandle = <0xf7>;
+                phandle = <0xf8>;
         };
 
         zynqmp-ipi {
@@ -2512,6 +2512,20 @@
                         xlnx,ipi-id = <0x1>;
                         phandle = <0xe3>;
                 };
+        };
+
+        mmi_tsu_ext_clk: mmi_tsu_ext_clk {
+                compatible = "fixed-clock";
+                clock-frequency = <0xee6b280>;
+                #clock-cells = <0x0>;
+                phandle = <0xf6>;
+        };
+
+        tsu_ext_clk: tsu_ext_clk {
+                compatible = "fixed-clock";
+                clock-frequency = <0xee6b280>;
+                #clock-cells = <0x0>;
+                phandle = <0xf3>;
         };
 
         NoC_C0_C1_ddr_memory: memory@00000000 {
@@ -2725,6 +2739,8 @@
                 clk250 = "/clk250";
                 clk256 = "/clk256";
                 ipi_mailbox_pmu1 = "/zynqmp-ipi/mailbox@eb3f0440";
+                mmi_tsu_ext_clk = "/mmi_tsu_ext_clk";
+                tsu_ext_clk = "/tsu_ext_clk";
                 NoC_C0_C1_ddr_memory = "/memory@00000000";
                 NoC_C2_ddr_memory = "/memory@50000000000";
                 NoC_C3_ddr_memory = "/memory@60000000000";
