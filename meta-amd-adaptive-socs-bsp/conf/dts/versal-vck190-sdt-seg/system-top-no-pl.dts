@@ -1,9 +1,9 @@
 /dts-v1/;
 / {
-        compatible = "xlnx,versal-vck190-revA-x-ebm-02-revA", "xlnx,versal-vck190-revA", "xlnx,versal";
+        compatible = "xlnx,versal-vck190-rev1.1-x-ebm-01-revA", "xlnx,versal-vck190-rev1.1", "xlnx,versal";
         #address-cells = <0x2>;
         #size-cells = <0x2>;
-        model = "Xilinx Versal vck190 Eval board revA (EMMC)";
+        model = "Xilinx Versal vck190 Eval board rev1.1 (QSPI)";
         board = "vck190_newl";
         device_id = "xcvc1902";
         slrcount = <0x1>;
@@ -1923,7 +1923,7 @@
                         xlnx,has-emio = <0x0>;
                         clock-frequency = <0xbebc149>;
                         xlnx,clk-100-sdr-otap-dly = <0x3>;
-                        xlnx,mio-bank = <0x0>;
+                        xlnx,mio-bank = <0x1>;
                         xlnx,ip-name = "psv_pmc_sd";
                         xlnx,bus-width = <0x8>;
                         xlnx,card-detect = <0x1>;
@@ -1938,12 +1938,9 @@
                         xlnx,write-protect = <0x0>;
                         xlnx,name = "CIPS_0_pspmc_0_psv_pmc_sd_1";
                         no-1-8-v;
-                        non-removable;
-                        disable-wp;
-                        no-sd;
-                        no-sdio;
-                        cap-mmc-hw-reset;
-                        bus-width = <0x8>;
+                        clk-phase-sd-hs = <0x6f 0x30>;
+                        clk-phase-uhs-sdr25 = <0x72 0x30>;
+                        clk-phase-uhs-ddr50 = <0x7e 0x24>;
                         phandle = <0x34>;
                 };
 
@@ -2049,6 +2046,22 @@
                         xlnx,qspi-bus-width = <0x2>;
                         is-dual = <0x1>;
                         phandle = <0x33>;
+
+                        flash@0 {
+                                #address-cells = <0x1>;
+                                #size-cells = <0x1>;
+                                compatible = "m25p80", "jedec,spi-nor";
+                                reg = <0x0 0x1>;
+                                parallel-memories = <0x0 0x8000000 0x0 0x8000000>;
+                                spi-tx-bus-width = <0x4>;
+                                spi-rx-bus-width = <0x4>;
+                                spi-max-frequency = <0x8f0d180>;
+
+                                partition@0 {
+                                        label = "spi0-flash0";
+                                        reg = <0x0 0x10000000>;
+                                };
+                        };
                 };
 
                 spi0: spi@ff040000 {
