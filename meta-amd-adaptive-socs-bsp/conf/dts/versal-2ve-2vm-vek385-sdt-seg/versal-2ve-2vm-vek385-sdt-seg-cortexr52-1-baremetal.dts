@@ -201,7 +201,7 @@
                         versal2_reset: reset-controller {
                                 compatible = "xlnx,versal-reset";
                                 #reset-cells = <0x1>;
-                                phandle = <0xee>;
+                                phandle = <0xea>;
                         };
 
                         versal2_clk: clock-controller {
@@ -309,7 +309,7 @@
 
         versal_fpga: versal-fpga {
                 compatible = "xlnx,versal-fpga";
-                phandle = <0xe4>;
+                phandle = <0xe0>;
         };
 
         amba_apu: apu-bus {
@@ -362,7 +362,7 @@
 
                 gpu_physical_memory_group_manager: physical-memory-group-manager {
                         compatible = "arm,physical-memory-group-manager";
-                        phandle = <0xe8>;
+                        phandle = <0xe4>;
                 };
 
                 gpu: gpu@ed000000 {
@@ -412,7 +412,7 @@
                                 gpu_partition_config_a_0: gpu_partition_config@20000 {
                                         compatible = "arm,mali-gpu-partition-config";
                                         reg = <0x0 0x20000 0x0 0x10000>;
-                                        phandle = <0xe5>;
+                                        phandle = <0xe1>;
                                 };
 
                                 gpu_partition_control_a_0: gpu_partition_control@30000 {
@@ -421,7 +421,7 @@
                                         interrupt-parent = <&gic_r52>;
                                         interrupt-names = "PTM_PARTITION_IRQ";
                                         interrupts = <0x0 0xb6 0x4>;
-                                        phandle = <0xe6>;
+                                        phandle = <0xe2>;
                                 };
 
                                 gpu_resource_group@a0000 {
@@ -440,7 +440,7 @@
                                         interrupt-parent = <&gic_r52>;
                                         interrupt-names = "PTM_MESSAGE";
                                         interrupts = <0x0 0xb4 0x4>;
-                                        phandle = <0xe7>;
+                                        phandle = <0xe3>;
                                 };
 
                                 gpu@e0000 {
@@ -481,7 +481,7 @@
 
                                         dptx_in_0: endpoint {
                                                 remote-endpoint = <&dc_out_0>;
-                                                phandle = <0xef>;
+                                                phandle = <0xeb>;
                                         };
                                 };
 
@@ -490,7 +490,7 @@
 
                                         dptx_in_1: endpoint {
                                                 remote-endpoint = <&dc_out_1>;
-                                                phandle = <0xf0>;
+                                                phandle = <0xec>;
                                         };
                                 };
 
@@ -499,7 +499,7 @@
 
                                         dptx_in_2: endpoint {
                                                 remote-endpoint = <&dc_out_2>;
-                                                phandle = <0xf1>;
+                                                phandle = <0xed>;
                                         };
                                 };
 
@@ -508,7 +508,7 @@
 
                                         dptx_in_3: endpoint {
                                                 remote-endpoint = <&dc_out_3>;
-                                                phandle = <0xf2>;
+                                                phandle = <0xee>;
                                         };
                                 };
                         };
@@ -626,7 +626,7 @@
 
                                         dc_out_0: endpoint {
                                                 remote-endpoint = <&dptx_in_0>;
-                                                phandle = <0xe9>;
+                                                phandle = <0xe5>;
                                         };
                                 };
 
@@ -635,7 +635,7 @@
 
                                         dc_out_1: endpoint {
                                                 remote-endpoint = <&dptx_in_1>;
-                                                phandle = <0xea>;
+                                                phandle = <0xe6>;
                                         };
                                 };
 
@@ -644,7 +644,7 @@
 
                                         dc_out_2: endpoint {
                                                 remote-endpoint = <&dptx_in_2>;
-                                                phandle = <0xeb>;
+                                                phandle = <0xe7>;
                                         };
                                 };
 
@@ -653,7 +653,7 @@
 
                                         dc_out_3: endpoint {
                                                 remote-endpoint = <&dptx_in_3>;
-                                                phandle = <0xec>;
+                                                phandle = <0xe8>;
                                         };
                                 };
 
@@ -848,7 +848,7 @@
                         clock-names = "can_clk", "s_axi_aclk";
                         rx-fifo-depth = <0x40>;
                         tx-mailbox-count = <0x20>;
-                        clocks = <&versal2_clk 0x9e>,
+                        clocks = <&can0_clk>,
                          <&versal2_clk 0x52>;
                         power-domains = <&versal2_firmware 0x1822401f>;
                         xlnx,can-rx-dpth = <0x40>;
@@ -872,7 +872,7 @@
                         clock-names = "can_clk", "s_axi_aclk";
                         rx-fifo-depth = <0x40>;
                         tx-mailbox-count = <0x20>;
-                        clocks = <&versal2_clk 0xac>,
+                        clocks = <&can1_clk>,
                          <&versal2_clk 0x52>;
                         power-domains = <&versal2_firmware 0x18224020>;
                         xlnx,can-rx-dpth = <0x40>;
@@ -896,7 +896,7 @@
                         clock-names = "can_clk", "s_axi_aclk";
                         rx-fifo-depth = <0x40>;
                         tx-mailbox-count = <0x20>;
-                        clocks = <&versal2_clk 0xc1>,
+                        clocks = <&can2_clk>,
                          <&versal2_clk 0x52>;
                         power-domains = <&versal2_firmware 0x1822411d>;
                         xlnx,can-rx-dpth = <0x40>;
@@ -920,7 +920,7 @@
                         clock-names = "can_clk", "s_axi_aclk";
                         rx-fifo-depth = <0x40>;
                         tx-mailbox-count = <0x20>;
-                        clocks = <&versal2_clk 0xc6>,
+                        clocks = <&can3_clk>,
                          <&versal2_clk 0x52>;
                         power-domains = <&versal2_firmware 0x1822411e>;
                         xlnx,can-rx-dpth = <0x40>;
@@ -1113,10 +1113,9 @@
                                 bootph-all;
                                 reg = <0x72>;
 
-                                i2c-arb@0 {
+                                i2c-arb {
                                         #address-cells = <0x1>;
                                         #size-cells = <0x0>;
-                                        reg = <0x0>;
 
                                         tca6416_u37: gpio@20 {
                                                 compatible = "ti,tca6416";
@@ -1208,7 +1207,7 @@
                         #size-cells = <0x0>;
                         phandle = <0x7e>;
 
-                        flash@0 {
+                        spi_flash: flash@0 {
                                 compatible = "jedec,spi-nor";
                                 spi-max-frequency = <0x1312d00>;
                                 spi-rx-bus-width = <0x8>;
@@ -1221,6 +1220,7 @@
                                 reg = <0x0>;
                                 no-wp;
                                 broken-flash-reset;
+                                phandle = <0x13e>;
 
                                 partitions {
                                         #size-cells = <0x1>;
@@ -1284,7 +1284,7 @@
                         interrupt-parent = <&gic_r52>;
                         interrupts = <0x0 0xc8 0x4 0x0 0xc9 0x4>;
                         interrupt-names = "alarm", "sec";
-                        calibration = <0x8000>;
+                        calibration = <0x7fff>;
                         power-domains = <&versal2_firmware 0x18224034>;
                         xlnx,ip-name = "pmc_rtc";
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_rtc_0";
@@ -1343,6 +1343,7 @@
                         compatible = "xlnx,versal-sysmon";
                         status = "okay";
                         reg = <0x0 0xf1270000 0x0 0x4000>;
+                        interrupt-parent = <&gic_r52>;
                         interrupts = <0x0 0xca 0x4>;
                         xlnx,numchannels = [07];
                         xlnx,sat-63-desc = "PS , FPD , APU3 , satellite";
@@ -1777,7 +1778,7 @@
                                         reg = <0x1>;
                                         i2c-bus = <&hub>;
                                         reset-gpios = <&gpio0 0xe 0x1>;
-                                        phandle = <0x147>;
+                                        phandle = <0x148>;
                                 };
                         };
                 };
@@ -2349,7 +2350,7 @@
                         xlnx,is-hierarchy;
                         reg = <0x0 0x0 0x0 0x100000>;
                         xlnx,name = "ps_wizard_0_mmi_0_r52_tcm_alias";
-                        phandle = <0x253>;
+                        phandle = <0x254>;
                 };
 
                 ps_wizard_0_ps11_0_pmc_aes: ps_wizard_0_ps11_0_pmc_aes@f11e0000 {
@@ -2785,7 +2786,7 @@
                         xlnx,is-hierarchy;
                         reg = <0x0 0x0 0x0 0x100000>;
                         xlnx,name = "ps_wizard_0_ps11_0_r52_tcm_alias";
-                        phandle = <0x256>;
+                        phandle = <0x25b>;
                 };
 
                 ps_wizard_0_ps11_0_rpu_a: ps_wizard_0_ps11_0_rpu_a@eb580000 {
@@ -2844,7 +2845,7 @@
                 #clock-cells = <0x0>;
                 clock-frequency = <0x1fca055>;
                 clock-output-names = "ref_clk";
-                phandle = <0xe2>;
+                phandle = <0xde>;
         };
 
         can0_clk: can0-clk {
@@ -2853,7 +2854,7 @@
                 clocks = <&versal2_clk 0x9e>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0x257>;
+                phandle = <0xef>;
         };
 
         can1_clk: can1-clk {
@@ -2862,7 +2863,7 @@
                 clocks = <&versal2_clk 0xac>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0x258>;
+                phandle = <0xf0>;
         };
 
         can2_clk: can2-clk {
@@ -2871,7 +2872,7 @@
                 clocks = <&versal2_clk 0xc1>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0x259>;
+                phandle = <0xf1>;
         };
 
         can3_clk: can3-clk {
@@ -2880,14 +2881,14 @@
                 clocks = <&versal2_clk 0xc6>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0x25a>;
+                phandle = <0xf2>;
         };
 
         clk50: clk50 {
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x2faf080>;
-                phandle = <0xed>;
+                phandle = <0xe9>;
         };
 
         clk150: clk150 {
@@ -2901,7 +2902,7 @@
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0xee6b280>;
-                phandle = <0x25b>;
+                phandle = <0x25c>;
         };
 
         clk256: clk256 {
@@ -2925,7 +2926,7 @@
                         reg-names = "local_request_region", "local_response_region", "remote_request_region", "remote_response_region";
                         #mbox-cells = <0x1>;
                         xlnx,ipi-id = <0x1>;
-                        phandle = <0xe3>;
+                        phandle = <0xdf>;
                 };
         };
 
@@ -2935,7 +2936,7 @@
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
                 firmware-name = "vek385_base_pld.pdi";
-                phandle = <0x25c>;
+                phandle = <0x25d>;
 
                 misc_clk_1: misc_clk_1 {
                         compatible = "fixed-clock";
@@ -3102,10 +3103,11 @@
                 gpio0 = "/axi/gpio@f1a50000";
                 i2c0 = "/axi/i2c@f1940000";
                 i2c1 = "/axi/i2c@f1950000";
-                tca6416_u37 = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb@0/gpio@20";
-                eeprom = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb@0/eeprom@54";
-                hub = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb@0/i2c-mux@77/i2c@4/usb-hub@2d";
+                tca6416_u37 = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/gpio@20";
+                eeprom = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/eeprom@54";
+                hub = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/i2c-mux@77/i2c@4/usb-hub@2d";
                 ospi = "/axi/spi@f1010000";
+                spi_flash = "/axi/spi@f1010000/flash@0";
                 pmc_trng = "/axi/pmc_trng@f1230000";
                 pmc_cfi_cframe_0 = "/axi/cframe@f12d0000";
                 pmc_cfu_apb_0 = "/axi/cfu_apb@f12b0000";
