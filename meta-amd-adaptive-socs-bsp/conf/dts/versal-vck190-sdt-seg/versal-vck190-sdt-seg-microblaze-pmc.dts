@@ -1,6 +1,6 @@
 /dts-v1/;
 / {
-        compatible = "xlnx,versal-vck190-rev1.1-x-ebm-01-revA", "xlnx,versal-vck190-rev1.1", "xlnx,versal";
+        compatible = "xlnx,versal-vck190-rev1.1-x-ebm-01-revA", "xlnx,versal-vck190-rev1.1", "xlnx,versal", "Xilinx Versal vck190 Eval board rev1.1 (QSPI)", "Xilinx Versal vck190 Eval board rev1.1 (QSPI)";
         #address-cells = <0x2>;
         #size-cells = <0x2>;
         model = "Xilinx Versal vck190 Eval board rev1.1 (QSPI)";
@@ -1868,5 +1868,131 @@
                 amba_pl = "/amba_pl";
                 misc_clk_0 = "/amba_pl/misc_clk_0";
                 aie_core_ref_clk_0 = "/amba_pl/aie_core_ref_clk_0";
+        };
+
+        definitions {
+
+                OpenAMP {
+                        openamp_channel0_access_srams = "[{\"dev\": \"psv_r5_0_atcm_global\", \"flags\": 0}, {\"dev\": \"psv_r5_0_btcm_global\", \"flags\": 0}]";
+                        rproc0 = "[{\"start\": 159383552, \"size\": 393216, \"no-map\": 1}]";
+                        rpu0vdev0vring0 = "[{\"start\": 159776768, \"size\": 16384, \"no-map\": 1}]";
+                        rpu0vdev0vring1 = "[{\"start\": 159793152, \"size\": 16384, \"no-map\": 1}]";
+                        rpu0vdev0buffer = "[{\"start\": 159809536, \"size\": 1048576, \"no-map\": 1}]";
+                };
+        };
+
+        domains {
+
+                openamp_a72_0_cluster {
+                        compatible = "openamp,domain-v1";
+                        phandle = <0x15c>;
+
+                        reserved-memory {
+                                ranges = <0x1>;
+
+                                rpu0vdev0vring1 {
+                                        start = <0x9864000>;
+                                        size = <0x4000>;
+                                        no-map = <0x1>;
+                                        phandle = <0x15a>;
+                                };
+
+                                rpu0vdev0vring0 {
+                                        start = <0x9860000>;
+                                        size = <0x4000>;
+                                        no-map = <0x1>;
+                                        phandle = <0x159>;
+                                };
+
+                                rpu0vdev0buffer {
+                                        start = <0x9868000>;
+                                        size = <0x100000>;
+                                        no-map = <0x1>;
+                                        phandle = <0x15b>;
+                                };
+
+                                rproc0 {
+                                        start = <0x9800000>;
+                                        size = <0x60000>;
+                                        no-map = <0x1>;
+                                        phandle = <0x158>;
+                                };
+                        };
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+
+                                remoteproc-relation {
+                                        compatible = "openamp,remoteproc-v2";
+                                        remote = <0x157>;
+                                        elfload;
+                                        elfload0 = <0x78 0x13f 0x158>;
+                                };
+
+                                rpmsg-relation {
+                                        compatible = "openamp,rpmsg-v1";
+                                        remote = <0x157>;
+                                        mbox = <0xa>;
+                                        carveouts = <0x159 0x15a 0x15b>;
+                                };
+                        };
+
+                        access {
+                                dev = "psv_r5_0_btcm_global";
+                                flags = <0x0>;
+                        };
+                };
+
+                openamp_r5_0_cluster {
+                        compatible = "openamp,domain-v1";
+                        phandle = <0x157>;
+
+                        reserved-memory {
+                                ranges = <0x1>;
+
+                                rpu0vdev0vring1 {
+                                        start = <0x9864000>;
+                                        size = <0x4000>;
+                                        no-map = <0x1>;
+                                        phandle = <0x15e>;
+                                };
+
+                                rpu0vdev0vring0 {
+                                        start = <0x9860000>;
+                                        size = <0x4000>;
+                                        no-map = <0x1>;
+                                        phandle = <0x15d>;
+                                };
+
+                                rpu0vdev0buffer {
+                                        start = <0x9868000>;
+                                        size = <0x100000>;
+                                        no-map = <0x1>;
+                                        phandle = <0x15f>;
+                                };
+
+                                rproc0 {
+                                        start = <0x9800000>;
+                                        size = <0x60000>;
+                                        no-map = <0x1>;
+                                };
+                        };
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+
+                                rpmsg-relation {
+                                        compatible = "openamp,rpmsg-v1";
+                                        host = <0x15c>;
+                                        mbox = <0x8a>;
+                                        carveouts = <0x15d 0x15e 0x15f>;
+                                };
+                        };
+
+                        access {
+                                dev = "psv_r5_0_btcm_global";
+                                flags = <0x0>;
+                        };
+                };
         };
 };
