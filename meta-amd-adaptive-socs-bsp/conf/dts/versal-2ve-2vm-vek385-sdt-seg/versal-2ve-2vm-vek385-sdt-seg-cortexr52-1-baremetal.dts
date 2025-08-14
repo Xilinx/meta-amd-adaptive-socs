@@ -1,6 +1,6 @@
 /dts-v1/;
 / {
-        compatible = "amd,versal2", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA";
+        compatible = "amd,versal2";
         model = "AMD Versal VEK385 revA";
         #address-cells = <0x2>;
         #size-cells = <0x2>;
@@ -1792,10 +1792,10 @@
                         interrupts = <0x0 0xa5 0x4>;
                         interrupt-parent = <&gic_r52>;
                         interrupt-map-mask = <0x0 0x0 0x0 0x7>;
-                        interrupt-map = <0x1 &mdb_intc_0 0x0>,
-                         <0x2 &mdb_intc_0 0x1>,
-                         <0x3 &mdb_intc_0 0x2>,
-                         <0x4 &mdb_intc_0 0x3>;
+                        interrupt-map = <0x0 0x0 0x0 0x1 &mdb_intc_0 0x0>,
+                         <0x0 0x0 0x0 0x2 &mdb_intc_0 0x1>,
+                         <0x0 0x0 0x0 0x3 &mdb_intc_0 0x2>,
+                         <0x0 0x0 0x0 0x4 &mdb_intc_0 0x3>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
                         xlnx,csr-slcr = <0x1000 0x0 0x0>;
@@ -1824,6 +1824,396 @@
                         xlnx,ip-name = "coresight";
                         xlnx,name = "ps_wizard_0_ps11_0_coresight_0";
                         phandle = <0x7a>;
+                };
+
+                r52_0a_atcm_global: r52_0a_atcm_global@eba00000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xeba00000 0x0 0x10000>;
+                        power-domains = <&versal2_firmware 0x183180cb>;
+                        xlnx,power-domain = <0x183180cb>;
+                        xlnx,ip-name = "r52_atcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x10000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0a_atcm_global";
+                        phandle = <0x31>;
+                };
+
+                r52_0a_btcm_global: r52_0a_btcm_global@eba10000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xeba10000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x183180cc>;
+                        xlnx,power-domain = <0x183180cc>;
+                        xlnx,ip-name = "r52_btcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0a_btcm_global";
+                        phandle = <0x32>;
+                };
+
+                r52_0a_ctcm_global: r52_0a_ctcm_global@eba20000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xeba20000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x183180cd>;
+                        xlnx,power-domain = <0x183180cd>;
+                        xlnx,ip-name = "r52_ctcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0a_ctcm_global";
+                        phandle = <0x33>;
+                };
+
+                r52_0b_atcm_global: r52_0b_atcm_global@eba80000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xeba80000 0x0 0x10000>;
+                        power-domains = <&versal2_firmware 0x183180d1>;
+                        xlnx,power-domain = <0x183180ce>;
+                        xlnx,ip-name = "r52_atcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x10000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0b_atcm_global";
+                        phandle = <0x37>;
+                };
+
+                r52_0b_btcm_global: r52_0b_btcm_global@eba90000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xeba90000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x183180d2>;
+                        xlnx,power-domain = <0x183180cf>;
+                        xlnx,ip-name = "r52_btcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0b_btcm_global";
+                        phandle = <0x38>;
+                };
+
+                r52_0b_ctcm_global: r52_0b_ctcm_global@ebaa0000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebaa0000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x183180d3>;
+                        xlnx,power-domain = <0x183180d0>;
+                        xlnx,ip-name = "r52_ctcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0b_ctcm_global";
+                        phandle = <0x39>;
+                };
+
+                r52_0c_atcm_global: r52_0c_atcm_global@ebb00000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebb00000 0x0 0x10000>;
+                        power-domains = <&versal2_firmware 0x18318100>;
+                        xlnx,power-domain = <0x18318100>;
+                        xlnx,ip-name = "r52_atcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x10000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0c_atcm_global";
+                        phandle = <0x3d>;
+                };
+
+                r52_0c_btcm_global: r52_0c_btcm_global@ebb10000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebb10000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x18318101>;
+                        xlnx,power-domain = <0x18318101>;
+                        xlnx,ip-name = "r52_btcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0c_btcm_global";
+                        phandle = <0x3e>;
+                };
+
+                r52_0c_ctcm_global: r52_0c_ctcm_global@ebb20000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebb20000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x18318102>;
+                        xlnx,power-domain = <0x18318102>;
+                        xlnx,ip-name = "r52_ctcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0c_ctcm_global";
+                        phandle = <0x3f>;
+                };
+
+                r52_0d_atcm_global: r52_0d_atcm_global@ebb80000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebb80000 0x0 0x10000>;
+                        power-domains = <&versal2_firmware 0x18318106>;
+                        xlnx,power-domain = <0x18318106>;
+                        xlnx,ip-name = "r52_atcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x10000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0d_atcm_global";
+                        phandle = <0x43>;
+                };
+
+                r52_0d_btcm_global: r52_0d_btcm_global@ebb90000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebb90000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x18318107>;
+                        xlnx,power-domain = <0x18318107>;
+                        xlnx,ip-name = "r52_btcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0d_btcm_global";
+                        phandle = <0x44>;
+                };
+
+                r52_0d_ctcm_global: r52_0d_ctcm_global@ebba0000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebba0000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x18318108>;
+                        xlnx,power-domain = <0x18318108>;
+                        xlnx,ip-name = "r52_ctcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0d_ctcm_global";
+                        phandle = <0x45>;
+                };
+
+                r52_0e_atcm_global: r52_0e_atcm_global@ebc00000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebc00000 0x0 0x10000>;
+                        power-domains = <&versal2_firmware 0x1831810c>;
+                        xlnx,power-domain = <0x1831810c>;
+                        xlnx,ip-name = "r52_atcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x10000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0e_atcm_global";
+                        phandle = <0x49>;
+                };
+
+                r52_0e_btcm_global: r52_0e_btcm_global@ebc10000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebc10000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x1831810d>;
+                        xlnx,power-domain = <0x1831810d>;
+                        xlnx,ip-name = "r52_btcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0e_btcm_global";
+                        phandle = <0x4a>;
+                };
+
+                r52_0e_ctcm_global: r52_0e_ctcm_global@ebc20000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebc20000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x1831810e>;
+                        xlnx,power-domain = <0x1831810e>;
+                        xlnx,ip-name = "r52_ctcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_0e_ctcm_global";
+                        phandle = <0x4b>;
+                };
+
+                r52_1a_atcm_global: r52_1a_atcm_global@eba40000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xeba40000 0x0 0x10000>;
+                        power-domains = <&versal2_firmware 0x183180ce>;
+                        xlnx,power-domain = <0x183180d1>;
+                        xlnx,ip-name = "r52_atcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x10000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1a_atcm_global";
+                        phandle = <0x34>;
+                };
+
+                r52_1a_btcm_global: r52_1a_btcm_global@eba50000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xeba50000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x183180cf>;
+                        xlnx,power-domain = <0x183180d2>;
+                        xlnx,ip-name = "r52_btcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1a_btcm_global";
+                        phandle = <0x35>;
+                };
+
+                r52_1a_ctcm_global: r52_1a_ctcm_global@eba60000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xeba60000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x183180d0>;
+                        xlnx,power-domain = <0x183180d3>;
+                        xlnx,ip-name = "r52_ctcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1a_ctcm_global";
+                        phandle = <0x36>;
+                };
+
+                r52_1b_atcm_global: r52_1b_atcm_global@ebac0000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebac0000 0x0 0x10000>;
+                        power-domains = <&versal2_firmware 0x183180d4>;
+                        xlnx,power-domain = <0x183180d4>;
+                        xlnx,ip-name = "r52_atcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x10000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1b_atcm_global";
+                        phandle = <0x3a>;
+                };
+
+                r52_1b_btcm_global: r52_1b_btcm_global@ebad0000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebad0000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x183180d5>;
+                        xlnx,power-domain = <0x183180d5>;
+                        xlnx,ip-name = "r52_btcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1b_btcm_global";
+                        phandle = <0x3b>;
+                };
+
+                r52_1b_ctcm_global: r52_1b_ctcm_global@ebae0000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebae0000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x183180d6>;
+                        xlnx,power-domain = <0x183180d6>;
+                        xlnx,ip-name = "r52_ctcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1b_ctcm_global";
+                        phandle = <0x3c>;
+                };
+
+                r52_1c_atcm_global: r52_1c_atcm_global@ebb40000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebb40000 0x0 0x10000>;
+                        power-domains = <&versal2_firmware 0x18318103>;
+                        xlnx,power-domain = <0x18318103>;
+                        xlnx,ip-name = "r52_atcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x10000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1c_atcm_global";
+                        phandle = <0x40>;
+                };
+
+                r52_1c_btcm_global: r52_1c_btcm_global@ebb50000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebb50000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x18318104>;
+                        xlnx,power-domain = <0x18318104>;
+                        xlnx,ip-name = "r52_btcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1c_btcm_global";
+                        phandle = <0x41>;
+                };
+
+                r52_1c_ctcm_global: r52_1c_ctcm_global@ebb60000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebb60000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x18318105>;
+                        xlnx,power-domain = <0x18318105>;
+                        xlnx,ip-name = "r52_ctcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1c_ctcm_global";
+                        phandle = <0x42>;
+                };
+
+                r52_1d_atcm_global: r52_1d_atcm_global@ebbc0000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebbc0000 0x0 0x10000>;
+                        power-domains = <&versal2_firmware 0x18318109>;
+                        xlnx,power-domain = <0x18318109>;
+                        xlnx,ip-name = "r52_atcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x10000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1d_atcm_global";
+                        phandle = <0x46>;
+                };
+
+                r52_1d_btcm_global: r52_1d_btcm_global@ebbd0000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebbd0000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x1831810a>;
+                        xlnx,power-domain = <0x1831810a>;
+                        xlnx,ip-name = "r52_btcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1d_btcm_global";
+                        phandle = <0x47>;
+                };
+
+                r52_1d_ctcm_global: r52_1d_ctcm_global@ebbe0000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebbe0000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x1831810b>;
+                        xlnx,power-domain = <0x1831810b>;
+                        xlnx,ip-name = "r52_ctcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1d_ctcm_global";
+                        phandle = <0x48>;
+                };
+
+                r52_1e_atcm_global: r52_1e_atcm_global@ebc40000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebc40000 0x0 0x10000>;
+                        power-domains = <&versal2_firmware 0x1831810f>;
+                        xlnx,power-domain = <0x1831810f>;
+                        xlnx,ip-name = "r52_atcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x10000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1e_atcm_global";
+                        phandle = <0x4c>;
+                };
+
+                r52_1e_btcm_global: r52_1e_btcm_global@ebc50000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebc50000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x18318110>;
+                        xlnx,power-domain = <0x18318110>;
+                        xlnx,ip-name = "r52_btcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1e_btcm_global";
+                        phandle = <0x4d>;
+                };
+
+                r52_1e_ctcm_global: r52_1e_ctcm_global@ebc60000 {
+                        status = "okay";
+                        compatible = "xlnx,tcm";
+                        reg = <0x0 0xebc60000 0x0 0x8000>;
+                        power-domains = <&versal2_firmware 0x18318111>;
+                        xlnx,power-domain = <0x18318111>;
+                        xlnx,ip-name = "r52_ctcm_global";
+                        xlnx,is-ecc = <0x1>;
+                        xlnx,bank-size = <0x8000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_1e_ctcm_global";
+                        phandle = <0x4e>;
                 };
 
                 ps_wizard_0_mmi_0_mmi_common: ps_wizard_0_mmi_0_mmi_common@eda00000 {
@@ -1951,6 +2341,16 @@
                         reg = <0x0 0xa0000000 0x0 0x10000000>;
                         xlnx,name = "ps_wizard_0_mmi_0_mmi_pcie_region_0";
                         phandle = <0x16>;
+                };
+
+                ps_wizard_0_mmi_0_r52_tcm_alias: ps_wizard_0_mmi_0_r52_tcm_alias@0 {
+                        compatible = "xlnx,tcm-global-11.0";
+                        status = "okay";
+                        xlnx,ip-name = "tcm_global";
+                        xlnx,is-hierarchy;
+                        reg = <0x0 0x0 0x0 0x100000>;
+                        xlnx,name = "ps_wizard_0_mmi_0_r52_tcm_alias";
+                        phandle = <0x255>;
                 };
 
                 ps_wizard_0_ps11_0_pmc_aes: ps_wizard_0_ps11_0_pmc_aes@f11e0000 {
@@ -2379,6 +2779,16 @@
                         phandle = <0x91>;
                 };
 
+                ps_wizard_0_ps11_0_r52_tcm_alias: ps_wizard_0_ps11_0_r52_tcm_alias@0 {
+                        compatible = "xlnx,tcm-global-11.0";
+                        status = "okay";
+                        xlnx,ip-name = "tcm_global";
+                        xlnx,is-hierarchy;
+                        reg = <0x0 0x0 0x0 0x100000>;
+                        xlnx,name = "ps_wizard_0_ps11_0_r52_tcm_alias";
+                        phandle = <0x25c>;
+                };
+
                 ps_wizard_0_ps11_0_rpu_a: ps_wizard_0_ps11_0_rpu_a@eb580000 {
                         compatible = "xlnx,rpu-11.0";
                         status = "okay";
@@ -2624,31 +3034,6 @@
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
                 ranges;
-
-                rproc0@9800000 {
-                        no-map;
-                        reg = <0x0 0x9800000 0x0 0x60000>;
-                        phandle = <0x269>;
-                };
-
-                vdev0vring0@9860000 {
-                        no-map;
-                        reg = <0x0 0x9860000 0x0 0x4000>;
-                        phandle = <0x26a>;
-                };
-
-                vdev0vring1@9864000 {
-                        no-map;
-                        reg = <0x0 0x9864000 0x0 0x4000>;
-                        phandle = <0x26b>;
-                };
-
-                vdev0buffer@9868000 {
-                        no-map;
-                        reg = <0x0 0x9868000 0x0 0x40000>;
-                        compatible = "shared-dma-pool";
-                        phandle = <0x26c>;
-                };
         };
 
         __symbols__ {
@@ -2746,6 +3131,36 @@
                 mdb_pcie0 = "/axi/pcie@ed931000";
                 mdb_intc_0 = "/axi/pcie@ed931000/interrupt-controller";
                 coresight = "/axi/coresight@f0800000";
+                r52_0a_atcm_global = "/axi/r52_0a_atcm_global@eba00000";
+                r52_0a_btcm_global = "/axi/r52_0a_btcm_global@eba10000";
+                r52_0a_ctcm_global = "/axi/r52_0a_ctcm_global@eba20000";
+                r52_0b_atcm_global = "/axi/r52_0b_atcm_global@eba80000";
+                r52_0b_btcm_global = "/axi/r52_0b_btcm_global@eba90000";
+                r52_0b_ctcm_global = "/axi/r52_0b_ctcm_global@ebaa0000";
+                r52_0c_atcm_global = "/axi/r52_0c_atcm_global@ebb00000";
+                r52_0c_btcm_global = "/axi/r52_0c_btcm_global@ebb10000";
+                r52_0c_ctcm_global = "/axi/r52_0c_ctcm_global@ebb20000";
+                r52_0d_atcm_global = "/axi/r52_0d_atcm_global@ebb80000";
+                r52_0d_btcm_global = "/axi/r52_0d_btcm_global@ebb90000";
+                r52_0d_ctcm_global = "/axi/r52_0d_ctcm_global@ebba0000";
+                r52_0e_atcm_global = "/axi/r52_0e_atcm_global@ebc00000";
+                r52_0e_btcm_global = "/axi/r52_0e_btcm_global@ebc10000";
+                r52_0e_ctcm_global = "/axi/r52_0e_ctcm_global@ebc20000";
+                r52_1a_atcm_global = "/axi/r52_1a_atcm_global@eba40000";
+                r52_1a_btcm_global = "/axi/r52_1a_btcm_global@eba50000";
+                r52_1a_ctcm_global = "/axi/r52_1a_ctcm_global@eba60000";
+                r52_1b_atcm_global = "/axi/r52_1b_atcm_global@ebac0000";
+                r52_1b_btcm_global = "/axi/r52_1b_btcm_global@ebad0000";
+                r52_1b_ctcm_global = "/axi/r52_1b_ctcm_global@ebae0000";
+                r52_1c_atcm_global = "/axi/r52_1c_atcm_global@ebb40000";
+                r52_1c_btcm_global = "/axi/r52_1c_btcm_global@ebb50000";
+                r52_1c_ctcm_global = "/axi/r52_1c_ctcm_global@ebb60000";
+                r52_1d_atcm_global = "/axi/r52_1d_atcm_global@ebbc0000";
+                r52_1d_btcm_global = "/axi/r52_1d_btcm_global@ebbd0000";
+                r52_1d_ctcm_global = "/axi/r52_1d_ctcm_global@ebbe0000";
+                r52_1e_atcm_global = "/axi/r52_1e_atcm_global@ebc40000";
+                r52_1e_btcm_global = "/axi/r52_1e_btcm_global@ebc50000";
+                r52_1e_ctcm_global = "/axi/r52_1e_ctcm_global@ebc60000";
                 ps_wizard_0_mmi_0_mmi_common = "/axi/ps_wizard_0_mmi_0_mmi_common@eda00000";
                 ps_wizard_0_mmi_0_mmi_dpdma = "/axi/ps_wizard_0_mmi_0_mmi_dpdma@edd10000";
                 ps_wizard_0_mmi_0_mmi_gtyp_cfg = "/axi/ps_wizard_0_mmi_0_mmi_gtyp_cfg@ed900000";
@@ -2759,6 +3174,7 @@
                 ps_wizard_0_mmi_0_mmi_usb3phy_crpara = "/axi/ps_wizard_0_mmi_0_mmi_usb3phy_crpara@ede40000";
                 ps_wizard_0_mmi_0_mmi_usb3phy_tca = "/axi/ps_wizard_0_mmi_0_mmi_usb3phy_tca@edeb8000";
                 ps_wizard_0_mmi_0_mmi_pcie_region_0 = "/axi/ps_wizard_0_mmi_0_mmi_pcie_region_0@a0000000";
+                ps_wizard_0_mmi_0_r52_tcm_alias = "/axi/ps_wizard_0_mmi_0_r52_tcm_alias@0";
                 ps_wizard_0_ps11_0_pmc_aes = "/axi/ps_wizard_0_ps11_0_pmc_aes@f11e0000";
                 ps_wizard_0_ps11_0_pmc_bbram_ctrl = "/axi/ps_wizard_0_ps11_0_pmc_bbram_ctrl@f11f0000";
                 ps_wizard_0_ps11_0_crf_0 = "/axi/ps_wizard_0_ps11_0_crf_0@ec200000";
@@ -2805,6 +3221,7 @@
                 ps_wizard_0_ps11_0_pmc_xmpu_0 = "/axi/ps_wizard_0_ps11_0_pmc_xmpu_0@f12f0000";
                 ps_wizard_0_ps11_0_pmc_xppu_0 = "/axi/ps_wizard_0_ps11_0_pmc_xppu_0@f1310000";
                 ps_wizard_0_ps11_0_pmc_xppu_npi_0 = "/axi/ps_wizard_0_ps11_0_pmc_xppu_npi_0@f1300000";
+                ps_wizard_0_ps11_0_r52_tcm_alias = "/axi/ps_wizard_0_ps11_0_r52_tcm_alias@0";
                 ps_wizard_0_ps11_0_rpu_a = "/axi/ps_wizard_0_ps11_0_rpu_a@eb580000";
                 ps_wizard_0_ps11_0_rpu_b = "/axi/ps_wizard_0_ps11_0_rpu_b@eb590000";
                 ps_wizard_0_ps11_0_pmc_sha2 = "/axi/ps_wizard_0_ps11_0_pmc_sha2@f1800000";
@@ -2831,163 +3248,5 @@
                 ps_wizard_0_ps11_0_ocm_ram_1_memory = "/memory@BBF80000";
                 ps_wizard_0_ps11_0_ocm_ram_2_memory = "/memory@BBE00000";
                 ps_wizard_0_ps11_0_ocm_ram_3_memory = "/memory@BBE80000";
-        };
-
-        domains {
-
-                openamp_a78_0_cluster {
-                        compatible = "openamp,domain-v1";
-                        phandle = <0x265>;
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu0vdev0vring1 {
-                                        start = <0x9864000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x263>;
-                                };
-
-                                rpu0vdev0vring0 {
-                                        start = <0x9860000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x262>;
-                                };
-
-                                rpu0vdev0buffer {
-                                        start = <0x9868000>;
-                                        size = <0x40000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x264>;
-                                };
-
-                                rproc0 {
-                                        start = <0x9800000>;
-                                        size = <0x60000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x261>;
-                                };
-                        };
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-                                        remote = <0x260>;
-                                        elfload;
-                                        elfload0 = <0x31 0x32 0x33 0x261>;
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-                                        remote = <0x260>;
-                                        carveouts = <0x262 0x263 0x264>;
-                                        mbox = <0xd>;
-                                };
-                        };
-
-                        access {
-                                dev = "r52_0a_btcm_global";
-                                flags = <0x0>;
-                        };
-                };
-
-                openamp_r52_0_cluster {
-                        compatible = "openamp,domain-v1";
-                        phandle = <0x260>;
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu0vdev0vring1 {
-                                        start = <0x9864000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x267>;
-                                };
-
-                                rpu0vdev0vring0 {
-                                        start = <0x9860000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x266>;
-                                };
-
-                                rpu0vdev0buffer {
-                                        start = <0x9868000>;
-                                        size = <0x40000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x268>;
-                                };
-
-                                rproc0 {
-                                        start = <0x9800000>;
-                                        size = <0x60000>;
-                                        no-map = <0x1>;
-                                };
-                        };
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-                                        host = <0x265>;
-                                        mbox = <0xbb>;
-                                        carveouts = <0x266 0x267 0x268>;
-                                };
-                        };
-
-                        access {
-                                dev = "r52_0a_btcm_global";
-                                flags = <0x0>;
-                        };
-                };
-        };
-
-        remoteproc@eba00000 {
-                compatible = "xlnx,versal-net-r52fss";
-                #address-cells = <0x2>;
-                #size-cells = <0x2>;
-                xlnx,cluster-mode = <0x0>;
-                ranges = <0x0 0x0 0x0 0xeba00000 0x0 0x10000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0x18000 0x0 0xeba20000 0x0 0x8000>;
-
-                r52f@0 {
-                        compatible = "xlnx,versal2-r52f";
-                        power-domains = <&versal2_firmware 0x181100bf>,
-                         <&versal2_firmware 0x183180cb>,
-                         <&versal2_firmware 0x183180cc>,
-                         <&versal2_firmware 0x183180cd>;
-                        reg = <0x0 0x0 0x0 0x10000 0x0 0x10000 0x0 0x8000 0x0 0x18000 0x0 0x8000>;
-                        reg-names = "r52_0a_atcm_global@eba00000", "r52_0a_btcm_global@eba10000", "r52_0a_ctcm_global@eba20000";
-                        memory-region = <0x269 0x26c 0x26a 0x26b>;
-                        mboxes = <&mailboxeb340000 0x0>,
-                         <&mailboxeb340000 0x1>;
-                        mbox-names = "tx", "rx";
-                };
-        };
-
-        openamp_mailbox@eb360000 {
-                #address-cells = <0x2>;
-                #size-cells = <0x2>;
-                compatible = "xlnx,versal-ipi-mailbox";
-                reg = <0x0 0xeb360000 0x0 0x10000 0x0 0xeb3f0a00 0x0 0x200 0x0 0xeb3f0a00 0x0 0x1ff>;
-                xlnx,ipi-id = <0x5>;
-                interrupts = <0x0 0x3c 0x4>;
-                reg-names = "ctrl", "msg";
-                ranges;
-                phandle = <0x26d>;
-
-                mailboxeb340000: mailbox@eb340000 {
-                        phandle = <0x26e>;
-                        compatible = "xlnx,versal-ipi-dest-mailbox";
-                        #mbox-cells = <0x1>;
-                        reg-names = "ctrl", "msg";
-                        reg = <0x0 0xeb340000 0x0 0x10000 0x0 0xeb3f0600 0x0 0x200 0x0 0xeb3f0600 0x0 0x1ff>;
-                        xlnx,ipi-id = <0x3>;
-                };
         };
 };

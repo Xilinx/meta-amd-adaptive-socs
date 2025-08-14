@@ -1,6 +1,6 @@
 /dts-v1/;
 / {
-        compatible = "amd,versal2", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA";
+        compatible = "amd,versal2";
         model = "AMD Versal VEK385 revA";
         #address-cells = <0x2>;
         #size-cells = <0x2>;
@@ -2160,10 +2160,10 @@
                         interrupts = <0x0 0xa5 0x4>;
                         interrupt-parent = <&gic>;
                         interrupt-map-mask = <0x0 0x0 0x0 0x7>;
-                        interrupt-map = <0x1 &mdb_intc_0 0x0>,
-                         <0x2 &mdb_intc_0 0x1>,
-                         <0x3 &mdb_intc_0 0x2>,
-                         <0x4 &mdb_intc_0 0x3>;
+                        interrupt-map = <0x0 0x0 0x0 0x1 &mdb_intc_0 0x0>,
+                         <0x0 0x0 0x0 0x2 &mdb_intc_0 0x1>,
+                         <0x0 0x0 0x0 0x3 &mdb_intc_0 0x2>,
+                         <0x0 0x0 0x0 0x4 &mdb_intc_0 0x3>;
                         msi-map = <0x0 &its 0x0 0x10000>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
@@ -2194,10 +2194,10 @@
                         interrupts = <0x0 0xa6 0x4>;
                         interrupt-parent = <&gic>;
                         interrupt-map-mask = <0x0 0x0 0x0 0x7>;
-                        interrupt-map = <0x1 &mdb_intc_1 0x0>,
-                         <0x2 &mdb_intc_1 0x1>,
-                         <0x3 &mdb_intc_1 0x2>,
-                         <0x4 &mdb_intc_1 0x3>;
+                        interrupt-map = <0x0 0x0 0x0 0x1 &mdb_intc_1 0x0>,
+                         <0x0 0x0 0x0 0x2 &mdb_intc_1 0x1>,
+                         <0x0 0x0 0x0 0x3 &mdb_intc_1 0x2>,
+                         <0x0 0x0 0x0 0x4 &mdb_intc_1 0x3>;
                         msi-map = <0x0 &its 0x10000 0x10000>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
@@ -2564,11 +2564,11 @@
                 phandle = <0x4>;
         };
 
-        NoC_C2_C3_ddr_memory: memory@50000000000 {
+        NoC_C2_C3_ddr_memory: memory@A00000000 {
                 compatible = "xlnx,axi-noc2-1.1";
                 xlnx,ip-name = "axi_noc2";
                 device_type = "memory";
-                reg = <0x500 0x0 0x1 0x0>;
+                reg = <0xa 0x0 0x1 0x0>;
                 memory_type = "memory";
                 phandle = <0x5>;
         };
@@ -2591,31 +2591,6 @@
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
                 ranges;
-
-                rproc0@9800000 {
-                        no-map;
-                        reg = <0x0 0x9800000 0x0 0x60000>;
-                        phandle = <0x267>;
-                };
-
-                vdev0vring0@9860000 {
-                        no-map;
-                        reg = <0x0 0x9860000 0x0 0x4000>;
-                        phandle = <0x268>;
-                };
-
-                vdev0vring1@9864000 {
-                        no-map;
-                        reg = <0x0 0x9864000 0x0 0x4000>;
-                        phandle = <0x269>;
-                };
-
-                vdev0buffer@9868000 {
-                        no-map;
-                        reg = <0x0 0x9868000 0x0 0x40000>;
-                        compatible = "shared-dma-pool";
-                        phandle = <0x26a>;
-                };
         };
 
         pwm-fan {
@@ -2788,168 +2763,8 @@
                 mmi_tsu_ext_clk = "/mmi_tsu_ext_clk";
                 tsu_ext_clk = "/tsu_ext_clk";
                 NoC_C0_C1_ddr_memory = "/memory@00000000";
-                NoC_C2_C3_ddr_memory = "/memory@50000000000";
+                NoC_C2_C3_ddr_memory = "/memory@A00000000";
                 NoC_C4_ddr_memory = "/memory@60000000000";
                 gic = "/axi/interrupt-controller@e2000000";
-        };
-
-        domains {
-
-                openamp_a78_0_cluster {
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_a78 0x1 0x80000003>;
-                        phandle = <0x263>;
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu0vdev0vring1 {
-                                        start = <0x9864000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x261>;
-                                };
-
-                                rpu0vdev0vring0 {
-                                        start = <0x9860000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x260>;
-                                };
-
-                                rpu0vdev0buffer {
-                                        start = <0x9868000>;
-                                        size = <0x40000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x262>;
-                                };
-
-                                rproc0 {
-                                        start = <0x9800000>;
-                                        size = <0x60000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x25f>;
-                                };
-                        };
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-                                        remote = <0x25e>;
-                                        elfload;
-                                        elfload0 = <0x31 0x32 0x33 0x25f>;
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-                                        remote = <0x25e>;
-                                        carveouts = <0x260 0x261 0x262>;
-                                        mbox = <0xd>;
-                                };
-                        };
-
-                        access {
-                                dev = "r52_0a_btcm_global";
-                                flags = <0x0>;
-                        };
-                };
-
-                openamp_r52_0_cluster {
-                        compatible = "openamp,domain-v1";
-                        phandle = <0x25e>;
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu0vdev0vring1 {
-                                        start = <0x9864000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x265>;
-                                };
-
-                                rpu0vdev0vring0 {
-                                        start = <0x9860000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x264>;
-                                };
-
-                                rpu0vdev0buffer {
-                                        start = <0x9868000>;
-                                        size = <0x40000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x266>;
-                                };
-
-                                rproc0 {
-                                        start = <0x9800000>;
-                                        size = <0x60000>;
-                                        no-map = <0x1>;
-                                };
-                        };
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-                                        host = <0x263>;
-                                        mbox = <0xbb>;
-                                        carveouts = <0x264 0x265 0x266>;
-                                };
-                        };
-
-                        access {
-                                dev = "r52_0a_btcm_global";
-                                flags = <0x0>;
-                        };
-                };
-        };
-
-        remoteproc@eba00000 {
-                compatible = "xlnx,versal-net-r52fss";
-                #address-cells = <0x2>;
-                #size-cells = <0x2>;
-                xlnx,cluster-mode = <0x0>;
-                ranges = <0x0 0x0 0x0 0xeba00000 0x0 0x10000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0x18000 0x0 0xeba20000 0x0 0x8000>;
-
-                r52f@0 {
-                        compatible = "xlnx,versal2-r52f";
-                        power-domains = <&versal2_firmware 0x181100bf>,
-                         <&versal2_firmware 0x183180cb>,
-                         <&versal2_firmware 0x183180cc>,
-                         <&versal2_firmware 0x183180cd>;
-                        reg = <0x0 0x0 0x0 0x10000 0x0 0x10000 0x0 0x8000 0x0 0x18000 0x0 0x8000>;
-                        reg-names = "r52_0a_atcm_global@eba00000", "r52_0a_btcm_global@eba10000", "r52_0a_ctcm_global@eba20000";
-                        memory-region = <0x267 0x26a 0x268 0x269>;
-                        mboxes = <&mailboxeb340000 0x0>,
-                         <&mailboxeb340000 0x1>;
-                        mbox-names = "tx", "rx";
-                };
-        };
-
-        openamp_mailbox@eb360000 {
-                #address-cells = <0x2>;
-                #size-cells = <0x2>;
-                compatible = "xlnx,versal-ipi-mailbox";
-                reg = <0x0 0xeb360000 0x0 0x10000 0x0 0xeb3f0a00 0x0 0x200 0x0 0xeb3f0a00 0x0 0x1ff>;
-                xlnx,ipi-id = <0x5>;
-                interrupts = <0x0 0x3c 0x4>;
-                reg-names = "ctrl", "msg";
-                ranges;
-                interrupt-parent = <&gic>;
-                phandle = <0x26b>;
-
-                mailboxeb340000: mailbox@eb340000 {
-                        phandle = <0x26c>;
-                        compatible = "xlnx,versal-ipi-dest-mailbox";
-                        #mbox-cells = <0x1>;
-                        reg-names = "ctrl", "msg";
-                        reg = <0x0 0xeb340000 0x0 0x10000 0x0 0xeb3f0600 0x0 0x200 0x0 0xeb3f0600 0x0 0x1ff>;
-                        xlnx,ipi-id = <0x3>;
-                };
         };
 };
