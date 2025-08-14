@@ -1,6 +1,6 @@
 /dts-v1/;
 / {
-        compatible = "xlnx,versal-vek280-revB", "xlnx,versal-vek280", "xlnx,versal", "Xilinx Versal vek280 Eval board revB", "Xilinx Versal vek280 Eval board revB", "Xilinx Versal vek280 Eval board revB", "Xilinx Versal vek280 Eval board revB", "Xilinx Versal vek280 Eval board revB", "Xilinx Versal vek280 Eval board revB";
+        compatible = "xlnx,versal-vek280-revB", "xlnx,versal-vek280", "xlnx,versal";
         #address-cells = <0x2>;
         #size-cells = <0x2>;
         model = "Xilinx Versal vek280 Eval board revB";
@@ -134,6 +134,9 @@
                  <0xffae0000 &lpd_dma_chan6 0xffae0000 0x10000>,
                  <0xffaf0000 &lpd_dma_chan7 0xffaf0000 0x10000>,
                  <0xffc90000 &CIPS_0_pspmc_0_psv_psm_global_reg 0xffc90000 0xf000>,
+                 <0x0 &CIPS_0_pspmc_0_psv_r5_0_atcm 0x0 0x10000>,
+                 <0x0 &CIPS_0_pspmc_0_psv_r5_tcm_ram_0 0x0 0x40000>,
+                 <0x20000 &CIPS_0_pspmc_0_psv_r5_0_btcm 0x20000 0x10000>,
                  <0xf9000000 &gic_r5 0xf9000000 0x3000>,
                  <0xffe40000 &CIPS_0_pspmc_0_psv_r5_0_instruction_cache 0xffe40000 0x10000>,
                  <0xffe50000 &CIPS_0_pspmc_0_psv_r5_0_data_cache 0xffe50000 0x10000>,
@@ -1814,6 +1817,50 @@
                         phandle = <0x78>;
                 };
 
+                CIPS_0_pspmc_0_psv_r5_0_atcm: CIPS_0_pspmc_0_psv_r5_0_atcm@0 {
+                        xlnx,power-domain = <0x1831800b>;
+                        compatible = "xlnx,psv-r5-tcm-1.0";
+                        status = "okay";
+                        xlnx,ip-name = "psv_r5_tcm";
+                        xlnx,bank-size = <0x10000>;
+                        reg = <0x0 0x0 0x0 0x10000>;
+                        xlnx,name = "CIPS_0_pspmc_0_psv_r5_0_atcm";
+                        phandle = <0x8c>;
+                };
+
+                CIPS_0_pspmc_0_psv_r5_0_atcm_lockstep: CIPS_0_pspmc_0_psv_r5_0_atcm_lockstep@ffe10000 {
+                        compatible = "xlnx,psv-r5-0-atcm-lockstep-1.0", "mmio-sram";
+                        status = "okay";
+                        power-domains = <&versal_firmware 0x1831800b>;
+                        xlnx,ip-name = "psv_r5_0_atcm_lockstep";
+                        xlnx,is-hierarchy;
+                        reg = <0x0 0xffe10000 0x0 0x10000>;
+                        xlnx,name = "CIPS_0_pspmc_0_psv_r5_0_atcm_lockstep";
+                        phandle = <0x13f>;
+                };
+
+                CIPS_0_pspmc_0_psv_r5_0_btcm: CIPS_0_pspmc_0_psv_r5_0_btcm@20000 {
+                        xlnx,power-domain = <0x1831800c>;
+                        compatible = "xlnx,psv-r5-tcm-1.0";
+                        status = "okay";
+                        xlnx,ip-name = "psv_r5_tcm";
+                        xlnx,bank-size = <0x10000>;
+                        reg = <0x0 0x20000 0x0 0x10000>;
+                        xlnx,name = "CIPS_0_pspmc_0_psv_r5_0_btcm";
+                        phandle = <0x8e>;
+                };
+
+                CIPS_0_pspmc_0_psv_r5_0_btcm_lockstep: CIPS_0_pspmc_0_psv_r5_0_btcm_lockstep@ffe30000 {
+                        compatible = "xlnx,psv-r5-0-btcm-lockstep-1.0", "mmio-sram";
+                        status = "okay";
+                        power-domains = <&versal_firmware 0x1831800c>;
+                        xlnx,ip-name = "psv_r5_0_btcm_lockstep";
+                        xlnx,is-hierarchy;
+                        reg = <0x0 0xffe30000 0x0 0x10000>;
+                        xlnx,name = "CIPS_0_pspmc_0_psv_r5_0_btcm_lockstep";
+                        phandle = <0x140>;
+                };
+
                 CIPS_0_pspmc_0_psv_r5_0_data_cache: CIPS_0_pspmc_0_psv_r5_0_data_cache@ffe50000 {
                         compatible = "xlnx,psv-r5-0-data-cache-1.0";
                         status = "okay";
@@ -1832,6 +1879,28 @@
                         phandle = <0x90>;
                 };
 
+                CIPS_0_pspmc_0_psv_r5_1_atcm: CIPS_0_pspmc_0_psv_r5_1_atcm@0 {
+                        xlnx,power-domain = <0x1831800d>;
+                        compatible = "xlnx,psv-r5-tcm-1.0";
+                        status = "okay";
+                        xlnx,ip-name = "psv_r5_tcm";
+                        xlnx,bank-size = <0x10000>;
+                        reg = <0x0 0x0 0x0 0x10000>;
+                        xlnx,name = "CIPS_0_pspmc_0_psv_r5_1_atcm";
+                        phandle = <0x95>;
+                };
+
+                CIPS_0_pspmc_0_psv_r5_1_btcm: CIPS_0_pspmc_0_psv_r5_1_btcm@20000 {
+                        xlnx,power-domain = <0x1831800e>;
+                        compatible = "xlnx,psv-r5-tcm-1.0";
+                        status = "okay";
+                        xlnx,ip-name = "psv_r5_tcm";
+                        xlnx,bank-size = <0x10000>;
+                        reg = <0x0 0x20000 0x0 0x10000>;
+                        xlnx,name = "CIPS_0_pspmc_0_psv_r5_1_btcm";
+                        phandle = <0x96>;
+                };
+
                 CIPS_0_pspmc_0_psv_r5_1_data_cache: CIPS_0_pspmc_0_psv_r5_1_data_cache@ffed0000 {
                         compatible = "xlnx,psv-r5-1-data-cache-1.0";
                         status = "okay";
@@ -1848,6 +1917,15 @@
                         reg = <0x0 0xffec0000 0x0 0x10000>;
                         xlnx,name = "CIPS_0_pspmc_0_psv_r5_1_instruction_cache";
                         phandle = <0x92>;
+                };
+
+                CIPS_0_pspmc_0_psv_r5_tcm_ram_0: CIPS_0_pspmc_0_psv_r5_tcm_ram_0@0 {
+                        compatible = "xlnx,psv-r5-tcm-1.0";
+                        status = "okay";
+                        xlnx,ip-name = "psv_r5_tcm";
+                        reg = <0x0 0x0 0x0 0x40000>;
+                        xlnx,name = "CIPS_0_pspmc_0_psv_r5_tcm_ram_0";
+                        phandle = <0x8d>;
                 };
 
                 CIPS_0_pspmc_0_psv_rpu_0: CIPS_0_pspmc_0_psv_rpu_0@ff9a0000 {
@@ -1876,6 +1954,48 @@
                         xlnx,name = "CIPS_0_pspmc_0_psv_scntrs_0";
                         phandle = <0x66>;
                 };
+        };
+
+        psv_r5_0_atcm_global: psv_r5_0_atcm_global@ffe00000 {
+                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
+                power-domains = <&versal_firmware 0x1831800b>;
+                reg = <0x0 0xffe00000 0x0 0x10000>;
+                status = "okay";
+                xlnx,ip-name = "psv_tcm_global";
+                xlnx,is-hierarchy;
+                xlnx,name = "CIPS_0_pspmc_0_psv_r5_0_atcm_global";
+                phandle = <0x79>;
+        };
+
+        psv_r5_0_btcm_global: psv_r5_0_btcm_global@ffe20000 {
+                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
+                power-domains = <&versal_firmware 0x1831800c>;
+                reg = <0x0 0xffe20000 0x0 0x10000>;
+                status = "okay";
+                xlnx,ip-name = "psv_tcm_global";
+                xlnx,is-hierarchy;
+                xlnx,name = "CIPS_0_pspmc_0_psv_r5_0_btcm_global";
+                phandle = <0x141>;
+        };
+
+        psv_r5_1_atcm_global: psv_r5_1_atcm_global@ffe90000 {
+                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
+                power-domains = <&versal_firmware 0x1831800d>;
+                reg = <0x0 0xffe90000 0x0 0x10000>;
+                status = "okay";
+                xlnx,ip-name = "psv_tcm_global";
+                xlnx,name = "CIPS_0_pspmc_0_psv_r5_1_atcm_global";
+                phandle = <0x7a>;
+        };
+
+        psv_r5_1_btcm_global: psv_r5_1_btcm_global@ffeb0000 {
+                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
+                power-domains = <&versal_firmware 0x1831800e>;
+                reg = <0x0 0xffeb0000 0x0 0x10000>;
+                status = "okay";
+                xlnx,ip-name = "psv_tcm_global";
+                xlnx,name = "CIPS_0_pspmc_0_psv_r5_1_btcm_global";
+                phandle = <0x7b>;
         };
 
         amba_xppu: indirect-bus@1 {
@@ -2421,13 +2541,24 @@
                 CIPS_0_pspmc_0_psv_pmc_slave_boot_stream = "/axi/CIPS_0_pspmc_0_psv_pmc_slave_boot_stream@f2100000";
                 CIPS_0_pspmc_0_psv_pmc_tap = "/axi/CIPS_0_pspmc_0_psv_pmc_tap@f11a0000";
                 CIPS_0_pspmc_0_psv_psm_global_reg = "/axi/CIPS_0_pspmc_0_psv_psm_global_reg@ffc90000";
+                CIPS_0_pspmc_0_psv_r5_0_atcm = "/axi/CIPS_0_pspmc_0_psv_r5_0_atcm@0";
+                CIPS_0_pspmc_0_psv_r5_0_atcm_lockstep = "/axi/CIPS_0_pspmc_0_psv_r5_0_atcm_lockstep@ffe10000";
+                CIPS_0_pspmc_0_psv_r5_0_btcm = "/axi/CIPS_0_pspmc_0_psv_r5_0_btcm@20000";
+                CIPS_0_pspmc_0_psv_r5_0_btcm_lockstep = "/axi/CIPS_0_pspmc_0_psv_r5_0_btcm_lockstep@ffe30000";
                 CIPS_0_pspmc_0_psv_r5_0_data_cache = "/axi/CIPS_0_pspmc_0_psv_r5_0_data_cache@ffe50000";
                 CIPS_0_pspmc_0_psv_r5_0_instruction_cache = "/axi/CIPS_0_pspmc_0_psv_r5_0_instruction_cache@ffe40000";
+                CIPS_0_pspmc_0_psv_r5_1_atcm = "/axi/CIPS_0_pspmc_0_psv_r5_1_atcm@0";
+                CIPS_0_pspmc_0_psv_r5_1_btcm = "/axi/CIPS_0_pspmc_0_psv_r5_1_btcm@20000";
                 CIPS_0_pspmc_0_psv_r5_1_data_cache = "/axi/CIPS_0_pspmc_0_psv_r5_1_data_cache@ffed0000";
                 CIPS_0_pspmc_0_psv_r5_1_instruction_cache = "/axi/CIPS_0_pspmc_0_psv_r5_1_instruction_cache@ffec0000";
+                CIPS_0_pspmc_0_psv_r5_tcm_ram_0 = "/axi/CIPS_0_pspmc_0_psv_r5_tcm_ram_0@0";
                 CIPS_0_pspmc_0_psv_rpu_0 = "/axi/CIPS_0_pspmc_0_psv_rpu_0@ff9a0000";
                 CIPS_0_pspmc_0_psv_scntr_0 = "/axi/CIPS_0_pspmc_0_psv_scntr_0@ff130000";
                 CIPS_0_pspmc_0_psv_scntrs_0 = "/axi/CIPS_0_pspmc_0_psv_scntrs_0@ff140000";
+                psv_r5_0_atcm_global = "/psv_r5_0_atcm_global@ffe00000";
+                psv_r5_0_btcm_global = "/psv_r5_0_btcm_global@ffe20000";
+                psv_r5_1_atcm_global = "/psv_r5_1_atcm_global@ffe90000";
+                psv_r5_1_btcm_global = "/psv_r5_1_btcm_global@ffeb0000";
                 amba_xppu = "/indirect-bus@1";
                 lpd_xppu = "/indirect-bus@1/xppu@ff990000";
                 pmc_xppu = "/indirect-bus@1/xppu@f1310000";
@@ -2468,194 +2599,5 @@
                 noc_lpddr0_ddr_memory = "/memory@00000000";
                 axi_bram_ctrl_0_memory = "/memory@a4010000";
                 CIPS_0_pspmc_0_psv_ocm_ram_0_memory = "/memory@FFFC0000";
-        };
-
-        domains {
-
-                openamp_a72_0_cluster {
-                        compatible = "openamp,domain-v1";
-                        phandle = <0x15e>;
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu0vdev0vring1 {
-                                        start = <0x9864000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x15c>;
-                                };
-
-                                rpu0vdev0vring0 {
-                                        start = <0x9860000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x15b>;
-                                };
-
-                                rpu0vdev0buffer {
-                                        start = <0x9868000>;
-                                        size = <0x100000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x15d>;
-                                };
-
-                                rproc0 {
-                                        start = <0x9800000>;
-                                        size = <0x60000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x15a>;
-                                };
-                        };
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-                                        remote = <0x159>;
-                                        elfload;
-                                        elfload0 = <0x79 0x141 0x15a>;
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-                                        remote = <0x159>;
-                                        mbox = <0xa>;
-                                        carveouts = <0x15b 0x15c 0x15d>;
-                                };
-                        };
-
-                        access {
-                                dev = "psv_r5_0_btcm_global";
-                                flags = <0x0>;
-                        };
-                };
-
-                openamp_r5_0_cluster {
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_r5_0 0x1 0x0>;
-                        phandle = <0x159>;
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu0vdev0vring1 {
-                                        start = <0x9864000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x160>;
-                                };
-
-                                rpu0vdev0vring0 {
-                                        start = <0x9860000>;
-                                        size = <0x4000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x15f>;
-                                };
-
-                                rpu0vdev0buffer {
-                                        start = <0x9868000>;
-                                        size = <0x100000>;
-                                        no-map = <0x1>;
-                                        phandle = <0x161>;
-                                };
-
-                                rproc0 {
-                                        start = <0x9800000>;
-                                        size = <0x60000>;
-                                        no-map = <0x1>;
-                                };
-                        };
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-                                        host = <0x15e>;
-                                        mbox = <0x8b>;
-                                        carveouts = <0x15f 0x160 0x161>;
-                                };
-                        };
-
-                        access {
-                                dev = "psv_r5_0_btcm_global";
-                                flags = <0x0>;
-                        };
-                };
-        };
-
-        reserved-memory {
-                #address-cells = <0x2>;
-                #size-cells = <0x2>;
-                ranges;
-
-                rproc0@9800000 {
-                        no-map;
-                        reg = <0x0 0x9800000 0x0 0x60000>;
-                        phandle = <0x162>;
-                };
-
-                vdev0vring0@9860000 {
-                        no-map;
-                        reg = <0x0 0x9860000 0x0 0x4000>;
-                        phandle = <0x163>;
-                };
-
-                vdev0vring1@9864000 {
-                        no-map;
-                        reg = <0x0 0x9864000 0x0 0x4000>;
-                        phandle = <0x164>;
-                };
-
-                vdev0buffer@9868000 {
-                        no-map;
-                        reg = <0x0 0x9868000 0x0 0x100000>;
-                        compatible = "shared-dma-pool";
-                        phandle = <0x165>;
-                };
-        };
-
-        remoteproc@ffe00000 {
-                compatible = "xlnx,versal-r5fss";
-                xlnx,cluster-mode = <0x0>;
-                xlnx,tcm-mode = <0x0>;
-                #address-cells = <0x2>;
-                #size-cells = <0x2>;
-                ranges = <0x0 0x0 0x0 0xffe00000 0x0 0x10000 0x0 0x20000 0x0 0xffe20000 0x0 0x10000 0x1 0x0 0x0 0xffe90000 0x0 0x10000 0x1 0x20000 0x0 0xffeb0000 0x0 0x10000>;
-
-                r5f@0 {
-                        compatible = "xlnx,zynqmp-r5f";
-                        reg-names = "atcm0", "btcm0";
-                        reg = <0x0 0x0 0x0 0x10000 0x0 0x20000 0x0 0x10000>;
-                        memory-region = <0x162 0x165 0x163 0x164>;
-                        power-domains = <&versal_firmware 0x18110005>,
-                         <&versal_firmware 0x1831800b>,
-                         <&versal_firmware 0x1831800c>;
-                        mboxes = <0x167 0x0 0x167 0x1>;
-                        mbox-names = "tx", "rx";
-                };
-        };
-
-        openamp_mailbox@ff360000 {
-                #address-cells = <0x2>;
-                #size-cells = <0x2>;
-                compatible = "xlnx,versal-ipi-mailbox";
-                reg = <0x0 0xff360000 0x0 0x10000 0x0 0xff3f0a00 0x0 0x200 0x0 0xff3f0a00 0x0 0x1ff>;
-                xlnx,ipi-id = <0x5>;
-                interrupts = <0x0 0x21 0x4>;
-                reg-names = "ctrl", "msg";
-                ranges;
-                phandle = <0x166>;
-
-                mailbox@ff340000 {
-                        phandle = <0x167>;
-                        compatible = "xlnx,versal-ipi-dest-mailbox";
-                        #mbox-cells = <0x1>;
-                        reg-names = "ctrl", "msg";
-                        reg = <0x0 0xff340000 0x0 0x10000 0x0 0xff3f0600 0x0 0x200 0x0 0xff3f0600 0x0 0x1ff>;
-                        xlnx,ipi-id = <0x3>;
-                };
         };
 };
