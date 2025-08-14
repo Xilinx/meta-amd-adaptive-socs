@@ -12,6 +12,7 @@
 #M# zynq-zc702-sdt-full     default       full     default  none  QB_MEM = \"-m 1024\"\\nQEMU_HW_SERIAL = \"-serial null -serial mon:stdio\"\\n
 #M# zynqmp-zcu106-sdt-full  default       full     default  none  QB_MEM = \"-m 4G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-zynqmp-zcu102.dtb\"\\nQEMU_HW_DTB_PMU = \"${QEMU_HW_DTB_PATH}/zynqmp-pmu.dtb\"\\n
 #M# versal-vmk180-sdt-seg   default       full     default  none  QB_MEM = \"-m 8G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-versal-ps-vmk180.dtb\"\\nQEMU_HW_DTB_PMC = \"\${QEMU_HW_DTB_PATH}/board-versal-pmc-virt.dtb\"\\nQB_ROOTFS_OPT = \"-drive if=sd,index=1,file=@ROOTFS@,format=raw\"\\n
+#M# versal-vpk120-sdt-seg   default       full     default  none  QB_MEM = \"-m 8G\"\\nQEMU_HW_DTB_PS = \"\${QEMU_HW_DTB_PATH}/board-versal-ps-vpk120.dtb\"\\nQEMU_HW_DTB_PMC = \"${QEMU_HW_DTB_PATH}/board-versal-pmc-virt.dtb\"\\nQB_ROOTFS_OPT = \"-drive if=sd,index=1,file=@ROOTFS@,format=raw\"\\n
 
 this=$(realpath $0)
 
