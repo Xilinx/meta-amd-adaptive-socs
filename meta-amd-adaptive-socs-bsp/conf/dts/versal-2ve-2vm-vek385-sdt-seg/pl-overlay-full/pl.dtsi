@@ -15,7 +15,7 @@
 };
 
 &amba {
-	pl_mmi_clk_wiz: clkx5_wiz@b2000000 {
+	pl_mmi_clk_wiz: clkx5_wiz@b2010000 {
 		xlnx,reset-type = "ACTIVE_HIGH";
 		xlnx,clk-out1-port = "clk_out1";
 		xlnx,clkout1-actual-duty-cycle = <50>;
@@ -25,7 +25,7 @@
 		xlnx,use-locked-deskew2 = <0>;
 		xlnx,clkout3-drives = "BUFG";
 		xlnx,deskew-delay1 = <0>;
-		reg = <0x0 0xb2000000 0x0 0x10000>;
+		reg = <0x0 0xb2010000 0x0 0x10000>;
 		xlnx,deskew-delay2 = <0>;
 		xlnx,clkin2-deskew-port = "clkin2_deskew";
 		xlnx,clkout4-grouping = "Auto";
@@ -71,7 +71,7 @@
 		xlnx,clkout-grouping = "Auto,Auto,Auto,Auto,Auto,Auto,Auto";
 		xlnx,clkin1-bufg = <0>;
 		xlnx,precision = <1>;
-		clock-output-names = "0xb2000000-clk_out1 0xb2000000-clk_out2 0xb2000000-clk_out3";
+		clock-output-names = "0xb2010000-clk_out1 0xb2010000-clk_out2 0xb2010000-clk_out3";
 		xlnx,clkout1-divide = <52>;
 		xlnx,use-phase-alignment = <0>;
 		xlnx,ref-clk-freq = <100>;
@@ -451,37 +451,12 @@
 		xlnx,s-axi-id-width = <1>;
 		xlnx,name = "axi_bram_ctrl_0";
 	};
-	axi_gpio_0: gpio@b2010000 {
-		xlnx,gpio-board-interface = "Custom";
+	axi_gpio_0: gpio@b2020000 {
+		xlnx,gpio-board-interface = "gpio_led";
 		compatible = "xlnx,axi-gpio-2.0" , "xlnx,xps-gpio-1.00.a";
 		xlnx,all-outputs = <1>;
 		#gpio-cells = <2>;
 		xlnx,gpio-width = <4>;
-		xlnx,dout-default = <0x0>;
-		xlnx,is-dual = <0>;
-		xlnx,ip-name = "axi_gpio";
-		xlnx,tri-default-2 = <0xffffffff>;
-		reg = <0x0 0xb2010000 0x0 0x10000>;
-		xlnx,all-inputs-2 = <0>;
-		clocks = <&misc_clk_1>;
-		xlnx,all-outputs-2 = <0>;
-		gpio-controller;
-		xlnx,interrupt-present = <0>;
-		xlnx,gpio2-board-interface = "Custom";
-		xlnx,edk-iptype = "PERIPHERAL";
-		xlnx,dout-default-2 = <0x0>;
-		xlnx,gpio2-width = <32>;
-		clock-names = "s_axi_aclk";
-		xlnx,tri-default = <0xffffffff>;
-		xlnx,name = "axi_gpio_0";
-		xlnx,all-inputs = <0>;
-	};
-	axi_gpio_1: gpio@b2020000 {
-		xlnx,gpio-board-interface = "Custom";
-		compatible = "xlnx,axi-gpio-2.0" , "xlnx,xps-gpio-1.00.a";
-		xlnx,all-outputs = <0>;
-		#gpio-cells = <2>;
-		xlnx,gpio-width = <2>;
 		xlnx,dout-default = <0x0>;
 		xlnx,is-dual = <0>;
 		xlnx,ip-name = "axi_gpio";
@@ -497,16 +472,20 @@
 		xlnx,dout-default-2 = <0x0>;
 		xlnx,gpio2-width = <32>;
 		clock-names = "s_axi_aclk";
+		xlnx,use-board-flow;
 		xlnx,tri-default = <0xffffffff>;
-		xlnx,name = "axi_gpio_1";
-		xlnx,all-inputs = <1>;
+		xlnx,name = "axi_gpio_0";
+		xlnx,all-inputs = <0>;
 	};
-	axi_gpio_2: gpio@b2030000 {
-		xlnx,gpio-board-interface = "Custom";
+	axi_gpio_1: gpio@b2030000 {
+		#interrupt-cells = <2>;
+		interrupts = < 0 104 4 >;
+		xlnx,gpio-board-interface = "gpio_pb";
 		compatible = "xlnx,axi-gpio-2.0" , "xlnx,xps-gpio-1.00.a";
 		xlnx,all-outputs = <0>;
 		#gpio-cells = <2>;
-		xlnx,gpio-width = <4>;
+		xlnx,gpio-width = <2>;
+		interrupt-parent = <&gic>;
 		xlnx,dout-default = <0x0>;
 		xlnx,is-dual = <0>;
 		xlnx,ip-name = "axi_gpio";
@@ -516,22 +495,28 @@
 		clocks = <&misc_clk_1>;
 		xlnx,all-outputs-2 = <0>;
 		gpio-controller;
-		xlnx,interrupt-present = <0>;
+		xlnx,interrupt-present = <1>;
 		xlnx,gpio2-board-interface = "Custom";
 		xlnx,edk-iptype = "PERIPHERAL";
 		xlnx,dout-default-2 = <0x0>;
 		xlnx,gpio2-width = <32>;
 		clock-names = "s_axi_aclk";
+		xlnx,use-board-flow;
+		interrupt-controller;
+		interrupt-names = "ip2intc_irpt";
 		xlnx,tri-default = <0xffffffff>;
-		xlnx,name = "axi_gpio_2";
+		xlnx,name = "axi_gpio_1";
 		xlnx,all-inputs = <1>;
 	};
-	board_misc_gpios_board_misc_i2c1_alt_in: gpio@b2040000 {
-		xlnx,gpio-board-interface = "Custom";
+	axi_gpio_2: gpio@b2040000 {
+		#interrupt-cells = <2>;
+		interrupts = < 0 105 4 >;
+		xlnx,gpio-board-interface = "gpio_dp";
 		compatible = "xlnx,axi-gpio-2.0" , "xlnx,xps-gpio-1.00.a";
 		xlnx,all-outputs = <0>;
 		#gpio-cells = <2>;
-		xlnx,gpio-width = <1>;
+		xlnx,gpio-width = <4>;
+		interrupt-parent = <&gic>;
 		xlnx,dout-default = <0x0>;
 		xlnx,is-dual = <0>;
 		xlnx,ip-name = "axi_gpio";
@@ -541,22 +526,47 @@
 		clocks = <&misc_clk_1>;
 		xlnx,all-outputs-2 = <0>;
 		gpio-controller;
-		xlnx,interrupt-present = <0>;
+		xlnx,interrupt-present = <1>;
 		xlnx,gpio2-board-interface = "Custom";
 		xlnx,edk-iptype = "PERIPHERAL";
 		xlnx,dout-default-2 = <0x0>;
 		xlnx,gpio2-width = <32>;
 		clock-names = "s_axi_aclk";
+		xlnx,use-board-flow;
+		interrupt-controller;
+		interrupt-names = "ip2intc_irpt";
 		xlnx,tri-default = <0xffffffff>;
-		xlnx,name = "board_misc_gpios_board_misc_i2c1_alt_in";
+		xlnx,name = "axi_gpio_2";
 		xlnx,all-inputs = <1>;
 	};
-	board_misc_gpios_board_misc_pcie_ep: gpio@b2050000 {
+	axi_uart16550_0: serial@b2000000 {
+		compatible = "xlnx,axi-uart16550-2.0" , "xlnx,axi-uart16550";
+		xlnx,external-xin-clk-hz = <25000000>;
+		xlnx,has-external-rclk = <0>;
+		xlnx,s-axi-aclk-freq-hz-d = <0x5f5dd18>;
+		xlnx,use-user-ports = <1>;
+		xlnx,sim-device = "VERSAL_AI_EDGE_2";
+		xlnx,uart-board-interface = "pl_uart_bank705";
+		xlnx,ip-name = "axi_uart16550";
+		reg = <0x0 0xb2000000 0x0 0x10000>;
+		xlnx,has-external-xin = <0>;
+		clocks = <&misc_clk_1>;
+		xlnx,use-modem-ports = <1>;
+		xlnx,edk-iptype = "PERIPHERAL";
+		xlnx,external-xin-clk-hz-d = <25>;
+		xlnx,clock-freq = <99999000>;
+		clock-names = "s_axi_aclk";
+		xlnx,use-board-flow;
+		xlnx,base-user = <1>;
+		xlnx,is-a-16550 = <1>;
+		xlnx,name = "axi_uart16550_0";
+	};
+	board_misc_gpios_board_misc_i2c1_alt_in: gpio@b2050000 {
 		xlnx,gpio-board-interface = "Custom";
 		compatible = "xlnx,axi-gpio-2.0" , "xlnx,xps-gpio-1.00.a";
 		xlnx,all-outputs = <0>;
 		#gpio-cells = <2>;
-		xlnx,gpio-width = <3>;
+		xlnx,gpio-width = <1>;
 		xlnx,dout-default = <0x0>;
 		xlnx,is-dual = <0>;
 		xlnx,ip-name = "axi_gpio";
@@ -573,15 +583,15 @@
 		xlnx,gpio2-width = <32>;
 		clock-names = "s_axi_aclk";
 		xlnx,tri-default = <0xffffffff>;
-		xlnx,name = "board_misc_gpios_board_misc_pcie_ep";
-		xlnx,all-inputs = <0>;
+		xlnx,name = "board_misc_gpios_board_misc_i2c1_alt_in";
+		xlnx,all-inputs = <1>;
 	};
-	board_misc_gpios_board_misc_pl_io_l16p: gpio@b2060000 {
+	board_misc_gpios_board_misc_pcie_ep: gpio@b2060000 {
 		xlnx,gpio-board-interface = "Custom";
 		compatible = "xlnx,axi-gpio-2.0" , "xlnx,xps-gpio-1.00.a";
 		xlnx,all-outputs = <0>;
 		#gpio-cells = <2>;
-		xlnx,gpio-width = <1>;
+		xlnx,gpio-width = <3>;
 		xlnx,dout-default = <0x0>;
 		xlnx,is-dual = <0>;
 		xlnx,ip-name = "axi_gpio";
@@ -598,15 +608,15 @@
 		xlnx,gpio2-width = <32>;
 		clock-names = "s_axi_aclk";
 		xlnx,tri-default = <0xffffffff>;
-		xlnx,name = "board_misc_gpios_board_misc_pl_io_l16p";
-		xlnx,all-inputs = <1>;
+		xlnx,name = "board_misc_gpios_board_misc_pcie_ep";
+		xlnx,all-inputs = <0>;
 	};
-	board_misc_gpios_board_misc_sc_gpio_in: gpio@b2070000 {
+	board_misc_gpios_board_misc_pl_io_l16p: gpio@b2070000 {
 		xlnx,gpio-board-interface = "Custom";
 		compatible = "xlnx,axi-gpio-2.0" , "xlnx,xps-gpio-1.00.a";
 		xlnx,all-outputs = <0>;
 		#gpio-cells = <2>;
-		xlnx,gpio-width = <2>;
+		xlnx,gpio-width = <1>;
 		xlnx,dout-default = <0x0>;
 		xlnx,is-dual = <0>;
 		xlnx,ip-name = "axi_gpio";
@@ -623,13 +633,13 @@
 		xlnx,gpio2-width = <32>;
 		clock-names = "s_axi_aclk";
 		xlnx,tri-default = <0xffffffff>;
-		xlnx,name = "board_misc_gpios_board_misc_sc_gpio_in";
+		xlnx,name = "board_misc_gpios_board_misc_pl_io_l16p";
 		xlnx,all-inputs = <1>;
 	};
-	board_misc_gpios_board_misc_sc_gpio_out: gpio@b2080000 {
+	board_misc_gpios_board_misc_sc_gpio_in: gpio@b2080000 {
 		xlnx,gpio-board-interface = "Custom";
 		compatible = "xlnx,axi-gpio-2.0" , "xlnx,xps-gpio-1.00.a";
-		xlnx,all-outputs = <1>;
+		xlnx,all-outputs = <0>;
 		#gpio-cells = <2>;
 		xlnx,gpio-width = <2>;
 		xlnx,dout-default = <0x0>;
@@ -648,25 +658,33 @@
 		xlnx,gpio2-width = <32>;
 		clock-names = "s_axi_aclk";
 		xlnx,tri-default = <0xffffffff>;
+		xlnx,name = "board_misc_gpios_board_misc_sc_gpio_in";
+		xlnx,all-inputs = <1>;
+	};
+	board_misc_gpios_board_misc_sc_gpio_out: gpio@b2090000 {
+		xlnx,gpio-board-interface = "Custom";
+		compatible = "xlnx,axi-gpio-2.0" , "xlnx,xps-gpio-1.00.a";
+		xlnx,all-outputs = <1>;
+		#gpio-cells = <2>;
+		xlnx,gpio-width = <2>;
+		xlnx,dout-default = <0x0>;
+		xlnx,is-dual = <0>;
+		xlnx,ip-name = "axi_gpio";
+		xlnx,tri-default-2 = <0xffffffff>;
+		reg = <0x0 0xb2090000 0x0 0x10000>;
+		xlnx,all-inputs-2 = <0>;
+		clocks = <&misc_clk_1>;
+		xlnx,all-outputs-2 = <0>;
+		gpio-controller;
+		xlnx,interrupt-present = <0>;
+		xlnx,gpio2-board-interface = "Custom";
+		xlnx,edk-iptype = "PERIPHERAL";
+		xlnx,dout-default-2 = <0x0>;
+		xlnx,gpio2-width = <32>;
+		clock-names = "s_axi_aclk";
+		xlnx,tri-default = <0xffffffff>;
 		xlnx,name = "board_misc_gpios_board_misc_sc_gpio_out";
 		xlnx,all-inputs = <0>;
-	};
-	pl_uart: serial@b2090000 {
-		compatible = "xlnx,axi-uartlite-2.0" , "xlnx,xps-uartlite-1.00.a";
-		xlnx,uartlite-board-interface = "Custom";
-		xlnx,s-axi-aclk-freq-hz-d = <0x5f5dd18>;
-		xlnx,ip-name = "axi_uartlite";
-		reg = <0x0 0xb2090000 0x0 0x10000>;
-		xlnx,baudrate = <115200>;
-		clocks = <&misc_clk_1>;
-		current-speed = <115200>;
-		xlnx,use-parity = <0>;
-		xlnx,edk-iptype = "PERIPHERAL";
-		xlnx,odd-parity = <0>;
-		clock-names = "s_axi_aclk";
-		xlnx,name = "pl_uart";
-		xlnx,data-bits = <8>;
-		xlnx,parity = "No_Parity";
 	};
 	aie_core_ref_clk_0: aie_core_ref_clk_0 {
 		compatible = "fixed-clock";
