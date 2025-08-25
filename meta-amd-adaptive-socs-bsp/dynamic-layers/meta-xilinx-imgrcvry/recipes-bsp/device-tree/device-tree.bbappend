@@ -4,6 +4,9 @@ FILESEXTRAPATHS:prepend:versal-2ve-2vm-vek385-sdt-seg:imgrcvry := "${THISDIR}/fi
 FILESEXTRAPATHS:prepend:versal-2ve-2vm-vek385-sdt-seg:linux := "${THISDIR}/files:"
 FILESEXTRAPATHS:prepend:versal-2ve-2vm-vek385-revb-sdt-seg:imgrcvry := "${THISDIR}/files:"
 FILESEXTRAPATHS:prepend:versal-2ve-2vm-vek385-revb-sdt-seg:linux := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend:versal-vck190-sdt-seg:imgrcvry := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend:versal-vck190-sdt-seg:linux := "${THISDIR}/files:"
+
 
 EXTRA_DT_INCLUDE_FILES:append:versal-vek280-sdt-seg:imgrcvry = " imgrcvry-system-conf.dtsi"
 EXTRA_DT_INCLUDE_FILES:append:versal-vek280-sdt-seg:linux    = " imgrcvry-system-conf.dtsi"
@@ -11,3 +14,5 @@ EXTRA_DT_INCLUDE_FILES:append:versal-2ve-2vm-vek385-sdt-seg:imgrcvry = " imgrcvr
 EXTRA_DT_INCLUDE_FILES:append:versal-2ve-2vm-vek385-sdt-seg:linux    = " imgrcvry-vek385-system-conf.dtsi"
 EXTRA_DT_INCLUDE_FILES:append:versal-2ve-2vm-vek385-revb-sdt-seg:imgrcvry = " imgrcvry-vek385-system-conf.dtsi"
 EXTRA_DT_INCLUDE_FILES:append:versal-2ve-2vm-vek385-revb-sdt-seg:linux    = " imgrcvry-vek385-system-conf.dtsi"
+EXTRA_DT_INCLUDE_FILES:append:versal-vck190-sdt-seg:imgrcvry = " imgrcvry-system-conf-vck190-sdt-seg.dtsi"
+EXTRA_DT_INCLUDE_FILES:append:versal-vck190-sdt-seg:linux    = " imgrcvry-system-conf-vck190-sdt-seg.dtsi"
