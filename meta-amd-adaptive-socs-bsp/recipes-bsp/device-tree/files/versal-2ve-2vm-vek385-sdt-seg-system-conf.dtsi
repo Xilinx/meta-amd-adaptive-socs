@@ -17,41 +17,41 @@
 	This is a workaround, later this will be handled through domain.yaml
 	shel flow */
 	reserved-memory {
-               #address-cells = <2>;
-               #size-cells = <2>;
-               ranges;
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
 
-               /* PLM region - 16MB */
-               plm_region: buffer@0 {
-                       no-map;
-                       reg = <0x0 0x0 0x0 0x1000000>;
-               };
+		/* PLM region - 16MB */
+		plm_region: buffer@0 {
+			no-map;
+			reg = <0x0 0x0 0x0 0x1000000>;
+		};
 
-               /* TFA region - 6MB*/
-               tfa_region: buffer@1000000 {
-                       no-map;
-                       reg = <0x0 0x1000000 0x0 0x600000>;
-               };
+		/* TFA region - 6MB*/
+		tfa_region: buffer@1000000 {
+			no-map;
+			reg = <0x0 0x1000000 0x0 0x600000>;
+		};
 
-               /* TFA core region -2MB */
-               tfa_core_region: buffer@1600000 {
-                       no-map;
-                       reg = <0x0 0x1600000 0x0 0x200000>;
-               };
+		/* TFA core region -2MB */
+		tfa_core_region: buffer@1600000 {
+			no-map;
+			reg = <0x0 0x1600000 0x0 0x200000>;
+		};
 
-               /* TEE region -128MB */
-               optee_region:  buffer@1800000 {
-                       no-map;
-                       reg = <0x0 0x1800000 0x0 0x8000000>;
-               };
+		/* TEE region -128MB */
+		optee_region:  buffer@1800000 {
+			no-map;
+			reg = <0x0 0x1800000 0x0 0x8000000>;
+		};
 
-               /* RPU openamp region - 40MB */
-               rpu_openamp_region: buffer@9800000 {
-                       no-map;
-                       reg = <0x0 0x9800000 0x0 0x02800000>;
-               };
+		/* RPU openamp region - 40MB */
+		rpu_openamp_region: buffer@9800000 {
+			no-map;
+			reg = <0x0 0x9800000 0x0 0x02800000>;
+		};
 
-               /* ISP mem reservations - 320MB */
+		/* ISP mem reservations - 320MB */
 		rpu6_fw: rproc6@0c000000 {
 			no-map;
 			reg = <0x00 0xc000000 0x00 0x3800000>;
@@ -138,37 +138,37 @@
 			reg = <0x8 0x0 0x0 0x40000000>;
 			linux,cma-default;
 		};
-        };
+	};
 
 
 	/* System-ready metadata partitions for bank0 and bank1 with uuid info*/
-        firmware {
-                fwu-mdata {
-                        compatible = "u-boot,fwu-mdata-mtd";
-                        fwu-mdata-store = <&flash0>;
-                        mdata-parts = "SystemReady-DT Update Metadata", "SystemReady-DT Update Metadata Backup";
-                        fwu-bank0 {
-                                id = <0>;
-                                label = "Bank A Space";
-                                fwu-image0 {
-                                        id = <0>;
-                                        offset = <0>;
-                                        size = <0x7200000>;
-                                        uuid = "0b931b7e-b2f6-11ef-8565-eb65d140066b";
-                                };
-                        };
-                        fwu-bank1 {
-                                id = <1>;
-                                label = "Bank B Space";
-                                fwu-image0 {
-                                        id = <0>;
-                                        offset = <0>;
-                                        size = <0x7200000>;
-                                        uuid = "1243d800-b2f6-11ef-8f4f-8bddc3aa326d";
-                                };
-                        };
-                };
-        };
+	firmware {
+		fwu-mdata {
+			compatible = "u-boot,fwu-mdata-mtd";
+			fwu-mdata-store = <&flash0>;
+			mdata-parts = "SystemReady-DT Update Metadata", "SystemReady-DT Update Metadata Backup";
+			fwu-bank0 {
+				id = <0>;
+				label = "Bank A Space";
+				fwu-image0 {
+					id = <0>;
+					offset = <0>;
+					size = <0x7200000>;
+					uuid = "0b931b7e-b2f6-11ef-8565-eb65d140066b";
+				};
+			};
+			fwu-bank1 {
+				id = <1>;
+				label = "Bank B Space";
+				fwu-image0 {
+					id = <0>;
+					offset = <0>;
+					size = <0x7200000>;
+					uuid = "1243d800-b2f6-11ef-8f4f-8bddc3aa326d";
+				};
+			};
+		};
+	};
 };
 
 /*
@@ -196,13 +196,13 @@ the RPU firmware execution during Linux boot.So disabling them to ensures succes
 };
 
 &ttc5 {
-        status = "disabled";
+	status = "disabled";
 };
 
 &ttc6 {
-        status = "disabled";
+	status = "disabled";
 };
 
 &ttc7 {
-        status = "disabled";
+	status = "disabled";
 };
