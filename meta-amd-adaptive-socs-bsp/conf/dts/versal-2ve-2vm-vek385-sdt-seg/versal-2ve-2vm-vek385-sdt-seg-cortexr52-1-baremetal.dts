@@ -105,6 +105,7 @@
                  <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
                  <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
                  <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
                  <0xf1230000 &pmc_trng 0xf1230000 0x10000>,
                  <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
                  <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
@@ -140,12 +141,13 @@
                  <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
                  <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
                  <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
                  <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
                  <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
                  <0xe2000000 &gic_r52 0xe2000000 0x10000>;
                 #ranges-address-cells = <0x1>;
                 #ranges-size-cells = <0x1>;
-                phandle = <0x103>;
+                phandle = <0x105>;
 
                 cortexr52_1: cpu@1 {
                         compatible = "arm,cortex-r52";
@@ -159,7 +161,7 @@
                         cpu-frequency = <0x34274ea8>;
                         bus-handle = <0x2>;
                         xlnx,cpu-clk-freq-hz = <0x34274ea8>;
-                        phandle = <0x104>;
+                        phandle = <0x106>;
                 };
         };
 
@@ -190,7 +192,7 @@
                 psci: psci {
                         compatible = "arm,psci-1.0";
                         method = "smc";
-                        phandle = <0x119>;
+                        phandle = <0x11b>;
                 };
 
                 versal2_firmware: versal2-firmware {
@@ -198,12 +200,12 @@
                         bootph-all;
                         method = "smc";
                         #power-domain-cells = <0x1>;
-                        phandle = <0xbf>;
+                        phandle = <0xc1>;
 
                         versal2_reset: reset-controller {
                                 compatible = "xlnx,versal-reset";
                                 #reset-cells = <0x1>;
-                                phandle = <0xea>;
+                                phandle = <0xec>;
                         };
 
                         versal2_clk: clock-controller {
@@ -213,7 +215,7 @@
                                 clocks = <&ref_clk>,
                                  <&ref_clk>;
                                 clock-names = "ref", "pl_alt_ref";
-                                phandle = <0xba>;
+                                phandle = <0xbc>;
                         };
 
                         versal_net_power: zynqmp-power {
@@ -223,73 +225,73 @@
                                 mboxes = <&ipi_mailbox_pmu1 0x0>,
                                  <&ipi_mailbox_pmu1 0x1>;
                                 mbox-names = "tx", "rx";
-                                phandle = <0x11a>;
+                                phandle = <0x11c>;
                         };
 
                         versal_sec_cfg: versal-sec-cfg {
                                 compatible = "xlnx,versal-sec-cfg";
                                 #address-cells = <0x1>;
                                 #size-cells = <0x1>;
-                                phandle = <0x11b>;
+                                phandle = <0x11d>;
 
                                 bbram_zeroize: bbram-zeroize@4 {
                                         reg = <0x4 0x4>;
-                                        phandle = <0x11c>;
+                                        phandle = <0x11e>;
                                 };
 
                                 bbram_key: bbram-key@10 {
                                         reg = <0x10 0x20>;
-                                        phandle = <0x11d>;
+                                        phandle = <0x11f>;
                                 };
 
                                 bbram_usr: bbram-usr@30 {
                                         reg = <0x30 0x4>;
-                                        phandle = <0x11e>;
+                                        phandle = <0x120>;
                                 };
 
                                 bbram_lock: bbram-lock@48 {
                                         reg = <0x48 0x4>;
-                                        phandle = <0x11f>;
+                                        phandle = <0x121>;
                                 };
 
                                 user_key0: user-key@110 {
                                         reg = <0x110 0x20>;
-                                        phandle = <0x120>;
+                                        phandle = <0x122>;
                                 };
 
                                 user_key1: user-key@130 {
                                         reg = <0x130 0x20>;
-                                        phandle = <0x121>;
+                                        phandle = <0x123>;
                                 };
 
                                 user_key2: user-key@150 {
                                         reg = <0x150 0x20>;
-                                        phandle = <0x122>;
+                                        phandle = <0x124>;
                                 };
 
                                 user_key3: user-key@170 {
                                         reg = <0x170 0x20>;
-                                        phandle = <0x123>;
+                                        phandle = <0x125>;
                                 };
 
                                 user_key4: user-key@190 {
                                         reg = <0x190 0x20>;
-                                        phandle = <0x124>;
+                                        phandle = <0x126>;
                                 };
 
                                 user_key5: user-key@1b0 {
                                         reg = <0x1b0 0x20>;
-                                        phandle = <0x125>;
+                                        phandle = <0x127>;
                                 };
 
                                 user_key6: user-key@1d0 {
                                         reg = <0x1d0 0x20>;
-                                        phandle = <0x126>;
+                                        phandle = <0x128>;
                                 };
 
                                 user_key7: user-key@1f0 {
                                         reg = <0x1f0 0x20>;
-                                        phandle = <0x127>;
+                                        phandle = <0x129>;
                                 };
                         };
                 };
@@ -300,18 +302,18 @@
                 fpga-mgr = <&versal_fpga>;
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
-                phandle = <0x128>;
+                phandle = <0x12a>;
         };
 
         timer: timer {
                 compatible = "arm,armv8-timer";
                 interrupts = <0x1 0xd 0x4 0x1 0xe 0x4 0x1 0xb 0x4 0x1 0xa 0x4>;
-                phandle = <0x129>;
+                phandle = <0x12b>;
         };
 
         versal_fpga: versal-fpga {
                 compatible = "xlnx,versal-fpga";
-                phandle = <0xe0>;
+                phandle = <0xe2>;
         };
 
         amba_apu: apu-bus {
@@ -330,7 +332,7 @@
                 ranges;
                 interrupt-parent = <&gic_r52>;
                 u-boot,dm-pre-reloc;
-                phandle = <0xbb>;
+                phandle = <0xbd>;
 
                 gic_r52: interrupt-controller@e2000000 {
                         compatible = "arm,gic-v3", "arm,gic";
@@ -344,7 +346,7 @@
                         status = "okay";
                         xlnx,ip-name = "rcpu_gic";
                         xlnx,name = "ps_wizard_0_ps11_0_rcpu_gic";
-                        phandle = <0xbe>;
+                        phandle = <0xc0>;
                 };
         };
 
@@ -364,7 +366,7 @@
 
                 gpu_physical_memory_group_manager: physical-memory-group-manager {
                         compatible = "arm,physical-memory-group-manager";
-                        phandle = <0xe4>;
+                        phandle = <0xe6>;
                 };
 
                 gpu: gpu@ed000000 {
@@ -414,7 +416,7 @@
                                 gpu_partition_config_a_0: gpu_partition_config@20000 {
                                         compatible = "arm,mali-gpu-partition-config";
                                         reg = <0x0 0x20000 0x0 0x10000>;
-                                        phandle = <0xe1>;
+                                        phandle = <0xe3>;
                                 };
 
                                 gpu_partition_control_a_0: gpu_partition_control@30000 {
@@ -423,7 +425,7 @@
                                         interrupt-parent = <&gic_r52>;
                                         interrupt-names = "PTM_PARTITION_IRQ";
                                         interrupts = <0x0 0xb6 0x4>;
-                                        phandle = <0xe2>;
+                                        phandle = <0xe4>;
                                 };
 
                                 gpu_resource_group@a0000 {
@@ -442,7 +444,7 @@
                                         interrupt-parent = <&gic_r52>;
                                         interrupt-names = "PTM_MESSAGE";
                                         interrupts = <0x0 0xb4 0x4>;
-                                        phandle = <0xe3>;
+                                        phandle = <0xe5>;
                                 };
 
                                 gpu@e0000 {
@@ -483,7 +485,7 @@
 
                                         dptx_in_0: endpoint {
                                                 remote-endpoint = <&dc_out_0>;
-                                                phandle = <0xeb>;
+                                                phandle = <0xed>;
                                         };
                                 };
 
@@ -492,7 +494,7 @@
 
                                         dptx_in_1: endpoint {
                                                 remote-endpoint = <&dc_out_1>;
-                                                phandle = <0xec>;
+                                                phandle = <0xee>;
                                         };
                                 };
 
@@ -501,7 +503,7 @@
 
                                         dptx_in_2: endpoint {
                                                 remote-endpoint = <&dc_out_2>;
-                                                phandle = <0xed>;
+                                                phandle = <0xef>;
                                         };
                                 };
 
@@ -510,7 +512,7 @@
 
                                         dptx_in_3: endpoint {
                                                 remote-endpoint = <&dc_out_3>;
-                                                phandle = <0xee>;
+                                                phandle = <0xf0>;
                                         };
                                 };
                         };
@@ -628,7 +630,7 @@
 
                                         dc_out_0: endpoint {
                                                 remote-endpoint = <&dptx_in_0>;
-                                                phandle = <0xe5>;
+                                                phandle = <0xe7>;
                                         };
                                 };
 
@@ -637,7 +639,7 @@
 
                                         dc_out_1: endpoint {
                                                 remote-endpoint = <&dptx_in_1>;
-                                                phandle = <0xe6>;
+                                                phandle = <0xe8>;
                                         };
                                 };
 
@@ -646,7 +648,7 @@
 
                                         dc_out_2: endpoint {
                                                 remote-endpoint = <&dptx_in_2>;
-                                                phandle = <0xe7>;
+                                                phandle = <0xe9>;
                                         };
                                 };
 
@@ -655,7 +657,7 @@
 
                                         dc_out_3: endpoint {
                                                 remote-endpoint = <&dptx_in_3>;
-                                                phandle = <0xe8>;
+                                                phandle = <0xea>;
                                         };
                                 };
 
@@ -862,7 +864,7 @@
                         xlnx,num-of-tx-buf = <0x20>;
                         xlnx,can-board-interface = "custom";
                         xlnx,name = "ps_wizard_0_ps11_0_canfd_0";
-                        phandle = <0x99>;
+                        phandle = <0x9a>;
                 };
 
                 can1: can@f19f0000 {
@@ -886,7 +888,7 @@
                         xlnx,num-of-tx-buf = <0x20>;
                         xlnx,can-board-interface = "custom";
                         xlnx,name = "ps_wizard_0_ps11_0_canfd_1";
-                        phandle = <0x9a>;
+                        phandle = <0x9b>;
                 };
 
                 can2: can@f1a00000 {
@@ -910,7 +912,7 @@
                         xlnx,num-of-tx-buf = <0x20>;
                         xlnx,can-board-interface = "custom";
                         xlnx,name = "ps_wizard_0_ps11_0_canfd_2";
-                        phandle = <0x9b>;
+                        phandle = <0x9c>;
                 };
 
                 can3: can@f1a10000 {
@@ -934,7 +936,7 @@
                         xlnx,num-of-tx-buf = <0x20>;
                         xlnx,can-board-interface = "custom";
                         xlnx,name = "ps_wizard_0_ps11_0_canfd_3";
-                        phandle = <0x9c>;
+                        phandle = <0x9d>;
                 };
 
                 dma0: pmcdma@f11c0000 {
@@ -1002,14 +1004,14 @@
                         xlnx,enet-clk-freq-hz = <0x7735464>;
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         xlnx,name = "ps_wizard_0_ps11_0_ethernet_0";
-                        phy-handle = <0xf4>;
+                        phy-handle = <0xf6>;
                         dma-coherent;
-                        phandle = <0xa0>;
+                        phandle = <0xa1>;
 
                         mdio: mdio {
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
-                                phandle = <0x12c>;
+                                phandle = <0x12e>;
 
                                 phy0: ethernet-phy@1 {
                                         #phy-cells = <0x1>;
@@ -1022,7 +1024,7 @@
                                         reset-assert-us = <0x64>;
                                         reset-deassert-us = <0x118>;
                                         reset-gpios = <&gpio0 0x19 0x1>;
-                                        phandle = <0xf4>;
+                                        phandle = <0xf6>;
                                 };
                         };
                 };
@@ -1071,7 +1073,7 @@
                         xlnx,ip-name = "gpio";
                         emio-gpio-width = "";
                         xlnx,name = "ps_wizard_0_ps11_0_gpio_2";
-                        phandle = <0x9f>;
+                        phandle = <0xa0>;
                 };
 
                 gpio1: gpio@f1020000 {
@@ -1104,7 +1106,7 @@
                         xlnx,ip-name = "i2c";
                         xlnx,iic-board-interface = "custom";
                         xlnx,name = "ps_wizard_0_ps11_0_i2c_0";
-                        phandle = <0x97>;
+                        phandle = <0x98>;
                 };
 
                 i2c1: i2c@f1950000 {
@@ -1124,7 +1126,7 @@
                         #size-cells = <0x0>;
                         bootph-all;
                         clock-frequency = <0x61a80>;
-                        phandle = <0x98>;
+                        phandle = <0x99>;
 
                         i2c-arbitrator@72 {
                                 compatible = "nxp,pca9541";
@@ -1142,14 +1144,14 @@
                                                 reg = <0x20>;
                                                 #gpio-cells = <0x2>;
                                                 gpio-controller;
-                                                phandle = <0xfb>;
+                                                phandle = <0xfd>;
                                         };
 
                                         eeprom: eeprom@54 {
                                                 compatible = "atmel,24c128";
                                                 bootph-all;
                                                 reg = <0x54>;
-                                                phandle = <0x12e>;
+                                                phandle = <0x130>;
                                         };
 
                                         i2c-mux@77 {
@@ -1191,7 +1193,7 @@
                                                         hub: usb-hub@2d {
                                                                 compatible = "microchip,usb5744";
                                                                 reg = <0x2d>;
-                                                                phandle = <0xf7>;
+                                                                phandle = <0xf9>;
                                                         };
                                                 };
                                         };
@@ -1240,7 +1242,7 @@
                                 reg = <0x0>;
                                 no-wp;
                                 broken-flash-reset;
-                                phandle = <0x13f>;
+                                phandle = <0x141>;
 
                                 partitions {
                                         #size-cells = <0x1>;
@@ -1267,7 +1269,7 @@
                         xlnx,device-id = <0x0>;
                         xlnx,ip-name = "pmc_trng";
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_trng";
-                        phandle = <0x89>;
+                        phandle = <0x8a>;
                 };
 
                 pmc_cfi_cframe_0: cframe@f12d0000 {
@@ -1276,7 +1278,7 @@
                         reg = <0x0 0xf12d0000 0x0 0x1000>;
                         xlnx,ip-name = "pmc_cfi_cframe";
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_cfi_cframe_0";
-                        phandle = <0x90>;
+                        phandle = <0x91>;
                 };
 
                 pmc_cfu_apb_0: cfu_apb@f12b0000 {
@@ -1285,7 +1287,7 @@
                         reg = <0x0 0xf12b0000 0x0 0x10000>;
                         xlnx,ip-name = "pmc_cfu_apb";
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_cfu_apb_0";
-                        phandle = <0x8f>;
+                        phandle = <0x90>;
                 };
 
                 pmc_ppu1_mdm_0: ppu1_mdm@f0310000 {
@@ -1308,7 +1310,7 @@
                         power-domains = <&versal2_firmware 0x18224034>;
                         xlnx,ip-name = "pmc_rtc";
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_rtc_0";
-                        phandle = <0x8e>;
+                        phandle = <0x8f>;
                 };
 
                 serial0: serial@f1920000 {
@@ -1332,7 +1334,7 @@
                         port-number = <0x0>;
                         xlnx,uart-clk-freq-hz = <0x5f5dd19>;
                         xlnx,name = "ps_wizard_0_ps11_0_sbsauart_0";
-                        phandle = <0x95>;
+                        phandle = <0x96>;
                 };
 
                 serial1: serial@f1930000 {
@@ -1356,7 +1358,7 @@
                         port-number = <0x0>;
                         xlnx,uart-clk-freq-hz = <0x5f5dd19>;
                         xlnx,name = "ps_wizard_0_ps11_0_sbsauart_1";
-                        phandle = <0x96>;
+                        phandle = <0x97>;
                 };
 
                 sysmon0: sysmon@f1270000 {
@@ -1514,7 +1516,7 @@
                         xlnx,sat-5-y = <0x29a3>;
                         xlnx,sat-35-desc = "X5IO , Satellite";
                         xlnx,sat-34-x = <0x17b1>;
-                        phandle = <0x8d>;
+                        phandle = <0x8e>;
 
                         supply@0 {
                                 reg = <0x0>;
@@ -1572,7 +1574,7 @@
                         xlnx,ttc-clk0-clksrc = "APB";
                         xlnx,name = "ps_wizard_0_ps11_0_ttc_0";
                         #pwm-cells = <0x3>;
-                        phandle = <0xa2>;
+                        phandle = <0xa3>;
                 };
 
                 ttc1: timer@f1e70000 {
@@ -1594,7 +1596,7 @@
                         xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
                         xlnx,ttc-clk0-clksrc = "APB";
                         xlnx,name = "ps_wizard_0_ps11_0_ttc_1";
-                        phandle = <0xa3>;
+                        phandle = <0xa4>;
                 };
 
                 ttc2: timer@f1e80000 {
@@ -1616,7 +1618,7 @@
                         xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
                         xlnx,ttc-clk0-clksrc = "APB";
                         xlnx,name = "ps_wizard_0_ps11_0_ttc_2";
-                        phandle = <0xa4>;
+                        phandle = <0xa5>;
                 };
 
                 ttc3: timer@f1e90000 {
@@ -1638,7 +1640,7 @@
                         xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
                         xlnx,ttc-clk0-clksrc = "APB";
                         xlnx,name = "ps_wizard_0_ps11_0_ttc_3";
-                        phandle = <0xa5>;
+                        phandle = <0xa6>;
                 };
 
                 ttc4: timer@f1ea0000 {
@@ -1660,7 +1662,7 @@
                         xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
                         xlnx,ttc-clk0-clksrc = "APB";
                         xlnx,name = "ps_wizard_0_ps11_0_ttc_4";
-                        phandle = <0xa6>;
+                        phandle = <0xa7>;
                 };
 
                 ttc5: timer@f1eb0000 {
@@ -1682,7 +1684,7 @@
                         xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
                         xlnx,ttc-clk0-clksrc = "APB";
                         xlnx,name = "ps_wizard_0_ps11_0_ttc_5";
-                        phandle = <0xa7>;
+                        phandle = <0xa8>;
                 };
 
                 ttc6: timer@f1ec0000 {
@@ -1704,7 +1706,7 @@
                         xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
                         xlnx,ttc-clk0-clksrc = "APB";
                         xlnx,name = "ps_wizard_0_ps11_0_ttc_6";
-                        phandle = <0xa8>;
+                        phandle = <0xa9>;
                 };
 
                 ttc7: timer@f1ed0000 {
@@ -1726,7 +1728,7 @@
                         xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
                         xlnx,ttc-clk0-clksrc = "APB";
                         xlnx,name = "ps_wizard_0_ps11_0_ttc_7";
-                        phandle = <0xa9>;
+                        phandle = <0xaa>;
                 };
 
                 ufshc: ufs@f10b0000 {
@@ -1768,7 +1770,7 @@
                         xlnx,ip-name = "usb";
                         xlnx,name = "ps_wizard_0_ps11_0_usb_1";
                         dma-coherent;
-                        phandle = <0xaa>;
+                        phandle = <0xab>;
 
                         dwc3_1: usb@f1c00000 {
                                 compatible = "snps,dwc3";
@@ -1791,14 +1793,14 @@
                                 dma-coherent;
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
-                                phandle = <0xa1>;
+                                phandle = <0xa2>;
 
                                 hub_2_0: hub@1 {
                                         compatible = "usb424,2744";
                                         reg = <0x1>;
                                         i2c-bus = <&hub>;
                                         reset-gpios = <&gpio0 0xe 0x1>;
-                                        phandle = <0x149>;
+                                        phandle = <0x14b>;
                                 };
                         };
                 };
@@ -1833,7 +1835,7 @@
                                 #address-cells = <0x0>;
                                 #interrupt-cells = <0x1>;
                                 interrupt-controller;
-                                phandle = <0xf9>;
+                                phandle = <0xfb>;
                         };
                 };
 
@@ -2363,6 +2365,24 @@
                         phandle = <0x16>;
                 };
 
+                ps_wizard_0_mmi_0_pmc_slave_boot: ps_wizard_0_mmi_0_pmc_slave_boot@f1220000 {
+                        compatible = "xlnx,pmc-slave-boot-11.0";
+                        status = "okay";
+                        xlnx,ip-name = "pmc_slave_boot";
+                        reg = <0x0 0xf1220000 0x0 0x10000>;
+                        xlnx,name = "ps_wizard_0_mmi_0_pmc_slave_boot";
+                        phandle = <0x89>;
+                };
+
+                ps_wizard_0_mmi_0_pmc_slave_boot_stream: ps_wizard_0_mmi_0_pmc_slave_boot_stream@f2100000 {
+                        compatible = "xlnx,pmc-slave-boot-stream-11.0";
+                        status = "okay";
+                        xlnx,ip-name = "pmc_slave_boot_stream";
+                        reg = <0x0 0xf2100000 0x0 0x10000>;
+                        xlnx,name = "ps_wizard_0_mmi_0_pmc_slave_boot_stream";
+                        phandle = <0xad>;
+                };
+
                 ps_wizard_0_mmi_0_r52_tcm_alias: ps_wizard_0_mmi_0_r52_tcm_alias@0 {
                         compatible = "xlnx,tcm-global-11.0";
                         status = "okay";
@@ -2370,7 +2390,7 @@
                         xlnx,is-hierarchy;
                         reg = <0x0 0x0 0x0 0x100000>;
                         xlnx,name = "ps_wizard_0_mmi_0_r52_tcm_alias";
-                        phandle = <0x255>;
+                        phandle = <0x257>;
                 };
 
                 ps_wizard_0_ps11_0_pmc_aes: ps_wizard_0_ps11_0_pmc_aes@f11e0000 {
@@ -2415,7 +2435,7 @@
                         xlnx,ip-name = "crp";
                         reg = <0x0 0xf1260000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_ps11_0_crp_0";
-                        phandle = <0x8c>;
+                        phandle = <0x8d>;
                 };
 
                 ps_wizard_0_ps11_0_coresight_fpd_stm: ps_wizard_0_ps11_0_coresight_fpd_stm@f0c40000 {
@@ -2451,7 +2471,7 @@
                         xlnx,ip-name = "pmc_efuse_cache";
                         reg = <0x0 0xf1250000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_efuse_cache";
-                        phandle = <0x8b>;
+                        phandle = <0x8c>;
                 };
 
                 ps_wizard_0_ps11_0_pmc_efuse_ctrl: ps_wizard_0_ps11_0_pmc_efuse_ctrl@f1240000 {
@@ -2460,7 +2480,7 @@
                         xlnx,ip-name = "pmc_efuse_ctrl";
                         reg = <0x0 0xf1240000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_efuse_ctrl";
-                        phandle = <0x8a>;
+                        phandle = <0x8b>;
                 };
 
                 ps_wizard_0_ps11_0_fpd_afi_0: ps_wizard_0_ps11_0_fpd_afi_0@ec880000 {
@@ -2542,7 +2562,7 @@
                         xlnx,is-ecc = <0x0>;
                         reg = <0x0 0xf8000000 0x0 0x4000000>;
                         xlnx,name = "ps_wizard_0_ps11_0_fpd_cmn";
-                        phandle = <0xad>;
+                        phandle = <0xaf>;
                 };
 
                 ps_wizard_0_ps11_0_fpd_slcr_0: ps_wizard_0_ps11_0_fpd_slcr_0@ec8c0000 {
@@ -2614,7 +2634,7 @@
                         xlnx,ip-name = "lpd_iou_secure_slcr";
                         reg = <0x0 0xf1a40000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0";
-                        phandle = <0x9e>;
+                        phandle = <0x9f>;
                 };
 
                 ps_wizard_0_ps11_0_lpd_iou_slcr_0: ps_wizard_0_ps11_0_lpd_iou_slcr_0@f1a20000 {
@@ -2623,7 +2643,7 @@
                         xlnx,ip-name = "lpd_iou_slcr";
                         reg = <0x0 0xf1a20000 0x0 0x20000>;
                         xlnx,name = "ps_wizard_0_ps11_0_lpd_iou_slcr_0";
-                        phandle = <0x9d>;
+                        phandle = <0x9e>;
                 };
 
                 ps_wizard_0_ps11_0_lpd_slcr_0: ps_wizard_0_ps11_0_lpd_slcr_0@eb410000 {
@@ -2751,7 +2771,7 @@
                         xlnx,ip-name = "pmc_ram_npi";
                         reg = <0x0 0xf6000000 0x0 0x2000000>;
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_ram_npi";
-                        phandle = <0xac>;
+                        phandle = <0xae>;
                 };
 
                 ps_wizard_0_ps11_0_pmc_slave_boot: ps_wizard_0_ps11_0_pmc_slave_boot@f1220000 {
@@ -2769,7 +2789,7 @@
                         xlnx,ip-name = "pmc_slave_boot_stream";
                         reg = <0x0 0xf2100000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_slave_boot_stream";
-                        phandle = <0xab>;
+                        phandle = <0xac>;
                 };
 
                 ps_wizard_0_ps11_0_pmc_xmpu_0: ps_wizard_0_ps11_0_pmc_xmpu_0@f12f0000 {
@@ -2778,7 +2798,7 @@
                         xlnx,ip-name = "pmc_xmpu";
                         reg = <0x0 0xf12f0000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_xmpu_0";
-                        phandle = <0x91>;
+                        phandle = <0x92>;
                 };
 
                 ps_wizard_0_ps11_0_pmc_xppu_0: ps_wizard_0_ps11_0_pmc_xppu_0@f1310000 {
@@ -2787,7 +2807,7 @@
                         xlnx,ip-name = "pmc_xppu";
                         reg = <0x0 0xf1310000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_xppu_0";
-                        phandle = <0x93>;
+                        phandle = <0x94>;
                 };
 
                 ps_wizard_0_ps11_0_pmc_xppu_npi_0: ps_wizard_0_ps11_0_pmc_xppu_npi_0@f1300000 {
@@ -2796,7 +2816,7 @@
                         xlnx,ip-name = "pmc_xppu_npi";
                         reg = <0x0 0xf1300000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_xppu_npi_0";
-                        phandle = <0x92>;
+                        phandle = <0x93>;
                 };
 
                 ps_wizard_0_ps11_0_r52_tcm_alias: ps_wizard_0_ps11_0_r52_tcm_alias@0 {
@@ -2806,7 +2826,7 @@
                         xlnx,is-hierarchy;
                         reg = <0x0 0x0 0x0 0x100000>;
                         xlnx,name = "ps_wizard_0_ps11_0_r52_tcm_alias";
-                        phandle = <0x25c>;
+                        phandle = <0x25e>;
                 };
 
                 ps_wizard_0_ps11_0_rpu_a: ps_wizard_0_ps11_0_rpu_a@eb580000 {
@@ -2833,7 +2853,7 @@
                         xlnx,ip-name = "pmc_sha2";
                         reg = <0x0 0xf1800000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_sha2";
-                        phandle = <0x94>;
+                        phandle = <0x95>;
                 };
 
                 ps_wizard_0_ps11_0_pmc_sha3: ps_wizard_0_ps11_0_pmc_sha3@f1210000 {
@@ -2865,7 +2885,7 @@
                 #clock-cells = <0x0>;
                 clock-frequency = <0x1fca055>;
                 clock-output-names = "ref_clk";
-                phandle = <0xde>;
+                phandle = <0xe0>;
         };
 
         can0_clk: can0-clk {
@@ -2874,7 +2894,7 @@
                 clocks = <&versal2_clk 0x9e>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0xef>;
+                phandle = <0xf1>;
         };
 
         can1_clk: can1-clk {
@@ -2883,7 +2903,7 @@
                 clocks = <&versal2_clk 0xac>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0xf0>;
+                phandle = <0xf2>;
         };
 
         can2_clk: can2-clk {
@@ -2892,7 +2912,7 @@
                 clocks = <&versal2_clk 0xc1>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0xf1>;
+                phandle = <0xf3>;
         };
 
         can3_clk: can3-clk {
@@ -2901,35 +2921,35 @@
                 clocks = <&versal2_clk 0xc6>;
                 clock-div = <0x2>;
                 clock-mult = <0x1>;
-                phandle = <0xf2>;
+                phandle = <0xf4>;
         };
 
         clk50: clk50 {
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x2faf080>;
-                phandle = <0xe9>;
+                phandle = <0xeb>;
         };
 
         clk150: clk150 {
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x8f0d180>;
-                phandle = <0xf5>;
+                phandle = <0xf7>;
         };
 
         clk250: clk250 {
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0xee6b280>;
-                phandle = <0x25d>;
+                phandle = <0x25f>;
         };
 
         clk256: clk256 {
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0xf424000>;
-                phandle = <0xf8>;
+                phandle = <0xfa>;
         };
 
         zynqmp-ipi {
@@ -2946,7 +2966,7 @@
                         reg-names = "local_request_region", "local_response_region", "remote_request_region", "remote_response_region";
                         #mbox-cells = <0x1>;
                         xlnx,ipi-id = <0x1>;
-                        phandle = <0xdf>;
+                        phandle = <0xe1>;
                 };
         };
 
@@ -2956,27 +2976,27 @@
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
                 firmware-name = "vek385_base_pld.pdi";
-                phandle = <0x25e>;
+                phandle = <0x260>;
 
                 misc_clk_1: misc_clk_1 {
                         compatible = "fixed-clock";
                         clock-frequency = <0x5f5dd18>;
                         #clock-cells = <0x0>;
-                        phandle = <0xfe>;
+                        phandle = <0x100>;
                 };
 
                 misc_clk_0: misc_clk_0 {
                         compatible = "fixed-clock";
                         clock-frequency = <0x5f5dd19>;
                         #clock-cells = <0x0>;
-                        phandle = <0xfd>;
+                        phandle = <0xff>;
                 };
 
                 aie_core_ref_clk_0: aie_core_ref_clk_0 {
                         compatible = "fixed-clock";
                         clock-frequency = <0x4a817c80>;
                         #clock-cells = <0x0>;
-                        phandle = <0xff>;
+                        phandle = <0x101>;
                 };
 
                 zyxclmm_drm {
@@ -2990,14 +3010,14 @@
                 compatible = "fixed-clock";
                 clock-frequency = <0xee6b280>;
                 #clock-cells = <0x0>;
-                phandle = <0xf6>;
+                phandle = <0xf8>;
         };
 
         tsu_ext_clk: tsu_ext_clk {
                 compatible = "fixed-clock";
                 clock-frequency = <0xee6b280>;
                 #clock-cells = <0x0>;
-                phandle = <0xf3>;
+                phandle = <0xf5>;
         };
 
         NoC_C0_C1_ddr_memory: memory@00000000 {
@@ -3195,6 +3215,8 @@
                 ps_wizard_0_mmi_0_mmi_usb3phy_crpara = "/axi/ps_wizard_0_mmi_0_mmi_usb3phy_crpara@ede40000";
                 ps_wizard_0_mmi_0_mmi_usb3phy_tca = "/axi/ps_wizard_0_mmi_0_mmi_usb3phy_tca@edeb8000";
                 ps_wizard_0_mmi_0_mmi_pcie_region_0 = "/axi/ps_wizard_0_mmi_0_mmi_pcie_region_0@a0000000";
+                ps_wizard_0_mmi_0_pmc_slave_boot = "/axi/ps_wizard_0_mmi_0_pmc_slave_boot@f1220000";
+                ps_wizard_0_mmi_0_pmc_slave_boot_stream = "/axi/ps_wizard_0_mmi_0_pmc_slave_boot_stream@f2100000";
                 ps_wizard_0_mmi_0_r52_tcm_alias = "/axi/ps_wizard_0_mmi_0_r52_tcm_alias@0";
                 ps_wizard_0_ps11_0_pmc_aes = "/axi/ps_wizard_0_ps11_0_pmc_aes@f11e0000";
                 ps_wizard_0_ps11_0_pmc_bbram_ctrl = "/axi/ps_wizard_0_ps11_0_pmc_bbram_ctrl@f11f0000";
