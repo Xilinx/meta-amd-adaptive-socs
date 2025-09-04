@@ -1,6 +1,6 @@
 /dts-v1/;
 / {
-        compatible = "amd,versal2";
+        compatible = "amd,versal2-vek385-revA", "amd,versal2-vek385", "amd,versal2";
         model = "AMD Versal VEK385 revA";
         #address-cells = <0x2>;
         #size-cells = <0x2>;
@@ -2179,7 +2179,6 @@
                         #interrupt-cells = <0x1>;
                         device_type = "pci";
                         xlnx,ip-name = "mmi_pcie0_slcr";
-                        reset-gpios = <&tca6416_u37 0x7 0x1>;
                         phandle = <0x6c>;
 
                         mdb_intc_0: interrupt-controller {
@@ -2187,6 +2186,15 @@
                                 #interrupt-cells = <0x1>;
                                 interrupt-controller;
                                 phandle = <0xfb>;
+                        };
+
+                        pcie@0,0 {
+                                device_type = "pci";
+                                reg = <0x0 0x0 0x0 0x0 0x0>;
+                                reset-gpios = <&tca6416_u37 0x7 0x1>;
+                                #address-cells = <0x3>;
+                                #size-cells = <0x2>;
+                                ranges;
                         };
                 };
 
