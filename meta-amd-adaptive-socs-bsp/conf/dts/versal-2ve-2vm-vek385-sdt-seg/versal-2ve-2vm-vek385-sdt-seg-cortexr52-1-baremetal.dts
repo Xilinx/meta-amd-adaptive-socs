@@ -1,6 +1,6 @@
 /dts-v1/;
 / {
-        compatible = "amd,versal2-vek385-revA", "amd,versal2-vek385", "amd,versal2";
+        compatible = "amd,versal2-vek385-revA", "amd,versal2-vek385", "amd,versal2", "AMD Versal VEK385 revA", "AMD Versal VEK385 revA";
         model = "AMD Versal VEK385 revA";
         #address-cells = <0x2>;
         #size-cells = <0x2>;
@@ -1817,10 +1817,8 @@
                         interrupts = <0x0 0xa5 0x4>;
                         interrupt-parent = <&gic_r52>;
                         interrupt-map-mask = <0x0 0x0 0x0 0x7>;
-                        interrupt-map = <0x0 0x0 0x0 0x1 &mdb_intc_0 0x0>,
-                         <0x0 0x0 0x0 0x2 &mdb_intc_0 0x1>,
-                         <0x0 0x0 0x0 0x3 &mdb_intc_0 0x2>,
-                         <0x0 0x0 0x0 0x4 &mdb_intc_0 0x3>;
+                        interrupt-map = <0x1 0xf6 0x0 0x2 &mdb_intc_0 0x1>,
+                         <0x3 0xf6 0x2 0x4 &mdb_intc_0 0x3>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
                         xlnx,csr-slcr = <0x1000 0x0 0x0>;
@@ -3301,5 +3299,337 @@
                 ps_wizard_0_ps11_0_ocm_ram_1_memory = "/memory@BBF80000";
                 ps_wizard_0_ps11_0_ocm_ram_2_memory = "/memory@BBE00000";
                 ps_wizard_0_ps11_0_ocm_ram_3_memory = "/memory@BBE80000";
+        };
+
+        domains {
+
+                APU_Linux {
+                        phandle = <0x263>;
+                        compatible = "openamp,domain-v1";
+                        os,type = "linux";
+                        memory = <0x20000000 0x60000000 0xa 0x0 0x1 0x0 0x500 0x0 0x80000000>;
+                        sram = <0xb0000000 0x2000>;
+                        access = <&r52_0a_atcm_global 0x0>,
+                         <&r52_0a_btcm_global 0x0>,
+                         <&r52_0a_ctcm_global 0x0>,
+                         <&gem0 0x0>,
+                         <&mmi_10gbe 0x0>,
+                         <&adma0 0x0>,
+                         <&adma1 0x0>,
+                         <&adma2 0x0>,
+                         <&adma3 0x0>,
+                         <&adma4 0x0>,
+                         <&adma5 0x0>,
+                         <&adma6 0x0>,
+                         <&adma7 0x0>,
+                         <&i2c1 0x0>,
+                         <&ttc0 0x0>,
+                         <&ttc1 0x0>,
+                         <&usb1 0x0>,
+                         <&can0 0x0>,
+                         <&can1 0x0>,
+                         <&can2 0x0>,
+                         <&can3 0x0>,
+                         <&gpio0 0x0>,
+                         <&ospi 0x0>,
+                         <&serial1 0x0>,
+                         <&gpu 0x0>,
+                         <&gpu_physical_memory_group_manager 0x0>,
+                         <&mmi_dptx 0x0>,
+                         <&mmi_dc 0x0>,
+                         <&mmi_dcdma 0x0>,
+                         <&gpio0 0x0>,
+                         <&mdb_pcie0 0x0>,
+                         <&ufshc 0x0>,
+                         <&rtc 0x0>;
+                        access-json = "[{\"dev\": \"cpus_r52_0\", \"flags\": {}}, {\"dev\": \"r52_0a_atcm_global@eba00000\", \"label\": \"r52_0a_atcm_global\", \"flags\": {}}, {\"dev\": \"r52_0a_btcm_global@eba10000\", \"label\": \"r52_0a_ctcm_global\", \"flags\": {}}, {\"dev\": \"r52_0a_ctcm_global@eba20000\", \"label\": \"r52_0a_ctcm_global\", \"flags\": {}}, {\"dev\": \"ethernet@f1a60000\", \"flags\": {}, \"label\": \"gem0\", \"spec_name\": \"GEM0\"}, {\"dev\": \"ethernet@ed920000\", \"flags\": {}, \"label\": \"mmi_10gbe\", \"spec_name\": \"MMI_10GBE\"}, {\"dev\": \"dma-controller@ebd00000\", \"flags\": {}, \"label\": \"adma0\", \"spec_name\": \"LPD_DMA0_CH0\"}, {\"dev\": \"dma-controller@ebd10000\", \"flags\": {}, \"label\": \"adma1\", \"spec_name\": \"LPD_DMA0_CH1\"}, {\"dev\": \"dma-controller@ebd20000\", \"flags\": {}, \"label\": \"adma2\", \"spec_name\": \"LPD_DMA0_CH2\"}, {\"dev\": \"dma-controller@ebd30000\", \"flags\": {}, \"label\": \"adma3\", \"spec_name\": \"LPD_DMA0_CH3\"}, {\"dev\": \"dma-controller@ebd40000\", \"flags\": {}, \"label\": \"adma4\", \"spec_name\": \"LPD_DMA0_CH4\"}, {\"dev\": \"dma-controller@ebd50000\", \"flags\": {}, \"label\": \"adma5\", \"spec_name\": \"LPD_DMA0_CH5\"}, {\"dev\": \"dma-controller@ebd60000\", \"flags\": {}, \"label\": \"adma6\", \"spec_name\": \"LPD_DMA0_CH6\"}, {\"dev\": \"dma-controller@ebd70000\", \"flags\": {}, \"label\": \"adma7\", \"spec_name\": \"LPD_DMA0_CH7\"}, {\"dev\": \"i2c@f1950000\", \"flags\": {}, \"label\": \"i2c1\", \"spec_name\": \"LPD_I3C1\"}, {\"dev\": \"timer@f1e60000\", \"flags\": {}, \"label\": \"ttc0\", \"spec_name\": \"TTC0\"}, {\"dev\": \"timer@f1e70000\", \"flags\": {}, \"label\": \"ttc1\", \"spec_name\": \"TTC1\"}, {\"dev\": \"usb@f1ef0000\", \"flags\": {}, \"label\": \"usb1\", \"spec_name\": \"USB1_CSR\"}, {\"dev\": \"can@f19e0000\", \"flags\": {}, \"label\": \"can0\", \"spec_name\": \"CANFD0\"}, {\"dev\": \"can@f19f0000\", \"flags\": {}, \"label\": \"can1\", \"spec_name\": \"CANFD1\"}, {\"dev\": \"can@f1a00000\", \"flags\": {}, \"label\": \"can2\", \"spec_name\": \"CANFD2\"}, {\"dev\": \"can@f1a10000\", \"flags\": {}, \"label\": \"can3\", \"spec_name\": \"CANFD3\"}, {\"dev\": \"gpio@f1a50000\", \"flags\": {}, \"label\": \"gpio0\", \"spec_name\": \"LPD_GPIO\"}, {\"dev\": \"spi@f1010000\", \"flags\": {}, \"label\": \"ospi\", \"spec_name\": \"OSPI\"}, {\"dev\": \"serial@f1930000\", \"flags\": {}, \"label\": \"serial1\", \"spec_name\": \"UART1\"}, {\"dev\": \"mailbox@eb330000\", \"flags\": {}, \"label\": \"ipi0\", \"spec_name\": \"IPI0\"}, {\"dev\": \"mailbox@eb350000\", \"flags\": {}, \"label\": \"ipi2\", \"spec_name\": \"IPI2\"}, {\"dev\": \"mailbox@eb340000\", \"flags\": {}, \"label\": \"ipi1\", \"spec_name\": \"IPI1\"}, {\"dev\": \"mailbox@eb3b1000\", \"flags\": {}, \"label\": \"ipi_nobuf2\", \"spec_name\": \"IPI_NO_BUF2\"}, {\"dev\": \"mailbox@eb360000\", \"flags\": {}, \"label\": \"ipi3\", \"spec_name\": \"IPI3\"}, {\"dev\": \"mailbox@eb370000\", \"flags\": {}, \"label\": \"ipi4\", \"spec_name\": \"IPI4\"}, {\"dev\": \"mailbox@eb380000\", \"flags\": {}, \"label\": \"ipi5\", \"spec_name\": \"IPI5\"}, {\"dev\": \"mailbox@eb3a0000\", \"flags\": {}, \"label\": \"ipi6\", \"spec_name\": \"IPI6\"}, {\"dev\": \"mailbox@eb3b0000\", \"flags\": {}, \"label\": \"ipi_nobuf1\", \"spec_name\": \"IPI_NO_BUF1\"}, {\"dev\": \"gpu@ed000000\", \"flags\": {}, \"label\": \"gpu\", \"spec_name\": \"GPU\"}, {\"dev\": \"physical-memory-group-manager\", \"flags\": {}, \"label\": \"gpu_physical_memory_group_manager\", \"spec_name\": \"GPU_PHYSICAL_MEMORY_GROUP_MANAGER\"}, {\"dev\": \"mmi_dptx@ede00000\", \"flags\": {}, \"label\": \"mmi_dptx\", \"spec_name\": \"MMI_DPTX\"}, {\"dev\": \"mmi_dc@edd00000\", \"flags\": {}, \"label\": \"mmi_dc\", \"spec_name\": \"MMI_DC\"}, {\"dev\": \"dma-controller@edd10000\", \"flags\": {}, \"label\": \"mmi_dcdma\", \"spec_name\": \"MMI_DCDMA\"}, {\"dev\": \"mmi-usb\", \"flags\": {}, \"label\": \"mmi_usb\", \"spec_name\": \"MMI_USB\"}, {\"dev\": \"gpio@f1a50000\", \"flags\": {}, \"label\": \"gpio0\", \"spec_name\": \"LPD_GPIO0\"}, {\"dev\": \"gpio@b2000000\", \"flags\": {}, \"label\": \"axi_gpio_0\", \"spec_name\": \"AXI_GPIO_0\"}, {\"dev\": \"gpio@b2010000\", \"flags\": {}, \"label\": \"axi_gpio_1\", \"spec_name\": \"AXI_GPIO_1\"}, {\"dev\": \"gpio@b2020000\", \"flags\": {}, \"label\": \"axi_gpio_2\", \"spec_name\": \"AXI_GPIO_2\"}, {\"dev\": \"timer@b0010000\", \"flags\": {}, \"label\": \"axi_timer_0\", \"spec_name\": \"AXI_TIMER_0\"}, {\"dev\": \"pcie@ed931000\", \"flags\": {}, \"label\": \"mdb_pcie0\", \"spec_name\": \"MDB_PCIE0\"}, {\"dev\": \"pcie@ed939000\", \"flags\": {}, \"label\": \"mdb_pcie1\", \"spec_name\": \"MDB_PCIE1\"}, {\"dev\": \"ufs@f10b0000\", \"flags\": {}, \"label\": \"ufshc\", \"spec_name\": \"UFSHC\"}, {\"dev\": \"rtc@f12a0000\", \"flags\": {}, \"label\": \"rtc\", \"spec_name\": \"RTC\"}]";
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+
+                                remoteproc-relation {
+                                        compatible = "openamp,remoteproc-v2";
+                                        remote = <0x25d>;
+                                        elfload;
+                                        elfload0 = <0x2c 0x2d 0x2e 0x25e 0x25f>;
+                                };
+
+                                rpmsg-relation {
+                                        compatible = "openamp,rpmsg-v1";
+                                        remote = <0x25d>;
+                                        carveouts = <0x260 0x261 0x262>;
+                                        mbox = <0xb>;
+                                };
+                        };
+
+                        reserved-memory {
+
+                                plm_reserved_memory {
+                                        start = "0x00000000";
+                                        size = "0x1000000";
+                                        no-map;
+                                };
+
+                                tfa_handoff_reserved_memory {
+                                        start = "0x01000000";
+                                        size = "0x600000";
+                                        no-map;
+                                };
+
+                                tfa_runtime_memory {
+                                        start = "0x01600000";
+                                        size = "0x200000";
+                                        no-map;
+                                };
+
+                                optee_shared_buffs {
+                                        start = "0x01800000";
+                                        size = "0x8000000";
+                                        no-map;
+                                };
+
+                                rpu_a0_openamp_reserved_memory {
+                                        start = "0x02000000";
+                                        size = "0x400000";
+                                        no-map;
+                                };
+
+                                rpu_a1_openamp_reserved_memory {
+                                        start = "0x02400000";
+                                        size = "0x400000";
+                                        no-map;
+                                };
+
+                                rpu_b0_openamp_reserved_memory {
+                                        start = "0x02800000";
+                                        size = "0x400000";
+                                        no-map;
+                                };
+
+                                rpu_b1_openamp_reserved_memory {
+                                        start = "0x02c00000";
+                                        size = "0x400000";
+                                        no-map;
+                                };
+
+                                rpu_c0_openamp_reserved_memory {
+                                        start = "0x03000000";
+                                        size = "0x400000";
+                                        no-map;
+                                };
+
+                                rpu_c1_openamp_reserved_memory {
+                                        start = "0x03400000";
+                                        size = "0x400000";
+                                        no-map;
+                                };
+
+                                rpu_d0_openamp_reserved_memory {
+                                        start = "0x03800000";
+                                        size = "0x400000";
+                                        no-map;
+                                };
+
+                                rpu_d1_openamp_reserved_memory {
+                                        start = "0x03c00000";
+                                        size = "0x400000";
+                                        no-map;
+                                };
+
+                                rpu_e0_openamp_reserved_memory {
+                                        start = "0x04000000";
+                                        size = "0x400000";
+                                        no-map;
+                                };
+
+                                rpu_e1_openamp_reserved_memory {
+                                        start = "0x04400000";
+                                        size = "0x400000";
+                                        no-map;
+                                };
+
+                                rpu_a0_isp_reserved_memory {
+                                        start = "0x04800000";
+                                        size = "0x2000000";
+                                        no-map;
+                                };
+
+                                rpu_a1_isp_reserved_memory {
+                                        start = "0x06800000";
+                                        size = "0x2000000";
+                                        no-map;
+                                };
+
+                                rpu_b0_isp_reserved_memory {
+                                        start = "0x08800000";
+                                        size = "0x2000000";
+                                        no-map;
+                                };
+
+                                rpu_b1_isp_reserved_memory {
+                                        start = "0x0a800000";
+                                        size = "0x2000000";
+                                        no-map;
+                                };
+
+                                rpu_c0_isp_reserved_memory {
+                                        start = "0x0c800000";
+                                        size = "0x2000000";
+                                        no-map;
+                                };
+
+                                rpu_c1_isp_reserved_memory {
+                                        start = "0x0e800000";
+                                        size = "0x2000000";
+                                        no-map;
+                                };
+
+                                rpu_d0_isp_reserved_memory {
+                                        start = "0x10800000";
+                                        size = "0x2000000";
+                                        no-map;
+                                };
+
+                                rpu_d1_isp_reserved_memory {
+                                        start = "0x12800000";
+                                        size = "0x2000000";
+                                        no-map;
+                                };
+
+                                rpu_e0_isp_reserved_memory {
+                                        start = "0x14800000";
+                                        size = "0x2000000";
+                                        no-map;
+                                };
+
+                                rpu_e1_isp_reserved_memory {
+                                        start = "0x16800000";
+                                        size = "0x2000000";
+                                        no-map;
+                                };
+
+                                rpu0vdev0vring1 {
+                                        phandle = <0x261>;
+                                        start = <0x9864000>;
+                                        size = <0x4000>;
+                                        no-map;
+                                };
+
+                                rpu0vdev0vring0 {
+                                        phandle = <0x260>;
+                                        start = <0x9860000>;
+                                        size = <0x4000>;
+                                        no-map;
+                                };
+
+                                rpu0vdev0buffer {
+                                        phandle = <0x262>;
+                                        start = <0x9868000>;
+                                        size = <0x40000>;
+                                        no-map;
+                                };
+
+                                ddrboot {
+                                        phandle = <0x25e>;
+                                        start = <0x9800000>;
+                                        size = <0x60000>;
+                                        no-map;
+                                };
+
+                                rsctbl {
+                                        phandle = <0x25f>;
+                                        start = <0x97fff00>;
+                                        size = <0x10>;
+                                        no-map;
+                                };
+                        };
+                };
+
+                RPU_Zephyr {
+                        phandle = <0x25d>;
+                        compatible = "openamp,domain-v1";
+                        os,type = "zephyr";
+                        xlnx,ddr-boot = <0x1>;
+                        memory;
+                        sram = <0xeba00000 0x10000 0xeba10000 0x8000 0xeba20000 0x8000>;
+                        access = <&r52_0a_atcm_global 0x0>,
+                         <&r52_0a_btcm_global 0x0>,
+                         <&r52_0a_ctcm_global 0x0>,
+                         <&ttc2 0x0>,
+                         <&serial0 0x0>,
+                         <&serial1 0x0>,
+                         <&serial1 0x0>,
+                         <&serial1 0x0>,
+                         <&serial1 0x0>,
+                         <&coresight 0x0>,
+                         <&ospi 0x0>,
+                         <&i2c0 0x0>,
+                         <&i2c1 0x0>;
+                        cpu_config_str = "split";
+                        core_num = "0";
+                        access-json = "[{\"dev\": \"r52_0a_atcm_global@eba00000\", \"label\": \"r52_0a_atcm_global\", \"flags\": {}}, {\"dev\": \"r52_0a_btcm_global@eba10000\", \"label\": \"r52_0a_btcm_global\", \"flags\": {}}, {\"dev\": \"r52_0a_ctcm_global@eba20000\", \"label\": \"r52_0a_ctcm_global\", \"flags\": {}}, {\"dev\": \"timer@f1e80000\", \"flags\": {}, \"label\": \"ttc2\", \"spec_name\": \"TTC2\"}, {\"dev\": \"mailbox@eb340000\", \"flags\": {}, \"label\": \"ipi1\", \"spec_name\": \"IPI1\"}, {\"dev\": \"mailbox@eb3b1000\", \"flags\": {}, \"label\": \"ipi_nobuf2\", \"spec_name\": \"IPI_NO_BUF2\"}, {\"dev\": \"mailbox@eb3b0000\", \"flags\": {}, \"label\": \"ipi_nobuf1\", \"spec_name\": \"IPI_NO_BUF1\"}, {\"dev\": \"serial@f1920000\", \"flags\": {}, \"label\": \"serial0\", \"spec_name\": \"UART0\"}, {\"dev\": \"serial@f1930000\", \"flags\": {}, \"label\": \"serial1\", \"spec_name\": \"UART1\"}, {\"dev\": \"mmc@f1040000\", \"flags\": {}}, {\"dev\": \"mmc@f1050000\", \"flags\": {}}, {\"dev\": \"serial@f1930000\", \"flags\": {}}, {\"dev\": \"serial@f1930000\", \"flags\": {}}, {\"dev\": \"serial@f1930000\", \"flags\": {}}, {\"dev\": \"serial@b2090000\", \"flags\": {}}, {\"dev\": \"coresight@f0800000\", \"flags\": {}}, {\"dev\": \"spi@f1010000\", \"flags\": {}}, {\"dev\": \"spi@f1030000\", \"flags\": {}}, {\"dev\": \"spi@f19c0000\", \"flags\": {}}, {\"dev\": \"spi@f19d0000\", \"flags\": {}}, {\"dev\": \"i2c@f1940000\", \"flags\": {}}, {\"dev\": \"i2c@f1950000\", \"flags\": {}}, {\"dev\": \"i2c@f1960000\", \"flags\": {}}, {\"dev\": \"i2c@f1970000\", \"flags\": {}}, {\"dev\": \"i2c@f1980000\", \"flags\": {}}, {\"dev\": \"i2c@f1990000\", \"flags\": {}}, {\"dev\": \"i2c@f19a0000\", \"flags\": {}}, {\"dev\": \"i2c@f19b0000\", \"flags\": {}}, {\"dev\": \"i2c@f1000000\", \"flags\": {}}]";
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+                                cluster_cpu = "cortexr52_0";
+
+                                rpmsg-relation {
+                                        compatible = "openamp,rpmsg-v1";
+                                        host = <0x263>;
+                                        mbox = <0xba>;
+                                        carveouts = <0x264 0x265 0x266>;
+                                };
+                        };
+
+                        reserved-memory {
+                                ranges = <0x1>;
+
+                                rpu0vdev0vring1 {
+                                        phandle = <0x265>;
+                                        start = <0x9864000>;
+                                        size = <0x4000>;
+                                        no-map;
+                                };
+
+                                rpu0vdev0vring0 {
+                                        phandle = <0x264>;
+                                        start = <0x9860000>;
+                                        size = <0x4000>;
+                                        no-map;
+                                };
+
+                                rpu0vdev0buffer {
+                                        phandle = <0x266>;
+                                        start = <0x9868000>;
+                                        size = <0x40000>;
+                                        no-map;
+                                };
+
+                                rsctbl {
+                                        start = <0x97fff00>;
+                                        size = <0x10>;
+                                        no-map;
+                                };
+
+                                ddrboot {
+                                        start = <0x9800000>;
+                                        size = <0x60000>;
+                                        no-map;
+                                };
+                        };
+                };
+
+                RPU_BM {
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_r52_1 0x2 0x80000003>;
+                        os,type = "baremetal";
+                        memory;
+                        sram = <0xeba40000 0x10000 0xeba50000 0x8000 0xeba60000 0x8000>;
+                        access = <&serial0 0x0>,
+                         <&ttc3 0x0>;
+                        cpu_config_str = "lockstep";
+                        core_num = "1";
+                        access-json = "[{\"dev\": \"serial@f1920000\", \"flags\": {}, \"label\": \"serial0\", \"spec_name\": \"UART0\"}, {\"dev\": \"timer@f1e90000\", \"flags\": {}, \"label\": \"ttc3\", \"spec_name\": \"TTC3\"}]";
+                };
         };
 };
