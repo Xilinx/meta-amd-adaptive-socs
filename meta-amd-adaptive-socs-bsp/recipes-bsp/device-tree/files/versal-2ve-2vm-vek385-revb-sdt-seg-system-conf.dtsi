@@ -1,5 +1,5 @@
 /*
- * Temporary DT nodes for VEK385 RevA Evaluation board.
+ * Temporary DT nodes for VEK385 RevB Evaluation board.
  */
 
 / {
@@ -34,20 +34,16 @@
 		};
 
 		/* TFA core region -2MB */
-		/* This node is injected into the DTB at runtime by the TF-A
-		component; leaving it commented for reference.
 		tfa_core_region: buffer@1600000 {
 			no-map;
 			reg = <0x0 0x1600000 0x0 0x200000>;
-		};*/
+		};
 
 		/* TEE region -128MB */
-		/* This node is injected into the DTB at runtime by OP-TEE OS
-		component; leaving it commented for reference.
 		optee_region:  buffer@1800000 {
 			no-map;
 			reg = <0x0 0x1800000 0x0 0x8000000>;
-		};*/
+		};
 
 		/* RPU openamp region - 40MB */
 		rpu_openamp_region: buffer@9800000 {
@@ -55,6 +51,11 @@
 			reg = <0x0 0x9800000 0x0 0x02800000>;
 		};
 
+		/* ISP mem reservations - 320MB */
+		rpu6_fw: rproc6@0c000000 {
+			no-map;
+			reg = <0x00 0xc000000 0x00 0x3800000>;
+		};
 		rproc_D_0_6_calib_load: rpu6_calib_load {
 			no-map;
 			reg = <0x0  0xF800000 0x0 0x28000>;
@@ -64,6 +65,10 @@
 			reg = <0x0 0xF828000 0x0 0x01001000>;
 		};
 
+		rpu7_fw: rproc7@1082A000 {
+			no-map;
+			reg = <0x00 0x1082A000 0x00 0x3800000>;
+		};
 		rproc_D_1_7_calib_load: rpu7_calib_load {
 			no-map;
 			reg = <0x0 0x1402A000 0x0 0x28000>;
@@ -73,6 +78,10 @@
 			reg = <0x0 0x14052000 0x0 0x01001000>;
 		};
 
+		rpu8_fw: rproc8@15054000 {
+			no-map;
+			reg = <0x00 0x15054000 0x00 0x3800000>;
+		};
 		rproc_E_0_8_calib_load: rpu8_calib_load {
 			no-map;
 			reg = <0x0 0x18854000 0x0 0x28000>;
@@ -82,6 +91,10 @@
 			reg = <0x0 0x1887C000 0x0 0x01001000>;
 		};
 
+		rpu9_fw: rproc9@1987E000 {
+			no-map;
+			reg = <0x00 0x1987E000 0x00 0x3800000>;
+		};
 		rproc_E_1_9_calib_load: rpu9_calib_load {
 			no-map;
 			reg = <0x0 0x1D07E000 0x0 0x28000>;
@@ -120,14 +133,14 @@
 			reg = <0x00 0xebc40000 0x00 0x30000>;
 		};
 		cma_reserved: cma_reserved@A00000000 {
-			compatible = "shared-dma-pool";
-			reg = <0xa 0x0 0x1 0x0>;
-			linux,cma-default;
-		};
-		ddr_ch4: buffer@60000000000 {
-			no-map;
-			reg = <0x600 0x0 0x0 0x80000000>;
-		};
+                        compatible = "shared-dma-pool";
+                        reg = <0xa 0x0 0x2 0x0>; 
+                        linux,cma-default;
+                };
+                ddr_ch4: buffer@60000000000 {
+                        no-map;
+                        reg = <0x600 0x0 0x1 0x0>;
+                };
 	};
 
 
