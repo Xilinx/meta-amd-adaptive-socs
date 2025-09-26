@@ -31,6 +31,7 @@
                 serial1 = "/axi/serial@f1930000";
                 i2c0 = "/axi/i2c@f1940000";
                 i2c1 = "/axi/i2c@f1950000";
+                ufs0 = "/axi/ufs@f10b0000";
         };
 
         timer: timer {
@@ -189,6 +190,22 @@
                         interrupt-parent = <&gic_r52>;
                         interrupts = <0x0 0x1a 0x4 0xa0>;
                         interrupt-names = "serial1";
+                };
+
+                ufshc: ufs@f10b0000 {
+                        phandle = <0x7b>;
+                        compatible = "amd,versal2-ufs";
+                        status = "okay";
+                        interrupt-parent = <&gic_r52>;
+                        interrupts = <0x0 0xea 0x4 0xa0>;
+                        reg = <0x0 0xf10b0000 0x0 0x100 0x0 0xf1060000 0x0 0x2000 0x0 0xf1250000 0x0 0x10000 0x0 0xf1260000 0x0 0x10000>;
+                        clock-names = "core_clk";
+                        clocks = <&ufshc_ref_clock>;
+
+                        ufsdisk0 {
+                                compatible = "zephyr,ufs-disk";
+                                disk-name = "UFS";
+                        };
                 };
 
                 ipi1: mailbox@eb340000 {
@@ -453,5 +470,11 @@
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x98961be>;
+        };
+
+        ufshc_ref_clock: ufshc_ref_clock {
+                compatible = "fixed-clock";
+                #clock-cells = <0x0>;
+                clock-frequency = <0x18cba80>;
         };
 };
