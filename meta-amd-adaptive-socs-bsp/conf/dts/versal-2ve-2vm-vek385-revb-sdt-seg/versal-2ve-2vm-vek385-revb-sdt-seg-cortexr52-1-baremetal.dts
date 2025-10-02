@@ -1,6 +1,6 @@
 /dts-v1/;
 / {
-        compatible = "amd,versal2-vek385-revB", "amd,versal2-vek385", "amd,versal2", "AMD Versal VEK385 revB", "AMD Versal VEK385 revB";
+        compatible = "amd,versal2-vek385-revB", "amd,versal2-vek385", "amd,versal2";
         model = "AMD Versal VEK385 revB";
         #address-cells = <0x2>;
         #size-cells = <0x2>;
@@ -21,7 +21,7 @@
         };
 
         cpus_r52_1: cpus-r52@1 {
-                phandle = <0x100>;
+                phandle = <0x101>;
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
@@ -151,7 +151,7 @@
                 #ranges-size-cells = <0x1>;
 
                 cortexr52_1: cpu@1 {
-                        phandle = <0x101>;
+                        phandle = <0x102>;
                         compatible = "arm,cortex-r52";
                         device_type = "cpu";
                         reg = <0x1>;
@@ -191,7 +191,7 @@
         firmware {
 
                 psci: psci {
-                        phandle = <0x116>;
+                        phandle = <0x117>;
                         compatible = "arm,psci-1.0";
                         method = "smc";
                 };
@@ -204,7 +204,7 @@
                         #power-domain-cells = <0x1>;
 
                         versal2_reset: reset-controller {
-                                phandle = <0xe8>;
+                                phandle = <0xe9>;
                                 compatible = "xlnx,versal-reset";
                                 #reset-cells = <0x1>;
                         };
@@ -220,7 +220,7 @@
                         };
 
                         versal_net_power: zynqmp-power {
-                                phandle = <0x117>;
+                                phandle = <0x118>;
                                 compatible = "xlnx,zynqmp-power";
                                 interrupt-parent = <&gic_r52>;
                                 interrupts = <0x0 0x39 0x4>;
@@ -230,68 +230,68 @@
                         };
 
                         versal_sec_cfg: versal-sec-cfg {
-                                phandle = <0x118>;
+                                phandle = <0x119>;
                                 compatible = "xlnx,versal-sec-cfg";
                                 #address-cells = <0x1>;
                                 #size-cells = <0x1>;
 
                                 bbram_zeroize: bbram-zeroize@4 {
-                                        phandle = <0x119>;
+                                        phandle = <0x11a>;
                                         reg = <0x4 0x4>;
                                 };
 
                                 bbram_key: bbram-key@10 {
-                                        phandle = <0x11a>;
+                                        phandle = <0x11b>;
                                         reg = <0x10 0x20>;
                                 };
 
                                 bbram_usr: bbram-usr@30 {
-                                        phandle = <0x11b>;
+                                        phandle = <0x11c>;
                                         reg = <0x30 0x4>;
                                 };
 
                                 bbram_lock: bbram-lock@48 {
-                                        phandle = <0x11c>;
+                                        phandle = <0x11d>;
                                         reg = <0x48 0x4>;
                                 };
 
                                 user_key0: user-key@110 {
-                                        phandle = <0x11d>;
+                                        phandle = <0x11e>;
                                         reg = <0x110 0x20>;
                                 };
 
                                 user_key1: user-key@130 {
-                                        phandle = <0x11e>;
+                                        phandle = <0x11f>;
                                         reg = <0x130 0x20>;
                                 };
 
                                 user_key2: user-key@150 {
-                                        phandle = <0x11f>;
+                                        phandle = <0x120>;
                                         reg = <0x150 0x20>;
                                 };
 
                                 user_key3: user-key@170 {
-                                        phandle = <0x120>;
+                                        phandle = <0x121>;
                                         reg = <0x170 0x20>;
                                 };
 
                                 user_key4: user-key@190 {
-                                        phandle = <0x121>;
+                                        phandle = <0x122>;
                                         reg = <0x190 0x20>;
                                 };
 
                                 user_key5: user-key@1b0 {
-                                        phandle = <0x122>;
+                                        phandle = <0x123>;
                                         reg = <0x1b0 0x20>;
                                 };
 
                                 user_key6: user-key@1d0 {
-                                        phandle = <0x123>;
+                                        phandle = <0x124>;
                                         reg = <0x1d0 0x20>;
                                 };
 
                                 user_key7: user-key@1f0 {
-                                        phandle = <0x124>;
+                                        phandle = <0x125>;
                                         reg = <0x1f0 0x20>;
                                 };
                         };
@@ -299,7 +299,7 @@
         };
 
         fpga: fpga-region {
-                phandle = <0x125>;
+                phandle = <0x126>;
                 compatible = "fpga-region";
                 fpga-mgr = <&versal_fpga>;
                 #address-cells = <0x2>;
@@ -307,7 +307,7 @@
         };
 
         timer: timer {
-                phandle = <0x126>;
+                phandle = <0x127>;
                 compatible = "arm,armv8-timer";
                 interrupts = <0x1 0xd 0x4 0x1 0xe 0x4 0x1 0xb 0x4 0x1 0xa 0x4>;
         };
@@ -351,6 +351,79 @@
                 };
         };
 
+        sensor0: versal-thermal-sensor {
+                phandle = <0xdf>;
+                compatible = "xlnx,versal-thermal";
+                #thermal-sensor-cells = <0x1>;
+                io-channels = <&sysmon0 0xf>,
+                 <&sysmon0 0x7>,
+                 <&sysmon0 0x8>,
+                 <&sysmon0 0x9>,
+                 <&sysmon0 0xa>,
+                 <&sysmon0 0xb>,
+                 <&sysmon0 0xc>,
+                 <&sysmon0 0xd>,
+                 <&sysmon0 0xe>;
+                io-channel-names = "sysmon-temp-channel", "aie-temp-ch1", "aie-temp-ch2", "aie-temp-ch3", "aie-temp-ch4", "aie-temp-ch5", "aie-temp-ch6", "aie-temp-ch7", "aie-temp-ch8";
+        };
+
+        thermal-zones {
+
+                versal_thermal: versal-thermal {
+                        phandle = <0x128>;
+                        polling-delay-passive = <0xfa>;
+                        polling-delay = <0x3e8>;
+                        thermal-sensors = <&sensor0 0x0>;
+
+                        trips {
+
+                                temp_alert: temp-alert {
+                                        phandle = <0x129>;
+                                        temperature = <0x11170>;
+                                        hysteresis = <0x0>;
+                                        type = "passive";
+                                };
+
+                                ot_crit: ot-crit {
+                                        phandle = <0x12a>;
+                                        temperature = <0x1e848>;
+                                        hysteresis = <0x0>;
+                                        type = "critical";
+                                };
+                        };
+
+                        cooling-maps {
+                        };
+                };
+
+                versal_thermal_aie: versal-aie-thermal {
+                        phandle = <0x12b>;
+                        polling-delay-passive = <0xfa>;
+                        polling-delay = <0x3e8>;
+                        thermal-sensors = <&sensor0 0x1>;
+
+                        trips {
+
+                                temp_alert_aie: temp-alert-aie {
+                                        phandle = <0x12c>;
+                                        temperature = <0x11170>;
+                                        hysteresis = <0x0>;
+                                        type = "passive";
+                                };
+
+                                ot_crit_aie: ot-crit-aie {
+                                        phandle = <0x12d>;
+                                        temperature = <0x1e848>;
+                                        hysteresis = <0x0>;
+                                        type = "critical";
+                                };
+                        };
+
+                        cooling-maps {
+                        };
+                };
+        };
+
         amba: axi {
                 phandle = <0x2>;
                 compatible = "simple-bus";
@@ -366,7 +439,7 @@
                 };
 
                 gpu_physical_memory_group_manager: physical-memory-group-manager {
-                        phandle = <0xe2>;
+                        phandle = <0xe3>;
                         compatible = "arm,physical-memory-group-manager";
                 };
 
@@ -415,13 +488,13 @@
                                 #size-cells = <0x2>;
 
                                 gpu_partition_config_a_0: gpu_partition_config@20000 {
-                                        phandle = <0xdf>;
+                                        phandle = <0xe0>;
                                         compatible = "arm,mali-gpu-partition-config";
                                         reg = <0x0 0x20000 0x0 0x10000>;
                                 };
 
                                 gpu_partition_control_a_0: gpu_partition_control@30000 {
-                                        phandle = <0xe0>;
+                                        phandle = <0xe1>;
                                         compatible = "arm,mali-gpu-partition-control";
                                         reg = <0x0 0x30000 0x0 0x10000>;
                                         interrupt-parent = <&gic_r52>;
@@ -430,7 +503,7 @@
                                 };
 
                                 gpu_resource_group: gpu_resource_group@a0000 {
-                                        phandle = <0x127>;
+                                        phandle = <0x12e>;
                                         compatible = "arm,mali-gpu-resource-group";
                                         reg = <0x0 0xa0000 0x0 0x10000>;
                                         partition-config = <&gpu_partition_config_a_0>;
@@ -441,7 +514,7 @@
                                 };
 
                                 gpu_aw_message_a_0: gpu_aw_message@fffc0 {
-                                        phandle = <0xe1>;
+                                        phandle = <0xe2>;
                                         compatible = "arm,mali-gpu-aw-message";
                                         reg = <0x0 0xfffc0 0x0 0x40>;
                                         interrupt-parent = <&gic_r52>;
@@ -450,7 +523,7 @@
                                 };
 
                                 gpu_mali: gpu@e0000 {
-                                        phandle = <0x128>;
+                                        phandle = <0x12f>;
                                         compatible = "arm,mali-midgard";
                                         reg = <0x0 0xe0000 0x0 0x1ffc0>;
                                         interrupt-parent = <&gic_r52>;
@@ -490,7 +563,7 @@
                                         reg = <0x0>;
 
                                         dptx_in_0: endpoint {
-                                                phandle = <0xe9>;
+                                                phandle = <0xea>;
                                                 remote-endpoint = <&dc_out_0>;
                                         };
                                 };
@@ -499,7 +572,7 @@
                                         reg = <0x1>;
 
                                         dptx_in_1: endpoint {
-                                                phandle = <0xea>;
+                                                phandle = <0xeb>;
                                                 remote-endpoint = <&dc_out_1>;
                                         };
                                 };
@@ -508,7 +581,7 @@
                                         reg = <0x2>;
 
                                         dptx_in_2: endpoint {
-                                                phandle = <0xeb>;
+                                                phandle = <0xec>;
                                                 remote-endpoint = <&dc_out_2>;
                                         };
                                 };
@@ -517,7 +590,7 @@
                                         reg = <0x3>;
 
                                         dptx_in_3: endpoint {
-                                                phandle = <0xec>;
+                                                phandle = <0xed>;
                                                 remote-endpoint = <&dc_out_3>;
                                         };
                                 };
@@ -553,8 +626,10 @@
                          <&mmi_dcdma 0x5>,
                          <&mmi_dcdma 0x6>,
                          <&mmi_dcdma 0x7>;
-                        clock-names = "ps_vid_clk";
-                        clocks = <&versal2_clk 0xda>;
+                        clock-names = "mmi_pll", "ps_vid_clk", "stc_ref_clk";
+                        clocks = <&versal2_clk 0xd7>,
+                         <&versal2_clk 0xda>,
+                         <&versal2_clk 0xdf>;
                         resets = <&versal2_reset 0xc104119>;
                         xlnx,dc-stream1-pixel-mode = "None";
                         xlnx,dc-presentation-mode = "Non_Live";
@@ -635,7 +710,7 @@
                                         reg = <0xc>;
 
                                         dc_out_0: endpoint {
-                                                phandle = <0xe3>;
+                                                phandle = <0xe4>;
                                                 remote-endpoint = <&dptx_in_0>;
                                         };
                                 };
@@ -644,7 +719,7 @@
                                         reg = <0xd>;
 
                                         dc_out_1: endpoint {
-                                                phandle = <0xe4>;
+                                                phandle = <0xe5>;
                                                 remote-endpoint = <&dptx_in_1>;
                                         };
                                 };
@@ -653,7 +728,7 @@
                                         reg = <0xe>;
 
                                         dc_out_2: endpoint {
-                                                phandle = <0xe5>;
+                                                phandle = <0xe6>;
                                                 remote-endpoint = <&dptx_in_2>;
                                         };
                                 };
@@ -662,7 +737,7 @@
                                         reg = <0xf>;
 
                                         dc_out_3: endpoint {
-                                                phandle = <0xe6>;
+                                                phandle = <0xe7>;
                                                 remote-endpoint = <&dptx_in_3>;
                                         };
                                 };
@@ -1011,16 +1086,16 @@
                         xlnx,enet-clk-freq-hz = <0x7735464>;
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         xlnx,name = "ps_wizard_0_ps11_0_ethernet_0";
-                        phy-handle = <0xf2>;
+                        phy-handle = <0xf3>;
                         dma-coherent;
 
                         mdio: mdio {
-                                phandle = <0x12b>;
+                                phandle = <0x132>;
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
 
                                 phy0: ethernet-phy@1 {
-                                        phandle = <0xf2>;
+                                        phandle = <0xf3>;
                                         #phy-cells = <0x1>;
                                         reg = <0x1>;
                                         compatible = "ethernet-phy-id2000.a231";
@@ -1146,7 +1221,7 @@
                                         #size-cells = <0x0>;
 
                                         tca6416_u37: gpio@20 {
-                                                phandle = <0xf8>;
+                                                phandle = <0xf9>;
                                                 compatible = "ti,tca6416";
                                                 reg = <0x20>;
                                                 #gpio-cells = <0x2>;
@@ -1154,7 +1229,7 @@
                                         };
 
                                         eeprom: eeprom@54 {
-                                                phandle = <0x12d>;
+                                                phandle = <0x134>;
                                                 compatible = "atmel,24c128";
                                                 bootph-all;
                                                 reg = <0x54>;
@@ -1224,7 +1299,7 @@
                         #size-cells = <0x0>;
 
                         spi_flash: flash@0 {
-                                phandle = <0x13e>;
+                                phandle = <0x145>;
                                 compatible = "jedec,spi-nor";
                                 spi-max-frequency = <0x1312d00>;
                                 spi-rx-bus-width = <0x8>;
@@ -1358,9 +1433,8 @@
                         phandle = <0x89>;
                         compatible = "xlnx,versal-sysmon";
                         status = "okay";
+                        #io-channel-cells = <0x1>;
                         reg = <0x0 0xf1270000 0x0 0x4000>;
-                        interrupt-parent = <&gic_r52>;
-                        interrupts = <0x0 0xca 0x4>;
                         xlnx,numchannels = [07];
                         xlnx,sat-63-desc = "PS , FPD , APU3 , satellite";
                         xlnx,sat-34-y = <0x3ece>;
@@ -1544,6 +1618,54 @@
                         supply@6 {
                                 reg = <0x6>;
                                 xlnx,name = "vp_vn";
+                        };
+
+                        temp@7 {
+                                xlnx,aie-temp;
+                                reg = <0x7>;
+                                xlnx,name = "aie-temp-ch1";
+                        };
+
+                        temp@8 {
+                                xlnx,aie-temp;
+                                reg = <0x8>;
+                                xlnx,name = "aie-temp-ch2";
+                        };
+
+                        temp@14 {
+                                xlnx,aie-temp;
+                                reg = <0xe>;
+                                xlnx,name = "aie-temp-ch3";
+                        };
+
+                        temp@15 {
+                                xlnx,aie-temp;
+                                reg = <0xf>;
+                                xlnx,name = "aie-temp-ch4";
+                        };
+
+                        temp@16 {
+                                xlnx,aie-temp;
+                                reg = <0x10>;
+                                xlnx,name = "aie-temp-ch5";
+                        };
+
+                        temp@30 {
+                                xlnx,aie-temp;
+                                reg = <0x1e>;
+                                xlnx,name = "aie-temp-ch6";
+                        };
+
+                        temp@33 {
+                                xlnx,aie-temp;
+                                reg = <0x21>;
+                                xlnx,name = "aie-temp-ch7";
+                        };
+
+                        temp@34 {
+                                xlnx,aie-temp;
+                                reg = <0x22>;
+                                xlnx,name = "aie-temp-ch8";
                         };
                 };
 
@@ -1789,7 +1911,7 @@
                                 #size-cells = <0x0>;
 
                                 hub_2_0: hub@1 {
-                                        phandle = <0x148>;
+                                        phandle = <0x14f>;
                                         compatible = "usb424,2744";
                                         reg = <0x1>;
                                         reset-gpios = <&gpio0 0xe 0x1>;
@@ -1807,8 +1929,10 @@
                         interrupts = <0x0 0xa5 0x4>;
                         interrupt-parent = <&gic_r52>;
                         interrupt-map-mask = <0x0 0x0 0x0 0x7>;
-                        interrupt-map = <0x1 0xf6 0x0 0x2 &mdb_intc_0 0x1>,
-                         <0x3 0xf6 0x2 0x4 &mdb_intc_0 0x3>;
+                        interrupt-map = <0x0 0x0 0x0 0x1 &mdb_intc_0 0x0>,
+                         <0x0 0x0 0x0 0x2 &mdb_intc_0 0x1>,
+                         <0x0 0x0 0x0 0x3 &mdb_intc_0 0x2>,
+                         <0x0 0x0 0x0 0x4 &mdb_intc_0 0x3>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
                         xlnx,csr-slcr = <0x1000 0x0 0x0>;
@@ -1821,7 +1945,7 @@
                         xlnx,name = "ps_wizard_0_mmi_0_mmi_pcie0_slcr";
 
                         mdb_intc_0: interrupt-controller {
-                                phandle = <0xf6>;
+                                phandle = <0xf7>;
                                 #address-cells = <0x0>;
                                 #interrupt-cells = <0x1>;
                                 interrupt-controller;
@@ -2382,7 +2506,7 @@
                 };
 
                 ps_wizard_0_mmi_0_r52_tcm_alias: ps_wizard_0_mmi_0_r52_tcm_alias@0 {
-                        phandle = <0x254>;
+                        phandle = <0x25b>;
                         compatible = "xlnx,tcm-global-11.0";
                         status = "okay";
                         xlnx,ip-name = "tcm_global";
@@ -2886,7 +3010,7 @@
         };
 
         can0_clk: can0-clk {
-                phandle = <0xed>;
+                phandle = <0xee>;
                 #clock-cells = <0x0>;
                 compatible = "fixed-factor-clock";
                 clocks = <&versal2_clk 0x9e>;
@@ -2895,7 +3019,7 @@
         };
 
         can1_clk: can1-clk {
-                phandle = <0xee>;
+                phandle = <0xef>;
                 #clock-cells = <0x0>;
                 compatible = "fixed-factor-clock";
                 clocks = <&versal2_clk 0xac>;
@@ -2904,7 +3028,7 @@
         };
 
         can2_clk: can2-clk {
-                phandle = <0xef>;
+                phandle = <0xf0>;
                 #clock-cells = <0x0>;
                 compatible = "fixed-factor-clock";
                 clocks = <&versal2_clk 0xc1>;
@@ -2913,7 +3037,7 @@
         };
 
         can3_clk: can3-clk {
-                phandle = <0xf0>;
+                phandle = <0xf1>;
                 #clock-cells = <0x0>;
                 compatible = "fixed-factor-clock";
                 clocks = <&versal2_clk 0xc6>;
@@ -2922,28 +3046,28 @@
         };
 
         clk50: clk50 {
-                phandle = <0xe7>;
+                phandle = <0xe8>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x2faf080>;
         };
 
         clk150: clk150 {
-                phandle = <0xf3>;
+                phandle = <0xf4>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x8f0d180>;
         };
 
         clk250: clk250 {
-                phandle = <0x25b>;
+                phandle = <0x262>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0xee6b280>;
         };
 
         clk256: clk256 {
-                phandle = <0xf5>;
+                phandle = <0xf6>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0xf424000>;
@@ -2968,7 +3092,7 @@
         };
 
         amba_pl: amba_pl {
-                phandle = <0x25c>;
+                phandle = <0x263>;
                 ranges;
                 compatible = "simple-bus";
                 #address-cells = <0x2>;
@@ -2976,21 +3100,21 @@
                 firmware-name = "vek385_revb_base_pld.pdi";
 
                 misc_clk_1: misc_clk_1 {
-                        phandle = <0xfb>;
+                        phandle = <0xfc>;
                         compatible = "fixed-clock";
                         clock-frequency = <0x5f5dd18>;
                         #clock-cells = <0x0>;
                 };
 
                 misc_clk_0: misc_clk_0 {
-                        phandle = <0xfa>;
+                        phandle = <0xfb>;
                         compatible = "fixed-clock";
                         clock-frequency = <0x5f5dd19>;
                         #clock-cells = <0x0>;
                 };
 
                 aie_core_ref_clk_0: aie_core_ref_clk_0 {
-                        phandle = <0xfc>;
+                        phandle = <0xfd>;
                         compatible = "fixed-clock";
                         clock-frequency = <0x4a817c80>;
                         #clock-cells = <0x0>;
@@ -3004,14 +3128,14 @@
         };
 
         mmi_tsu_ext_clk: mmi_tsu_ext_clk {
-                phandle = <0xf4>;
+                phandle = <0xf5>;
                 compatible = "fixed-clock";
                 clock-frequency = <0xee6b280>;
                 #clock-cells = <0x0>;
         };
 
         tsu_ext_clk: tsu_ext_clk {
-                phandle = <0xf1>;
+                phandle = <0xf2>;
                 compatible = "fixed-clock";
                 clock-frequency = <0xee6b280>;
                 #clock-cells = <0x0>;
@@ -3073,7 +3197,7 @@
                 ranges;
 
                 res: memory@0 {
-                        phandle = <0x25e>;
+                        phandle = <0x265>;
                         no-map;
                         reg = <0x0 0x0 0x0 0x20000000>;
                 };
@@ -3106,6 +3230,13 @@
                 amba_apu = "/apu-bus";
                 amba_rpu = "/rpu-bus";
                 gic_r52 = "/rpu-bus/interrupt-controller@e2000000";
+                sensor0 = "/versal-thermal-sensor";
+                versal_thermal = "/thermal-zones/versal-thermal";
+                temp_alert = "/thermal-zones/versal-thermal/trips/temp-alert";
+                ot_crit = "/thermal-zones/versal-thermal/trips/ot-crit";
+                versal_thermal_aie = "/thermal-zones/versal-aie-thermal";
+                temp_alert_aie = "/thermal-zones/versal-aie-thermal/trips/temp-alert-aie";
+                ot_crit_aie = "/thermal-zones/versal-aie-thermal/trips/ot-crit-aie";
                 amba = "/axi";
                 imux = "/axi/interrupt-multiplex";
                 gpu_physical_memory_group_manager = "/axi/physical-memory-group-manager";
@@ -3296,337 +3427,5 @@
                 ps_wizard_0_ps11_0_ocm_ram_2_memory = "/memory@BBE00000";
                 ps_wizard_0_ps11_0_ocm_ram_3_memory = "/memory@BBE80000";
                 res = "/reserved-memory/memory@0";
-        };
-
-        domains {
-
-                APU_Linux {
-                        phandle = <0x265>;
-                        compatible = "openamp,domain-v1";
-                        os,type = "linux";
-                        memory = <0x20000000 0x60000000 0xa 0x0 0x1 0x0 0x500 0x0 0x80000000>;
-                        sram = <0xb0000000 0x2000>;
-                        access = <&r52_0a_atcm_global 0x0>,
-                         <&r52_0a_btcm_global 0x0>,
-                         <&r52_0a_ctcm_global 0x0>,
-                         <&gem0 0x0>,
-                         <&mmi_10gbe 0x0>,
-                         <&adma0 0x0>,
-                         <&adma1 0x0>,
-                         <&adma2 0x0>,
-                         <&adma3 0x0>,
-                         <&adma4 0x0>,
-                         <&adma5 0x0>,
-                         <&adma6 0x0>,
-                         <&adma7 0x0>,
-                         <&i2c1 0x0>,
-                         <&ttc0 0x0>,
-                         <&ttc1 0x0>,
-                         <&usb1 0x0>,
-                         <&can0 0x0>,
-                         <&can1 0x0>,
-                         <&can2 0x0>,
-                         <&can3 0x0>,
-                         <&gpio0 0x0>,
-                         <&ospi 0x0>,
-                         <&serial1 0x0>,
-                         <&gpu 0x0>,
-                         <&gpu_physical_memory_group_manager 0x0>,
-                         <&mmi_dptx 0x0>,
-                         <&mmi_dc 0x0>,
-                         <&mmi_dcdma 0x0>,
-                         <&gpio0 0x0>,
-                         <&mdb_pcie0 0x0>,
-                         <&ufshc 0x0>,
-                         <&rtc 0x0>;
-                        access-json = "[{\"dev\": \"cpus_r52_0\", \"flags\": {}}, {\"dev\": \"r52_0a_atcm_global@eba00000\", \"label\": \"r52_0a_atcm_global\", \"flags\": {}}, {\"dev\": \"r52_0a_btcm_global@eba10000\", \"label\": \"r52_0a_ctcm_global\", \"flags\": {}}, {\"dev\": \"r52_0a_ctcm_global@eba20000\", \"label\": \"r52_0a_ctcm_global\", \"flags\": {}}, {\"dev\": \"ethernet@f1a60000\", \"flags\": {}, \"label\": \"gem0\", \"spec_name\": \"GEM0\"}, {\"dev\": \"ethernet@ed920000\", \"flags\": {}, \"label\": \"mmi_10gbe\", \"spec_name\": \"MMI_10GBE\"}, {\"dev\": \"dma-controller@ebd00000\", \"flags\": {}, \"label\": \"adma0\", \"spec_name\": \"LPD_DMA0_CH0\"}, {\"dev\": \"dma-controller@ebd10000\", \"flags\": {}, \"label\": \"adma1\", \"spec_name\": \"LPD_DMA0_CH1\"}, {\"dev\": \"dma-controller@ebd20000\", \"flags\": {}, \"label\": \"adma2\", \"spec_name\": \"LPD_DMA0_CH2\"}, {\"dev\": \"dma-controller@ebd30000\", \"flags\": {}, \"label\": \"adma3\", \"spec_name\": \"LPD_DMA0_CH3\"}, {\"dev\": \"dma-controller@ebd40000\", \"flags\": {}, \"label\": \"adma4\", \"spec_name\": \"LPD_DMA0_CH4\"}, {\"dev\": \"dma-controller@ebd50000\", \"flags\": {}, \"label\": \"adma5\", \"spec_name\": \"LPD_DMA0_CH5\"}, {\"dev\": \"dma-controller@ebd60000\", \"flags\": {}, \"label\": \"adma6\", \"spec_name\": \"LPD_DMA0_CH6\"}, {\"dev\": \"dma-controller@ebd70000\", \"flags\": {}, \"label\": \"adma7\", \"spec_name\": \"LPD_DMA0_CH7\"}, {\"dev\": \"i2c@f1950000\", \"flags\": {}, \"label\": \"i2c1\", \"spec_name\": \"LPD_I3C1\"}, {\"dev\": \"timer@f1e60000\", \"flags\": {}, \"label\": \"ttc0\", \"spec_name\": \"TTC0\"}, {\"dev\": \"timer@f1e70000\", \"flags\": {}, \"label\": \"ttc1\", \"spec_name\": \"TTC1\"}, {\"dev\": \"usb@f1ef0000\", \"flags\": {}, \"label\": \"usb1\", \"spec_name\": \"USB1_CSR\"}, {\"dev\": \"can@f19e0000\", \"flags\": {}, \"label\": \"can0\", \"spec_name\": \"CANFD0\"}, {\"dev\": \"can@f19f0000\", \"flags\": {}, \"label\": \"can1\", \"spec_name\": \"CANFD1\"}, {\"dev\": \"can@f1a00000\", \"flags\": {}, \"label\": \"can2\", \"spec_name\": \"CANFD2\"}, {\"dev\": \"can@f1a10000\", \"flags\": {}, \"label\": \"can3\", \"spec_name\": \"CANFD3\"}, {\"dev\": \"gpio@f1a50000\", \"flags\": {}, \"label\": \"gpio0\", \"spec_name\": \"LPD_GPIO\"}, {\"dev\": \"spi@f1010000\", \"flags\": {}, \"label\": \"ospi\", \"spec_name\": \"OSPI\"}, {\"dev\": \"serial@f1930000\", \"flags\": {}, \"label\": \"serial1\", \"spec_name\": \"UART1\"}, {\"dev\": \"mailbox@eb330000\", \"flags\": {}, \"label\": \"ipi0\", \"spec_name\": \"IPI0\"}, {\"dev\": \"mailbox@eb350000\", \"flags\": {}, \"label\": \"ipi2\", \"spec_name\": \"IPI2\"}, {\"dev\": \"mailbox@eb340000\", \"flags\": {}, \"label\": \"ipi1\", \"spec_name\": \"IPI1\"}, {\"dev\": \"mailbox@eb3b1000\", \"flags\": {}, \"label\": \"ipi_nobuf2\", \"spec_name\": \"IPI_NO_BUF2\"}, {\"dev\": \"mailbox@eb360000\", \"flags\": {}, \"label\": \"ipi3\", \"spec_name\": \"IPI3\"}, {\"dev\": \"mailbox@eb370000\", \"flags\": {}, \"label\": \"ipi4\", \"spec_name\": \"IPI4\"}, {\"dev\": \"mailbox@eb380000\", \"flags\": {}, \"label\": \"ipi5\", \"spec_name\": \"IPI5\"}, {\"dev\": \"mailbox@eb3a0000\", \"flags\": {}, \"label\": \"ipi6\", \"spec_name\": \"IPI6\"}, {\"dev\": \"mailbox@eb3b0000\", \"flags\": {}, \"label\": \"ipi_nobuf1\", \"spec_name\": \"IPI_NO_BUF1\"}, {\"dev\": \"gpu@ed000000\", \"flags\": {}, \"label\": \"gpu\", \"spec_name\": \"GPU\"}, {\"dev\": \"physical-memory-group-manager\", \"flags\": {}, \"label\": \"gpu_physical_memory_group_manager\", \"spec_name\": \"GPU_PHYSICAL_MEMORY_GROUP_MANAGER\"}, {\"dev\": \"mmi_dptx@ede00000\", \"flags\": {}, \"label\": \"mmi_dptx\", \"spec_name\": \"MMI_DPTX\"}, {\"dev\": \"mmi_dc@edd00000\", \"flags\": {}, \"label\": \"mmi_dc\", \"spec_name\": \"MMI_DC\"}, {\"dev\": \"dma-controller@edd10000\", \"flags\": {}, \"label\": \"mmi_dcdma\", \"spec_name\": \"MMI_DCDMA\"}, {\"dev\": \"mmi-usb\", \"flags\": {}, \"label\": \"mmi_usb\", \"spec_name\": \"MMI_USB\"}, {\"dev\": \"gpio@f1a50000\", \"flags\": {}, \"label\": \"gpio0\", \"spec_name\": \"LPD_GPIO0\"}, {\"dev\": \"gpio@b2000000\", \"flags\": {}, \"label\": \"axi_gpio_0\", \"spec_name\": \"AXI_GPIO_0\"}, {\"dev\": \"gpio@b2010000\", \"flags\": {}, \"label\": \"axi_gpio_1\", \"spec_name\": \"AXI_GPIO_1\"}, {\"dev\": \"gpio@b2020000\", \"flags\": {}, \"label\": \"axi_gpio_2\", \"spec_name\": \"AXI_GPIO_2\"}, {\"dev\": \"timer@b0010000\", \"flags\": {}, \"label\": \"axi_timer_0\", \"spec_name\": \"AXI_TIMER_0\"}, {\"dev\": \"pcie@ed931000\", \"flags\": {}, \"label\": \"mdb_pcie0\", \"spec_name\": \"MDB_PCIE0\"}, {\"dev\": \"pcie@ed939000\", \"flags\": {}, \"label\": \"mdb_pcie1\", \"spec_name\": \"MDB_PCIE1\"}, {\"dev\": \"ufs@f10b0000\", \"flags\": {}, \"label\": \"ufshc\", \"spec_name\": \"UFSHC\"}, {\"dev\": \"rtc@f12a0000\", \"flags\": {}, \"label\": \"rtc\", \"spec_name\": \"RTC\"}]";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-                                        remote = <0x25f>;
-                                        elfload;
-                                        elfload0 = <0x2c 0x2d 0x2e 0x260 0x261>;
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-                                        remote = <0x25f>;
-                                        carveouts = <0x262 0x263 0x264>;
-                                        mbox = <0xb>;
-                                };
-                        };
-
-                        reserved-memory {
-
-                                plm_reserved_memory {
-                                        start = "0x00000000";
-                                        size = "0x1000000";
-                                        no-map;
-                                };
-
-                                tfa_handoff_reserved_memory {
-                                        start = "0x01000000";
-                                        size = "0x600000";
-                                        no-map;
-                                };
-
-                                tfa_runtime_memory {
-                                        start = "0x01600000";
-                                        size = "0x200000";
-                                        no-map;
-                                };
-
-                                optee_shared_buffs {
-                                        start = "0x01800000";
-                                        size = "0x8000000";
-                                        no-map;
-                                };
-
-                                rpu_a0_openamp_reserved_memory {
-                                        start = "0x02000000";
-                                        size = "0x400000";
-                                        no-map;
-                                };
-
-                                rpu_a1_openamp_reserved_memory {
-                                        start = "0x02400000";
-                                        size = "0x400000";
-                                        no-map;
-                                };
-
-                                rpu_b0_openamp_reserved_memory {
-                                        start = "0x02800000";
-                                        size = "0x400000";
-                                        no-map;
-                                };
-
-                                rpu_b1_openamp_reserved_memory {
-                                        start = "0x02c00000";
-                                        size = "0x400000";
-                                        no-map;
-                                };
-
-                                rpu_c0_openamp_reserved_memory {
-                                        start = "0x03000000";
-                                        size = "0x400000";
-                                        no-map;
-                                };
-
-                                rpu_c1_openamp_reserved_memory {
-                                        start = "0x03400000";
-                                        size = "0x400000";
-                                        no-map;
-                                };
-
-                                rpu_d0_openamp_reserved_memory {
-                                        start = "0x03800000";
-                                        size = "0x400000";
-                                        no-map;
-                                };
-
-                                rpu_d1_openamp_reserved_memory {
-                                        start = "0x03c00000";
-                                        size = "0x400000";
-                                        no-map;
-                                };
-
-                                rpu_e0_openamp_reserved_memory {
-                                        start = "0x04000000";
-                                        size = "0x400000";
-                                        no-map;
-                                };
-
-                                rpu_e1_openamp_reserved_memory {
-                                        start = "0x04400000";
-                                        size = "0x400000";
-                                        no-map;
-                                };
-
-                                rpu_a0_isp_reserved_memory {
-                                        start = "0x04800000";
-                                        size = "0x2000000";
-                                        no-map;
-                                };
-
-                                rpu_a1_isp_reserved_memory {
-                                        start = "0x06800000";
-                                        size = "0x2000000";
-                                        no-map;
-                                };
-
-                                rpu_b0_isp_reserved_memory {
-                                        start = "0x08800000";
-                                        size = "0x2000000";
-                                        no-map;
-                                };
-
-                                rpu_b1_isp_reserved_memory {
-                                        start = "0x0a800000";
-                                        size = "0x2000000";
-                                        no-map;
-                                };
-
-                                rpu_c0_isp_reserved_memory {
-                                        start = "0x0c800000";
-                                        size = "0x2000000";
-                                        no-map;
-                                };
-
-                                rpu_c1_isp_reserved_memory {
-                                        start = "0x0e800000";
-                                        size = "0x2000000";
-                                        no-map;
-                                };
-
-                                rpu_d0_isp_reserved_memory {
-                                        start = "0x10800000";
-                                        size = "0x2000000";
-                                        no-map;
-                                };
-
-                                rpu_d1_isp_reserved_memory {
-                                        start = "0x12800000";
-                                        size = "0x2000000";
-                                        no-map;
-                                };
-
-                                rpu_e0_isp_reserved_memory {
-                                        start = "0x14800000";
-                                        size = "0x2000000";
-                                        no-map;
-                                };
-
-                                rpu_e1_isp_reserved_memory {
-                                        start = "0x16800000";
-                                        size = "0x2000000";
-                                        no-map;
-                                };
-
-                                rpu0vdev0vring1 {
-                                        phandle = <0x263>;
-                                        start = <0x9864000>;
-                                        size = <0x4000>;
-                                        no-map;
-                                };
-
-                                rpu0vdev0vring0 {
-                                        phandle = <0x262>;
-                                        start = <0x9860000>;
-                                        size = <0x4000>;
-                                        no-map;
-                                };
-
-                                rpu0vdev0buffer {
-                                        phandle = <0x264>;
-                                        start = <0x9868000>;
-                                        size = <0x40000>;
-                                        no-map;
-                                };
-
-                                ddrboot {
-                                        phandle = <0x260>;
-                                        start = <0x9800100>;
-                                        size = <0x5ff00>;
-                                        no-map;
-                                };
-
-                                rsctbl {
-                                        phandle = <0x261>;
-                                        start = <0x9800000>;
-                                        size = <0x100>;
-                                        no-map;
-                                };
-                        };
-                };
-
-                RPU_Zephyr {
-                        phandle = <0x25f>;
-                        compatible = "openamp,domain-v1";
-                        os,type = "zephyr";
-                        xlnx,ddr-boot = <0x1>;
-                        memory;
-                        sram = <0xeba00000 0x10000 0xeba10000 0x8000 0xeba20000 0x8000>;
-                        access = <&r52_0a_atcm_global 0x0>,
-                         <&r52_0a_btcm_global 0x0>,
-                         <&r52_0a_ctcm_global 0x0>,
-                         <&ttc2 0x0>,
-                         <&serial0 0x0>,
-                         <&serial1 0x0>,
-                         <&serial1 0x0>,
-                         <&serial1 0x0>,
-                         <&serial1 0x0>,
-                         <&coresight 0x0>,
-                         <&ospi 0x0>,
-                         <&i2c0 0x0>,
-                         <&i2c1 0x0>;
-                        cpu_config_str = "split";
-                        core_num = "0";
-                        access-json = "[{\"dev\": \"r52_0a_atcm_global@eba00000\", \"label\": \"r52_0a_atcm_global\", \"flags\": {}}, {\"dev\": \"r52_0a_btcm_global@eba10000\", \"label\": \"r52_0a_btcm_global\", \"flags\": {}}, {\"dev\": \"r52_0a_ctcm_global@eba20000\", \"label\": \"r52_0a_ctcm_global\", \"flags\": {}}, {\"dev\": \"timer@f1e80000\", \"flags\": {}, \"label\": \"ttc2\", \"spec_name\": \"TTC2\"}, {\"dev\": \"mailbox@eb340000\", \"flags\": {}, \"label\": \"ipi1\", \"spec_name\": \"IPI1\"}, {\"dev\": \"mailbox@eb3b1000\", \"flags\": {}, \"label\": \"ipi_nobuf2\", \"spec_name\": \"IPI_NO_BUF2\"}, {\"dev\": \"mailbox@eb3b0000\", \"flags\": {}, \"label\": \"ipi_nobuf1\", \"spec_name\": \"IPI_NO_BUF1\"}, {\"dev\": \"serial@f1920000\", \"flags\": {}, \"label\": \"serial0\", \"spec_name\": \"UART0\"}, {\"dev\": \"serial@f1930000\", \"flags\": {}, \"label\": \"serial1\", \"spec_name\": \"UART1\"}, {\"dev\": \"mmc@f1040000\", \"flags\": {}}, {\"dev\": \"mmc@f1050000\", \"flags\": {}}, {\"dev\": \"serial@f1930000\", \"flags\": {}}, {\"dev\": \"serial@f1930000\", \"flags\": {}}, {\"dev\": \"serial@f1930000\", \"flags\": {}}, {\"dev\": \"serial@b2090000\", \"flags\": {}}, {\"dev\": \"coresight@f0800000\", \"flags\": {}}, {\"dev\": \"spi@f1010000\", \"flags\": {}}, {\"dev\": \"spi@f1030000\", \"flags\": {}}, {\"dev\": \"spi@f19c0000\", \"flags\": {}}, {\"dev\": \"spi@f19d0000\", \"flags\": {}}, {\"dev\": \"i2c@f1940000\", \"flags\": {}}, {\"dev\": \"i2c@f1950000\", \"flags\": {}}, {\"dev\": \"i2c@f1960000\", \"flags\": {}}, {\"dev\": \"i2c@f1970000\", \"flags\": {}}, {\"dev\": \"i2c@f1980000\", \"flags\": {}}, {\"dev\": \"i2c@f1990000\", \"flags\": {}}, {\"dev\": \"i2c@f19a0000\", \"flags\": {}}, {\"dev\": \"i2c@f19b0000\", \"flags\": {}}, {\"dev\": \"i2c@f1000000\", \"flags\": {}}]";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "cortexr52_0";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-                                        host = <0x265>;
-                                        mbox = <0xba>;
-                                        carveouts = <0x266 0x267 0x268>;
-                                };
-                        };
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu0vdev0vring1 {
-                                        phandle = <0x267>;
-                                        start = <0x9864000>;
-                                        size = <0x4000>;
-                                        no-map;
-                                };
-
-                                rpu0vdev0vring0 {
-                                        phandle = <0x266>;
-                                        start = <0x9860000>;
-                                        size = <0x4000>;
-                                        no-map;
-                                };
-
-                                rpu0vdev0buffer {
-                                        phandle = <0x268>;
-                                        start = <0x9868000>;
-                                        size = <0x40000>;
-                                        no-map;
-                                };
-
-                                rsctbl {
-                                        start = <0x9800000>;
-                                        size = <0x100>;
-                                        no-map;
-                                };
-
-                                ddrboot {
-                                        start = <0x9800100>;
-                                        size = <0x5ff00>;
-                                        no-map;
-                                };
-                        };
-                };
-
-                RPU_BM {
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_r52_1 0x2 0x80000003>;
-                        os,type = "baremetal";
-                        memory;
-                        sram = <0xeba40000 0x10000 0xeba50000 0x8000 0xeba60000 0x8000>;
-                        access = <&serial0 0x0>,
-                         <&ttc3 0x0>;
-                        cpu_config_str = "lockstep";
-                        core_num = "1";
-                        access-json = "[{\"dev\": \"serial@f1920000\", \"flags\": {}, \"label\": \"serial0\", \"spec_name\": \"UART0\"}, {\"dev\": \"timer@f1e90000\", \"flags\": {}, \"label\": \"ttc3\", \"spec_name\": \"TTC3\"}]";
-                };
         };
 };
