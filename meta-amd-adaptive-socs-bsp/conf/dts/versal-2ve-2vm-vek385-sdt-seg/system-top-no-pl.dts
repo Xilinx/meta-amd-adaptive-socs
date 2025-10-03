@@ -10618,7 +10618,7 @@
         domains {
 
                 APU_Linux {
-                        phandle = <0x265>;
+                        phandle = <0x26d>;
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_a78 0xf 0x3>;
                         os,type = "linux";
@@ -10628,15 +10628,19 @@
 
                                 remoteproc-relation {
                                         compatible = "openamp,remoteproc-v2";
-                                        remote = <0x25f>;
+                                        remote = <0x25f 0x260 0x261 0x262 0x263>;
                                         elfload;
-                                        elfload0 = <0x2c 0x2d 0x2e 0x260 0x261>;
+                                        elfload0 = <0x2c 0x2d 0x2e 0x264 0x265>;
+                                        elfload1 = <0x3e 0x3f 0x40 0x266>;
+                                        elfload2 = <0x41 0x42 0x43 0x267>;
+                                        elfload3 = <0x44 0x45 0x46 0x268>;
+                                        elfload4 = <0x47 0x48 0x49 0x269>;
                                 };
 
                                 rpmsg-relation {
                                         compatible = "openamp,rpmsg-v1";
                                         remote = <0x25f>;
-                                        carveouts = <0x262 0x263 0x264>;
+                                        carveouts = <0x26a 0x26b 0x26c>;
                                         mbox = <0xb>;
                                 };
                         };
@@ -10644,37 +10648,65 @@
                         reserved-memory {
 
                                 rpu0vdev0vring1 {
-                                        phandle = <0x263>;
+                                        phandle = <0x26b>;
                                         start = <0x9864000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0vring0 {
-                                        phandle = <0x262>;
+                                        phandle = <0x26a>;
                                         start = <0x9860000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0buffer {
-                                        phandle = <0x264>;
+                                        phandle = <0x26c>;
                                         start = <0x9868000>;
                                         size = <0x40000>;
                                         no-map;
                                 };
 
                                 ddrboot {
-                                        phandle = <0x260>;
+                                        phandle = <0x264>;
                                         start = <0x9800100>;
                                         size = <0x5ff00>;
                                         no-map;
                                 };
 
                                 rsctbl {
-                                        phandle = <0x261>;
+                                        phandle = <0x265>;
                                         start = <0x9800000>;
                                         size = <0x100>;
+                                        no-map;
+                                };
+
+                                rpu6_fw {
+                                        phandle = <0x266>;
+                                        start = <0xc000000>;
+                                        size = <0x3800000>;
+                                        no-map;
+                                };
+
+                                rpu7_fw {
+                                        phandle = <0x267>;
+                                        start = <0x1082a000>;
+                                        size = <0x3800000>;
+                                        no-map;
+                                };
+
+                                rpu8_fw {
+                                        phandle = <0x268>;
+                                        start = <0x15054000>;
+                                        size = <0x3800000>;
+                                        no-map;
+                                };
+
+                                rpu9_fw {
+                                        phandle = <0x269>;
+                                        start = <0x1987e000>;
+                                        size = <0x3800000>;
                                         no-map;
                                 };
                         };
@@ -10725,9 +10757,9 @@
 
                                 rpmsg-relation {
                                         compatible = "openamp,rpmsg-v1";
-                                        host = <0x265>;
+                                        host = <0x26d>;
                                         mbox = <0xba>;
-                                        carveouts = <0x266 0x267 0x268>;
+                                        carveouts = <0x26e 0x26f 0x270>;
                                 };
                         };
 
@@ -10735,21 +10767,21 @@
                                 ranges = <0x1>;
 
                                 rpu0vdev0vring1 {
-                                        phandle = <0x267>;
+                                        phandle = <0x26f>;
                                         start = <0x9864000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0vring0 {
-                                        phandle = <0x266>;
+                                        phandle = <0x26e>;
                                         start = <0x9860000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0buffer {
-                                        phandle = <0x268>;
+                                        phandle = <0x270>;
                                         start = <0x9868000>;
                                         size = <0x40000>;
                                         no-map;
@@ -10764,6 +10796,82 @@
                                 ddrboot {
                                         start = <0x9800100>;
                                         size = <0x5ff00>;
+                                        no-map;
+                                };
+                        };
+                };
+
+                RPU6_ISP_FW {
+                        phandle = <0x260>;
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_r52_6 0x1 0x80000003>;
+                        os,type = "baremetal";
+                        cpu_config_str = "split";
+                        core_num = "6";
+
+                        reserved-memory {
+                                ranges = <0x1>;
+
+                                rpu6_fw {
+                                        start = <0xc000000>;
+                                        size = <0x3800000>;
+                                        no-map;
+                                };
+                        };
+                };
+
+                RPU7_ISP_FW {
+                        phandle = <0x261>;
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_r52_7 0x1 0x80000003>;
+                        os,type = "baremetal";
+                        cpu_config_str = "split";
+                        core_num = "7";
+
+                        reserved-memory {
+                                ranges = <0x1>;
+
+                                rpu7_fw {
+                                        start = <0x1082a000>;
+                                        size = <0x3800000>;
+                                        no-map;
+                                };
+                        };
+                };
+
+                RPU8_ISP_FW {
+                        phandle = <0x262>;
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_r52_8 0x1 0x80000003>;
+                        os,type = "baremetal";
+                        cpu_config_str = "split";
+                        core_num = "8";
+
+                        reserved-memory {
+                                ranges = <0x1>;
+
+                                rpu8_fw {
+                                        start = <0x15054000>;
+                                        size = <0x3800000>;
+                                        no-map;
+                                };
+                        };
+                };
+
+                RPU9_ISP_FW {
+                        phandle = <0x263>;
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_r52_9 0x1 0x80000003>;
+                        os,type = "baremetal";
+                        cpu_config_str = "split";
+                        core_num = "9";
+
+                        reserved-memory {
+                                ranges = <0x1>;
+
+                                rpu9_fw {
+                                        start = <0x1987e000>;
+                                        size = <0x3800000>;
                                         no-map;
                                 };
                         };
