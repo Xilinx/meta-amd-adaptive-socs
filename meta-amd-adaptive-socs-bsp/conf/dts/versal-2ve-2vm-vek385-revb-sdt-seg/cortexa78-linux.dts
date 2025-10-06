@@ -793,7 +793,6 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
-                        dma-coherent;
                 };
 
                 adma1: dma-controller@ebd10000 {
@@ -813,7 +812,6 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
-                        dma-coherent;
                 };
 
                 adma2: dma-controller@ebd20000 {
@@ -833,7 +831,6 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
-                        dma-coherent;
                 };
 
                 adma3: dma-controller@ebd30000 {
@@ -853,7 +850,6 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
-                        dma-coherent;
                 };
 
                 adma4: dma-controller@ebd40000 {
@@ -873,7 +869,6 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
-                        dma-coherent;
                 };
 
                 adma5: dma-controller@ebd50000 {
@@ -893,7 +888,6 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
-                        dma-coherent;
                 };
 
                 adma6: dma-controller@ebd60000 {
@@ -913,7 +907,6 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
-                        dma-coherent;
                 };
 
                 adma7: dma-controller@ebd70000 {
@@ -933,7 +926,6 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
-                        dma-coherent;
                 };
 
                 can0: can@f19e0000 {
@@ -1115,7 +1107,6 @@
                         xlnx,enet-clk-freq-hz = <0x7735464>;
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         phy-handle = <0xf3>;
-                        dma-coherent;
 
                         mdio: mdio {
                                 phandle = <0x132>;
@@ -1250,8 +1241,6 @@
 
                         i2c-arbitrator@72 {
                                 compatible = "nxp,pca9541";
-                                #address-cells = <0x1>;
-                                #size-cells = <0x0>;
                                 bootph-all;
                                 reg = <0x72>;
 
@@ -2200,7 +2189,6 @@
                         power-domains = <&versal2_firmware 0x182240d7>;
                         resets = <&versal2_reset 0xc1040c6>;
                         xlnx,ip-name = "usb";
-                        dma-coherent;
 
                         dwc3_1: usb@f1c00000 {
                                 phandle = <0x9d>;
@@ -2220,7 +2208,6 @@
                                 xlnx,ip-name = "usb_xhci";
                                 dr_mode = "host";
                                 maximum-speed = "high-speed";
-                                dma-coherent;
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
 
@@ -2388,8 +2375,15 @@
                         power-domains = <&versal2_firmware 0x182240de>;
                 };
 
-                lpd_wwdt0: watchdog@eb000000 {
+                xilsem_edac: edac@f2014050 {
                         phandle = <0x156>;
+                        compatible = "xlnx,versal-xilsem-edac";
+                        status = "disabled";
+                        reg = <0x0 0xf2014050 0x0 0xc4>;
+                };
+
+                lpd_wwdt0: watchdog@eb000000 {
+                        phandle = <0x157>;
                         compatible = "xlnx,versal-wwdt";
                         status = "disabled";
                         reg = <0x0 0xeb000000 0x0 0x10000>;
@@ -2400,7 +2394,7 @@
                 };
 
                 lpd_wwdt1: watchdog@eb010000 {
-                        phandle = <0x157>;
+                        phandle = <0x158>;
                         compatible = "xlnx,versal-wwdt";
                         status = "disabled";
                         reg = <0x0 0xeb010000 0x0 0x10000>;
@@ -2411,7 +2405,7 @@
                 };
 
                 lpd_wwdt2: watchdog@eb020000 {
-                        phandle = <0x158>;
+                        phandle = <0x159>;
                         compatible = "xlnx,versal-wwdt";
                         status = "disabled";
                         reg = <0x0 0xeb020000 0x0 0x10000>;
@@ -2422,7 +2416,7 @@
                 };
 
                 lpd_wwdt3: watchdog@eb030000 {
-                        phandle = <0x159>;
+                        phandle = <0x15a>;
                         compatible = "xlnx,versal-wwdt";
                         status = "disabled";
                         reg = <0x0 0xeb030000 0x0 0x10000>;
@@ -2433,7 +2427,7 @@
                 };
 
                 lpd_wwdt4: watchdog@eb040000 {
-                        phandle = <0x15a>;
+                        phandle = <0x15b>;
                         compatible = "xlnx,versal-wwdt";
                         status = "disabled";
                         reg = <0x0 0xeb040000 0x0 0x10000>;
@@ -2464,7 +2458,7 @@
                         reg-names = "ctrl", "msg";
 
                         ipi_0_to_ipi_asu: child@eb310000 {
-                                phandle = <0x15b>;
+                                phandle = <0x15c>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -2473,7 +2467,7 @@
                         };
 
                         ipi_0_to_ipi_0: child@eb330000 {
-                                phandle = <0x15c>;
+                                phandle = <0x15d>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -2482,7 +2476,7 @@
                         };
 
                         ipi_0_to_ipi_1: child@eb340000 {
-                                phandle = <0x15d>;
+                                phandle = <0x15e>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -2491,7 +2485,7 @@
                         };
 
                         ipi_0_to_ipi_1_nobuf: child@eb3b0000 {
-                                phandle = <0x15e>;
+                                phandle = <0x15f>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xa>;
@@ -2500,7 +2494,7 @@
                         };
 
                         ipi_0_to_ipi_2: child@eb350000 {
-                                phandle = <0x15f>;
+                                phandle = <0x160>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -2509,7 +2503,7 @@
                         };
 
                         ipi_0_to_ipi_2_nobuf: child@eb3b1000 {
-                                phandle = <0x160>;
+                                phandle = <0x161>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xb>;
@@ -2518,7 +2512,7 @@
                         };
 
                         ipi_0_to_ipi_3: child@eb360000 {
-                                phandle = <0x161>;
+                                phandle = <0x162>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -2527,7 +2521,7 @@
                         };
 
                         ipi_0_to_ipi_3_nobuf: child@eb3b2000 {
-                                phandle = <0x162>;
+                                phandle = <0x163>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xc>;
@@ -2536,7 +2530,7 @@
                         };
 
                         ipi_0_to_ipi_4: child@eb370000 {
-                                phandle = <0x163>;
+                                phandle = <0x164>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -2545,7 +2539,7 @@
                         };
 
                         ipi_0_to_ipi_4_nobuf: child@eb3b3000 {
-                                phandle = <0x164>;
+                                phandle = <0x165>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xd>;
@@ -2554,7 +2548,7 @@
                         };
 
                         ipi_0_to_ipi_5: child@eb380000 {
-                                phandle = <0x165>;
+                                phandle = <0x166>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -2563,7 +2557,7 @@
                         };
 
                         ipi_0_to_ipi_5_nobuf: child@eb3b4000 {
-                                phandle = <0x166>;
+                                phandle = <0x167>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xe>;
@@ -2572,7 +2566,7 @@
                         };
 
                         ipi_0_to_ipi_6: child@eb3a0000 {
-                                phandle = <0x167>;
+                                phandle = <0x168>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -2581,7 +2575,7 @@
                         };
 
                         ipi_0_to_ipi_6_nobuf: child@eb3b5000 {
-                                phandle = <0x168>;
+                                phandle = <0x169>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xf>;
@@ -2590,7 +2584,7 @@
                         };
 
                         ipi_0_to_ipi_pmc: child@eb320000 {
-                                phandle = <0x169>;
+                                phandle = <0x16a>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -2599,7 +2593,7 @@
                         };
 
                         ipi_0_to_ipi_pmc_nobuf: child@eb390000 {
-                                phandle = <0x16a>;
+                                phandle = <0x16b>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -2621,7 +2615,7 @@
                         reg-names = "ctrl", "msg";
 
                         ipi_2_to_ipi_asu: child@eb310000 {
-                                phandle = <0x17b>;
+                                phandle = <0x17c>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -2630,7 +2624,7 @@
                         };
 
                         ipi_2_to_ipi_0: child@eb330000 {
-                                phandle = <0x17c>;
+                                phandle = <0x17d>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -2639,7 +2633,7 @@
                         };
 
                         ipi_2_to_ipi_1: child@eb340000 {
-                                phandle = <0x17d>;
+                                phandle = <0x17e>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -2648,7 +2642,7 @@
                         };
 
                         ipi_2_to_ipi_1_nobuf: child@eb3b0000 {
-                                phandle = <0x17e>;
+                                phandle = <0x17f>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xa>;
@@ -2657,7 +2651,7 @@
                         };
 
                         ipi_2_to_ipi_2: child@eb350000 {
-                                phandle = <0x17f>;
+                                phandle = <0x180>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -2666,7 +2660,7 @@
                         };
 
                         ipi_2_to_ipi_2_nobuf: child@eb3b1000 {
-                                phandle = <0x180>;
+                                phandle = <0x181>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xb>;
@@ -2675,7 +2669,7 @@
                         };
 
                         ipi_2_to_ipi_3: child@eb360000 {
-                                phandle = <0x181>;
+                                phandle = <0x182>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -2684,7 +2678,7 @@
                         };
 
                         ipi_2_to_ipi_3_nobuf: child@eb3b2000 {
-                                phandle = <0x182>;
+                                phandle = <0x183>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xc>;
@@ -2693,7 +2687,7 @@
                         };
 
                         ipi_2_to_ipi_4: child@eb370000 {
-                                phandle = <0x183>;
+                                phandle = <0x184>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -2702,7 +2696,7 @@
                         };
 
                         ipi_2_to_ipi_4_nobuf: child@eb3b3000 {
-                                phandle = <0x184>;
+                                phandle = <0x185>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xd>;
@@ -2711,7 +2705,7 @@
                         };
 
                         ipi_2_to_ipi_5: child@eb380000 {
-                                phandle = <0x185>;
+                                phandle = <0x186>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -2720,7 +2714,7 @@
                         };
 
                         ipi_2_to_ipi_5_nobuf: child@eb3b4000 {
-                                phandle = <0x186>;
+                                phandle = <0x187>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xe>;
@@ -2729,7 +2723,7 @@
                         };
 
                         ipi_2_to_ipi_6: child@eb3a0000 {
-                                phandle = <0x187>;
+                                phandle = <0x188>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -2738,7 +2732,7 @@
                         };
 
                         ipi_2_to_ipi_6_nobuf: child@eb3b5000 {
-                                phandle = <0x188>;
+                                phandle = <0x189>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xf>;
@@ -2747,7 +2741,7 @@
                         };
 
                         ipi_2_to_ipi_pmc: child@eb320000 {
-                                phandle = <0x189>;
+                                phandle = <0x18a>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -2756,7 +2750,7 @@
                         };
 
                         ipi_2_to_ipi_pmc_nobuf: child@eb390000 {
-                                phandle = <0x18a>;
+                                phandle = <0x18b>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -2778,7 +2772,7 @@
                         reg-names = "ctrl", "msg";
 
                         ipi_3_to_ipi_asu: child@eb310000 {
-                                phandle = <0x18b>;
+                                phandle = <0x18c>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -2787,7 +2781,7 @@
                         };
 
                         ipi_3_to_ipi_0: child@eb330000 {
-                                phandle = <0x18c>;
+                                phandle = <0x18d>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -2796,7 +2790,7 @@
                         };
 
                         ipi_3_to_ipi_1: child@eb340000 {
-                                phandle = <0x18d>;
+                                phandle = <0x18e>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -2805,7 +2799,7 @@
                         };
 
                         ipi_3_to_ipi_1_nobuf: child@eb3b0000 {
-                                phandle = <0x18e>;
+                                phandle = <0x18f>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xa>;
@@ -2814,7 +2808,7 @@
                         };
 
                         ipi_3_to_ipi_2: child@eb350000 {
-                                phandle = <0x18f>;
+                                phandle = <0x190>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -2823,7 +2817,7 @@
                         };
 
                         ipi_3_to_ipi_2_nobuf: child@eb3b1000 {
-                                phandle = <0x190>;
+                                phandle = <0x191>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xb>;
@@ -2832,7 +2826,7 @@
                         };
 
                         ipi_3_to_ipi_3: child@eb360000 {
-                                phandle = <0x191>;
+                                phandle = <0x192>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -2841,7 +2835,7 @@
                         };
 
                         ipi_3_to_ipi_3_nobuf: child@eb3b2000 {
-                                phandle = <0x192>;
+                                phandle = <0x193>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xc>;
@@ -2850,7 +2844,7 @@
                         };
 
                         ipi_3_to_ipi_4: child@eb370000 {
-                                phandle = <0x193>;
+                                phandle = <0x194>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -2859,7 +2853,7 @@
                         };
 
                         ipi_3_to_ipi_4_nobuf: child@eb3b3000 {
-                                phandle = <0x194>;
+                                phandle = <0x195>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xd>;
@@ -2868,7 +2862,7 @@
                         };
 
                         ipi_3_to_ipi_5: child@eb380000 {
-                                phandle = <0x195>;
+                                phandle = <0x196>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -2877,7 +2871,7 @@
                         };
 
                         ipi_3_to_ipi_5_nobuf: child@eb3b4000 {
-                                phandle = <0x196>;
+                                phandle = <0x197>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xe>;
@@ -2886,7 +2880,7 @@
                         };
 
                         ipi_3_to_ipi_6: child@eb3a0000 {
-                                phandle = <0x197>;
+                                phandle = <0x198>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -2895,7 +2889,7 @@
                         };
 
                         ipi_3_to_ipi_6_nobuf: child@eb3b5000 {
-                                phandle = <0x198>;
+                                phandle = <0x199>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xf>;
@@ -2904,7 +2898,7 @@
                         };
 
                         ipi_3_to_ipi_pmc: child@eb320000 {
-                                phandle = <0x199>;
+                                phandle = <0x19a>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -2913,7 +2907,7 @@
                         };
 
                         ipi_3_to_ipi_pmc_nobuf: child@eb390000 {
-                                phandle = <0x19a>;
+                                phandle = <0x19b>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -2935,7 +2929,7 @@
                         reg-names = "ctrl", "msg";
 
                         ipi_4_to_ipi_asu: child@eb310000 {
-                                phandle = <0x19b>;
+                                phandle = <0x19c>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -2944,7 +2938,7 @@
                         };
 
                         ipi_4_to_ipi_0: child@eb330000 {
-                                phandle = <0x19c>;
+                                phandle = <0x19d>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -2953,7 +2947,7 @@
                         };
 
                         ipi_4_to_ipi_1: child@eb340000 {
-                                phandle = <0x19d>;
+                                phandle = <0x19e>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -2962,7 +2956,7 @@
                         };
 
                         ipi_4_to_ipi_1_nobuf: child@eb3b0000 {
-                                phandle = <0x19e>;
+                                phandle = <0x19f>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xa>;
@@ -2971,7 +2965,7 @@
                         };
 
                         ipi_4_to_ipi_2: child@eb350000 {
-                                phandle = <0x19f>;
+                                phandle = <0x1a0>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -2980,7 +2974,7 @@
                         };
 
                         ipi_4_to_ipi_2_nobuf: child@eb3b1000 {
-                                phandle = <0x1a0>;
+                                phandle = <0x1a1>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xb>;
@@ -2989,7 +2983,7 @@
                         };
 
                         ipi_4_to_ipi_3: child@eb360000 {
-                                phandle = <0x1a1>;
+                                phandle = <0x1a2>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -2998,7 +2992,7 @@
                         };
 
                         ipi_4_to_ipi_3_nobuf: child@eb3b2000 {
-                                phandle = <0x1a2>;
+                                phandle = <0x1a3>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xc>;
@@ -3007,7 +3001,7 @@
                         };
 
                         ipi_4_to_ipi_4: child@eb370000 {
-                                phandle = <0x1a3>;
+                                phandle = <0x1a4>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -3016,7 +3010,7 @@
                         };
 
                         ipi_4_to_ipi_4_nobuf: child@eb3b3000 {
-                                phandle = <0x1a4>;
+                                phandle = <0x1a5>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xd>;
@@ -3025,7 +3019,7 @@
                         };
 
                         ipi_4_to_ipi_5: child@eb380000 {
-                                phandle = <0x1a5>;
+                                phandle = <0x1a6>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -3034,7 +3028,7 @@
                         };
 
                         ipi_4_to_ipi_5_nobuf: child@eb3b4000 {
-                                phandle = <0x1a6>;
+                                phandle = <0x1a7>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xe>;
@@ -3043,7 +3037,7 @@
                         };
 
                         ipi_4_to_ipi_6: child@eb3a0000 {
-                                phandle = <0x1a7>;
+                                phandle = <0x1a8>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -3052,7 +3046,7 @@
                         };
 
                         ipi_4_to_ipi_6_nobuf: child@eb3b5000 {
-                                phandle = <0x1a8>;
+                                phandle = <0x1a9>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xf>;
@@ -3061,7 +3055,7 @@
                         };
 
                         ipi_4_to_ipi_pmc: child@eb320000 {
-                                phandle = <0x1a9>;
+                                phandle = <0x1aa>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -3070,7 +3064,7 @@
                         };
 
                         ipi_4_to_ipi_pmc_nobuf: child@eb390000 {
-                                phandle = <0x1aa>;
+                                phandle = <0x1ab>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -3092,7 +3086,7 @@
                         reg-names = "ctrl", "msg";
 
                         ipi_5_to_ipi_asu: child@eb310000 {
-                                phandle = <0x1ab>;
+                                phandle = <0x1ac>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -3101,7 +3095,7 @@
                         };
 
                         ipi_5_to_ipi_0: child@eb330000 {
-                                phandle = <0x1ac>;
+                                phandle = <0x1ad>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -3110,7 +3104,7 @@
                         };
 
                         ipi_5_to_ipi_1: child@eb340000 {
-                                phandle = <0x1ad>;
+                                phandle = <0x1ae>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -3119,7 +3113,7 @@
                         };
 
                         ipi_5_to_ipi_1_nobuf: child@eb3b0000 {
-                                phandle = <0x1ae>;
+                                phandle = <0x1af>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xa>;
@@ -3128,7 +3122,7 @@
                         };
 
                         ipi_5_to_ipi_2: child@eb350000 {
-                                phandle = <0x1af>;
+                                phandle = <0x1b0>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -3137,7 +3131,7 @@
                         };
 
                         ipi_5_to_ipi_2_nobuf: child@eb3b1000 {
-                                phandle = <0x1b0>;
+                                phandle = <0x1b1>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xb>;
@@ -3146,7 +3140,7 @@
                         };
 
                         ipi_5_to_ipi_3: child@eb360000 {
-                                phandle = <0x1b1>;
+                                phandle = <0x1b2>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -3155,7 +3149,7 @@
                         };
 
                         ipi_5_to_ipi_3_nobuf: child@eb3b2000 {
-                                phandle = <0x1b2>;
+                                phandle = <0x1b3>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xc>;
@@ -3164,7 +3158,7 @@
                         };
 
                         ipi_5_to_ipi_4: child@eb370000 {
-                                phandle = <0x1b3>;
+                                phandle = <0x1b4>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -3173,7 +3167,7 @@
                         };
 
                         ipi_5_to_ipi_4_nobuf: child@eb3b3000 {
-                                phandle = <0x1b4>;
+                                phandle = <0x1b5>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xd>;
@@ -3182,7 +3176,7 @@
                         };
 
                         ipi_5_to_ipi_5: child@eb380000 {
-                                phandle = <0x1b5>;
+                                phandle = <0x1b6>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -3191,7 +3185,7 @@
                         };
 
                         ipi_5_to_ipi_5_nobuf: child@eb3b4000 {
-                                phandle = <0x1b6>;
+                                phandle = <0x1b7>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xe>;
@@ -3200,7 +3194,7 @@
                         };
 
                         ipi_5_to_ipi_6: child@eb3a0000 {
-                                phandle = <0x1b7>;
+                                phandle = <0x1b8>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -3209,7 +3203,7 @@
                         };
 
                         ipi_5_to_ipi_6_nobuf: child@eb3b5000 {
-                                phandle = <0x1b8>;
+                                phandle = <0x1b9>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xf>;
@@ -3218,7 +3212,7 @@
                         };
 
                         ipi_5_to_ipi_pmc: child@eb320000 {
-                                phandle = <0x1b9>;
+                                phandle = <0x1ba>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -3227,7 +3221,7 @@
                         };
 
                         ipi_5_to_ipi_pmc_nobuf: child@eb390000 {
-                                phandle = <0x1ba>;
+                                phandle = <0x1bb>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -3249,7 +3243,7 @@
                         reg-names = "ctrl";
 
                         ipi_6_to_ipi_asu: child@eb310000 {
-                                phandle = <0x1bb>;
+                                phandle = <0x1bc>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -3258,7 +3252,7 @@
                         };
 
                         ipi_6_to_ipi_0: child@eb330000 {
-                                phandle = <0x1bc>;
+                                phandle = <0x1bd>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -3267,7 +3261,7 @@
                         };
 
                         ipi_6_to_ipi_1: child@eb340000 {
-                                phandle = <0x1bd>;
+                                phandle = <0x1be>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -3276,7 +3270,7 @@
                         };
 
                         ipi_6_to_ipi_1_nobuf: child@eb3b0000 {
-                                phandle = <0x1be>;
+                                phandle = <0x1bf>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xa>;
@@ -3285,7 +3279,7 @@
                         };
 
                         ipi_6_to_ipi_2: child@eb350000 {
-                                phandle = <0x1bf>;
+                                phandle = <0x1c0>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -3294,7 +3288,7 @@
                         };
 
                         ipi_6_to_ipi_2_nobuf: child@eb3b1000 {
-                                phandle = <0x1c0>;
+                                phandle = <0x1c1>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xb>;
@@ -3303,7 +3297,7 @@
                         };
 
                         ipi_6_to_ipi_3: child@eb360000 {
-                                phandle = <0x1c1>;
+                                phandle = <0x1c2>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -3312,7 +3306,7 @@
                         };
 
                         ipi_6_to_ipi_3_nobuf: child@eb3b2000 {
-                                phandle = <0x1c2>;
+                                phandle = <0x1c3>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xc>;
@@ -3321,7 +3315,7 @@
                         };
 
                         ipi_6_to_ipi_4: child@eb370000 {
-                                phandle = <0x1c3>;
+                                phandle = <0x1c4>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -3330,7 +3324,7 @@
                         };
 
                         ipi_6_to_ipi_4_nobuf: child@eb3b3000 {
-                                phandle = <0x1c4>;
+                                phandle = <0x1c5>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xd>;
@@ -3339,7 +3333,7 @@
                         };
 
                         ipi_6_to_ipi_5: child@eb380000 {
-                                phandle = <0x1c5>;
+                                phandle = <0x1c6>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -3348,7 +3342,7 @@
                         };
 
                         ipi_6_to_ipi_5_nobuf: child@eb3b4000 {
-                                phandle = <0x1c6>;
+                                phandle = <0x1c7>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xe>;
@@ -3357,7 +3351,7 @@
                         };
 
                         ipi_6_to_ipi_6: child@eb3a0000 {
-                                phandle = <0x1c7>;
+                                phandle = <0x1c8>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -3366,7 +3360,7 @@
                         };
 
                         ipi_6_to_ipi_6_nobuf: child@eb3b5000 {
-                                phandle = <0x1c8>;
+                                phandle = <0x1c9>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xf>;
@@ -3375,7 +3369,7 @@
                         };
 
                         ipi_6_to_ipi_pmc: child@eb320000 {
-                                phandle = <0x1c9>;
+                                phandle = <0x1ca>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -3384,7 +3378,7 @@
                         };
 
                         ipi_6_to_ipi_pmc_nobuf: child@eb390000 {
-                                phandle = <0x1ca>;
+                                phandle = <0x1cb>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -3406,7 +3400,7 @@
                         reg-names = "ctrl";
 
                         ipi_1_nobuf_to_ipi_asu: child@eb310000 {
-                                phandle = <0x1cb>;
+                                phandle = <0x1cc>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -3415,7 +3409,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_0: child@eb330000 {
-                                phandle = <0x1cc>;
+                                phandle = <0x1cd>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -3424,7 +3418,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_1: child@eb340000 {
-                                phandle = <0x1cd>;
+                                phandle = <0x1ce>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -3433,7 +3427,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_1_nobuf: child@eb3b0000 {
-                                phandle = <0x1ce>;
+                                phandle = <0x1cf>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xa>;
@@ -3442,7 +3436,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_2: child@eb350000 {
-                                phandle = <0x1cf>;
+                                phandle = <0x1d0>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -3451,7 +3445,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_2_nobuf: child@eb3b1000 {
-                                phandle = <0x1d0>;
+                                phandle = <0x1d1>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xb>;
@@ -3460,7 +3454,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_3: child@eb360000 {
-                                phandle = <0x1d1>;
+                                phandle = <0x1d2>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -3469,7 +3463,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_3_nobuf: child@eb3b2000 {
-                                phandle = <0x1d2>;
+                                phandle = <0x1d3>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xc>;
@@ -3478,7 +3472,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_4: child@eb370000 {
-                                phandle = <0x1d3>;
+                                phandle = <0x1d4>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -3487,7 +3481,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_4_nobuf: child@eb3b3000 {
-                                phandle = <0x1d4>;
+                                phandle = <0x1d5>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xd>;
@@ -3496,7 +3490,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_5: child@eb380000 {
-                                phandle = <0x1d5>;
+                                phandle = <0x1d6>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -3505,7 +3499,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_5_nobuf: child@eb3b4000 {
-                                phandle = <0x1d6>;
+                                phandle = <0x1d7>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xe>;
@@ -3514,7 +3508,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_6: child@eb3a0000 {
-                                phandle = <0x1d7>;
+                                phandle = <0x1d8>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -3523,7 +3517,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_6_nobuf: child@eb3b5000 {
-                                phandle = <0x1d8>;
+                                phandle = <0x1d9>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xf>;
@@ -3532,7 +3526,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_pmc: child@eb320000 {
-                                phandle = <0x1d9>;
+                                phandle = <0x1da>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -3541,7 +3535,7 @@
                         };
 
                         ipi_1_nobuf_to_ipi_pmc_nobuf: child@eb390000 {
-                                phandle = <0x1da>;
+                                phandle = <0x1db>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -3617,7 +3611,7 @@
                 };
 
                 ps_wizard_0_mmi_0_r52_tcm_alias: ps_wizard_0_mmi_0_r52_tcm_alias@0 {
-                        phandle = <0x25b>;
+                        phandle = <0x25c>;
                         compatible = "xlnx,tcm-global-11.0";
                         status = "okay";
                         xlnx,ip-name = "tcm_global";
@@ -3745,7 +3739,7 @@
         };
 
         clk250: clk250 {
-                phandle = <0x262>;
+                phandle = <0x263>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0xee6b280>;
@@ -3828,7 +3822,7 @@
                 ranges;
 
                 res: memory@0 {
-                        phandle = <0x265>;
+                        phandle = <0x266>;
                         no-map;
                         reg = <0x0 0x0 0x0 0x20000000>;
                 };
@@ -3836,29 +3830,29 @@
                 ddrboot@9800100 {
                         no-map;
                         reg = <0x0 0x9800100 0x0 0x5ff00>;
-                        phandle = <0x270>;
+                        phandle = <0x271>;
                 };
 
                 rsctbl@9800000 {
                         no-map;
                         reg = <0x0 0x9800000 0x0 0x100>;
-                        phandle = <0x271>;
+                        phandle = <0x272>;
                 };
 
                 vdev0vring0@9860000 {
-                        phandle = <0x272>;
+                        phandle = <0x273>;
                         no-map;
                         reg = <0x0 0x9860000 0x0 0x4000>;
                 };
 
                 vdev0vring1@9864000 {
-                        phandle = <0x273>;
+                        phandle = <0x274>;
                         no-map;
                         reg = <0x0 0x9864000 0x0 0x4000>;
                 };
 
                 vdev0buffer@9868000 {
-                        phandle = <0x274>;
+                        phandle = <0x275>;
                         no-map;
                         reg = <0x0 0x9868000 0x0 0x40000>;
                         compatible = "shared-dma-pool";
@@ -4014,6 +4008,7 @@
                 wwdt1 = "/axi/watchdog@ecd10000";
                 wwdt2 = "/axi/watchdog@ece10000";
                 wwdt3 = "/axi/watchdog@ecf10000";
+                xilsem_edac = "/axi/edac@f2014050";
                 lpd_wwdt0 = "/axi/watchdog@eb000000";
                 lpd_wwdt1 = "/axi/watchdog@eb010000";
                 lpd_wwdt2 = "/axi/watchdog@eb020000";
@@ -4173,7 +4168,7 @@
         domains {
 
                 APU_Linux {
-                        phandle = <0x26c>;
+                        phandle = <0x26d>;
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_a78 0xf 0x3>;
                         os,type = "linux";
@@ -4183,15 +4178,15 @@
 
                                 remoteproc-relation {
                                         compatible = "openamp,remoteproc-v2";
-                                        remote = <0x266>;
+                                        remote = <0x267>;
                                         elfload;
-                                        elfload0 = <0x2c 0x2d 0x2e 0x267 0x268>;
+                                        elfload0 = <0x2c 0x2d 0x2e 0x268 0x269>;
                                 };
 
                                 rpmsg-relation {
                                         compatible = "openamp,rpmsg-v1";
-                                        remote = <0x266>;
-                                        carveouts = <0x269 0x26a 0x26b>;
+                                        remote = <0x267>;
+                                        carveouts = <0x26a 0x26b 0x26c>;
                                         mbox = <0xb>;
                                 };
                         };
@@ -4199,35 +4194,35 @@
                         reserved-memory {
 
                                 rpu0vdev0vring1 {
-                                        phandle = <0x26a>;
+                                        phandle = <0x26b>;
                                         start = <0x9864000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0vring0 {
-                                        phandle = <0x269>;
+                                        phandle = <0x26a>;
                                         start = <0x9860000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0buffer {
-                                        phandle = <0x26b>;
+                                        phandle = <0x26c>;
                                         start = <0x9868000>;
                                         size = <0x40000>;
                                         no-map;
                                 };
 
                                 ddrboot {
-                                        phandle = <0x267>;
+                                        phandle = <0x268>;
                                         start = <0x9800100>;
                                         size = <0x5ff00>;
                                         no-map;
                                 };
 
                                 rsctbl {
-                                        phandle = <0x268>;
+                                        phandle = <0x269>;
                                         start = <0x9800000>;
                                         size = <0x100>;
                                         no-map;
@@ -4236,7 +4231,7 @@
                 };
 
                 RPU_Zephyr {
-                        phandle = <0x266>;
+                        phandle = <0x267>;
                         compatible = "openamp,domain-v1";
                         os,type = "zephyr";
                         xlnx,ddr-boot = <0x1>;
@@ -4274,9 +4269,9 @@
 
                                 rpmsg-relation {
                                         compatible = "openamp,rpmsg-v1";
-                                        host = <0x26c>;
+                                        host = <0x26d>;
                                         mbox = <0xba>;
-                                        carveouts = <0x26d 0x26e 0x26f>;
+                                        carveouts = <0x26e 0x26f 0x270>;
                                 };
                         };
 
@@ -4284,21 +4279,21 @@
                                 ranges = <0x1>;
 
                                 rpu0vdev0vring1 {
-                                        phandle = <0x26e>;
+                                        phandle = <0x26f>;
                                         start = <0x9864000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0vring0 {
-                                        phandle = <0x26d>;
+                                        phandle = <0x26e>;
                                         start = <0x9860000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0buffer {
-                                        phandle = <0x26f>;
+                                        phandle = <0x270>;
                                         start = <0x9868000>;
                                         size = <0x40000>;
                                         no-map;
@@ -4334,7 +4329,7 @@
                          <&versal2_firmware 0x183180cd>;
                         reg = <0x0 0x0 0x0 0x10000 0x0 0x10000 0x0 0x8000 0x0 0x18000 0x0 0x8000>;
                         reg-names = "r52_0a_atcm_global@eba00000", "r52_0a_btcm_global@eba10000", "r52_0a_ctcm_global@eba20000";
-                        memory-region = <0x271 0x274 0x272 0x273 0x270>;
+                        memory-region = <0x272 0x275 0x273 0x274 0x271>;
                         mboxes = <&ipi_1_nobuf_to_ipi_2_nobuf 0x0>,
                          <&ipi_1_nobuf_to_ipi_2_nobuf 0x1>;
                         mbox-names = "tx", "rx";
