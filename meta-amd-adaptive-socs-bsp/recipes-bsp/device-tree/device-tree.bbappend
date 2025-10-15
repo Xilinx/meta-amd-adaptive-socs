@@ -9,3 +9,6 @@ EXTRA_DT_INCLUDE_FILES:append:versal-2ve-2vm-vek385-sdt-seg:linux = " versal-2ve
 
 FILESEXTRAPATHS:prepend:versal-2ve-2vm-vek385-revb-sdt-seg:linux := "${THISDIR}/files:"
 EXTRA_DT_INCLUDE_FILES:append:versal-2ve-2vm-vek385-revb-sdt-seg:linux = " versal-2ve-2vm-vek385-revb-sdt-seg-system-conf.dtsi"
+
+FILESEXTRAPATHS:prepend:zynq-zc702-sdt-full := "${THISDIR}/files:"
+EXTRA_DT_INCLUDE_FILES:append:zynq-zc702-sdt-full = " zynq-zc702-sdt-full-system-conf.dtsi"
