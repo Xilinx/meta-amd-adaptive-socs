@@ -4,9 +4,9 @@
 # Usage:
 # cd sources/meta-xilinx-tools
 # ./scripts/hdf-repository-generate-srcuri.sh \
-#    https://artifactory.xilinx.com/artifactory/petalinux-hwproj-dev/misc/2025.2 \
+#    https://artifactory.xilinx.com/artifactory/petalinux-hwproj-dev/misc/2026.1 \
 #    /usr/local/sdt-examples \
-#    > ./scripts/2025.2-sdt-index
+#    > ./scripts/2026.1-sdt-index
 #
 # It is assumed the URL being pointed to will be a series of directories.  The directory name
 # will be the machine name for the index, followed by the filename.  We are specifically looking
