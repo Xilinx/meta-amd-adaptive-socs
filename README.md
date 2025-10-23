@@ -1,6 +1,6 @@
 # meta-amd-adaptive-socs
 
-Collection of layers to enable AMD Apdative SoC's bsp cache metadata.
+Collection of layers to enable AMD Adaptive SoC's bsp cache metadata.
 
 * **meta-amd-adaptive-socs-core**: layer containing AMD Adaptive SoC's core features.
 This layer enables AMD adaptive socs core metadata features such as recipes for

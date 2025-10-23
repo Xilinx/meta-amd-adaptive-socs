@@ -14,7 +14,7 @@ scripts.
 > * `full` - ZynqMP full bitstream loading Vivado design.
 > * `seg` - Versal Segmented Configuration Vivado design.
 >
-> **Note:** In machine file nomencalutre `<soc-family>-<eval-board-name>-sdt-<design-name>`
+> **Note:** In machine file nomenclature `<soc-family>-<eval-board-name>-sdt-<design-name>`
 > If design-name suffix is not set or defined then it is treated as flat design
 > without dynamic PL configuration.
 
