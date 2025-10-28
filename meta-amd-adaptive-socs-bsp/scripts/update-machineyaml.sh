@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 # Update the hw-description url in the machineyaml files against an index
 #

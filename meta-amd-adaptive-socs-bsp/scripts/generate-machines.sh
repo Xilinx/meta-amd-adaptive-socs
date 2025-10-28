@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 # Use the machineyaml file to refresh the machine
 #
