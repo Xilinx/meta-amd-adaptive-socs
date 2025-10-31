@@ -27,7 +27,7 @@
 	firmware {
 		fwu-mdata {
 			compatible = "u-boot,fwu-mdata-mtd";
-			fwu-mdata-store = <&flash0>;
+			fwu-mdata-store = <&spi_flash>;
 			mdata-parts = "SystemReady-DT Update Metadata", "SystemReady-DT Update Metadata Backup";
 
 			fwu-bank0 {
@@ -51,36 +51,6 @@
 					uuid = "1243d800-b2f6-11ef-8f4f-8bddc3aa326d";
 				};
 			};
-		};
-	};
-};
-
-&ospi {
-	#address-cells = <1>;
-	#size-cells = <0>;
-
-	flash0: flash@0 {
-		/delete-node/ partition@0;
-		/delete-node/ partition@100000;
-		/delete-node/ partition@600000;
-		/delete-node/ partition@620000;
-		/delete-node/ partition@c00000;
-
-		partition@0 {
-			label = "spi0-boot";
-			reg = <0x00000000 0x00040000>;
-		};
-		partition@1 {
-			label = "spi0-bootenv";
-			reg = <0x00040000 0x00020000>;
-		};
-		partition@2 {
-			label = "spi0-config";
-			reg = <0x00060000 0x00020000>;
-		};
-		partition@3 {
-			label = "spi0-kernel";
-			reg = <0x00080000 0x00c00000>;
 		};
 	};
 };
