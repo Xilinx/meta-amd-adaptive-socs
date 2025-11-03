@@ -28,7 +28,7 @@
                  <0x0 0xf9000000 &amba_apu 0x0 0xf9000000 0x0 0x80000>,
                  <0x0 0x0 &NoC_C0_C1_ddr_memory 0x0 0x0 0x0 0x80000000>,
                  <0x8 0x0 &NoC_C0_C1_ddr_memory 0x8 0x0 0x0 0x80000000>,
-                 <0xa 0x0 &NoC_C2_C3_ddr_memory 0xa 0x0 0x1 0x0>,
+                 <0x500 0x0 &NoC_C2_C3_ddr_memory 0x500 0x0 0x1 0x0>,
                  <0x600 0x0 &NoC_C4_ddr_memory 0x600 0x0 0x0 0x80000000>,
                  <0x0 0xb0000000 &axi_bram_ctrl_0_memory 0x0 0xb0000000 0x0 0x2000>,
                  <0x0 0xedd10000 &mmi_dcdma 0x0 0xedd10000 0x0 0x1000>,
@@ -10055,12 +10055,12 @@
                 memory_type = "memory";
         };
 
-        NoC_C2_C3_ddr_memory: memory@A00000000 {
+        NoC_C2_C3_ddr_memory: memory@50000000000 {
                 phandle = <0x5>;
                 compatible = "xlnx,axi-noc2-1.1";
                 xlnx,ip-name = "axi_noc2";
                 device_type = "memory";
-                reg = <0xa 0x0 0x1 0x0>;
+                reg = <0x500 0x0 0x1 0x0>;
                 memory_type = "memory";
         };
 
@@ -10731,7 +10731,7 @@
                 mmi_tsu_ext_clk = "/mmi_tsu_ext_clk";
                 tsu_ext_clk = "/tsu_ext_clk";
                 NoC_C0_C1_ddr_memory = "/memory@00000000";
-                NoC_C2_C3_ddr_memory = "/memory@A00000000";
+                NoC_C2_C3_ddr_memory = "/memory@50000000000";
                 NoC_C4_ddr_memory = "/memory@60000000000";
                 axi_bram_ctrl_0_memory = "/memory@b0000000";
                 ps_wizard_0_ps11_0_ocm_ram_0_memory = "/memory@BBF00000";
@@ -10755,22 +10755,50 @@
                                         compatible = "openamp,remoteproc-v2";
                                         remote = <0x267 0x268 0x269 0x26a 0x26b>;
                                         elfload;
-                                        elfload0 = <0x2b 0x2c 0x2d 0x26c 0x26d>;
-                                        elfload1 = <0x3d 0x3e 0x3f 0x26e>;
-                                        elfload2 = <0x40 0x41 0x42 0x26f>;
-                                        elfload3 = <0x43 0x44 0x45 0x270>;
-                                        elfload4 = <0x46 0x47 0x48 0x271>;
+                                        elfload0 = <0x3d 0x3e 0x3f 0x26c>;
+                                        elfload1 = <0x40 0x41 0x42 0x26d>;
+                                        elfload2 = <0x43 0x44 0x45 0x26e>;
+                                        elfload3 = <0x46 0x47 0x48 0x26f>;
+                                        elfload4 = <0x2b 0x2c 0x2d 0x270 0x271>;
                                 };
 
                                 rpmsg-relation {
                                         compatible = "openamp,rpmsg-v1";
-                                        remote = <0x267>;
+                                        remote = <0x26b>;
                                         carveouts = <0x272 0x273 0x274>;
                                         mbox = <0xb>;
                                 };
                         };
 
                         reserved-memory {
+
+                                rpu6_fw {
+                                        phandle = <0x26c>;
+                                        start = <0xc000000>;
+                                        size = <0x3800000>;
+                                        no-map;
+                                };
+
+                                rpu7_fw {
+                                        phandle = <0x26d>;
+                                        start = <0x1082a000>;
+                                        size = <0x3800000>;
+                                        no-map;
+                                };
+
+                                rpu8_fw {
+                                        phandle = <0x26e>;
+                                        start = <0x15054000>;
+                                        size = <0x3800000>;
+                                        no-map;
+                                };
+
+                                rpu9_fw {
+                                        phandle = <0x26f>;
+                                        start = <0x1987e000>;
+                                        size = <0x3800000>;
+                                        no-map;
+                                };
 
                                 rpu0vdev0vring1 {
                                         phandle = <0x273>;
@@ -10794,42 +10822,90 @@
                                 };
 
                                 ddrboot {
-                                        phandle = <0x26c>;
+                                        phandle = <0x270>;
                                         start = <0x9800100>;
                                         size = <0x5ff00>;
                                         no-map;
                                 };
 
                                 rsctbl {
-                                        phandle = <0x26d>;
+                                        phandle = <0x271>;
                                         start = <0x9800000>;
                                         size = <0x100>;
                                         no-map;
                                 };
+                        };
+                };
+
+                RPU6_ISP_FW {
+                        phandle = <0x267>;
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_r52_6 0x1 0x80000003>;
+                        os,type = "baremetal";
+                        cpu_config_str = "split";
+                        core_num = "6";
+
+                        reserved-memory {
+                                ranges = <0x1>;
 
                                 rpu6_fw {
-                                        phandle = <0x26e>;
                                         start = <0xc000000>;
                                         size = <0x3800000>;
                                         no-map;
                                 };
+                        };
+                };
+
+                RPU7_ISP_FW {
+                        phandle = <0x268>;
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_r52_7 0x1 0x80000003>;
+                        os,type = "baremetal";
+                        cpu_config_str = "split";
+                        core_num = "7";
+
+                        reserved-memory {
+                                ranges = <0x1>;
 
                                 rpu7_fw {
-                                        phandle = <0x26f>;
                                         start = <0x1082a000>;
                                         size = <0x3800000>;
                                         no-map;
                                 };
+                        };
+                };
+
+                RPU8_ISP_FW {
+                        phandle = <0x269>;
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_r52_8 0x1 0x80000003>;
+                        os,type = "baremetal";
+                        cpu_config_str = "split";
+                        core_num = "8";
+
+                        reserved-memory {
+                                ranges = <0x1>;
 
                                 rpu8_fw {
-                                        phandle = <0x270>;
                                         start = <0x15054000>;
                                         size = <0x3800000>;
                                         no-map;
                                 };
+                        };
+                };
+
+                RPU9_ISP_FW {
+                        phandle = <0x26a>;
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_r52_9 0x1 0x80000003>;
+                        os,type = "baremetal";
+                        cpu_config_str = "split";
+                        core_num = "9";
+
+                        reserved-memory {
+                                ranges = <0x1>;
 
                                 rpu9_fw {
-                                        phandle = <0x271>;
                                         start = <0x1987e000>;
                                         size = <0x3800000>;
                                         no-map;
@@ -10838,7 +10914,7 @@
                 };
 
                 RPU_Zephyr {
-                        phandle = <0x267>;
+                        phandle = <0x26b>;
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_r52_0 0x1 0x80000003>;
                         os,type = "zephyr";
@@ -10921,82 +10997,6 @@
                                 ddrboot {
                                         start = <0x9800100>;
                                         size = <0x5ff00>;
-                                        no-map;
-                                };
-                        };
-                };
-
-                RPU6_ISP_FW {
-                        phandle = <0x268>;
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_r52_6 0x1 0x80000003>;
-                        os,type = "baremetal";
-                        cpu_config_str = "split";
-                        core_num = "6";
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu6_fw {
-                                        start = <0xc000000>;
-                                        size = <0x3800000>;
-                                        no-map;
-                                };
-                        };
-                };
-
-                RPU7_ISP_FW {
-                        phandle = <0x269>;
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_r52_7 0x1 0x80000003>;
-                        os,type = "baremetal";
-                        cpu_config_str = "split";
-                        core_num = "7";
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu7_fw {
-                                        start = <0x1082a000>;
-                                        size = <0x3800000>;
-                                        no-map;
-                                };
-                        };
-                };
-
-                RPU8_ISP_FW {
-                        phandle = <0x26a>;
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_r52_8 0x1 0x80000003>;
-                        os,type = "baremetal";
-                        cpu_config_str = "split";
-                        core_num = "8";
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu8_fw {
-                                        start = <0x15054000>;
-                                        size = <0x3800000>;
-                                        no-map;
-                                };
-                        };
-                };
-
-                RPU9_ISP_FW {
-                        phandle = <0x26b>;
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_r52_9 0x1 0x80000003>;
-                        os,type = "baremetal";
-                        cpu_config_str = "split";
-                        core_num = "9";
-
-                        reserved-memory {
-                                ranges = <0x1>;
-
-                                rpu9_fw {
-                                        start = <0x1987e000>;
-                                        size = <0x3800000>;
                                         no-map;
                                 };
                         };

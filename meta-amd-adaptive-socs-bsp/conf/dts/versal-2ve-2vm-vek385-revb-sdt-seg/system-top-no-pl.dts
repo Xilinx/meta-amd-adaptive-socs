@@ -28,7 +28,7 @@
                  <0x0 0xf9000000 &amba_apu 0x0 0xf9000000 0x0 0x80000>,
                  <0x0 0x0 &NoC_C0_C1_ddr_memory 0x0 0x0 0x0 0x80000000>,
                  <0x8 0x0 &NoC_C0_C1_ddr_memory 0x8 0x0 0x1 0x80000000>,
-                 <0xa 0x0 &NoC_C2_C3_ddr_memory 0xa 0x0 0x2 0x0>,
+                 <0x500 0x0 &NoC_C2_C3_ddr_memory 0x500 0x0 0x2 0x0>,
                  <0x600 0x0 &NoC_C4_ddr_memory 0x600 0x0 0x1 0x0>,
                  <0x0 0xb0000000 &axi_bram_ctrl_0_memory 0x0 0xb0000000 0x0 0x2000>,
                  <0x0 0xedd10000 &mmi_dcdma 0x0 0xedd10000 0x0 0x1000>,
@@ -10042,12 +10042,12 @@
                 memory_type = "memory";
         };
 
-        NoC_C2_C3_ddr_memory: memory@A00000000 {
+        NoC_C2_C3_ddr_memory: memory@50000000000 {
                 phandle = <0x5>;
                 compatible = "xlnx,axi-noc2-1.1";
                 xlnx,ip-name = "axi_noc2";
                 device_type = "memory";
-                reg = <0xa 0x0 0x2 0x0>;
+                reg = <0x500 0x0 0x2 0x0>;
                 memory_type = "memory";
         };
 
@@ -10114,12 +10114,6 @@
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
                 ranges;
-
-                res: memory@0 {
-                        phandle = <0x266>;
-                        no-map;
-                        reg = <0x0 0x0 0x0 0x20000000>;
-                };
         };
 
         pwm-fan {
@@ -10723,20 +10717,19 @@
                 mmi_tsu_ext_clk = "/mmi_tsu_ext_clk";
                 tsu_ext_clk = "/tsu_ext_clk";
                 NoC_C0_C1_ddr_memory = "/memory@00000000";
-                NoC_C2_C3_ddr_memory = "/memory@A00000000";
+                NoC_C2_C3_ddr_memory = "/memory@50000000000";
                 NoC_C4_ddr_memory = "/memory@60000000000";
                 axi_bram_ctrl_0_memory = "/memory@b0000000";
                 ps_wizard_0_ps11_0_ocm_ram_0_memory = "/memory@BBF00000";
                 ps_wizard_0_ps11_0_ocm_ram_1_memory = "/memory@BBF80000";
                 ps_wizard_0_ps11_0_ocm_ram_2_memory = "/memory@BBE00000";
                 ps_wizard_0_ps11_0_ocm_ram_3_memory = "/memory@BBE80000";
-                res = "/reserved-memory/memory@0";
         };
 
         domains {
 
                 APU_Linux {
-                        phandle = <0x26d>;
+                        phandle = <0x26c>;
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_a78 0xf 0x3>;
                         os,type = "linux";
@@ -10746,15 +10739,15 @@
 
                                 remoteproc-relation {
                                         compatible = "openamp,remoteproc-v2";
-                                        remote = <0x267>;
+                                        remote = <0x266>;
                                         elfload;
-                                        elfload0 = <0x2b 0x2c 0x2d 0x268 0x269>;
+                                        elfload0 = <0x2b 0x2c 0x2d 0x267 0x268>;
                                 };
 
                                 rpmsg-relation {
                                         compatible = "openamp,rpmsg-v1";
-                                        remote = <0x267>;
-                                        carveouts = <0x26a 0x26b 0x26c>;
+                                        remote = <0x266>;
+                                        carveouts = <0x269 0x26a 0x26b>;
                                         mbox = <0xb>;
                                 };
                         };
@@ -10762,35 +10755,35 @@
                         reserved-memory {
 
                                 rpu0vdev0vring1 {
-                                        phandle = <0x26b>;
+                                        phandle = <0x26a>;
                                         start = <0x9864000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0vring0 {
-                                        phandle = <0x26a>;
+                                        phandle = <0x269>;
                                         start = <0x9860000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0buffer {
-                                        phandle = <0x26c>;
+                                        phandle = <0x26b>;
                                         start = <0x9868000>;
                                         size = <0x40000>;
                                         no-map;
                                 };
 
                                 ddrboot {
-                                        phandle = <0x268>;
+                                        phandle = <0x267>;
                                         start = <0x9800100>;
                                         size = <0x5ff00>;
                                         no-map;
                                 };
 
                                 rsctbl {
-                                        phandle = <0x269>;
+                                        phandle = <0x268>;
                                         start = <0x9800000>;
                                         size = <0x100>;
                                         no-map;
@@ -10799,7 +10792,7 @@
                 };
 
                 RPU_Zephyr {
-                        phandle = <0x267>;
+                        phandle = <0x266>;
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_r52_0 0x1 0x80000003>;
                         os,type = "zephyr";
@@ -10843,9 +10836,9 @@
 
                                 rpmsg-relation {
                                         compatible = "openamp,rpmsg-v1";
-                                        host = <0x26d>;
+                                        host = <0x26c>;
                                         mbox = <0xb9>;
-                                        carveouts = <0x26e 0x26f 0x270>;
+                                        carveouts = <0x26d 0x26e 0x26f>;
                                 };
                         };
 
@@ -10853,21 +10846,21 @@
                                 ranges = <0x1>;
 
                                 rpu0vdev0vring1 {
-                                        phandle = <0x26f>;
+                                        phandle = <0x26e>;
                                         start = <0x9864000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0vring0 {
-                                        phandle = <0x26e>;
+                                        phandle = <0x26d>;
                                         start = <0x9860000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0buffer {
-                                        phandle = <0x270>;
+                                        phandle = <0x26f>;
                                         start = <0x9868000>;
                                         size = <0x40000>;
                                         no-map;
