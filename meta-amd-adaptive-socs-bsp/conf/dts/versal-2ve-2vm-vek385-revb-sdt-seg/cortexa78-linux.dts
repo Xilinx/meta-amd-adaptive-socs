@@ -1,6 +1,6 @@
 /dts-v1/;
 / {
-        compatible = "amd,versal2-vek385-revB", "amd,versal2-vek385", "amd,versal2", "AMD Versal VEK385 revB", "AMD Versal VEK385 revB", "AMD Versal VEK385 revB", "AMD Versal VEK385 revB", "AMD Versal VEK385 revB", "AMD Versal VEK385 revB", "AMD Versal VEK385 revB";
+        compatible = "amd,versal2-vek385-revB", "amd,versal2-vek385", "amd,versal2";
         model = "AMD Versal VEK385 revB";
         #address-cells = <0x2>;
         #size-cells = <0x2>;
@@ -225,7 +225,6 @@
         };
 
         aliases {
-                serial0 = "/axi/serial@f1920000";
                 serial1 = "/axi/serial@f1930000";
                 mmc0 = "/axi/mmc@f1040000";
                 mmc1 = "/axi/mmc@f1050000";
@@ -243,6 +242,7 @@
                 spi2 = "/axi/spi@f19c0000";
                 spi3 = "/axi/spi@f19d0000";
                 serial3 = "/axi/coresight@f0800000";
+                nvmem1 = "";
         };
 
         firmware {
@@ -350,6 +350,35 @@
                                 user_key7: user-key@1f0 {
                                         phandle = <0x125>;
                                         reg = <0x1f0 0x20>;
+                                };
+                        };
+                };
+
+                fwu-mdata {
+                        compatible = "u-boot,fwu-mdata-mtd";
+                        mdata-parts = "SystemReady-DT Update Metadata", "SystemReady-DT Update Metadata Backup";
+
+                        fwu-bank0 {
+                                id = <0x0>;
+                                label = "Bank A Space";
+
+                                fwu-image0 {
+                                        id = <0x0>;
+                                        offset = <0x0>;
+                                        size = <0x7200000>;
+                                        uuid = "0b931b7e-b2f6-11ef-8565-eb65d140066b";
+                                };
+                        };
+
+                        fwu-bank1 {
+                                id = <0x1>;
+                                label = "Bank B Space";
+
+                                fwu-image0 {
+                                        id = <0x0>;
+                                        offset = <0x0>;
+                                        size = <0x7200000>;
+                                        uuid = "1243d800-b2f6-11ef-8f4f-8bddc3aa326d";
                                 };
                         };
                 };
@@ -1210,7 +1239,7 @@
                 i2c0: i2c@f1940000 {
                         phandle = <0x92>;
                         compatible = "cdns,i2c-r1p14";
-                        status = "okay";
+                        status = "disabled";
                         reg = <0x0 0xf1940000 0x0 0x1000>;
                         interrupt-parent = <&gic>;
                         interrupts = <0x0 0x15 0x4>;
@@ -1540,13 +1569,83 @@
                                         compatible = "fixed-partitions";
 
                                         partition@0 {
-                                                reg = <0x0 0x200000>;
-                                                label = "ospi-flash0";
+                                                reg = <0x0 0x60000>;
+                                                label = "Image Selector";
                                         };
 
-                                        partition@1 {
-                                                reg = <0x200000 0x3e00000>;
-                                                label = "ospi-flash1";
+                                        partition@60000 {
+                                                label = "Image Selector Backup";
+                                                reg = <0x60000 0x60000>;
+                                        };
+
+                                        partition@c0000 {
+                                                label = "Image Selector Scratchpad";
+                                                reg = <0xc0000 0x20000>;
+                                        };
+
+                                        partition@e0000 {
+                                                label = "Image Recovery";
+                                                reg = <0xe0000 0x1400000>;
+                                        };
+
+                                        partition@14e0000 {
+                                                label = "Image Recovery Scratchpad";
+                                                reg = <0x14e0000 0x20000>;
+                                        };
+
+                                        partition@1500000 {
+                                                label = "SystemReady-DT Update Metadata";
+                                                reg = <0x1500000 0x20000>;
+                                        };
+
+                                        partition@1520000 {
+                                                label = "SystemReady-DT Update Metadata Backup";
+                                                reg = <0x1520000 0x20000>;
+                                        };
+
+                                        partition@1540000 {
+                                                label = "U-Boot Variables";
+                                                reg = <0x1540000 0x20000>;
+                                        };
+
+                                        partition@1560000 {
+                                                label = "U-Boot Variables Backup";
+                                                reg = <0x1560000 0x20000>;
+                                        };
+
+                                        partition@1580000 {
+                                                label = "Bank A Space";
+                                                reg = <0x1580000 0x7200000>;
+                                        };
+
+                                        partition@8780000 {
+                                                label = "U-Boot Variables Bank A";
+                                                reg = <0x8780000 0x20000>;
+                                        };
+
+                                        partition@87a0000 {
+                                                label = "U-Boot Variables Bank A Backup";
+                                                reg = <0x87a0000 0x20000>;
+                                        };
+
+                                        partition@87c0000 {
+                                                label = "Bank B Space";
+                                                reg = <0x87c0000 0x7200000>;
+                                        };
+
+                                        partition@f9c0000 {
+                                                label = "U-Boot Variables Bank B";
+                                                reg = <0xf9c0000 0x20000>;
+                                        };
+
+                                        partition@f9e0000 {
+                                                label = "U-Boot Variables Bank B Backup";
+                                                reg = <0xf9e0000 0x20000>;
+                                        };
+
+                                        partition@fa00000 {
+                                                label = "User Scratchpad";
+                                                reg = <0xfa00000 0x5e0000>;
                                         };
                                 };
                         };
@@ -2040,7 +2139,7 @@
                 ttc4: timer@f1ea0000 {
                         phandle = <0xa1>;
                         compatible = "cdns,ttc";
-                        status = "okay";
+                        status = "disabled";
                         interrupt-parent = <&gic>;
                         interrupts = <0x0 0x2f 0x4 0x0 0x2f 0x4 0x0 0x2f 0x4>;
                         timer-width = <0x20>;
@@ -2061,7 +2160,7 @@
                 ttc5: timer@f1eb0000 {
                         phandle = <0xa2>;
                         compatible = "cdns,ttc";
-                        status = "okay";
+                        status = "disabled";
                         interrupt-parent = <&gic>;
                         interrupts = <0x0 0x30 0x4 0x0 0x30 0x4 0x0 0x30 0x4>;
                         timer-width = <0x20>;
@@ -2082,7 +2181,7 @@
                 ttc6: timer@f1ec0000 {
                         phandle = <0xa3>;
                         compatible = "cdns,ttc";
-                        status = "okay";
+                        status = "disabled";
                         interrupt-parent = <&gic>;
                         interrupts = <0x0 0x31 0x4 0x0 0x31 0x4 0x0 0x31 0x4>;
                         timer-width = <0x20>;
@@ -2103,7 +2202,7 @@
                 ttc7: timer@f1ed0000 {
                         phandle = <0xa4>;
                         compatible = "cdns,ttc";
-                        status = "okay";
+                        status = "disabled";
                         interrupt-parent = <&gic>;
                         interrupts = <0x0 0x32 0x4 0x0 0x32 0x4 0x0 0x32 0x4>;
                         timer-width = <0x20>;
@@ -3672,15 +3771,15 @@
                 };
 
                 ddrboot@9800100 {
+                        phandle = <0x271>;
                         no-map;
                         reg = <0x0 0x9800100 0x0 0x5ff00>;
-                        phandle = <0x271>;
                 };
 
                 rsctbl@9800000 {
+                        phandle = <0x272>;
                         no-map;
                         reg = <0x0 0x9800000 0x0 0x100>;
-                        phandle = <0x272>;
                 };
 
                 vdev0vring0@9860000 {
@@ -3700,6 +3799,153 @@
                         no-map;
                         reg = <0x0 0x9868000 0x0 0x40000>;
                         compatible = "shared-dma-pool";
+                };
+
+                plm_region: buffer@0 {
+                        phandle = <0x1>;
+                        no-map;
+                        reg = <0x0 0x0 0x0 0x1000000>;
+                };
+
+                tfa_region: buffer@1000000 {
+                        phandle = <0x3>;
+                        no-map;
+                        reg = <0x0 0x1000000 0x0 0x600000>;
+                };
+
+                rpu6_fw: rproc6@0c000000 {
+                        phandle = <0x7>;
+                        no-map;
+                        reg = <0x0 0xc000000 0x0 0x3800000>;
+                };
+
+                rproc_D_0_6_calib_load: rpu6_calib_load {
+                        phandle = <0x8>;
+                        no-map;
+                        reg = <0x0 0xf800000 0x0 0x28000>;
+                };
+
+                rproc_D_0_6_hal_mem_priv: rpu6_hal_mem_priv {
+                        phandle = <0x10>;
+                        no-map;
+                        reg = <0x0 0xf828000 0x0 0x1001000>;
+                };
+
+                rpu7_fw: rproc7@1082A000 {
+                        phandle = <0x11>;
+                        no-map;
+                        reg = <0x0 0x1082a000 0x0 0x3800000>;
+                };
+
+                rproc_D_1_7_calib_load: rpu7_calib_load {
+                        phandle = <0x12>;
+                        no-map;
+                        reg = <0x0 0x1402a000 0x0 0x28000>;
+                };
+
+                rproc_D_1_7_hal_mem_priv: rpu7_hal_mem_priv {
+                        phandle = <0x13>;
+                        no-map;
+                        reg = <0x0 0x14052000 0x0 0x1001000>;
+                };
+
+                rpu8_fw: rproc8@15054000 {
+                        phandle = <0x16>;
+                        no-map;
+                        reg = <0x0 0x15054000 0x0 0x3800000>;
+                };
+
+                rproc_E_0_8_calib_load: rpu8_calib_load {
+                        phandle = <0x17>;
+                        no-map;
+                        reg = <0x0 0x18854000 0x0 0x28000>;
+                };
+
+                rproc_E_0_8_hal_mem_priv: rpu8_hal_mem_priv {
+                        phandle = <0x18>;
+                        no-map;
+                        reg = <0x0 0x1887c000 0x0 0x1001000>;
+                };
+
+                rpu9_fw: rproc9@1987E000 {
+                        phandle = <0x19>;
+                        no-map;
+                        reg = <0x0 0x1987e000 0x0 0x3800000>;
+                };
+
+                rproc_E_1_9_calib_load: rpu9_calib_load {
+                        phandle = <0x1a>;
+                        no-map;
+                        reg = <0x0 0x1d07e000 0x0 0x28000>;
+                };
+
+                rproc_E_1_9_hal_mem_priv: rpu9_hal_mem_priv {
+                        phandle = <0x1c>;
+                        no-map;
+                        reg = <0x0 0x1d0a6000 0x0 0x1001000>;
+                };
+
+                isp_mbox_buffer: isp_mbox_buffer@1E0A8000 {
+                        phandle = <0x1d>;
+                        no-map;
+                        reg = <0x0 0x1e0a8000 0x0 0x400000>;
+                };
+
+                rpu_shared_mem: rpu_shared_mem@1E4A8000 {
+                        phandle = <0x1e>;
+                        no-map;
+                        reg = <0x0 0x1e4a8000 0x0 0x40000>;
+                };
+
+                isp_vring: vring@1fff7000 {
+                        phandle = <0x1f>;
+                        no-map;
+                        reg = <0x0 0x1fff7000 0x0 0x8000>;
+                };
+
+                tcm_rpu6: rpu6_tcm {
+                        phandle = <0x20>;
+                        no-map;
+                        reg = <0x0 0xebb80000 0x0 0x30000>;
+                };
+
+                tcm_rpu7: rpu7_tcm {
+                        phandle = <0x21>;
+                        no-map;
+                        reg = <0x0 0xebbc0000 0x0 0x30000>;
+                };
+
+                tcm_rpu8: rpu8_tcm {
+                        phandle = <0x22>;
+                        no-map;
+                        reg = <0x0 0xebc00000 0x0 0x30000>;
+                };
+
+                tcm_rpu9: rpu9_tcm {
+                        phandle = <0x23>;
+                        no-map;
+                        reg = <0x0 0xebc40000 0x0 0x30000>;
+                };
+
+                cma_reserved_1: cma_reserved@800000000 {
+                        phandle = <0x24>;
+                        compatible = "shared-dma-pool";
+                        reusable;
+                        reg = <0x8 0x0 0x1 0x0>;
+                        linux,cma-default;
+                };
+
+                cma_reserved_2: cma_reserved@50000000000 {
+                        phandle = <0x25>;
+                        comaptible = "shared-dma-pool";
+                        reusable;
+                        reg = <0x500 0x0 0x1 0x80000000>;
+                };
+
+                ddr_ch4: buffer@60000000000 {
+                        phandle = <0x26>;
+                        no-map;
+                        reg = <0x600 0x0 0x1 0x0>;
                 };
         };
 
@@ -3990,6 +4236,30 @@
                 NoC_C4_ddr_memory = "/memory@60000000000";
                 res = "/reserved-memory/memory@0";
                 gic = "/axi/interrupt-controller@e2000000";
+                plm_region = "/reserved-memory/buffer@0";
+                tfa_region = "/reserved-memory/buffer@1000000";
+                rpu6_fw = "/reserved-memory/rproc6@0c000000";
+                rproc_D_0_6_calib_load = "/reserved-memory/rpu6_calib_load";
+                rproc_D_0_6_hal_mem_priv = "/reserved-memory/rpu6_hal_mem_priv";
+                rpu7_fw = "/reserved-memory/rproc7@1082A000";
+                rproc_D_1_7_calib_load = "/reserved-memory/rpu7_calib_load";
+                rproc_D_1_7_hal_mem_priv = "/reserved-memory/rpu7_hal_mem_priv";
+                rpu8_fw = "/reserved-memory/rproc8@15054000";
+                rproc_E_0_8_calib_load = "/reserved-memory/rpu8_calib_load";
+                rproc_E_0_8_hal_mem_priv = "/reserved-memory/rpu8_hal_mem_priv";
+                rpu9_fw = "/reserved-memory/rproc9@1987E000";
+                rproc_E_1_9_calib_load = "/reserved-memory/rpu9_calib_load";
+                rproc_E_1_9_hal_mem_priv = "/reserved-memory/rpu9_hal_mem_priv";
+                isp_mbox_buffer = "/reserved-memory/isp_mbox_buffer@1E0A8000";
+                rpu_shared_mem = "/reserved-memory/rpu_shared_mem@1E4A8000";
+                isp_vring = "/reserved-memory/vring@1fff7000";
+                tcm_rpu6 = "/reserved-memory/rpu6_tcm";
+                tcm_rpu7 = "/reserved-memory/rpu7_tcm";
+                tcm_rpu8 = "/reserved-memory/rpu8_tcm";
+                tcm_rpu9 = "/reserved-memory/rpu9_tcm";
+                cma_reserved_1 = "/reserved-memory/cma_reserved@800000000";
+                cma_reserved_2 = "/reserved-memory/cma_reserved@50000000000";
+                ddr_ch4 = "/reserved-memory/buffer@60000000000";
         };
 
         domains {
