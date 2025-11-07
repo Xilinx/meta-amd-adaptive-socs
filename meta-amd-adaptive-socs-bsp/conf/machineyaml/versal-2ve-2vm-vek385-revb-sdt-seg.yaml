@@ -52,3 +52,15 @@ machine:
         QB_ROOTFS_OPT:
             op: '='
             val: "-device scsi-hd,drive=d1,bus=scsi.0,channel=0,scsi-id=0,lun=0,logical_block_size=4096,physical_block_size=4096 -drive file=@ROOTFS@,if=none,id=d1,format=raw"
+        UEFI_CAB_GUID:
+            comment: 'GUID for the capsule update'
+            op: '='
+            val: 'f27c2e59-8f43-4d77-9b63-12b0a4e67c28'
+        XLNX_CMAKE_BSP_VARS:pn-xilplmi:append:
+            comment: 'Enables the restoration of the multi-boot register for A/B firmware platforms'
+            op: '='
+            val: ' -DPLM_ENABLE_RESTORE_MULTIBOOT'
+        CFLAGS:pn-image-selector:append:
+            comment: 'Enable Push Button support'
+            op: '='
+            val: ' -DXIS_ENABLE_PB'
