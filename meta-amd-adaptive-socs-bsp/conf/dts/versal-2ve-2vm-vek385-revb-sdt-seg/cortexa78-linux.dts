@@ -793,6 +793,7 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
+                        dma-coherent;
                 };
 
                 adma1: dma-controller@ebd10000 {
@@ -812,6 +813,7 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
+                        dma-coherent;
                 };
 
                 adma2: dma-controller@ebd20000 {
@@ -831,6 +833,7 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
+                        dma-coherent;
                 };
 
                 adma3: dma-controller@ebd30000 {
@@ -850,6 +853,7 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
+                        dma-coherent;
                 };
 
                 adma4: dma-controller@ebd40000 {
@@ -869,6 +873,7 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
+                        dma-coherent;
                 };
 
                 adma5: dma-controller@ebd50000 {
@@ -888,6 +893,7 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
+                        dma-coherent;
                 };
 
                 adma6: dma-controller@ebd60000 {
@@ -907,6 +913,7 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
+                        dma-coherent;
                 };
 
                 adma7: dma-controller@ebd70000 {
@@ -926,6 +933,7 @@
                         xlnx,ip-name = "adma";
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
+                        dma-coherent;
                 };
 
                 can0: can@f19e0000 {
@@ -1107,6 +1115,7 @@
                         xlnx,enet-clk-freq-hz = <0x7735464>;
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         phy-handle = <0xf3>;
+                        dma-coherent;
 
                         mdio: mdio {
                                 phandle = <0x132>;
@@ -2141,6 +2150,7 @@
                         xlnx,ref-pad-clk-freq-hz = <0x18cba80>;
                         xlnx,clk-freq-hz = <0x11e19751>;
                         xlnx,cfg-clk-freq-hz = <0x18cba80>;
+                        dma-coherent;
                 };
 
                 usb0: usb@f1ee0000 {
@@ -2190,6 +2200,7 @@
                         power-domains = <&versal2_firmware 0x182240d7>;
                         resets = <&versal2_reset 0xc1040c6>;
                         xlnx,ip-name = "usb";
+                        dma-coherent;
 
                         dwc3_1: usb@f1c00000 {
                                 phandle = <0x9c>;
@@ -2209,6 +2220,7 @@
                                 xlnx,ip-name = "usb_xhci";
                                 dr_mode = "host";
                                 maximum-speed = "high-speed";
+                                dma-coherent;
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
 
@@ -2227,6 +2239,7 @@
                         status = "okay";
                         clock-names = "bus_clk", "ref_clk";
                         ranges;
+                        dma-coherent;
                         #address-cells = <0x2>;
                         #size-cells = <0x2>;
                         clocks = <&clk256>,
@@ -2248,6 +2261,7 @@
                                 snps,usb3_lpm_capable;
                                 dr_mode = "host";
                                 clock-names = "ref";
+                                dma-coherent;
                                 clocks = <&versal2_clk 0xd0>;
                                 xlnx,ip-name = "mmi_usb_cfg";
                                 xlnx,super-speed = <0x1>;
@@ -2264,8 +2278,10 @@
                         interrupts = <0x0 0xa5 0x4>;
                         interrupt-parent = <&gic>;
                         interrupt-map-mask = <0x0 0x0 0x0 0x7>;
-                        interrupt-map = <0x1 0xf7 0x0 0x2 &mdb_intc_0 0x1>,
-                         <0x3 0xf7 0x2 0x4 &mdb_intc_0 0x3>;
+                        interrupt-map = <0x0 0x0 0x0 0x1 &mdb_intc_0 0x0>,
+                         <0x0 0x0 0x0 0x2 &mdb_intc_0 0x1>,
+                         <0x0 0x0 0x0 0x3 &mdb_intc_0 0x2>,
+                         <0x0 0x0 0x0 0x4 &mdb_intc_0 0x3>;
                         msi-map = <0x0 &its 0x0 0x10000>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
@@ -2304,8 +2320,10 @@
                         interrupts = <0x0 0xa6 0x4>;
                         interrupt-parent = <&gic>;
                         interrupt-map-mask = <0x0 0x0 0x0 0x7>;
-                        interrupt-map = <0x1 0xfa 0x0 0x2 &mdb_intc_1 0x1>,
-                         <0x3 0xfa 0x2 0x4 &mdb_intc_1 0x3>;
+                        interrupt-map = <0x0 0x0 0x0 0x1 &mdb_intc_1 0x0>,
+                         <0x0 0x0 0x0 0x2 &mdb_intc_1 0x1>,
+                         <0x0 0x0 0x0 0x3 &mdb_intc_1 0x2>,
+                         <0x0 0x0 0x0 0x4 &mdb_intc_1 0x3>;
                         msi-map = <0x0 &its 0x10000 0x10000>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
