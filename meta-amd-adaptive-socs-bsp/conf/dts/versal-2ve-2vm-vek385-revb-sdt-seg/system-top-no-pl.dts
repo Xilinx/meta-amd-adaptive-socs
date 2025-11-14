@@ -3105,6 +3105,7 @@
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
                         xlnx,name = "ps_wizard_0_ps11_0_adma_0";
+                        dma-coherent;
                 };
 
                 adma1: dma-controller@ebd10000 {
@@ -3125,6 +3126,7 @@
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
                         xlnx,name = "ps_wizard_0_ps11_0_adma_1";
+                        dma-coherent;
                 };
 
                 adma2: dma-controller@ebd20000 {
@@ -3145,6 +3147,7 @@
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
                         xlnx,name = "ps_wizard_0_ps11_0_adma_2";
+                        dma-coherent;
                 };
 
                 adma3: dma-controller@ebd30000 {
@@ -3165,6 +3168,7 @@
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
                         xlnx,name = "ps_wizard_0_ps11_0_adma_3";
+                        dma-coherent;
                 };
 
                 adma4: dma-controller@ebd40000 {
@@ -3185,6 +3189,7 @@
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
                         xlnx,name = "ps_wizard_0_ps11_0_adma_4";
+                        dma-coherent;
                 };
 
                 adma5: dma-controller@ebd50000 {
@@ -3205,6 +3210,7 @@
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
                         xlnx,name = "ps_wizard_0_ps11_0_adma_5";
+                        dma-coherent;
                 };
 
                 adma6: dma-controller@ebd60000 {
@@ -3225,6 +3231,7 @@
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
                         xlnx,name = "ps_wizard_0_ps11_0_adma_6";
+                        dma-coherent;
                 };
 
                 adma7: dma-controller@ebd70000 {
@@ -3245,6 +3252,7 @@
                         xlnx,dma-mode = <0x1>;
                         xlnx,zdma-clk-freq-hz = <0x8f0cba9>;
                         xlnx,name = "ps_wizard_0_ps11_0_adma_7";
+                        dma-coherent;
                 };
 
                 can0: can@f19e0000 {
@@ -3447,6 +3455,7 @@
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         xlnx,name = "ps_wizard_0_ps11_0_ethernet_0";
                         phy-handle = <0xf3>;
+                        dma-coherent;
 
                         mdio: mdio {
                                 phandle = <0x132>;
@@ -4657,6 +4666,7 @@
                         xlnx,clk-freq-hz = <0x11e19751>;
                         xlnx,cfg-clk-freq-hz = <0x18cba80>;
                         xlnx,name = "ps_wizard_0_ps11_0_pmc_ufs_xhci";
+                        dma-coherent;
                 };
 
                 usb0: usb@f1ee0000 {
@@ -4707,6 +4717,7 @@
                         resets = <&versal2_reset 0xc1040c6>;
                         xlnx,ip-name = "usb";
                         xlnx,name = "ps_wizard_0_ps11_0_usb_1";
+                        dma-coherent;
 
                         dwc3_1: usb@f1c00000 {
                                 phandle = <0x9c>;
@@ -4727,6 +4738,7 @@
                                 xlnx,name = "ps_wizard_0_ps11_0_usb_xhci_1";
                                 dr_mode = "host";
                                 maximum-speed = "high-speed";
+                                dma-coherent;
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
 
@@ -4745,6 +4757,7 @@
                         status = "okay";
                         clock-names = "bus_clk", "ref_clk";
                         ranges;
+                        dma-coherent;
                         #address-cells = <0x2>;
                         #size-cells = <0x2>;
                         clocks = <&clk256>,
@@ -4766,6 +4779,7 @@
                                 snps,usb3_lpm_capable;
                                 dr_mode = "host";
                                 clock-names = "ref";
+                                dma-coherent;
                                 clocks = <&versal2_clk 0xd0>;
                                 xlnx,ip-name = "mmi_usb_cfg";
                                 xlnx,super-speed = <0x1>;
@@ -4783,8 +4797,10 @@
                         interrupts = <0x0 0xa5 0x4>;
                         interrupt-parent = <&imux>;
                         interrupt-map-mask = <0x0 0x0 0x0 0x7>;
-                        interrupt-map = <0x1 0xf7 0x0 0x2 &mdb_intc_0 0x1>,
-                         <0x3 0xf7 0x2 0x4 &mdb_intc_0 0x3>;
+                        interrupt-map = <0x0 0x0 0x0 0x1 &mdb_intc_0 0x0>,
+                         <0x0 0x0 0x0 0x2 &mdb_intc_0 0x1>,
+                         <0x0 0x0 0x0 0x3 &mdb_intc_0 0x2>,
+                         <0x0 0x0 0x0 0x4 &mdb_intc_0 0x3>;
                         msi-map = <0x0 &its 0x0 0x10000>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
@@ -4824,8 +4840,10 @@
                         interrupts = <0x0 0xa6 0x4>;
                         interrupt-parent = <&imux>;
                         interrupt-map-mask = <0x0 0x0 0x0 0x7>;
-                        interrupt-map = <0x1 0xfa 0x0 0x2 &mdb_intc_1 0x1>,
-                         <0x3 0xfa 0x2 0x4 &mdb_intc_1 0x3>;
+                        interrupt-map = <0x0 0x0 0x0 0x1 &mdb_intc_1 0x0>,
+                         <0x0 0x0 0x0 0x2 &mdb_intc_1 0x1>,
+                         <0x0 0x0 0x0 0x3 &mdb_intc_1 0x2>,
+                         <0x0 0x0 0x0 0x4 &mdb_intc_1 0x3>;
                         msi-map = <0x0 &its 0x10000 0x10000>;
                         xlnx,num-of-bars = <0x2>;
                         xlnx,port-type = <0x1>;
@@ -10114,12 +10132,6 @@
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
                 ranges;
-
-                res: memory@0 {
-                        phandle = <0x266>;
-                        no-map;
-                        reg = <0x0 0x0 0x0 0x20000000>;
-                };
         };
 
         pwm-fan {
@@ -10730,13 +10742,12 @@
                 ps_wizard_0_ps11_0_ocm_ram_1_memory = "/memory@BBF80000";
                 ps_wizard_0_ps11_0_ocm_ram_2_memory = "/memory@BBE00000";
                 ps_wizard_0_ps11_0_ocm_ram_3_memory = "/memory@BBE80000";
-                res = "/reserved-memory/memory@0";
         };
 
         domains {
 
                 APU_Linux {
-                        phandle = <0x26d>;
+                        phandle = <0x26c>;
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_a78 0xf 0x3>;
                         os,type = "linux";
@@ -10746,15 +10757,15 @@
 
                                 remoteproc-relation {
                                         compatible = "openamp,remoteproc-v2";
-                                        remote = <0x267>;
+                                        remote = <0x266>;
                                         elfload;
-                                        elfload0 = <0x2b 0x2c 0x2d 0x268 0x269>;
+                                        elfload0 = <0x2b 0x2c 0x2d 0x267 0x268>;
                                 };
 
                                 rpmsg-relation {
                                         compatible = "openamp,rpmsg-v1";
-                                        remote = <0x267>;
-                                        carveouts = <0x26a 0x26b 0x26c>;
+                                        remote = <0x266>;
+                                        carveouts = <0x269 0x26a 0x26b>;
                                         mbox = <0xb>;
                                 };
                         };
@@ -10762,35 +10773,35 @@
                         reserved-memory {
 
                                 rpu0vdev0vring1 {
-                                        phandle = <0x26b>;
+                                        phandle = <0x26a>;
                                         start = <0x9864000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0vring0 {
-                                        phandle = <0x26a>;
+                                        phandle = <0x269>;
                                         start = <0x9860000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0buffer {
-                                        phandle = <0x26c>;
+                                        phandle = <0x26b>;
                                         start = <0x9868000>;
                                         size = <0x40000>;
                                         no-map;
                                 };
 
                                 ddrboot {
-                                        phandle = <0x268>;
+                                        phandle = <0x267>;
                                         start = <0x9800100>;
                                         size = <0x5ff00>;
                                         no-map;
                                 };
 
                                 rsctbl {
-                                        phandle = <0x269>;
+                                        phandle = <0x268>;
                                         start = <0x9800000>;
                                         size = <0x100>;
                                         no-map;
@@ -10799,7 +10810,7 @@
                 };
 
                 RPU_Zephyr {
-                        phandle = <0x267>;
+                        phandle = <0x266>;
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_r52_0 0x1 0x80000003>;
                         os,type = "zephyr";
@@ -10843,9 +10854,9 @@
 
                                 rpmsg-relation {
                                         compatible = "openamp,rpmsg-v1";
-                                        host = <0x26d>;
+                                        host = <0x26c>;
                                         mbox = <0xb9>;
-                                        carveouts = <0x26e 0x26f 0x270>;
+                                        carveouts = <0x26d 0x26e 0x26f>;
                                 };
                         };
 
@@ -10853,21 +10864,21 @@
                                 ranges = <0x1>;
 
                                 rpu0vdev0vring1 {
-                                        phandle = <0x26f>;
+                                        phandle = <0x26e>;
                                         start = <0x9864000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0vring0 {
-                                        phandle = <0x26e>;
+                                        phandle = <0x26d>;
                                         start = <0x9860000>;
                                         size = <0x4000>;
                                         no-map;
                                 };
 
                                 rpu0vdev0buffer {
-                                        phandle = <0x270>;
+                                        phandle = <0x26f>;
                                         start = <0x9868000>;
                                         size = <0x40000>;
                                         no-map;
