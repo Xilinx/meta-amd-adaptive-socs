@@ -4137,6 +4137,7 @@
                         clocks = <&versal2_clk 0x5c>,
                          <&versal2_clk 0x52>;
                         power-domains = <&versal2_firmware 0x18224021>;
+                        device_type = "serial";
                         xlnx,clock-freq = <0x5f5dd19>;
                         xlnx,uart-board-interface = "custom";
                         xlnx,has-modem = <0x0>;
@@ -4161,6 +4162,7 @@
                         clocks = <&versal2_clk 0x5d>,
                          <&versal2_clk 0x52>;
                         power-domains = <&versal2_firmware 0x18224022>;
+                        device_type = "serial";
                         xlnx,clock-freq = <0x5f5dd19>;
                         xlnx,uart-board-interface = "custom";
                         xlnx,has-modem = <0x0>;
@@ -10062,9 +10064,12 @@
 
         axi_bram_ctrl_0_memory: memory@b0000000 {
                 phandle = <0x7>;
-                compatible = "xlnx,axi-bram-ctrl-4.1";
+                ranges = <0x0 0x0 0xb0000000 0x0 0x2000>;
+                compatible = "xlnx,axi-bram-ctrl-4.1", "mmio-sram";
+                #address-cells = <0x2>;
                 xlnx,ip-name = "axi_bram_ctrl";
                 device_type = "memory";
+                #size-cells = <0x2>;
                 memory_type = "memory";
                 reg = <0x0 0xb0000000 0x0 0x2000>;
         };
