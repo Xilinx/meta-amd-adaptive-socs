@@ -802,15 +802,16 @@
                         clocks = <&versal_clk 0x5c>,
                          <&versal_clk 0x52>;
                         power-domains = <&versal_firmware 0x18224021>;
-                        xlnx,clock-freq = <0x5f5e0a4>;
-                        u-boot,dm-pre-reloc;
-                        xlnx,uart-board-interface = "custom";
                         xlnx,has-modem = <0x0>;
+                        xlnx,uart-clk-freq-hz = <0x5f5e0a4>;
+                        port-number = <0x0>;
                         xlnx,ip-name = "psv_sbsauart";
+                        xlnx,uart-board-interface = "custom";
                         xlnx,baudrate = <0x1c200>;
                         cts-override;
-                        port-number = <0x0>;
-                        xlnx,uart-clk-freq-hz = <0x5f5e0a4>;
+                        u-boot,dm-pre-reloc;
+                        device_type = "serial";
+                        xlnx,clock-freq = <0x5f5e0a4>;
                         xlnx,name = "CIPS_0_pspmc_0_psv_sbsauart_0";
                 };
 
@@ -2617,6 +2618,7 @@
                         clocks = <&misc_clk_0>;
                         xlnx,all-outputs-2 = <0x0>;
                         gpio-controller;
+                        device_type = "gpio";
                         xlnx,interrupt-present = <0x0>;
                         xlnx,gpio2-board-interface = "Custom";
                         xlnx,edk-iptype = "PERIPHERAL";
@@ -2646,6 +2648,7 @@
                         clocks = <&misc_clk_0>;
                         xlnx,all-outputs-2 = <0x0>;
                         gpio-controller;
+                        device_type = "gpio";
                         xlnx,interrupt-present = <0x0>;
                         xlnx,gpio2-board-interface = "Custom";
                         xlnx,edk-iptype = "PERIPHERAL";
@@ -2675,6 +2678,7 @@
                         clocks = <&misc_clk_0>;
                         xlnx,all-outputs-2 = <0x0>;
                         gpio-controller;
+                        device_type = "gpio";
                         xlnx,interrupt-present = <0x0>;
                         xlnx,gpio2-board-interface = "Custom";
                         xlnx,edk-iptype = "PERIPHERAL";
@@ -2702,6 +2706,7 @@
                         xlnx,has-external-xin = <0x0>;
                         clocks = <&misc_clk_0>;
                         xlnx,use-modem-ports = <0x1>;
+                        device_type = "serial";
                         xlnx,edk-iptype = "PERIPHERAL";
                         status = "okay";
                         xlnx,external-xin-clk-hz-d = <0x19>;
@@ -2738,9 +2743,12 @@
 
         axi_bram_ctrl_0_memory: memory@a4020000 {
                 phandle = <0x3>;
-                compatible = "xlnx,axi-bram-ctrl-4.1";
+                ranges = <0x0 0x0 0xa4020000 0x0 0x2000>;
+                compatible = "xlnx,axi-bram-ctrl-4.1", "mmio-sram";
+                #address-cells = <0x2>;
                 xlnx,ip-name = "axi_bram_ctrl";
                 device_type = "memory";
+                #size-cells = <0x2>;
                 memory_type = "memory";
                 reg = <0x0 0xa4020000 0x0 0x2000>;
         };

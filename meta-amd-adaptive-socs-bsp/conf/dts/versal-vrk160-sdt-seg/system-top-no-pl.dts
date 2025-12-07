@@ -1847,15 +1847,16 @@
                         clocks = <&versal_clk 0x5c>,
                          <&versal_clk 0x52>;
                         power-domains = <&versal_firmware 0x18224021>;
-                        xlnx,clock-freq = <0x5f5dd19>;
-                        u-boot,dm-pre-reloc;
-                        xlnx,uart-board-interface = "custom";
                         xlnx,has-modem = <0x0>;
+                        xlnx,uart-clk-freq-hz = <0x5f5dd19>;
+                        port-number = <0x0>;
                         xlnx,ip-name = "psv_sbsauart";
+                        xlnx,uart-board-interface = "custom";
                         xlnx,baudrate = <0x1c200>;
                         cts-override;
-                        port-number = <0x0>;
-                        xlnx,uart-clk-freq-hz = <0x5f5dd19>;
+                        u-boot,dm-pre-reloc;
+                        device_type = "serial";
+                        xlnx,clock-freq = <0x5f5dd19>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_sbsauart_0";
                 };
 
@@ -1872,15 +1873,16 @@
                         clocks = <&versal_clk 0x5d>,
                          <&versal_clk 0x52>;
                         power-domains = <&versal_firmware 0x18224022>;
-                        xlnx,clock-freq = <0x5f5dd19>;
-                        u-boot,dm-pre-reloc;
-                        xlnx,uart-board-interface = "custom";
                         xlnx,has-modem = <0x0>;
+                        xlnx,uart-clk-freq-hz = <0x5f5dd19>;
+                        port-number = <0x0>;
                         xlnx,ip-name = "psv_sbsauart";
+                        xlnx,uart-board-interface = "custom";
                         xlnx,baudrate = <0x1c200>;
                         cts-override;
-                        port-number = <0x0>;
-                        xlnx,uart-clk-freq-hz = <0x5f5dd19>;
+                        u-boot,dm-pre-reloc;
+                        device_type = "serial";
+                        xlnx,clock-freq = <0x5f5dd19>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_sbsauart_1";
                 };
 
@@ -5362,9 +5364,12 @@
 
         axi_bram_ctrl_0_memory: memory@a4000000 {
                 phandle = <0x7>;
-                compatible = "xlnx,axi-bram-ctrl-4.1";
+                ranges = <0x0 0x0 0xa4000000 0x0 0x2000>;
+                compatible = "xlnx,axi-bram-ctrl-4.1", "mmio-sram";
+                #address-cells = <0x2>;
                 xlnx,ip-name = "axi_bram_ctrl";
                 device_type = "memory";
+                #size-cells = <0x2>;
                 memory_type = "memory";
                 reg = <0x0 0xa4000000 0x0 0x2000>;
         };
