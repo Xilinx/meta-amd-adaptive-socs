@@ -15,7 +15,7 @@
 
                 u-boot {
                         compatible = "u-boot,config";
-                        bootscr-address = <0x0 0x20000000>;
+                        bootscr-address = /bits/ 64 <0x0 0x20000000>;
                 };
         };
 
@@ -307,25 +307,25 @@
                 opp-shared;
 
                 opp-1400000000 {
-                        opp-hz = <0x0 0x53724e00>;
+                        opp-hz = /bits/ 64 <0x0 0x53724e00>;
                         clock-latency-ns = <0x7a120>;
                         opp-microvolt = <0xf4240>;
                 };
 
                 opp-700000000 {
-                        opp-hz = <0x0 0x29b92700>;
+                        opp-hz = /bits/ 64 <0x0 0x29b92700>;
                         clock-latency-ns = <0x7a120>;
                         opp-microvolt = <0xf4240>;
                 };
 
                 opp-466666667 {
-                        opp-hz = <0x0 0x1bd0c4ab>;
+                        opp-hz = /bits/ 64 <0x0 0x1bd0c4ab>;
                         clock-latency-ns = <0x7a120>;
                         opp-microvolt = <0xf4240>;
                 };
 
                 opp-350000000 {
-                        opp-hz = <0x0 0x14dc9380>;
+                        opp-hz = /bits/ 64 <0x0 0x14dc9380>;
                         clock-latency-ns = <0x7a120>;
                         opp-microvolt = <0xf4240>;
                 };
@@ -466,7 +466,6 @@
                          <0x0 0x3c 0x0 &amba_rpu 0x4>,
                          <0x7e 0x0 0x14 &amba 0x0>,
                          <0x0 0x7e 0x0 &ref 0x4>,
-                         <0x0 0x7e 0x0 &psv_r5_1_atcm_global 0x4>,
                          <0x1a 0x4 0x0 &serial0 0x0>;
                 };
 
@@ -767,6 +766,7 @@
                                         eeprom: eeprom@54 {
                                                 phandle = <0xaf>;
                                                 compatible = "st,24c128", "atmel,24c128";
+                                                label = "eeprom_vrk160a";
                                                 reg = <0x54>;
                                         };
                                 };
@@ -1668,68 +1668,6 @@
                                 reg-names = "ctrl", "msg";
                         };
                 };
-
-                ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep: ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep@ffe10000 {
-                        phandle = <0x12f>;
-                        compatible = "xlnx,psv-r5-0-atcm-lockstep-11.0", "mmio-sram";
-                        status = "okay";
-                        power-domains = <&versal_firmware 0x1831800b>;
-                        xlnx,ip-name = "psv_r5_0_atcm_lockstep";
-                        xlnx,is-hierarchy;
-                        reg = <0x0 0xffe10000 0x0 0x10000>;
-                        xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep";
-                };
-
-                ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep: ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep@ffe30000 {
-                        phandle = <0x130>;
-                        compatible = "xlnx,psv-r5-0-btcm-lockstep-11.0", "mmio-sram";
-                        status = "okay";
-                        power-domains = <&versal_firmware 0x1831800c>;
-                        xlnx,ip-name = "psv_r5_0_btcm_lockstep";
-                        xlnx,is-hierarchy;
-                        reg = <0x0 0xffe30000 0x0 0x10000>;
-                        xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep";
-                };
-        };
-
-        psv_r5_0_atcm_global: psv_r5_0_atcm_global@ffe00000 {
-                phandle = <0x6a>;
-                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
-                power-domains = <&versal_firmware 0x1831800b>;
-                reg = <0x0 0xffe00000 0x0 0x10000>;
-                status = "okay";
-                xlnx,ip-name = "psv_tcm_global";
-                xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_0_atcm_global";
-        };
-
-        psv_r5_0_btcm_global: psv_r5_0_btcm_global@ffe20000 {
-                phandle = <0x7f>;
-                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
-                power-domains = <&versal_firmware 0x1831800c>;
-                reg = <0x0 0xffe20000 0x0 0x10000>;
-                status = "okay";
-                xlnx,ip-name = "psv_tcm_global";
-                xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_0_btcm_global";
-        };
-
-        psv_r5_1_atcm_global: psv_r5_1_atcm_global@ffe90000 {
-                phandle = <0x6b>;
-                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
-                power-domains = <&versal_firmware 0x1831800d>;
-                reg = <0x0 0xffe90000 0x0 0x10000>;
-                status = "okay";
-                xlnx,ip-name = "psv_tcm_global";
-                xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_1_atcm_global";
-        };
-
-        psv_r5_1_btcm_global: psv_r5_1_btcm_global@ffeb0000 {
-                phandle = <0x6c>;
-                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
-                power-domains = <&versal_firmware 0x1831800e>;
-                reg = <0x0 0xffeb0000 0x0 0x10000>;
-                status = "okay";
-                xlnx,ip-name = "psv_tcm_global";
-                xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_1_btcm_global";
         };
 
         amba_xppu: indirect-bus@1 {
@@ -2026,12 +1964,6 @@
                 ipi_pmc_nobuf_to_ipi_pmc = "/axi/mailbox@ff390000/child@ff320000";
                 ipi_pmc_nobuf_to_ipi_pmc_nobuf = "/axi/mailbox@ff390000/child@ff390000";
                 ipi_pmc_nobuf_to_ipi_psm = "/axi/mailbox@ff390000/child@ff310000";
-                ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep = "/axi/ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep@ffe10000";
-                ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep = "/axi/ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep@ffe30000";
-                psv_r5_0_atcm_global = "/psv_r5_0_atcm_global@ffe00000";
-                psv_r5_0_btcm_global = "/psv_r5_0_btcm_global@ffe20000";
-                psv_r5_1_atcm_global = "/psv_r5_1_atcm_global@ffe90000";
-                psv_r5_1_btcm_global = "/psv_r5_1_btcm_global@ffeb0000";
                 amba_xppu = "/indirect-bus@1";
                 amba_xmpu = "/indirect-bus@2";
                 pl_alt_ref = "/pl-alt-ref";
