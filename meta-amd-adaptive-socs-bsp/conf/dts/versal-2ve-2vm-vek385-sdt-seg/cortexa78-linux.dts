@@ -15,7 +15,7 @@
 
                 u-boot {
                         compatible = "u-boot,config";
-                        bootscr-address = /bits/ 64 <0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x78000000>;
+                        bootscr-address = /bits/ 64 <0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x0 0x78000000>;
                 };
         };
 
@@ -3787,9 +3787,10 @@
                         phandle = <0x269>;
                         no-map;
                         reg = <0x0 0x9868000 0x0 0x40000>;
+                        compatible = "shared-dma-pool";
                 };
 
-                rsctbl@9800000 {
+                rsctbl9800000: rsctbl@9800000 {
                         phandle = <0x26b>;
                         no-map;
                         reg = <0x0 0x9800000 0x0 0x100>;
@@ -4300,8 +4301,8 @@
                         os,type = "zephyr";
                         xlnx,ddr-boot = <0x1>;
                         sram = <0x9800100 0x5ff00 0xeba00000 0x10000 0xeba10000 0x8000 0xeba20000 0x8000>;
-                        reserved-memory = <0x26c 0x26a>;
-                        rpu_pd_val = <0xbc 0x181100bf>;
+                        reserved-memory = <0x26c>;
+                        rpu_pd_val = <0xbc 0x181100bf 0xbc 0x183180cb 0xbc 0x183180cc 0xbc 0x183180cd>;
                         cpu_config_str = "split";
                         core_num = "0";
 
@@ -4315,10 +4316,32 @@
                                         relation0 {
                                                 host = <0x26e>;
                                                 mbox = <0x1e0>;
-                                                carveouts = <0x26c>;
+                                                carveouts = <0x267 0x268 0x269>;
                                         };
                                 };
                         };
+                };
+        };
+
+        remoteproc@eba00000 {
+                compatible = "xlnx,versal-net-r52fss";
+                #address-cells = <0x2>;
+                #size-cells = <0x2>;
+                xlnx,cluster-mode = <0x0>;
+                ranges = <0x0 0x0 0x0 0xeba00000 0x0 0x10000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0x18000 0x0 0xeba20000 0x0 0x8000>;
+
+                r52f@0 {
+                        compatible = "xlnx,versal2-r52f";
+                        power-domains = <&versal2_firmware 0x181100bf>,
+                         <&versal2_firmware 0x183180cb>,
+                         <&versal2_firmware 0x183180cc>,
+                         <&versal2_firmware 0x183180cd>;
+                        reg = <0x0 0x0 0x0 0x10000 0x0 0x10000 0x0 0x8000 0x0 0x18000 0x0 0x8000>;
+                        reg-names = "r52_0a_atcm_global@eba00000", "r52_0a_btcm_global@eba10000", "r52_0a_ctcm_global@eba20000";
+                        memory-region = <&rsctbl9800000 0x269 0x267 0x268 0x26a>;
+                        mboxes = <&ipi_1_nobuf_to_ipi_2_nobuf 0x0>,
+                         <&ipi_1_nobuf_to_ipi_2_nobuf 0x1>;
+                        mbox-names = "tx", "rx";
                 };
         };
 
