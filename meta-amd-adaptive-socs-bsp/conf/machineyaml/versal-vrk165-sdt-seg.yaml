@@ -1,0 +1,39 @@
+args:
+    - --hw-description https://edf.amd.com/sswreleases/rel-v2026.1/sdt/2026.1/2026.1_1224_1_12250000/external/versal-vrk165-sdt-seg/versal-vrk165-sdt-seg_2026.1_1224_1_12250000.tar.gz
+    - --machine-name versal-vrk165-sdt-seg
+    - -g full
+    - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/openamp-overlay-versal.yaml
+
+kconfig:
+    CONFIG_YOCTO_BBMC_CORTEXR5_1_BAREMETAL: y
+    CONFIG_YOCTO_BBMC_LINUX_DTSI: \
+          ${LAYER_PATH_xilinx-standalone-sdt}/recipes-bsp/device-tree/files/ospi-2g-memory-map.dtsi
+
+machine:
+    pre:
+    post:
+        include:
+            comment: "Enable meta-xilinx-imgrcvry if available"
+            op: 'conf/enable-xilinx-imgrcvry.conf'
+        QB_MEM:
+            op: '='
+            val: "-m 12G"
+        QEMU_HW_DTB_PS:
+            op: '='
+            val: "${QEMU_HW_DTB_PATH}/board-versal-ps-vrk165.dtb"
+        QEMU_HW_DTB_PMC:
+            op: '='
+            val: "${QEMU_HW_DTB_PATH}/board-versal-pmc-virt.dtb"
+        QEMU_HW_BOOT_MODE:
+            op: '='
+            val: "8"
+        QEMU_HW_OSPI_FILE:
+            op: '='
+            val: "qemu-ospi-${MACHINE}.bin"
+        QB_OPT_APPEND:append:
+            op: ':='
+            val: " -drive file=@DEPLOY_DIR_IMAGE@/${QEMU_HW_OSPI_FILE},if=mtd,format=raw,index=4"
+        UEFI_CAB_GUID:
+            comment: "GUID for the capsule update"
+            op: '='
+            val: "9a7f3b02-1c4e-42a0-bf6d-8471c2e9153d"
