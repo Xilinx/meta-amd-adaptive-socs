@@ -15,7 +15,7 @@
 
                 u-boot {
                         compatible = "u-boot,config";
-                        bootscr-address = /bits/ 64 <0x0 0x20000000>;
+                        bootscr-address = /bits/ 64 <0x20000000>;
                 };
         };
 
@@ -35,15 +35,15 @@
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
                 address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
-                 <0xa4020000 &axi_bram_ctrl_0_memory 0xa4020000 0x2000>,
-                 <0xa4020000 &axi_bram_ctrl_0 0xa4020000 0x2000>,
+                 <0xa4000000 &axi_bram_ctrl_0_memory 0xa4000000 0x2000>,
+                 <0xa4000000 &axi_bram_ctrl_0 0xa4000000 0x2000>,
                  <0x0 &noc_lpddr0_ddr_memory 0x0 0x80000000>,
                  <0xff310000 &ipi_psm 0xff310000 0x10000>,
                  <0xfffc0000 &CIPS_0_pspmc_0_psv_ocm_ram_0_memory 0xfffc0000 0x40000>,
-                 <0xa4000000 &axi_gpio_2 0xa4000000 0x10000>,
-                 <0xa4010000 &axi_uart16550_0 0xa4010000 0x10000>,
-                 <0xa6020000 &axi_gpio_0 0xa6020000 0x10000>,
-                 <0xa6030000 &axi_gpio_1 0xa6030000 0x10000>,
+                 <0xa6000000 &axi_uart16550_0 0xa6000000 0x10000>,
+                 <0xa6010000 &axi_gpio_0 0xa6010000 0x10000>,
+                 <0xa6020000 &axi_gpio_1 0xa6020000 0x10000>,
+                 <0xa6030000 &axi_gpio_2 0xa6030000 0x10000>,
                  <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
                  <0xf1010000 &ospi 0xf1010000 0x10000>,
                  <0xf1020000 &gpio1 0xf1020000 0x10000>,
@@ -377,25 +377,25 @@
                 opp-shared;
 
                 opp-1400000000 {
-                        opp-hz = /bits/ 64 <0x0 0x53724e00>;
+                        opp-hz = /bits/ 64 <0x53724e00>;
                         clock-latency-ns = <0x7a120>;
                         opp-microvolt = <0xf4240>;
                 };
 
                 opp-700000000 {
-                        opp-hz = /bits/ 64 <0x0 0x29b92700>;
+                        opp-hz = /bits/ 64 <0x29b92700>;
                         clock-latency-ns = <0x7a120>;
                         opp-microvolt = <0xf4240>;
                 };
 
                 opp-466666667 {
-                        opp-hz = /bits/ 64 <0x0 0x1bd0c4ab>;
+                        opp-hz = /bits/ 64 <0x1bd0c4ab>;
                         clock-latency-ns = <0x7a120>;
                         opp-microvolt = <0xf4240>;
                 };
 
                 opp-350000000 {
-                        opp-hz = /bits/ 64 <0x0 0x14dc9380>;
+                        opp-hz = /bits/ 64 <0x14dc9380>;
                         clock-latency-ns = <0x7a120>;
                         opp-microvolt = <0xf4240>;
                 };
@@ -540,13 +540,13 @@
                          <0x43 0x4 0x0 &CIPS_0_pspmc_0_psv_pmc_global_0 0x0>,
                          <0x5e 0x0 0x38 &axi_bram_ctrl_0 0x0>,
                          <0x0 0x5e 0x0 &CIPS_0_pspmc_0_psv_scntrs_0 0x4>,
-                         <0xe 0x4 0x0 &axi_gpio_2 0x0>,
+                         <0xe 0x4 0x0 &axi_uart16550_0 0x0>,
                          <0x5e 0x0 0xf &axi_bram_ctrl_0 0x0>,
                          <0x0 0x5e 0x0 &CIPS_0_pspmc_0_psv_ocm_ctrl 0x4>,
-                         <0x80 0x4 0x0 &axi_gpio_1 0x0>,
+                         <0x80 0x4 0x0 &axi_gpio_2 0x0>,
                          <0x5e 0x0 0x12 &axi_bram_ctrl_0 0x0>,
                          <0x0 0x5e 0x0 &CIPS_0_pspmc_0_psv_lpd_slcr_secure_0 0x4>,
-                         <0x7d 0x4 0x0 &axi_uart16550_0 0x0>,
+                         <0x7d 0x4 0x0 &axi_gpio_0 0x0>,
                          <0x5e 0x0 0x10 &axi_bram_ctrl_0 0x0>,
                          <0x4a 0x4 0x0 &pmc_cfu_apb_0 0x0>,
                          <0x5e 0x0 0x48 &axi_bram_ctrl_0 0x0>,
@@ -2524,7 +2524,7 @@
                         #clock-cells = <0x0>;
                 };
 
-                axi_bram_ctrl_0: axi_bram_ctrl_0@a4020000 {
+                axi_bram_ctrl_0: axi_bram_ctrl_0@a4000000 {
                         phandle = <0x4>;
                         xlnx,protocol = "AXI4";
                         xlnx,edk-special = "BRAM_CTRL";
@@ -2536,7 +2536,7 @@
                         xlnx,use-ecc = <0x0>;
                         xlnx,fault-inject = <0x0>;
                         xlnx,ip-name = "axi_bram_ctrl";
-                        reg = <0x0 0xa4020000 0x0 0x2000>;
+                        reg = <0x0 0xa4000000 0x0 0x2000>;
                         xlnx,bmg-instance = "EXTERNAL";
                         clocks = <&misc_clk_0>;
                         xlnx,s-axi-ctrl-addr-width = <0x20>;
@@ -2558,13 +2558,43 @@
                         xlnx,name = "axi_bram_ctrl_0";
                 };
 
-                axi_gpio_0: gpio@a6020000 {
-                        phandle = <0x11>;
+                axi_gpio_0: gpio@a6010000 {
+                        phandle = <0x10>;
                         xlnx,gpio-board-interface = "gpio_led";
                         compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
                         xlnx,all-outputs = <0x1>;
                         #gpio-cells = <0x2>;
                         xlnx,gpio-width = <0x4>;
+                        xlnx,dout-default = <0x0>;
+                        xlnx,is-dual = <0x0>;
+                        xlnx,ip-name = "axi_gpio";
+                        xlnx,tri-default-2 = <0xffffffff>;
+                        reg = <0x0 0xa6010000 0x0 0x10000>;
+                        xlnx,all-inputs-2 = <0x0>;
+                        clocks = <&misc_clk_0>;
+                        xlnx,all-outputs-2 = <0x0>;
+                        gpio-controller;
+                        device_type = "gpio";
+                        xlnx,interrupt-present = <0x0>;
+                        xlnx,gpio2-board-interface = "Custom";
+                        xlnx,edk-iptype = "PERIPHERAL";
+                        xlnx,dout-default-2 = <0x0>;
+                        status = "okay";
+                        xlnx,gpio2-width = <0x20>;
+                        clock-names = "s_axi_aclk";
+                        xlnx,use-board-flow;
+                        xlnx,tri-default = <0xffffffff>;
+                        xlnx,name = "axi_gpio_0";
+                        xlnx,all-inputs = <0x0>;
+                };
+
+                axi_gpio_1: gpio@a6020000 {
+                        phandle = <0x11>;
+                        xlnx,gpio-board-interface = "gpio_pb";
+                        compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
+                        xlnx,all-outputs = <0x0>;
+                        #gpio-cells = <0x2>;
+                        xlnx,gpio-width = <0x2>;
                         xlnx,dout-default = <0x0>;
                         xlnx,is-dual = <0x0>;
                         xlnx,ip-name = "axi_gpio";
@@ -2584,17 +2614,17 @@
                         clock-names = "s_axi_aclk";
                         xlnx,use-board-flow;
                         xlnx,tri-default = <0xffffffff>;
-                        xlnx,name = "axi_gpio_0";
-                        xlnx,all-inputs = <0x0>;
+                        xlnx,name = "axi_gpio_1";
+                        xlnx,all-inputs = <0x1>;
                 };
 
-                axi_gpio_1: gpio@a6030000 {
+                axi_gpio_2: gpio@a6030000 {
                         phandle = <0x12>;
-                        xlnx,gpio-board-interface = "gpio_pb";
+                        xlnx,gpio-board-interface = "gpio_dp";
                         compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
                         xlnx,all-outputs = <0x0>;
                         #gpio-cells = <0x2>;
-                        xlnx,gpio-width = <0x2>;
+                        xlnx,gpio-width = <0x4>;
                         xlnx,dout-default = <0x0>;
                         xlnx,is-dual = <0x0>;
                         xlnx,ip-name = "axi_gpio";
@@ -2614,42 +2644,12 @@
                         clock-names = "s_axi_aclk";
                         xlnx,use-board-flow;
                         xlnx,tri-default = <0xffffffff>;
-                        xlnx,name = "axi_gpio_1";
-                        xlnx,all-inputs = <0x1>;
-                };
-
-                axi_gpio_2: gpio@a4000000 {
-                        phandle = <0xf>;
-                        xlnx,gpio-board-interface = "gpio_dp";
-                        compatible = "xlnx,axi-gpio-2.0", "xlnx,xps-gpio-1.00.a";
-                        xlnx,all-outputs = <0x0>;
-                        #gpio-cells = <0x2>;
-                        xlnx,gpio-width = <0x4>;
-                        xlnx,dout-default = <0x0>;
-                        xlnx,is-dual = <0x0>;
-                        xlnx,ip-name = "axi_gpio";
-                        xlnx,tri-default-2 = <0xffffffff>;
-                        reg = <0x0 0xa4000000 0x0 0x10000>;
-                        xlnx,all-inputs-2 = <0x0>;
-                        clocks = <&misc_clk_0>;
-                        xlnx,all-outputs-2 = <0x0>;
-                        gpio-controller;
-                        device_type = "gpio";
-                        xlnx,interrupt-present = <0x0>;
-                        xlnx,gpio2-board-interface = "Custom";
-                        xlnx,edk-iptype = "PERIPHERAL";
-                        xlnx,dout-default-2 = <0x0>;
-                        status = "okay";
-                        xlnx,gpio2-width = <0x20>;
-                        clock-names = "s_axi_aclk";
-                        xlnx,use-board-flow;
-                        xlnx,tri-default = <0xffffffff>;
                         xlnx,name = "axi_gpio_2";
                         xlnx,all-inputs = <0x1>;
                 };
 
-                axi_uart16550_0: serial@a4010000 {
-                        phandle = <0x10>;
+                axi_uart16550_0: serial@a6000000 {
+                        phandle = <0xf>;
                         compatible = "xlnx,axi-uart16550-2.0", "xlnx,axi-uart16550";
                         xlnx,external-xin-clk-hz = <0x17d7840>;
                         xlnx,has-external-rclk = <0x0>;
@@ -2658,7 +2658,7 @@
                         xlnx,sim-device = "VERSAL_AI_EDGE";
                         xlnx,uart-board-interface = "uart1_bank401";
                         xlnx,ip-name = "axi_uart16550";
-                        reg = <0x0 0xa4010000 0x0 0x10000>;
+                        reg = <0x0 0xa6000000 0x0 0x10000>;
                         xlnx,has-external-xin = <0x0>;
                         clocks = <&misc_clk_0>;
                         xlnx,use-modem-ports = <0x1>;
@@ -2697,16 +2697,16 @@
                 memory_type = "memory";
         };
 
-        axi_bram_ctrl_0_memory: memory@a4020000 {
+        axi_bram_ctrl_0_memory: memory@a4000000 {
                 phandle = <0x3>;
-                ranges = <0x0 0x0 0xa4020000 0x0 0x2000>;
+                ranges = <0x0 0x0 0xa4000000 0x0 0x2000>;
                 compatible = "xlnx,axi-bram-ctrl-4.1";
                 #address-cells = <0x2>;
                 xlnx,ip-name = "axi_bram_ctrl";
                 device_type = "memory";
                 #size-cells = <0x2>;
                 memory_type = "memory";
-                reg = <0x0 0xa4020000 0x0 0x2000>;
+                reg = <0x0 0xa4000000 0x0 0x2000>;
         };
 
         CIPS_0_pspmc_0_psv_ocm_ram_0_memory: memory@FFFC0000 {
@@ -2725,7 +2725,7 @@
 
         aliases {
                 serial0 = "/axi/serial@ff000000";
-                serial1 = "/amba_pl/serial@a4010000";
+                serial1 = "/amba_pl/serial@a6000000";
                 serial2 = "/dcc";
                 i2c0 = "/axi/i2c@ff020000";
                 i2c1 = "/axi/i2c@ff030000";
@@ -2894,14 +2894,14 @@
                 user_key7 = "/firmware/versal-firmware/versal-sec-cfg/nvmem-layout/user-key@1f0";
                 amba_pl = "/amba_pl";
                 misc_clk_0 = "/amba_pl/misc_clk_0";
-                axi_bram_ctrl_0 = "/amba_pl/axi_bram_ctrl_0@a4020000";
-                axi_gpio_0 = "/amba_pl/gpio@a6020000";
-                axi_gpio_1 = "/amba_pl/gpio@a6030000";
-                axi_gpio_2 = "/amba_pl/gpio@a4000000";
-                axi_uart16550_0 = "/amba_pl/serial@a4010000";
+                axi_bram_ctrl_0 = "/amba_pl/axi_bram_ctrl_0@a4000000";
+                axi_gpio_0 = "/amba_pl/gpio@a6010000";
+                axi_gpio_1 = "/amba_pl/gpio@a6020000";
+                axi_gpio_2 = "/amba_pl/gpio@a6030000";
+                axi_uart16550_0 = "/amba_pl/serial@a6000000";
                 aie_core_ref_clk_0 = "/amba_pl/aie_core_ref_clk_0";
                 noc_lpddr0_ddr_memory = "/memory@00000000";
-                axi_bram_ctrl_0_memory = "/memory@a4020000";
+                axi_bram_ctrl_0_memory = "/memory@a4000000";
                 CIPS_0_pspmc_0_psv_ocm_ram_0_memory = "/memory@FFFC0000";
         };
 };
