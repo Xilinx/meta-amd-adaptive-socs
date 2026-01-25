@@ -81,7 +81,7 @@
                  <0x0 0xf1200000 &versal_cips_0_pspmc_0_psv_pmc_rsa 0x0 0xf1200000 0x0 0x10000>,
                  <0x0 0xf1210000 &versal_cips_0_pspmc_0_psv_pmc_sha 0x0 0xf1210000 0x0 0x10000>,
                  <0x0 0xf1220000 &versal_cips_0_pspmc_0_psv_pmc_slave_boot 0x0 0xf1220000 0x0 0x10000>,
-                 <0x0 0xf1230000 &pmc_trng 0x0 0xf1230000 0x0 0x10000>,
+                 <0x0 0xf1230000 &trng 0x0 0xf1230000 0x0 0x10000>,
                  <0x0 0xf1240000 &versal_cips_0_pspmc_0_psv_pmc_efuse_ctrl 0x0 0xf1240000 0x0 0x10000>,
                  <0x0 0xf1250000 &versal_cips_0_pspmc_0_psv_pmc_efuse_cache 0x0 0xf1250000 0x0 0x10000>,
                  <0x0 0xf1260000 &versal_cips_0_pspmc_0_psv_crp_0 0x0 0xf1260000 0x0 0x10000>,
@@ -250,7 +250,7 @@
                  <0xf1040000 &sdhci0 0xf1040000 0x10000>,
                  <0xf11c0000 &dma0 0xf11c0000 0x10000>,
                  <0xf11d0000 &dma1 0xf11d0000 0x10000>,
-                 <0xf1230000 &pmc_trng 0xf1230000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
                  <0xf1270000 &sysmon0 0xf1270000 0x30000>,
                  <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
                  <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
@@ -545,7 +545,7 @@
                  <0xf1200000 &versal_cips_0_pspmc_0_psv_pmc_rsa 0xf1200000 0x10000>,
                  <0xf1210000 &versal_cips_0_pspmc_0_psv_pmc_sha 0xf1210000 0x10000>,
                  <0xf1220000 &versal_cips_0_pspmc_0_psv_pmc_slave_boot 0xf1220000 0x10000>,
-                 <0xf1230000 &pmc_trng 0xf1230000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
                  <0xf1240000 &versal_cips_0_pspmc_0_psv_pmc_efuse_ctrl 0xf1240000 0x10000>,
                  <0xf1250000 &versal_cips_0_pspmc_0_psv_pmc_efuse_cache 0xf1250000 0x10000>,
                  <0xf1260000 &versal_cips_0_pspmc_0_psv_crp_0 0xf1260000 0x10000>,
@@ -913,7 +913,7 @@
                  <0xf1200000 &versal_cips_0_pspmc_0_psv_pmc_rsa 0xf1200000 0x10000>,
                  <0xf1210000 &versal_cips_0_pspmc_0_psv_pmc_sha 0xf1210000 0x10000>,
                  <0xf1220000 &versal_cips_0_pspmc_0_psv_pmc_slave_boot 0xf1220000 0x10000>,
-                 <0xf1230000 &pmc_trng 0xf1230000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
                  <0xf1240000 &versal_cips_0_pspmc_0_psv_pmc_efuse_ctrl 0xf1240000 0x10000>,
                  <0xf1250000 &versal_cips_0_pspmc_0_psv_pmc_efuse_cache 0xf1250000 0x10000>,
                  <0xf1260000 &versal_cips_0_pspmc_0_psv_crp_0 0xf1260000 0x10000>,
@@ -1070,7 +1070,7 @@
                  <0xf1200000 &versal_cips_0_pspmc_0_psv_pmc_rsa 0xf1200000 0x10000>,
                  <0xf1210000 &versal_cips_0_pspmc_0_psv_pmc_sha 0xf1210000 0x10000>,
                  <0xf1220000 &versal_cips_0_pspmc_0_psv_pmc_slave_boot 0xf1220000 0x10000>,
-                 <0xf1230000 &pmc_trng 0xf1230000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
                  <0xf1240000 &versal_cips_0_pspmc_0_psv_pmc_efuse_ctrl 0xf1240000 0x10000>,
                  <0xf1250000 &versal_cips_0_pspmc_0_psv_pmc_efuse_cache 0xf1250000 0x10000>,
                  <0xf1260000 &versal_cips_0_pspmc_0_psv_crp_0 0xf1260000 0x10000>,
@@ -2686,9 +2686,9 @@
                         xlnx,name = "versal_cips_0_pspmc_0_psv_pmc_dma_1";
                 };
 
-                pmc_trng: pmc_trng@f1230000 {
+                trng: rng@f1230000 {
                         phandle = <0x39>;
-                        compatible = "xlnx,psv-pmc-trng-1.0";
+                        compatible = "xlnx,psv-pmc-trng-1.0", "xlnx,versal-trng";
                         status = "okay";
                         reg = <0x0 0xf1230000 0x0 0x10000>;
                         xlnx,device-id = <0x0>;
@@ -6104,7 +6104,7 @@
                 xilsem_edac = "/axi/edac@f2014050";
                 dma0 = "/axi/pmcdma@f11c0000";
                 dma1 = "/axi/pmcdma@f11d0000";
-                pmc_trng = "/axi/pmc_trng@f1230000";
+                trng = "/axi/rng@f1230000";
                 pmc_cfi_cframe_0 = "/axi/cframe@f12d0000";
                 pmc_cfu_apb_0 = "/axi/cfu_apb@f12b0000";
                 pmc_ppu1_mdm_0 = "/axi/ppu1_mdm@f0310000";
