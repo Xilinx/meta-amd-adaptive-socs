@@ -52,7 +52,7 @@ https://docs.yoctoproject.org/dev/contributor-guide/submit-changes.html#
 	Mark Hatle <mark.hatle@amd.com>
 	Sandeep Gundlupet Raju <sandeep.gundlupet-raju@amd.com>
 	John Toomey <john.toomey@amd.com>
-    Trevor Woerner <trevor.woerner@amd.com>
+	Trevor Woerner <trevor.woerner@amd.com>
 ---
 
 ## Additional Documentation

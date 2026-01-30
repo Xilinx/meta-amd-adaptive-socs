@@ -14,7 +14,7 @@ components, however they can be acquired separately.
 2. Clone meta-amd-adaptive-socs and dependency repository.
 ```
 $ cd ../sources
-$ git clone -b <rel-version> https://gitenterprise.xilinx.com/Yocto/meta-amd-adaptive-socs
+$ git clone -b <rel-version> https://github.com/Xilinx/meta-amd-adaptive-socs
 $ cd -
 ```
 
