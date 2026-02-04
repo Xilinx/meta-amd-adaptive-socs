@@ -2111,8 +2111,8 @@
                 };
 
                 ttc3: timer@f1e90000 {
-                        phandle = <0xa0>;
-                        compatible = "cdns,ttc";
+                        phandle = <0x270>;
+                        compatible = "uio";
                         status = "okay";
                         interrupt-parent = <&gic>;
                         interrupts = <0x0 0x2e 0x4 0x0 0x2e 0x4 0x0 0x2e 0x4>;
@@ -2708,157 +2708,231 @@
 
                 ipi3: mailbox@eb360000 {
                         phandle = <0xc>;
-                        compatible = "xlnx,versal-ipi-mailbox";
+                        compatible = "uio";
+                        status = "okay";
                         interrupt-parent = <&gic>;
                         interrupts = <0x0 0x3c 0x4>;
                         reg = <0x0 0xeb360000 0x0 0x10000 0x0 0xeb3f0a00 0x0 0x200>;
+                        xlnx,ipi-bitmask = <0x20>;
                         xlnx,ipi-id = <0x5>;
+                        xlnx,ipi-buf-index = <0x5>;
                         #address-cells = <0x2>;
                         #size-cells = <0x2>;
                         ranges;
+                        xlnx,cpu-name = "A78_0";
+                        xlnx,buffer-base = <0xeb3f0a00>;
+                        xlnx,buffer-index = <0x5>;
+                        xlnx,ip-name = "ipi";
+                        xlnx,ipi-target-count = <0x10>;
                         reg-names = "ctrl", "msg";
+                        xlnx,int-id = <0x5c>;
+                        xlnx,bit-position = <0x5>;
 
                         ipi_3_to_ipi_asu: child@eb310000 {
                                 phandle = <0x18c>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x1>;
+                                xlnx,cpu-name = "ASU";
+                                xlnx,ipi-rsp-msg-buf = <0xeb3f0a20>;
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
                                 reg = <0x0 0xeb310000 0x0 0x10000 0x0 0xeb3f0000 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x0>;
+                                xlnx,ipi-req-msg-buf = <0xeb3f0a00>;
                                 reg-names = "ctrl", "msg";
                         };
 
                         ipi_3_to_ipi_0: child@eb330000 {
                                 phandle = <0x18d>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x4>;
+                                xlnx,cpu-name = "A78_0";
+                                xlnx,ipi-rsp-msg-buf = <0xeb3f0aa0>;
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
                                 reg = <0x0 0xeb330000 0x0 0x10000 0x0 0xeb3f0400 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x2>;
+                                xlnx,ipi-req-msg-buf = <0xeb3f0a80>;
                                 reg-names = "ctrl", "msg";
                         };
 
                         ipi_3_to_ipi_1: child@eb340000 {
                                 phandle = <0x18e>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x8>;
+                                xlnx,cpu-name = "R52_0";
+                                xlnx,ipi-rsp-msg-buf = <0xeb3f0ae0>;
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
                                 reg = <0x0 0xeb340000 0x0 0x10000 0x0 0xeb3f0600 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x3>;
+                                xlnx,ipi-req-msg-buf = <0xeb3f0ac0>;
                                 reg-names = "ctrl", "msg";
                         };
 
                         ipi_3_to_ipi_1_nobuf: child@eb3b0000 {
                                 phandle = <0x18f>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x400>;
+                                xlnx,cpu-name = "A78_0";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xa>;
                                 reg = <0x0 0xeb3b0000 0x0 0x1000>;
+                                xlnx,ipi-buf-index = <0xffff>;
                                 reg-names = "ctrl";
                         };
 
                         ipi_3_to_ipi_2: child@eb350000 {
                                 phandle = <0x190>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x10>;
+                                xlnx,cpu-name = "R52_1";
+                                xlnx,ipi-rsp-msg-buf = <0xeb3f0b20>;
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
                                 reg = <0x0 0xeb350000 0x0 0x10000 0x0 0xeb3f0800 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x4>;
+                                xlnx,ipi-req-msg-buf = <0xeb3f0b00>;
                                 reg-names = "ctrl", "msg";
                         };
 
                         ipi_3_to_ipi_2_nobuf: child@eb3b1000 {
                                 phandle = <0x191>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x800>;
+                                xlnx,cpu-name = "R52_0";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xb>;
                                 reg = <0x0 0xeb3b1000 0x0 0x1000>;
+                                xlnx,ipi-buf-index = <0xffff>;
                                 reg-names = "ctrl";
                         };
 
                         ipi_3_to_ipi_3: child@eb360000 {
                                 phandle = <0x192>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x20>;
+                                xlnx,cpu-name = "A78_0";
+                                xlnx,ipi-rsp-msg-buf = <0xeb3f0b60>;
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
                                 reg = <0x0 0xeb360000 0x0 0x10000 0x0 0xeb3f0a00 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x5>;
+                                xlnx,ipi-req-msg-buf = <0xeb3f0b40>;
                                 reg-names = "ctrl", "msg";
                         };
 
                         ipi_3_to_ipi_3_nobuf: child@eb3b2000 {
                                 phandle = <0x193>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x1000>;
+                                xlnx,cpu-name = "R52_6";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xc>;
                                 reg = <0x0 0xeb3b2000 0x0 0x1000>;
+                                xlnx,ipi-buf-index = <0xffff>;
                                 reg-names = "ctrl";
                         };
 
                         ipi_3_to_ipi_4: child@eb370000 {
                                 phandle = <0x194>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x40>;
+                                xlnx,cpu-name = "A78_0";
+                                xlnx,ipi-rsp-msg-buf = <0xeb3f0ba0>;
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
                                 reg = <0x0 0xeb370000 0x0 0x10000 0x0 0xeb3f0c00 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x6>;
+                                xlnx,ipi-req-msg-buf = <0xeb3f0b80>;
                                 reg-names = "ctrl", "msg";
                         };
 
                         ipi_3_to_ipi_4_nobuf: child@eb3b3000 {
                                 phandle = <0x195>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x2000>;
+                                xlnx,cpu-name = "R52_7";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xd>;
                                 reg = <0x0 0xeb3b3000 0x0 0x1000>;
+                                xlnx,ipi-buf-index = <0xffff>;
                                 reg-names = "ctrl";
                         };
 
                         ipi_3_to_ipi_5: child@eb380000 {
                                 phandle = <0x196>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x80>;
+                                xlnx,cpu-name = "A78_0";
+                                xlnx,ipi-rsp-msg-buf = <0xeb3f0be0>;
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
                                 reg = <0x0 0xeb380000 0x0 0x10000 0x0 0xeb3f0e00 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x7>;
+                                xlnx,ipi-req-msg-buf = <0xeb3f0bc0>;
                                 reg-names = "ctrl", "msg";
                         };
 
                         ipi_3_to_ipi_5_nobuf: child@eb3b4000 {
                                 phandle = <0x197>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x4000>;
+                                xlnx,cpu-name = "R52_8";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xe>;
                                 reg = <0x0 0xeb3b4000 0x0 0x1000>;
+                                xlnx,ipi-buf-index = <0xffff>;
                                 reg-names = "ctrl";
                         };
 
                         ipi_3_to_ipi_6: child@eb3a0000 {
                                 phandle = <0x198>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x200>;
+                                xlnx,cpu-name = "A78_0";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
                                 reg = <0x0 0xeb3a0000 0x0 0x10000>;
+                                xlnx,ipi-buf-index = <0xffff>;
                                 reg-names = "ctrl";
                         };
 
                         ipi_3_to_ipi_6_nobuf: child@eb3b5000 {
                                 phandle = <0x199>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x8000>;
+                                xlnx,cpu-name = "R52_9";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0xf>;
                                 reg = <0x0 0xeb3b5000 0x0 0x1000>;
+                                xlnx,ipi-buf-index = <0xffff>;
                                 reg-names = "ctrl";
                         };
 
                         ipi_3_to_ipi_pmc: child@eb320000 {
                                 phandle = <0x19a>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x2>;
+                                xlnx,cpu-name = "PMC";
+                                xlnx,ipi-rsp-msg-buf = <0xeb3f0a60>;
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
                                 reg = <0x0 0xeb320000 0x0 0x10000 0x0 0xeb3f0200 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x1>;
+                                xlnx,ipi-req-msg-buf = <0xeb3f0a40>;
                                 reg-names = "ctrl", "msg";
                         };
 
                         ipi_3_to_ipi_pmc_nobuf: child@eb390000 {
                                 phandle = <0x19b>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x100>;
+                                xlnx,cpu-name = "PMC";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
                                 reg = <0x0 0xeb390000 0x0 0x10000>;
+                                xlnx,ipi-buf-index = <0xffff>;
                                 reg-names = "ctrl";
                         };
                 };
@@ -3585,6 +3659,24 @@
                         xlnx,cfg-clk-freq-hz = <0x18cba80>;
                 };
 
+                libmetal_uio_desc0@9908000 {
+                        phandle = <0x26d>;
+                        compatible = "uio";
+                        reg = <0x0 0x9908000 0x0 0x4000>;
+                };
+
+                libmetal_uio_desc1@990c000 {
+                        phandle = <0x26e>;
+                        compatible = "uio";
+                        reg = <0x0 0x990c000 0x0 0x4000>;
+                };
+
+                libmetal_uio_data@9910000 {
+                        phandle = <0x26f>;
+                        compatible = "uio";
+                        reg = <0x0 0x9910000 0x0 0x40000>;
+                };
+
                 gic: interrupt-controller@e2000000 {
                         phandle = <0x1b>;
                         xlnx,ip-name = "acpu_gic";
@@ -3781,6 +3873,26 @@
                         phandle = <0x26a>;
                         no-map;
                         reg = <0x0 0x9800000 0x0 0x100>;
+                };
+
+                libmetal_elf@98a8000 {
+                        no-map;
+                        reg = <0x0 0x98a8000 0x0 0x60000>;
+                };
+
+                libmetal_desc0@9908000 {
+                        no-map;
+                        reg = <0x0 0x9908000 0x0 0x4000>;
+                };
+
+                libmetal_desc1@990c000 {
+                        no-map;
+                        reg = <0x0 0x990c000 0x0 0x4000>;
+                };
+
+                libmetal_data@9910000 {
+                        no-map;
+                        reg = <0x0 0x9910000 0x0 0x40000>;
                 };
 
                 plm_region: buffer@0 {
@@ -4244,7 +4356,7 @@
         domains {
 
                 APU_Linux {
-                        phandle = <0x26c>;
+                        phandle = <0x271>;
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_a78 0xff 0x3>;
                         os,type = "linux";
@@ -4272,6 +4384,17 @@
                                                 mbox = <0x1d1>;
                                         };
                                 };
+
+                                libmetal-relation {
+                                        compatible = "libmetal,ipc-v1";
+
+                                        relation0 {
+                                                remote = <0x26c>;
+                                                carveouts = <0x26d 0x26e 0x26f>;
+                                                mbox = <0x190>;
+                                                timer = <0x270>;
+                                        };
+                                };
                         };
                 };
 
@@ -4294,9 +4417,37 @@
                                         compatible = "openamp,rpmsg-v1";
 
                                         relation0 {
-                                                host = <0x26c>;
+                                                host = <0x271>;
                                                 mbox = <0x1df>;
                                                 carveouts = <0x266 0x267 0x268>;
+                                        };
+                                };
+                        };
+                };
+
+                RPU_1_BM {
+                        phandle = <0x26c>;
+                        compatible = "openamp,domain-v1";
+                        os,type = "baremetal";
+                        xlnx,ddr-boot = <0x1>;
+                        sram = <0x98a8000 0x60000 0xeba80000 0x10000 0xeba90000 0x8000 0xebaa0000 0x8000>;
+                        rpu_pd_val = <0xbc 0x181100c0>;
+                        cpu_config_str = "split";
+                        core_num = "1";
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+                                cluster_cpu = "cortexr52_1";
+
+                                libmetal-relation {
+                                        compatible = "libmetal,ipc-v1";
+
+                                        relation0 {
+                                                host = <0x271>;
+                                                carveouts = <0x26d 0x26e 0x26f>;
+                                                mbox = <0x182>;
+                                                timer = <0x270>;
+                                                elfload = "libmetal_elf@98a8000";
                                         };
                                 };
                         };
