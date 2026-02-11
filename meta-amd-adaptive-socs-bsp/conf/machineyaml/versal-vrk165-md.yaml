@@ -1,0 +1,28 @@
+inherit:
+    ${BSPLAYERDIR_amd-adaptive-socs-bsp}/conf/machineyaml/versal-vrk165-sdt-seg.yaml
+
+args:
+    - --machine-name versal-vrk165-md
+    - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/openamp-overlay-versal.yaml \
+                    ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/libmetal-overlay-versal.yaml
+
+kconfig:
+    CONFIG_YOCTO_BBMC_CORTEXR5_1_BAREMETAL: y
+    CONFIG_YOCTO_BBMC_LINUX_DTSI: \
+          ${LAYER_PATH_xilinx-standalone-sdt}/recipes-bsp/device-tree/files/ospi-2g-memory-map.dtsi
+
+machine:
+    post:
+        include:
+            comment: "Enable meta-xilinx-imgrcvry if available"
+            op: 'conf/enable-xilinx-imgrcvry.conf'
+        PRODUCT_NAME:
+            comment: 'UEFI Capsule Update / LVFS Configuration'
+            op: '='
+            val: 'VRK165'
+        PRODUCT_GUID:
+            op: '='
+            val: '9a7f3b02-1c4e-42a0-bf6d-8471c2e9153d'
+        PRODUCT_URL:
+            op: '='
+            val: 'https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal.html'

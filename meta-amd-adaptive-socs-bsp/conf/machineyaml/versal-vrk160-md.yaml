@@ -1,0 +1,35 @@
+inherit:
+    ${BSPLAYERDIR_amd-adaptive-socs-bsp}/conf/machineyaml/versal-vrk160-sdt-seg.yaml
+
+args:
+    - --machine-name versal-vrk160-md
+    - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/openamp-overlay-versal.yaml \
+                    ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/libmetal-overlay-versal.yaml
+
+kconfig:
+    CONFIG_YOCTO_BBMC_CORTEXR5_1_BAREMETAL: y
+    CONFIG_YOCTO_BBMC_LINUX_DTSI: \
+        ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/versal-vrk160-sdt-seg-system-conf.dtsi \
+        ${LAYER_PATH_xilinx-standalone-sdt}/recipes-bsp/device-tree/files/ospi-2g-memory-map.dtsi \
+        ${LAYER_PATH_xilinx-virtualization}/recipes-bsp/device-tree/files/versal-xen.dtsi \
+        ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/platform-misc.dtsi
+
+machine:
+    post:
+        include:
+            comment: "Enable meta-xilinx-imgrcvry if available"
+            op: 'conf/enable-xilinx-imgrcvry.conf'
+        XLNX_CMAKE_BSP_VARS:pn-xilplmi:append:
+            comment: 'Enables the restoration of the multi-boot register for A/B firmware platforms'
+            op: '='
+            val: ' -DPLM_ENABLE_RESTORE_MULTIBOOT'
+        PRODUCT_NAME:
+            comment: 'UEFI Capsule Update / LVFS Configuration'
+            op: '='
+            val: 'VRK160'
+        PRODUCT_GUID:
+            op: '='
+            val: 'f1c0d5e8-7a23-4b91-b0f8-3e5c6a2d97f3'
+        PRODUCT_URL:
+            op: '='
+            val: 'https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal.html'

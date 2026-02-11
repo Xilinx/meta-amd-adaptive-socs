@@ -1,0 +1,26 @@
+inherit:
+    ${BSPLAYERDIR_amd-adaptive-socs-bsp}/conf/machineyaml/versal-vpk120-sdt-seg.yaml
+
+args:
+    - --machine-name versal-vpk120-md
+    - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/openamp-overlay-versal.yaml \
+                    ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/libmetal-overlay-versal.yaml
+
+kconfig:
+    CONFIG_YOCTO_BBMC_LINUX_DTSI: ${LAYER_PATH_xilinx-virtualization}/recipes-bsp/device-tree/files/versal-xen.dtsi \
+        ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/platform-misc.dtsi
+
+machine:
+    post:
+        QB_MEM:
+            op: '='
+            val: "-m 8G"
+        QEMU_HW_DTB_PS:
+            op: '='
+            val: "${QEMU_HW_DTB_PATH}/board-versal-ps-vpk120.dtb"
+        QEMU_HW_DTB_PMC:
+            op: '='
+            val: "${QEMU_HW_DTB_PATH}/board-versal-pmc-virt.dtb"
+        QB_ROOTFS_OPT:
+            op: '='
+            val: "-drive if=sd,index=1,file=@ROOTFS@,format=raw"

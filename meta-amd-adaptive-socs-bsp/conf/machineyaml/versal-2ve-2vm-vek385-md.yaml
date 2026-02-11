@@ -1,0 +1,43 @@
+inherit:
+    ${BSPLAYERDIR_amd-adaptive-socs-bsp}/conf/machineyaml/versal-2ve-2vm-vek385-sdt-seg.yaml
+
+args:
+    - --machine-name versal-2ve-2vm-vek385-md
+    - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/openamp-overlay-versal-2ve-2vm.yaml \
+                    ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/libmetal-overlay-versal-2ve-2vm.yaml
+
+kconfig:
+    CONFIG_YOCTO_BBMC_LINUX_DTSI: \
+      ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/versal-2ve-2vm-vek385-sdt-seg-system-conf.dtsi \
+      ${LAYER_PATH_xilinx-standalone-sdt}/recipes-bsp/device-tree/files/ospi-2g-memory-map.dtsi
+    CONFIG_YOCTO_BBMC_CORTEXR52_1_BAREMETAL: y
+    CONFIG_SUBSYSTEM_OP-TEE_SERIAL_SERIAL1_SELECT: y
+    CONFIG_SUBSYSTEM_OPTEE: y
+    CONFIG_SUBSYSTEM_UBOOT_APPEND_BASEADDR: n
+
+machine:
+    pre:
+        UBOOT_ENTRYPOINT:
+            op: '?='
+            val: '0x20200000'
+        UBOOT_LOADADDRESS:
+            op: '?='
+            val: '0x20200000'
+    post:
+        include:
+            comment: "Enable meta-xilinx-imgrcvry if available"
+            op: 'conf/enable-xilinx-imgrcvry.conf'
+        XLNX_CMAKE_BSP_VARS:pn-xilplmi:append:
+            comment: 'Enables the restoration of the multi-boot register for A/B firmware platforms'
+            op: '='
+            val: ' -DPLM_ENABLE_RESTORE_MULTIBOOT'
+        PRODUCT_NAME:
+            comment: 'UEFI Capsule Update / LVFS Configuration'
+            op: '='
+            val: 'VEK385'
+        PRODUCT_GUID:
+            op: '='
+            val: 'cb27e54d-8f3a-4c77-8a72-1c76d2d4e938'
+        PRODUCT_URL:
+            op: '='
+            val: 'https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal.html'
