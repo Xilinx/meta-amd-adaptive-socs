@@ -2478,6 +2478,10 @@
                 noc_lpddr0_ddr_memory = "/memory@00000000";
                 noc_lpddr1_ddr_memory = "/memory@50000000000";
                 noc_lpddr2_ddr_memory = "/memory@60000000000";
+                rproc09800000 = "/reserved-memory/rproc0@9800000";
+                vdev0vring09860000 = "/reserved-memory/vdev0vring0@9860000";
+                vdev0vring19864000 = "/reserved-memory/vdev0vring1@9864000";
+                vdev0buffer9868000 = "/reserved-memory/vdev0buffer@9868000";
                 gic = "/axi/interrupt-controller@f9000000";
         };
 
@@ -2486,25 +2490,25 @@
                 #address-cells = <0x2>;
                 ranges;
 
-                rproc0@9800000 {
+                rproc09800000: rproc0@9800000 {
                         phandle = <0x16c>;
                         no-map;
                         reg = <0x0 0x9800000 0x0 0x60000>;
                 };
 
-                vdev0vring0@9860000 {
+                vdev0vring09860000: vdev0vring0@9860000 {
                         phandle = <0x16b>;
                         no-map;
                         reg = <0x0 0x9860000 0x0 0x4000>;
                 };
 
-                vdev0vring1@9864000 {
+                vdev0vring19864000: vdev0vring1@9864000 {
                         phandle = <0x16a>;
                         no-map;
                         reg = <0x0 0x9864000 0x0 0x4000>;
                 };
 
-                vdev0buffer@9868000 {
+                vdev0buffer9868000: vdev0buffer@9868000 {
                         phandle = <0x169>;
                         no-map;
                         reg = <0x0 0x9868000 0x0 0x100000>;
@@ -2642,7 +2646,10 @@
                          <&versal_firmware 0x1831800c>;
                         reg = <0x0 0x0 0x0 0x10000 0x0 0x20000 0x0 0x10000>;
                         reg-names = "psv_r5_0_atcm_global@ffe00000", "psv_r5_0_btcm_global@ffe20000";
-                        memory-region = <0x16c 0x169 0x16b 0x16a>;
+                        memory-region = <&rproc09800000>,
+                         <&vdev0buffer9868000>,
+                         <&vdev0vring09860000>,
+                         <&vdev0vring19864000>;
                         mboxes = <0x120 0x0 0x120 0x1>;
                         mbox-names = "tx", "rx";
                 };

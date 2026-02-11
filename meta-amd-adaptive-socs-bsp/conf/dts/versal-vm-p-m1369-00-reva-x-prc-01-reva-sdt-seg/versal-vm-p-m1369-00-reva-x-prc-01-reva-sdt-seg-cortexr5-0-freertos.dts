@@ -910,6 +910,18 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ttc_0";
                 };
 
+                ttc2: timer@ff100000 {
+                        phandle = <0x143>;
+                        compatible = "uio";
+                        status = "disabled";
+                        interrupts = <0x0 0x2b 0x4 0x0 0x2c 0x4 0x0 0x2d 0x4>;
+                        interrupt-parent = <&gic_r5>;
+                        reg = <0x0 0xff100000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        clocks = <&versal_clk 0x29>;
+                        power-domains = <&versal_firmware 0x18224026>;
+                };
+
                 usb0: usb@ff9d0000 {
                         phandle = <0x54>;
                         compatible = "xlnx,versal-dwc3";
@@ -1167,6 +1179,166 @@
                                 reg = <0x0 0xff310000 0x0 0x10000 0x0 0xff3f0000 0x0 0x200>;
                                 xlnx,ipi-buf-index = <0x0>;
                                 xlnx,ipi-req-msg-buf = <0xff3f0600>;
+                                reg-names = "ctrl", "msg";
+                        };
+                };
+
+                ipi5: mailbox@ff380000 {
+                        phandle = <0x7>;
+                        compatible = "uio";
+                        status = "okay";
+                        interrupt-parent = <&gic_r5>;
+                        interrupts = <0x0 0x23 0x4>;
+                        reg = <0x0 0xff380000 0x0 0x10000 0x0 0xff3f0e00 0x0 0x200>;
+                        xlnx,ipi-bitmask = <0x80>;
+                        xlnx,ipi-id = <0x7>;
+                        xlnx,ipi-buf-index = <0x7>;
+                        #address-cells = <0x2>;
+                        #size-cells = <0x2>;
+                        ranges;
+                        xlnx,cpu-name = "A72";
+                        xlnx,buffer-base = <0xff3f0e00>;
+                        xlnx,buffer-index = <0x7>;
+                        xlnx,ip-name = "psv_ipi";
+                        xlnx,ipi-target-count = <0xa>;
+                        reg-names = "ctrl", "msg";
+                        xlnx,int-id = <0x43>;
+                        xlnx,bit-position = <0x7>;
+                        xlnx,name = "ps_wizard_0_pmcps_0_psv_ipi_5";
+
+                        ipi_5_to_ipi_0: child@ff330000 {
+                                phandle = <0x105>;
+                                compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x4>;
+                                xlnx,cpu-name = "A72";
+                                xlnx,ipi-rsp-msg-buf = <0xff3f0ea0>;
+                                #mbox-cells = <0x1>;
+                                xlnx,ipi-id = <0x2>;
+                                reg = <0x0 0xff330000 0x0 0x10000 0x0 0xff3f0400 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x2>;
+                                xlnx,ipi-req-msg-buf = <0xff3f0e80>;
+                                reg-names = "ctrl", "msg";
+                        };
+
+                        ipi_5_to_ipi_1: child@ff340000 {
+                                phandle = <0x106>;
+                                compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x8>;
+                                xlnx,cpu-name = "R5_0";
+                                xlnx,ipi-rsp-msg-buf = <0xff3f0ee0>;
+                                #mbox-cells = <0x1>;
+                                xlnx,ipi-id = <0x3>;
+                                reg = <0x0 0xff340000 0x0 0x10000 0x0 0xff3f0600 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x3>;
+                                xlnx,ipi-req-msg-buf = <0xff3f0ec0>;
+                                reg-names = "ctrl", "msg";
+                        };
+
+                        ipi_5_to_ipi_2: child@ff350000 {
+                                phandle = <0x107>;
+                                compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x10>;
+                                xlnx,cpu-name = "R5_1";
+                                xlnx,ipi-rsp-msg-buf = <0xff3f0f20>;
+                                #mbox-cells = <0x1>;
+                                xlnx,ipi-id = <0x4>;
+                                reg = <0x0 0xff350000 0x0 0x10000 0x0 0xff3f0800 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x4>;
+                                xlnx,ipi-req-msg-buf = <0xff3f0f00>;
+                                reg-names = "ctrl", "msg";
+                        };
+
+                        ipi_5_to_ipi_3: child@ff360000 {
+                                phandle = <0x108>;
+                                compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x20>;
+                                xlnx,cpu-name = "A72";
+                                xlnx,ipi-rsp-msg-buf = <0xff3f0f60>;
+                                #mbox-cells = <0x1>;
+                                xlnx,ipi-id = <0x5>;
+                                reg = <0x0 0xff360000 0x0 0x10000 0x0 0xff3f0a00 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x5>;
+                                xlnx,ipi-req-msg-buf = <0xff3f0f40>;
+                                reg-names = "ctrl", "msg";
+                        };
+
+                        ipi_5_to_ipi_4: child@ff370000 {
+                                phandle = <0x109>;
+                                compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x40>;
+                                xlnx,cpu-name = "A72";
+                                xlnx,ipi-rsp-msg-buf = <0xff3f0fa0>;
+                                #mbox-cells = <0x1>;
+                                xlnx,ipi-id = <0x6>;
+                                reg = <0x0 0xff370000 0x0 0x10000 0x0 0xff3f0c00 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x6>;
+                                xlnx,ipi-req-msg-buf = <0xff3f0f80>;
+                                reg-names = "ctrl", "msg";
+                        };
+
+                        ipi_5_to_ipi_5: child@ff380000 {
+                                phandle = <0x10a>;
+                                compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x80>;
+                                xlnx,cpu-name = "A72";
+                                xlnx,ipi-rsp-msg-buf = <0xff3f0fe0>;
+                                #mbox-cells = <0x1>;
+                                xlnx,ipi-id = <0x7>;
+                                reg = <0x0 0xff380000 0x0 0x10000 0x0 0xff3f0e00 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x7>;
+                                xlnx,ipi-req-msg-buf = <0xff3f0fc0>;
+                                reg-names = "ctrl", "msg";
+                        };
+
+                        ipi_5_to_ipi_6: child@ff3a0000 {
+                                phandle = <0x10b>;
+                                compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x200>;
+                                xlnx,cpu-name = "A72";
+                                #mbox-cells = <0x1>;
+                                xlnx,ipi-id = <0x9>;
+                                reg = <0x0 0xff3a0000 0x0 0x10000>;
+                                xlnx,ipi-buf-index = <0xffff>;
+                                reg-names = "ctrl";
+                        };
+
+                        ipi_5_to_ipi_pmc: child@ff320000 {
+                                phandle = <0x10c>;
+                                compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x2>;
+                                xlnx,cpu-name = "PMC";
+                                xlnx,ipi-rsp-msg-buf = <0xff3f0e60>;
+                                #mbox-cells = <0x1>;
+                                xlnx,ipi-id = <0x1>;
+                                reg = <0x0 0xff320000 0x0 0x10000 0x0 0xff3f0200 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x1>;
+                                xlnx,ipi-req-msg-buf = <0xff3f0e40>;
+                                reg-names = "ctrl", "msg";
+                        };
+
+                        ipi_5_to_ipi_pmc_nobuf: child@ff390000 {
+                                phandle = <0x10d>;
+                                compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x100>;
+                                xlnx,cpu-name = "PMC";
+                                #mbox-cells = <0x1>;
+                                xlnx,ipi-id = <0x8>;
+                                reg = <0x0 0xff390000 0x0 0x10000>;
+                                xlnx,ipi-buf-index = <0xffff>;
+                                reg-names = "ctrl";
+                        };
+
+                        ipi_5_to_ipi_psm: child@ff310000 {
+                                phandle = <0x10e>;
+                                compatible = "xlnx,versal-ipi-dest-mailbox";
+                                xlnx,ipi-bitmask = <0x1>;
+                                xlnx,cpu-name = "PSM";
+                                xlnx,ipi-rsp-msg-buf = <0xff3f0e20>;
+                                #mbox-cells = <0x1>;
+                                xlnx,ipi-id = <0x0>;
+                                reg = <0x0 0xff310000 0x0 0x10000 0x0 0xff3f0000 0x0 0x200>;
+                                xlnx,ipi-buf-index = <0x0>;
+                                xlnx,ipi-req-msg-buf = <0xff3f0e00>;
                                 reg-names = "ctrl", "msg";
                         };
                 };
@@ -2017,6 +2189,7 @@
                 qspi = "/axi/spi@f1030000";
                 sysmon0 = "/axi/sysmon@f1270000";
                 ttc0 = "/axi/timer@ff0e0000";
+                ttc2 = "/axi/timer@ff100000";
                 usb0 = "/axi/usb@ff9d0000";
                 dwc3_0 = "/axi/usb@ff9d0000/usb@fe200000";
                 dma0 = "/axi/pmcdma@f11c0000";
@@ -2036,6 +2209,17 @@
                 ipi_1_to_ipi_pmc = "/axi/mailbox@ff340000/child@ff320000";
                 ipi_1_to_ipi_pmc_nobuf = "/axi/mailbox@ff340000/child@ff390000";
                 ipi_1_to_ipi_psm = "/axi/mailbox@ff340000/child@ff310000";
+                ipi5 = "/axi/mailbox@ff380000";
+                ipi_5_to_ipi_0 = "/axi/mailbox@ff380000/child@ff330000";
+                ipi_5_to_ipi_1 = "/axi/mailbox@ff380000/child@ff340000";
+                ipi_5_to_ipi_2 = "/axi/mailbox@ff380000/child@ff350000";
+                ipi_5_to_ipi_3 = "/axi/mailbox@ff380000/child@ff360000";
+                ipi_5_to_ipi_4 = "/axi/mailbox@ff380000/child@ff370000";
+                ipi_5_to_ipi_5 = "/axi/mailbox@ff380000/child@ff380000";
+                ipi_5_to_ipi_6 = "/axi/mailbox@ff380000/child@ff3a0000";
+                ipi_5_to_ipi_pmc = "/axi/mailbox@ff380000/child@ff320000";
+                ipi_5_to_ipi_pmc_nobuf = "/axi/mailbox@ff380000/child@ff390000";
+                ipi_5_to_ipi_psm = "/axi/mailbox@ff380000/child@ff310000";
                 coresight = "/axi/coresight@f0800000";
                 ps_wizard_0_pmcps_0_psv_pmc_aes = "/axi/ps_wizard_0_pmcps_0_psv_pmc_aes@f11e0000";
                 ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl = "/axi/ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl@f11f0000";
