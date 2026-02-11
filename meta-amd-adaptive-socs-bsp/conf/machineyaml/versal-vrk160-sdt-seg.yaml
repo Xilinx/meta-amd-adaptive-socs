@@ -2,22 +2,9 @@ args:
     - --hw-description https://edf.amd.com/sswreleases/rel-v2026.1/sdt/2026.1/2026.1_0210_1_02110449/external/versal-vrk160-sdt-seg/versal-vrk160-sdt-seg_2026.1_0210_1_02110449.tar.gz
     - --machine-name versal-vrk160-sdt-seg
     - -g full
-    - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/openamp-overlay-versal.yaml \
-                    ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/libmetal-overlay-versal.yaml
 
-kconfig:
-    CONFIG_YOCTO_BBMC_CORTEXR5_1_BAREMETAL: y
-    CONFIG_YOCTO_BBMC_LINUX_DTSI: \
-        ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/versal-vrk160-sdt-seg-system-conf.dtsi \
-        ${LAYER_PATH_xilinx-standalone-sdt}/recipes-bsp/device-tree/files/ospi-2g-memory-map.dtsi \
-        ${LAYER_PATH_xilinx-virtualization}/recipes-bsp/device-tree/files/versal-xen.dtsi \
-        ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/platform-misc.dtsi
 machine:
-    pre:
     post:
-        include:
-            comment: "Enable meta-xilinx-imgrcvry if available"
-            op: 'conf/enable-xilinx-imgrcvry.conf'
         QB_MEM:
             op: '='
             val: "-m 12G"
@@ -36,17 +23,3 @@ machine:
         QB_OPT_APPEND:append:
             op: ':='
             val: " -drive file=@DEPLOY_DIR_IMAGE@/${QEMU_HW_OSPI_FILE},if=mtd,format=raw,index=4"
-        PRODUCT_NAME:
-            comment: 'UEFI Capsule Update / LVFS Configuration'
-            op: '='
-            val: 'VRK160'
-        PRODUCT_GUID:
-            op: '='
-            val: 'f1c0d5e8-7a23-4b91-b0f8-3e5c6a2d97f3'
-        PRODUCT_URL:
-            op: '='
-            val: 'https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal.html'
-        XLNX_CMAKE_BSP_VARS:pn-xilplmi:append:
-            comment: 'Enables the restoration of the multi-boot register for A/B firmware platforms'
-            op: '='
-            val: ' -DPLM_ENABLE_RESTORE_MULTIBOOT'

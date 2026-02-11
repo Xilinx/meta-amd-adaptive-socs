@@ -2,19 +2,11 @@ args:
     - --hw-description https://edf.amd.com/sswreleases/rel-v2026.1/sdt/2026.1/2026.1_0210_1_02110449/external/versal-vck190-sdt-seg/versal-vck190-sdt-seg_2026.1_0210_1_02110449.tar.gz
     - --machine-name versal-vck190-sdt-seg
     - -g full
-    - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/openamp-overlay-versal.yaml \
-                    ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/libmetal-overlay-versal.yaml
-kconfig:
-    CONFIG_YOCTO_BBMC_CORTEXR5_1_BAREMETAL: y
-    CONFIG_YOCTO_BBMC_LINUX_DTSI: \
-        ${LAYER_PATH_xilinx-virtualization}/recipes-bsp/device-tree/files/versal-xen.dtsi \
-        ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/platform-misc.dtsi
+
+
+
 machine:
-    pre:
     post:
-        include:
-            comment: "Enable meta-xilinx-imgrcvry if available"
-            op: 'conf/enable-xilinx-imgrcvry.conf'
         QB_MEM:
             op: '='
             val: "-m 8G"
@@ -27,21 +19,3 @@ machine:
         QB_ROOTFS_OPT:
             op: '='
             val: "-drive if=sd,index=1,file=@ROOTFS@,format=raw"
-        PRODUCT_NAME:
-            comment: 'UEFI Capsule Update / LVFS Configuration'
-            op: '='
-            val: 'VCK190'
-        PRODUCT_GUID:
-            op: '='
-            val: 'a9b6d4f0-23e1-4f88-a7b4-6d83f1d2c92e'
-        PRODUCT_URL:
-            op: '='
-            val: 'https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal.html'
-        XLNX_CMAKE_BSP_VARS:pn-xilplmi:append:
-            comment: 'Enables the restoration of the multi-boot register for A/B firmware platforms'
-            op: '='
-            val: ' -DPLM_ENABLE_RESTORE_MULTIBOOT'
-        CFLAGS:pn-image-selector:append:
-            comment: 'Enable QSPI flash'
-            op: '='
-            val: ' -DXIS_QSPI_FLSH'
