@@ -23,7 +23,8 @@
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
-                address-map = <0x0 0xf9000000 &amba_apu 0x0 0xf9000000 0x0 0x80000>,
+                address-map = <0x0 0xf0000000 &amba 0x0 0xf0000000 0x0 0x10000000>,
+                 <0x0 0xf9000000 &amba_apu 0x0 0xf9000000 0x0 0x80000>,
                  <0x0 0x0 &NoC_C0_ddr_memory 0x0 0x0 0x0 0x80000000>,
                  <0x8 0x0 &NoC_C0_ddr_memory 0x8 0x0 0x0 0x80000000>,
                  <0x500 0x0 &NoC_C1_ddr_memory 0x500 0x0 0x1 0x0>,
@@ -32,6 +33,7 @@
                  <0x0 0xff330000 &ipi0 0x0 0xff330000 0x0 0x10000>,
                  <0x0 0xff360000 &ipi3 0x0 0xff360000 0x0 0x10000>,
                  <0x0 0xff370000 &ipi4 0x0 0xff370000 0x0 0x10000>,
+                 <0x0 0xff380000 &ipi5 0x0 0xff380000 0x0 0x10000>,
                  <0x0 0xff3a0000 &ipi6 0x0 0xff3a0000 0x0 0x10000>,
                  <0x0 0xfffc0000 &ps_wizard_0_pmcps_0_psv_ocm_ram_0_memory 0x0 0xfffc0000 0x0 0x40000>,
                  <0x0 0xf0310000 &pmc_ppu1_mdm_0 0x0 0xf0310000 0x0 0x8000>,
@@ -99,6 +101,7 @@
                  <0x0 0xff0c0000 &gem0 0x0 0xff0c0000 0x0 0x10000>,
                  <0x0 0xff0e0000 &ttc0 0x0 0xff0e0000 0x0 0x10000>,
                  <0x0 0xff0f0000 &ttc1 0x0 0xff0f0000 0x0 0x10000>,
+                 <0x0 0xff100000 &ttc2 0x0 0xff100000 0x0 0x10000>,
                  <0x0 0xff110000 &ttc3 0x0 0xff110000 0x0 0x10000>,
                  <0x0 0xff130000 &ps_wizard_0_pmcps_0_psv_scntr_0 0x0 0xff130000 0x0 0x10000>,
                  <0x0 0xff140000 &ps_wizard_0_pmcps_0_psv_scntrs_0 0x0 0xff140000 0x0 0x10000>,
@@ -207,7 +210,8 @@
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
-                address-map = <0xff320000 &ipi_pmc 0xff320000 0x10000>,
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xff320000 &ipi_pmc 0xff320000 0x10000>,
                  <0xff390000 &ipi_pmc_nobuf 0xff390000 0x10000>,
                  <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
                  <0xf1010000 &ospi 0xf1010000 0x10000>,
@@ -228,6 +232,7 @@
                  <0xff0c0000 &gem0 0xff0c0000 0x10000>,
                  <0xff0e0000 &ttc0 0xff0e0000 0x10000>,
                  <0xff0f0000 &ttc1 0xff0f0000 0x10000>,
+                 <0xff100000 &ttc2 0xff100000 0x10000>,
                  <0xff110000 &ttc3 0xff110000 0x10000>,
                  <0xff9d0000 &usb0 0xff9d0000 0x10000>,
                  <0xffa80000 &lpd_dma_chan0 0xffa80000 0x10000>,
@@ -477,7 +482,8 @@
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
-                address-map = <0x0 &NoC_C0_ddr_memory 0x0 0x80000000>,
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0x0 &NoC_C0_ddr_memory 0x0 0x80000000>,
                  <0xfffc0000 &ps_wizard_0_pmcps_0_psv_ocm_ram_0_memory 0xfffc0000 0x40000>,
                  <0xff310000 &ipi_psm 0xff310000 0x10000>,
                  <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
@@ -527,6 +533,7 @@
                  <0xff0c0000 &gem0 0xff0c0000 0x10000>,
                  <0xff0e0000 &ttc0 0xff0e0000 0x10000>,
                  <0xff0f0000 &ttc1 0xff0f0000 0x10000>,
+                 <0xff100000 &ttc2 0xff100000 0x10000>,
                  <0xff110000 &ttc3 0xff110000 0x10000>,
                  <0xff130000 &ps_wizard_0_pmcps_0_psv_scntr_0 0xff130000 0x10000>,
                  <0xff140000 &ps_wizard_0_pmcps_0_psv_scntrs_0 0xff140000 0x10000>,
@@ -793,7 +800,8 @@
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
-                address-map = <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
                  <0x40000 &NoC_C0_ddr_memory 0x40000 0x7ffc0000>,
                  <0xff340000 &ipi1 0xff340000 0x10000>,
                  <0xfffc0000 &ps_wizard_0_pmcps_0_psv_ocm_ram_0_memory 0xfffc0000 0x40000>,
@@ -861,6 +869,7 @@
                  <0xff0c0000 &gem0 0xff0c0000 0x10000>,
                  <0xff0e0000 &ttc0 0xff0e0000 0x10000>,
                  <0xff0f0000 &ttc1 0xff0f0000 0x10000>,
+                 <0xff100000 &ttc2 0xff100000 0x10000>,
                  <0xff110000 &ttc3 0xff110000 0x10000>,
                  <0xff130000 &ps_wizard_0_pmcps_0_psv_scntr_0 0xff130000 0x10000>,
                  <0xff140000 &ps_wizard_0_pmcps_0_psv_scntrs_0 0xff140000 0x10000>,
@@ -917,7 +926,8 @@
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
-                address-map = <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
                  <0x40000 &NoC_C0_ddr_memory 0x40000 0x7ffc0000>,
                  <0xff350000 &ipi2 0xff350000 0x10000>,
                  <0xfffc0000 &ps_wizard_0_pmcps_0_psv_ocm_ram_0_memory 0xfffc0000 0x40000>,
@@ -985,6 +995,7 @@
                  <0xff0c0000 &gem0 0xff0c0000 0x10000>,
                  <0xff0e0000 &ttc0 0xff0e0000 0x10000>,
                  <0xff0f0000 &ttc1 0xff0f0000 0x10000>,
+                 <0xff100000 &ttc2 0xff100000 0x10000>,
                  <0xff110000 &ttc3 0xff110000 0x10000>,
                  <0xff130000 &ps_wizard_0_pmcps_0_psv_scntr_0 0xff130000 0x10000>,
                  <0xff140000 &ps_wizard_0_pmcps_0_psv_scntrs_0 0xff140000 0x10000>,
@@ -2200,8 +2211,8 @@
                 };
 
                 ttc2: timer@ff100000 {
-                        phandle = <0x14c>;
-                        compatible = "uio";
+                        phandle = <0x4e>;
+                        compatible = "cdns,ttc";
                         status = "okay";
                         interrupts = <0x0 0x2b 0x4 0x0 0x2c 0x4 0x0 0x2d 0x4>;
                         interrupt-parent = <&imux>;
@@ -3832,8 +3843,8 @@
 
                 ipi5: mailbox@ff380000 {
                         phandle = <0xa>;
-                        compatible = "uio";
                         status = "okay";
+                        compatible = "xlnx,versal-ipi-mailbox";
                         interrupt-parent = <&imux>;
                         interrupts = <0x0 0x23 0x4>;
                         reg = <0x0 0xff380000 0x0 0x10000 0x0 0xff3f0e00 0x0 0x200>;
@@ -5026,24 +5037,6 @@
                         reg = <0x0 0xf1210000 0x0 0x10000>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_sha";
                 };
-
-                libmetal_uio_desc0@9908000 {
-                        phandle = <0x149>;
-                        compatible = "uio";
-                        reg = <0x0 0x9908000 0x0 0x4000>;
-                };
-
-                libmetal_uio_desc1@990c000 {
-                        phandle = <0x14a>;
-                        compatible = "uio";
-                        reg = <0x0 0x990c000 0x0 0x4000>;
-                };
-
-                libmetal_uio_data@9910000 {
-                        phandle = <0x14b>;
-                        compatible = "uio";
-                        reg = <0x0 0x9910000 0x0 0x40000>;
-                };
         };
 
         psv_r5_0_atcm_global: psv_r5_0_atcm_global@ffe00000 {
@@ -5727,152 +5720,5 @@
                 NoC_C3_ddr_memory = "/memory@70000000000";
                 ps_wizard_0_pmcps_0_psv_ocm_ram_0_memory = "/memory@FFFC0000";
                 pwm_fan = "/pwm-fan";
-        };
-
-        reserved-memory {
-                ranges = <0x1>;
-                #size-cells = <0x2>;
-                #address-cells = <0x2>;
-
-                rproc0@9800000 {
-                        phandle = <0x146>;
-                        no-map;
-                        reg = <0x0 0x9800000 0x0 0x60000>;
-                };
-
-                vdev0vring0@9860000 {
-                        phandle = <0x145>;
-                        no-map;
-                        reg = <0x0 0x9860000 0x0 0x4000>;
-                };
-
-                vdev0vring1@9864000 {
-                        phandle = <0x144>;
-                        no-map;
-                        reg = <0x0 0x9864000 0x0 0x4000>;
-                };
-
-                vdev0buffer@9868000 {
-                        phandle = <0x143>;
-                        no-map;
-                        reg = <0x0 0x9868000 0x0 0x100000>;
-                };
-
-                libmetal_elf@98a8000 {
-                        phandle = <0x14e>;
-                        no-map;
-                        reg = <0x0 0x98a8000 0x0 0x60000>;
-                };
-
-                libmetal_desc0@9908000 {
-                        no-map;
-                        reg = <0x0 0x9908000 0x0 0x4000>;
-                };
-
-                libmetal_desc1@990c000 {
-                        no-map;
-                        reg = <0x0 0x990c000 0x0 0x4000>;
-                };
-
-                libmetal_data@9910000 {
-                        no-map;
-                        reg = <0x0 0x9910000 0x0 0x40000>;
-                };
-        };
-
-        domains {
-
-                APU_Linux {
-                        phandle = <0x14d>;
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_a72 0x1 0x80000003>;
-                        os,type = "linux";
-                        reserved-memory = <0x143 0x144 0x145 0x146>;
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-
-                                        relation0 {
-                                                remote = <0x147>;
-                                                elfload = <0x64 0x79 0x146>;
-                                        };
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                remote = <0x147>;
-                                                mbox = <0xf9>;
-                                                carveouts = <0x145 0x144 0x143>;
-                                        };
-                                };
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                remote = <0x148>;
-                                                carveouts = <0x149 0x14a 0x14b>;
-                                                mbox = <0x10e>;
-                                                timer = <0x14c>;
-                                        };
-                                };
-                        };
-                };
-
-                R5_0_FREERTOS {
-                        phandle = <0x147>;
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_r5_0 0x1 0x0>;
-                        os,type = "freertos";
-                        sram = <0x9800000 0x6000 0xffe00000 0x10000>;
-                        reserved-memory = <0x143 0x144 0x145 0x146>;
-                        rpu_pd_val = <0x6a 0x18110005>;
-                        cpu_config_str = "split";
-                        core_num = "0";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "psv_cortexr5_0";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                host = <0x14d>;
-                                                mbox = <0xe7>;
-                                                carveouts = <0x145 0x144 0x143>;
-                                        };
-                                };
-                        };
-                };
-
-                R5_1_BAREMETAL {
-                        phandle = <0x148>;
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_r5_1 0x2 0x80000003>;
-                        os,type = "baremetal";
-                        sram = <0x98a8000 0x60000 0xffe90000 0x10000>;
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                host = <0x14d>;
-                                                carveouts = <0x149 0x14a 0x14b>;
-                                                mbox = <0xf3>;
-                                                timer = <0x14c>;
-                                                elfload = <0x14e>;
-                                        };
-                                };
-                        };
-                };
         };
 };

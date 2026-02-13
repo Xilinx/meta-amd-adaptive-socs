@@ -1,0 +1,73 @@
+/dts-v1/;
+/plugin/;
+&fpga {
+	firmware-name = "vrk160_base_pld.pdi";
+};
+
+&amba {
+	ai_engine_0: ai_engine@20000000000 {
+		xlnx,num-mi-axi = <0>;
+		compatible = "xlnx,ai-engine-2.0" , "xlnx,ai-engine-v2.0";
+		xlnx,aie-ref-clk-freqmhz = <0x1fc9f08>;
+		xlnx,num-mi-axis = <0>;
+		xlnx,aie-max-freq = <1250>;
+		xlnx,en-addr-virtualization = <0>;
+		xlnx,aie-gen = /bits/ 8 <0x1>;
+		xlnx,name-mi-axis = "M00_AXIS";
+		xlnx,mem-rows = /bits/ 8 <0 0>;
+		xlnx,mi-destid-pins;
+		xlnx,ip-name = "ai_engine";
+		#size-cells = <2>;
+		xlnx,num-si-axi = <1>;
+		xlnx,fast-pm-write;
+		reg = <0x00000200 0x00000000 0x00000001 0x00000000>;
+		clocks = <&aie_core_ref_clk_0>;
+		xlnx,num-noc-axis-clks = <0>;
+		ranges;
+		xlnx,num-clks = <0>;
+		xlnx,partition-enabled = <0>;
+		#address-cells = <2>;
+		xlnx,num-si-axis = <0>;
+		xlnx,name-mi-axi = "M00_AXI";
+		xlnx,num-column = <1>;
+		xlnx,aie-core-ref-ctrl-freqmhz = <1250>;
+		xlnx,clk-names = "aclk0";
+		xlnx,name-si-axis = "S00_AXIS";
+		xlnx,fast-dm-write;
+		xlnx,edk-iptype = "PERIPHERAL";
+		xlnx,selected-nsu = <0>;
+		clock-names = "aclk0";
+		power-domains = <&versal_firmware 0x18800000>;
+		xlnx,num-trig-in = <0>;
+		xlnx,en-ext-rst = <0>;
+		xlnx,num-trig-out = <0>;
+		xlnx,core-rows = /bits/ 8 <1 3>;
+		xlnx,shim-rows = /bits/ 8 <0 1>;
+		xlnx,name-si-axi = "S00_AXI";
+		xlnx,start-column = <0>;
+		xlnx,name = "ai_engine_0";
+		xlnx,aie-site = "AIE";
+		aie_aperture_0: aie_aperture@20000000000 {
+			xlnx,device-name = <0>;
+			interrupt-parent = <&gic>;
+			interrupts = <0x0 0x94 0x4>, <0x0 0x95 0x4>, <0x0 0x96 0x4>;
+			#address-cells = <2>;
+			power-domains = <&versal_firmware 0x18800000>;
+			xlnx,node-id = <0x18800000>;
+			#size-cells = <2>;
+			interrupt-names = "interrupt1" , "interrupt2" , "interrupt3";
+			reg = <0x00000200 0x00000000 0x00000001 0x00000000>;
+			xlnx,columns = < 0 42 >;
+		};
+	};
+	aie_core_ref_clk_0: aie_core_ref_clk_0 {
+		compatible = "fixed-clock";
+		clock-frequency = <1250000000>;
+		#clock-cells = <0>;
+	};
+	zyxclmm_drm {
+		interrupts = <0x0 0x89 0x4>, <0x0 0x90 0x4>, <0x0 0x91 0x4>, <0x0 0x92 0x4>, <0x0 0x93 0x4>, <0x0 0x94 0x4>, <0x0 0x95 0x4>, <0x0 0x96 0x4>;
+		interrupt-parent = <&gic>;
+		compatible = "xlnx,zocl-versal";
+	};
+};
