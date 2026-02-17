@@ -1200,27 +1200,6 @@
                         xlnx,ttc-clk0-clksrc = <0x1>;
                 };
 
-                ttc3: timer@ff110000 {
-                        phandle = <0x4f>;
-                        compatible = "cdns,ttc";
-                        status = "okay";
-                        interrupts = <0x0 0x2e 0x4 0x0 0x2f 0x4 0x0 0x30 0x4>;
-                        interrupt-parent = <&gic>;
-                        reg = <0x0 0xff110000 0x0 0x1000>;
-                        timer-width = <0x20>;
-                        clocks = <&versal_clk 0x2a>;
-                        power-domains = <&versal_firmware 0x18224027>;
-                        xlnx,ttc-board-interface = "custom";
-                        xlnx,ttc-clk2-freq-hz = <0x8f0cba9>;
-                        xlnx,ttc-clk1-clksrc = <0x1>;
-                        xlnx,clock-freq = <0x8f0cba9>;
-                        xlnx,ttc-clk2-clksrc = <0x1>;
-                        xlnx,ip-name = "psv_ttc";
-                        xlnx,ttc-clk0-freq-hz = <0x8f0cba9>;
-                        xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
-                        xlnx,ttc-clk0-clksrc = <0x1>;
-                };
-
                 usb0: usb@ff9d0000 {
                         phandle = <0x5a>;
                         compatible = "xlnx,versal-dwc3";
@@ -1967,22 +1946,22 @@
                         xlnx,ip-name = "psv_coresight";
                 };
 
-                libmetal_uio_desc0@9908000 {
+                libmetal_uio_desc0@99c8000 {
                         phandle = <0x149>;
                         compatible = "uio";
-                        reg = <0x0 0x9908000 0x0 0x4000>;
+                        reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
-                libmetal_uio_desc1@990c000 {
+                libmetal_uio_desc1@99cc000 {
                         phandle = <0x14a>;
                         compatible = "uio";
-                        reg = <0x0 0x990c000 0x0 0x4000>;
+                        reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
-                libmetal_uio_data@9910000 {
+                libmetal_uio_data@99d0000 {
                         phandle = <0x14b>;
                         compatible = "uio";
-                        reg = <0x0 0x9910000 0x0 0x40000>;
+                        reg = <0x0 0x99d0000 0x0 0x40000>;
                 };
 
                 gic: interrupt-controller@f9000000 {
@@ -2416,7 +2395,6 @@
                 ttc0 = "/axi/timer@ff0e0000";
                 ttc1 = "/axi/timer@ff0f0000";
                 ttc2 = "/axi/timer@ff100000";
-                ttc3 = "/axi/timer@ff110000";
                 usb0 = "/axi/usb@ff9d0000";
                 dwc3_0 = "/axi/usb@ff9d0000/usb@fe200000";
                 hub_2_0 = "/axi/usb@ff9d0000/usb@fe200000/hub@1";
@@ -2562,25 +2540,25 @@
                         compatible = "shared-dma-pool";
                 };
 
-                libmetal_elf@98a8000 {
+                libmetal_elf@9968000 {
                         phandle = <0x14e>;
                         no-map;
-                        reg = <0x0 0x98a8000 0x0 0x60000>;
+                        reg = <0x0 0x9968000 0x0 0x60000>;
                 };
 
-                libmetal_desc0@9908000 {
+                libmetal_desc0@99c8000 {
                         no-map;
-                        reg = <0x0 0x9908000 0x0 0x4000>;
+                        reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
-                libmetal_desc1@990c000 {
+                libmetal_desc1@99cc000 {
                         no-map;
-                        reg = <0x0 0x990c000 0x0 0x4000>;
+                        reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
-                libmetal_data@9910000 {
+                libmetal_data@99d0000 {
                         no-map;
-                        reg = <0x0 0x9910000 0x0 0x40000>;
+                        reg = <0x0 0x99d0000 0x0 0x40000>;
                 };
         };
 
@@ -2612,6 +2590,7 @@
                                                 remote = <0x147>;
                                                 mbox = <0xf9>;
                                                 carveouts = <0x145 0x144 0x143>;
+                                                timer = "ttc0", "ttc1";
                                         };
                                 };
 
@@ -2649,6 +2628,7 @@
                                                 host = <0x14d>;
                                                 mbox = <0xe7>;
                                                 carveouts = <0x145 0x144 0x143>;
+                                                timer = "ttc3";
                                         };
                                 };
                         };
@@ -2658,7 +2638,7 @@
                         phandle = <0x148>;
                         compatible = "openamp,domain-v1";
                         os,type = "baremetal";
-                        sram = <0x98a8000 0x60000 0xffe90000 0x10000>;
+                        sram = <0x9968000 0x60000 0xffe90000 0x10000>;
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
