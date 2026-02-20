@@ -99,7 +99,6 @@
                  <0xff0a0000 &ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0 0xff0a0000 0x10000>,
                  <0xff0c0000 &gem0 0xff0c0000 0x10000>,
                  <0xff0d0000 &gem1 0xff0d0000 0x10000>,
-                 <0xff0e0000 &ttc0 0xff0e0000 0x10000>,
                  <0xff130000 &ps_wizard_0_pmcps_0_psv_scntr_0 0xff130000 0x10000>,
                  <0xff140000 &ps_wizard_0_pmcps_0_psv_scntrs_0 0xff140000 0x10000>,
                  <0xff410000 &ps_wizard_0_pmcps_0_psv_lpd_slcr_0 0xff410000 0x100000>,
@@ -889,32 +888,10 @@
                         xlnx,sat-5-y = "7534.000000";
                 };
 
-                ttc0: timer@ff0e0000 {
-                        phandle = <0x49>;
-                        compatible = "cdns,ttc";
-                        status = "okay";
-                        interrupts = <0x0 0x25 0x4 0x0 0x26 0x4 0x0 0x27 0x4>;
-                        interrupt-parent = <&gic_r5>;
-                        reg = <0x0 0xff0e0000 0x0 0x1000>;
-                        timer-width = <0x20>;
-                        clocks = <&versal_clk 0x27>;
-                        power-domains = <&versal_firmware 0x18224024>;
-                        xlnx,ttc-board-interface = "custom";
-                        xlnx,ttc-clk2-freq-hz = <0x5f5dd19>;
-                        xlnx,ttc-clk1-clksrc = <0x1>;
-                        xlnx,clock-freq = <0x5f5dd19>;
-                        xlnx,ttc-clk2-clksrc = <0x1>;
-                        xlnx,ip-name = "psv_ttc";
-                        xlnx,ttc-clk0-freq-hz = <0x5f5dd19>;
-                        xlnx,ttc-clk1-freq-hz = <0x5f5dd19>;
-                        xlnx,ttc-clk0-clksrc = <0x1>;
-                        xlnx,name = "ps_wizard_0_pmcps_0_psv_ttc_0";
-                };
-
                 ttc2: timer@ff100000 {
                         phandle = <0x144>;
                         compatible = "uio";
-                        status = "disabled";
+                        status = "okay";
                         interrupts = <0x0 0x2b 0x4 0x0 0x2c 0x4 0x0 0x2d 0x4>;
                         interrupt-parent = <&gic_r5>;
                         reg = <0x0 0xff100000 0x0 0x1000>;
@@ -2198,7 +2175,6 @@
                 smmu = "/axi/iommu@fd800000";
                 qspi = "/axi/spi@f1030000";
                 sysmon0 = "/axi/sysmon@f1270000";
-                ttc0 = "/axi/timer@ff0e0000";
                 ttc2 = "/axi/timer@ff100000";
                 usb0 = "/axi/usb@ff9d0000";
                 dwc3_0 = "/axi/usb@ff9d0000/usb@fe200000";
@@ -2399,7 +2375,7 @@
                                                 remote = <0x13f>;
                                                 mbox = <0xf3>;
                                                 carveouts = <0x13d 0x13c 0x13b>;
-                                                timer = "ttc0", "ttc1";
+                                                timer = <0x49 0xae>;
                                         };
                                 };
 
@@ -2437,7 +2413,7 @@
                                                 host = <0x145>;
                                                 mbox = <0xe1>;
                                                 carveouts = <0x13d 0x13c 0x13b>;
-                                                timer = "ttc3";
+                                                timer = <0xb0>;
                                         };
                                 };
                         };

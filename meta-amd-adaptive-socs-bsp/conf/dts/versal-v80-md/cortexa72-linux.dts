@@ -2305,6 +2305,15 @@
                 };
         };
 
+        amba_pl: amba_pl {
+                phandle = <0x16e>;
+                ranges;
+                compatible = "simple-bus";
+                #address-cells = <0x2>;
+                #size-cells = <0x2>;
+                firmware-name = "v80_base_pld.pdi";
+        };
+
         axi_noc_0_ddr_memory: memory@00000000 {
                 phandle = <0x3>;
                 compatible = "xlnx,axi-noc-1.1";
@@ -2329,12 +2338,12 @@
 
         aliases {
                 serial0 = "/axi/serial@ff000000";
+                spi0 = "/axi/spi@f1010000";
                 serial1 = "/axi/serial@ff010000";
                 serial2 = "/axi/coresight@f0800000";
                 i2c0 = "/axi/i2c@ff020000";
                 i2c1 = "/axi/i2c@ff030000";
                 mmc0 = "/axi/mmc@f1040000";
-                spi0 = "/axi/spi@f1010000";
                 rtc0 = "/axi/rtc@f12a0000";
         };
 
@@ -2518,6 +2527,7 @@
                 user_key5 = "/firmware/versal-firmware/versal-sec-cfg/nvmem-layout/user-key@1b0";
                 user_key6 = "/firmware/versal-firmware/versal-sec-cfg/nvmem-layout/user-key@1d0";
                 user_key7 = "/firmware/versal-firmware/versal-sec-cfg/nvmem-layout/user-key@1f0";
+                amba_pl = "/amba_pl";
                 axi_noc_0_ddr_memory = "/memory@00000000";
                 axi_noc_1_ddr_memory = "/memory@50000000000";
                 rproc09800000 = "/reserved-memory/rproc0@9800000";
@@ -2607,7 +2617,7 @@
                                                 remote = <0x173>;
                                                 mbox = <0x126>;
                                                 carveouts = <0x171 0x170 0x16f>;
-                                                timer = "ttc0", "ttc1";
+                                                timer = <0x6b 0x6c>;
                                         };
                                 };
 
@@ -2645,7 +2655,7 @@
                                                 host = <0x179>;
                                                 mbox = <0x114>;
                                                 carveouts = <0x171 0x170 0x16f>;
-                                                timer = "ttc3";
+                                                timer = <0x6e>;
                                         };
                                 };
                         };

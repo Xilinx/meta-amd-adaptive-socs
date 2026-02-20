@@ -1043,7 +1043,7 @@
                 ttc2: timer@ff100000 {
                         phandle = <0x144>;
                         compatible = "uio";
-                        status = "disabled";
+                        status = "okay";
                         interrupts = <0x0 0x2b 0x4 0x0 0x2c 0x4 0x0 0x2d 0x4>;
                         interrupt-parent = <&gic>;
                         reg = <0x0 0xff100000 0x0 0x1000>;
@@ -2090,6 +2090,15 @@
                 };
         };
 
+        amba_pl: amba_pl {
+                phandle = <0x13a>;
+                ranges;
+                compatible = "simple-bus";
+                #address-cells = <0x2>;
+                #size-cells = <0x2>;
+                firmware-name = "vm-p-m1369-00_base_pld.pdi";
+        };
+
         axi_noc2_0_ddr_memory: memory@00000000 {
                 phandle = <0x3>;
                 compatible = "xlnx,axi-noc2-1.1";
@@ -2287,6 +2296,7 @@
                 user_key5 = "/firmware/versal-firmware/versal-sec-cfg/nvmem-layout/user-key@1b0";
                 user_key6 = "/firmware/versal-firmware/versal-sec-cfg/nvmem-layout/user-key@1d0";
                 user_key7 = "/firmware/versal-firmware/versal-sec-cfg/nvmem-layout/user-key@1f0";
+                amba_pl = "/amba_pl";
                 axi_noc2_0_ddr_memory = "/memory@00000000";
                 rproc09800000 = "/reserved-memory/rproc0@9800000";
                 vdev0vring09860000 = "/reserved-memory/vdev0vring0@9860000";
@@ -2375,7 +2385,7 @@
                                                 remote = <0x13f>;
                                                 mbox = <0xf3>;
                                                 carveouts = <0x13d 0x13c 0x13b>;
-                                                timer = "ttc0", "ttc1";
+                                                timer = <0x49 0xae>;
                                         };
                                 };
 
@@ -2413,7 +2423,7 @@
                                                 host = <0x145>;
                                                 mbox = <0xe1>;
                                                 carveouts = <0x13d 0x13c 0x13b>;
-                                                timer = "ttc3";
+                                                timer = <0xb0>;
                                         };
                                 };
                         };
