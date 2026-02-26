@@ -134,6 +134,7 @@
                  <0xff0a0000 &CIPS_0_pspmc_0_psv_lpd_iou_secure_slcr_0 0xff0a0000 0x10000>,
                  <0xff0c0000 &gem0 0xff0c0000 0x10000>,
                  <0xff0d0000 &gem1 0xff0d0000 0x10000>,
+                 <0xff110000 &ttc3 0xff110000 0x10000>,
                  <0xff130000 &CIPS_0_pspmc_0_psv_scntr_0 0xff130000 0x10000>,
                  <0xff140000 &CIPS_0_pspmc_0_psv_scntrs_0 0xff140000 0x10000>,
                  <0xff410000 &CIPS_0_pspmc_0_psv_lpd_slcr_0 0xff410000 0x100000>,
@@ -1102,6 +1103,28 @@
                         xlnx,ttc-clk1-freq-hz = <0x8f0d0f7>;
                         xlnx,ttc-clk0-clksrc = <0x0>;
                         xlnx,name = "CIPS_0_pspmc_0_psv_ttc_2";
+                };
+
+                ttc3: timer@ff110000 {
+                        phandle = <0x72>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupts = <0x0 0x2e 0x4 0x0 0x2f 0x4 0x0 0x30 0x4>;
+                        interrupt-parent = <&gic_r5>;
+                        reg = <0x0 0xff110000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        clocks = <&versal_clk 0x2a>;
+                        power-domains = <&versal_firmware 0x18224027>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk1-clksrc = <0x0>;
+                        xlnx,clock-freq = <0x8f0d0f7>;
+                        xlnx,ttc-clk2-clksrc = <0x0>;
+                        xlnx,ip-name = "psv_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk1-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk0-clksrc = <0x0>;
+                        xlnx,name = "CIPS_0_pspmc_0_psv_ttc_3";
                 };
 
                 usb0: usb@ff9d0000 {
@@ -2679,6 +2702,7 @@
                 qspi = "/axi/spi@f1030000";
                 sysmon0 = "/axi/sysmon@f1270000";
                 ttc2 = "/axi/timer@ff100000";
+                ttc3 = "/axi/timer@ff110000";
                 usb0 = "/axi/usb@ff9d0000";
                 dwc3_0 = "/axi/usb@ff9d0000/usb@fe200000";
                 dma0 = "/axi/pmcdma@f11c0000";
@@ -2973,7 +2997,7 @@
                                                 host = <0x171>;
                                                 carveouts = <0x16d 0x16e 0x16f>;
                                                 mbox = <0x117>;
-                                                timer = <0x170>;
+                                                timer = <0x170 0x72>;
                                                 elfload = <0x172>;
                                         };
                                 };

@@ -133,6 +133,7 @@
                  <0xff080000 &versal_cips_0_pspmc_0_psv_lpd_iou_slcr_0 0xff080000 0x20000>,
                  <0xff0a0000 &versal_cips_0_pspmc_0_psv_lpd_iou_secure_slcr_0 0xff0a0000 0x10000>,
                  <0xff0b0000 &gpio0 0xff0b0000 0x10000>,
+                 <0xff110000 &ttc3 0xff110000 0x10000>,
                  <0xff130000 &versal_cips_0_pspmc_0_psv_scntr_0 0xff130000 0x10000>,
                  <0xff140000 &versal_cips_0_pspmc_0_psv_scntrs_0 0xff140000 0x10000>,
                  <0xff410000 &versal_cips_0_pspmc_0_psv_lpd_slcr_0 0xff410000 0x100000>,
@@ -1161,6 +1162,28 @@
                         xlnx,ttc-clk1-freq-hz = <0x8f0d0f7>;
                         xlnx,ttc-clk0-clksrc = <0x0>;
                         xlnx,name = "versal_cips_0_pspmc_0_psv_ttc_2";
+                };
+
+                ttc3: timer@ff110000 {
+                        phandle = <0x6e>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupts = <0x0 0x2e 0x4 0x0 0x2f 0x4 0x0 0x30 0x4>;
+                        interrupt-parent = <&gic_r5>;
+                        reg = <0x0 0xff110000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        clocks = <&versal_clk 0x2a>;
+                        power-domains = <&versal_firmware 0x18224027>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk1-clksrc = <0x0>;
+                        xlnx,clock-freq = <0x8f0d0f7>;
+                        xlnx,ttc-clk2-clksrc = <0x0>;
+                        xlnx,ip-name = "psv_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk1-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk0-clksrc = <0x0>;
+                        xlnx,name = "versal_cips_0_pspmc_0_psv_ttc_3";
                 };
 
                 dma0: pmcdma@f11c0000 {
@@ -2685,6 +2708,7 @@
                 spi0 = "/axi/spi@ff040000";
                 sysmon0 = "/axi/sysmon@f1270000";
                 ttc2 = "/axi/timer@ff100000";
+                ttc3 = "/axi/timer@ff110000";
                 dma0 = "/axi/pmcdma@f11c0000";
                 dma1 = "/axi/pmcdma@f11d0000";
                 trng = "/axi/rng@f1230000";
@@ -2976,7 +3000,7 @@
                                                 host = <0x179>;
                                                 carveouts = <0x175 0x176 0x177>;
                                                 mbox = <0x120>;
-                                                timer = <0x178>;
+                                                timer = <0x178 0x6e>;
                                                 elfload = <0x17a>;
                                         };
                                 };
