@@ -1,0 +1,41 @@
+reserved-memory:
+  ranges: true
+  "#size-cells": 2
+  "#address-cells": 2
+
+  cma_bank1@50000000000:
+    start: 0x50000000000
+    size: 0xC0000000        # 3GB
+    compatible: "shared-dma-pool"
+    reusable: true
+    linux,cma-default: true
+
+  cma_bank2@60000000000:
+    start: 0x60000000000
+    size: 0xC0000000        # 3GB
+    compatible: "shared-dma-pool"
+    reusable: true
+    linux,cma-default: true
+
+
+domains:
+  APU_Linux:
+    compatible:
+      - "openamp,domain-v1"
+    cpus:
+      - cluster: cpus_a72
+        cpumask: 0x1
+        mode:
+          secure: true
+          el: 0x3
+    os,type: linux
+
+    access:
+      - dev: cma_bank1
+        flags: 0
+      - dev: cma_bank2
+        flags: 0
+
+    reserved-memory:
+      - cma_bank1@50000000000
+      - cma_bank2@60000000000
