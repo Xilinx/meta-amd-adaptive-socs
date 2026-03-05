@@ -6290,5 +6290,42 @@
                 noc_lpddr2_ddr_memory = "/memory@60000000000";
                 axi_bram_ctrl_0_memory = "/memory@a4000000";
                 CIPS_0_pspmc_0_psv_ocm_ram_0_memory = "/memory@FFFC0000";
+                cma_bank150000000000 = "/reserved-memory/cma_bank1@50000000000";
+                cma_bank260000000000 = "/reserved-memory/cma_bank2@60000000000";
+        };
+
+        reserved-memory {
+                ranges = <0x1>;
+                #size-cells = <0x2>;
+                #address-cells = <0x2>;
+
+                cma_bank150000000000: cma_bank1@50000000000 {
+                        phandle = <0x16f>;
+                        compatible = "shared-dma-pool";
+                        reusable = <0x1>;
+                        linux,cma-default = <0x1>;
+                        reg = <0x500 0x0 0x0 0xc0000000>;
+                };
+
+                cma_bank260000000000: cma_bank2@60000000000 {
+                        phandle = <0x170>;
+                        compatible = "shared-dma-pool";
+                        reusable = <0x1>;
+                        linux,cma-default = <0x1>;
+                        reg = <0x600 0x0 0x0 0xc0000000>;
+                };
+        };
+
+        domains {
+
+                APU_Linux {
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_a72 0x1 0x80000003>;
+                        os,type = "linux";
+                        access = <&cma_bank150000000000 0x0>,
+                         <&cma_bank260000000000 0x0>;
+                        reserved-memory = <0x16f 0x170>;
+                        access-json = "[{\"dev\": \"cma_bank1\", \"flags\": 0}, {\"dev\": \"cma_bank2\", \"flags\": 0}]";
+                };
         };
 };
