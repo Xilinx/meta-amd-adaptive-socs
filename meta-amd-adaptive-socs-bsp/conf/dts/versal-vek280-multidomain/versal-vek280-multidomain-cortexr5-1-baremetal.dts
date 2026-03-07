@@ -34,7 +34,8 @@
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
-                address-map = <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
                  <0xa4000000 &axi_bram_ctrl_0_memory 0xa4000000 0x2000>,
                  <0xa4000000 &axi_bram_ctrl_0 0xa4000000 0x2000>,
                  <0x40000 &noc_lpddr0_ddr_memory 0x40000 0x7ffc0000>,
@@ -140,6 +141,7 @@
                  <0xff080000 &CIPS_0_pspmc_0_psv_lpd_iou_slcr_0 0xff080000 0x20000>,
                  <0xff0a0000 &CIPS_0_pspmc_0_psv_lpd_iou_secure_slcr_0 0xff0a0000 0x10000>,
                  <0xff0c0000 &gem0 0xff0c0000 0x10000>,
+                 <0xff100000 &ttc2 0xff100000 0x10000>,
                  <0xff110000 &ttc3 0xff110000 0x10000>,
                  <0xff130000 &CIPS_0_pspmc_0_psv_scntr_0 0xff130000 0x10000>,
                  <0xff140000 &CIPS_0_pspmc_0_psv_scntrs_0 0xff140000 0x10000>,
@@ -1028,7 +1030,7 @@
                 };
 
                 ttc2: timer@ff100000 {
-                        phandle = <0x178>;
+                        phandle = <0x77>;
                         compatible = "uio";
                         status = "okay";
                         interrupts = <0x0 0x2b 0x4 0x0 0x2c 0x4 0x0 0x2d 0x4>;
@@ -3015,7 +3017,7 @@
                 };
 
                 libmetal_elf@9968000 {
-                        phandle = <0x17a>;
+                        phandle = <0x179>;
                         no-map;
                         reg = <0x0 0x9968000 0x0 0x60000>;
                 };
@@ -3039,7 +3041,7 @@
         domains {
 
                 APU_Linux {
-                        phandle = <0x179>;
+                        phandle = <0x178>;
                         compatible = "openamp,domain-v1";
                         os,type = "linux";
                         reserved-memory = <0x16f 0x170 0x171 0x172>;
@@ -3074,7 +3076,7 @@
                                                 remote = <0x174>;
                                                 carveouts = <0x175 0x176 0x177>;
                                                 mbox = <0x13a>;
-                                                timer = <0x178>;
+                                                timer = <0x77>;
                                         };
                                 };
                         };
@@ -3084,7 +3086,7 @@
                         phandle = <0x173>;
                         compatible = "openamp,domain-v1";
                         os,type = "freertos";
-                        sram = <0x9800000 0x6000 0xffe00000 0x10000>;
+                        sram = <0x0 0x9800000 0x0 0x6000 0x0 0xffe00000 0x0 0x10000>;
                         reserved-memory = <0x16f 0x170 0x171 0x172>;
                         rpu_pd_val = <0x93 0x18110005>;
                         cpu_config_str = "split";
@@ -3098,7 +3100,7 @@
                                         compatible = "openamp,rpmsg-v1";
 
                                         relation0 {
-                                                host = <0x179>;
+                                                host = <0x178>;
                                                 mbox = <0x113>;
                                                 carveouts = <0x171 0x170 0x16f>;
                                                 timer = <0x78>;
@@ -3112,7 +3114,7 @@
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_r5_1 0x2 0x80000003>;
                         os,type = "baremetal";
-                        sram = <0x9968000 0x60000 0xffe90000 0x10000>;
+                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xffe90000 0x0 0x10000>;
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
@@ -3121,11 +3123,11 @@
                                         compatible = "libmetal,ipc-v1";
 
                                         relation0 {
-                                                host = <0x179>;
+                                                host = <0x178>;
                                                 carveouts = <0x175 0x176 0x177>;
                                                 mbox = <0x11f>;
-                                                timer = <0x178 0x78>;
-                                                elfload = <0x17a>;
+                                                timer = <0x77 0x78>;
+                                                elfload = <0x179>;
                                         };
                                 };
                         };
