@@ -20,9 +20,11 @@ machine:
         QEMU_FLASH_TYPE:
             op: '='
             val: 'ospi'
-        QB_OPT_APPEND:append:
-            op: ':='
-            val: " -drive file=@DEPLOY_DIR_IMAGE@/${QEMU_FLASH_FILE}.bin,if=mtd,format=raw,index=4"
-        QB_ROOTFS_OPT:
+        SPI_IMAGE_SIZE:
+            comment: 'OSPI flash size (256M)'
             op: '='
-            val: "-drive if=sd,index=2,file=@ROOTFS@,format=raw"
+            val: '0x1000_0000'
+        # Secondary boot is SD0 per QEMU settings
+        QEMU_SECONDARY_BOOT_MODE:
+            op: '='
+            val: '3'
