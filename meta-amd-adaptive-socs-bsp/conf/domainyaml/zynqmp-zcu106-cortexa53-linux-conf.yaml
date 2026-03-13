@@ -5,29 +5,21 @@ reserved-memory:
 
   cma_reserved@800000000:
     start: 0x800000000
-    size: 0x5DC00000        # 1500MB
+    size: 1500M
     compatible: "shared-dma-pool"
     reusable: true
     linux,cma-default: true
-
 
 domains:
   APU_Linux:
     compatible:
       - "openamp,domain-v1"
-
     cpus:
       - cluster: cpus_a53
-        cpumask: 0x1
+        cpumask: 0xf
         mode:
           secure: true
           el: 0x3
-
     os,type: linux
-
-    access:
-      - dev: cma_reserved
-        flags: 0
-
     reserved-memory:
       - cma_reserved@800000000
