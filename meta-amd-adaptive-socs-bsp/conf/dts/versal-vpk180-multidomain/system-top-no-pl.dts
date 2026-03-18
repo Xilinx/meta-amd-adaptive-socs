@@ -5878,8 +5878,8 @@
         };
 
         chosen {
-                stdout-path = "serial0:115200";
-                bootargs = "console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8 clk_ignore_unused";
+                bootargs = "console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8 versal_sysmon.secure_mode=1";
+                stdout-path = "serial0:115200n8";
         };
 
         aliases {
@@ -6253,57 +6253,6 @@
                 CIPS_0_pspmc_0_psv_ocm_ram_0_memory = "/memory@FFFC0000";
         };
 
-        reserved-memory {
-                ranges = <0x1>;
-                #size-cells = <0x2>;
-                #address-cells = <0x2>;
-
-                rproc0@9800000 {
-                        phandle = <0x167>;
-                        no-map;
-                        reg = <0x0 0x9800000 0x0 0x60000>;
-                };
-
-                vdev0vring0@9860000 {
-                        phandle = <0x166>;
-                        no-map;
-                        reg = <0x0 0x9860000 0x0 0x4000>;
-                };
-
-                vdev0vring1@9864000 {
-                        phandle = <0x165>;
-                        no-map;
-                        reg = <0x0 0x9864000 0x0 0x4000>;
-                };
-
-                vdev0buffer@9868000 {
-                        phandle = <0x164>;
-                        no-map;
-                        reg = <0x0 0x9868000 0x0 0x100000>;
-                };
-
-                libmetal_elf@9968000 {
-                        phandle = <0x16e>;
-                        no-map;
-                        reg = <0x0 0x9968000 0x0 0x60000>;
-                };
-
-                libmetal_desc0@99c8000 {
-                        no-map;
-                        reg = <0x0 0x99c8000 0x0 0x4000>;
-                };
-
-                libmetal_desc1@99cc000 {
-                        no-map;
-                        reg = <0x0 0x99cc000 0x0 0x4000>;
-                };
-
-                libmetal_data@99d0000 {
-                        no-map;
-                        reg = <0x0 0x99d0000 0x0 0x40000>;
-                };
-        };
-
         domains {
 
                 APU_Linux {
@@ -6312,6 +6261,11 @@
                         cpus = <&cpus_a72 0x1 0x80000003>;
                         os,type = "linux";
                         reserved-memory = <0x164 0x165 0x166 0x167>;
+
+                        chosen {
+                                bootargs = "console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8 versal_sysmon.secure_mode=1";
+                                stdout-path = "serial0:115200n8";
+                        };
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
@@ -6399,6 +6353,57 @@
                                         };
                                 };
                         };
+                };
+        };
+
+        reserved-memory {
+                ranges = <0x1>;
+                #size-cells = <0x2>;
+                #address-cells = <0x2>;
+
+                rproc0@9800000 {
+                        phandle = <0x167>;
+                        no-map;
+                        reg = <0x0 0x9800000 0x0 0x60000>;
+                };
+
+                vdev0vring0@9860000 {
+                        phandle = <0x166>;
+                        no-map;
+                        reg = <0x0 0x9860000 0x0 0x4000>;
+                };
+
+                vdev0vring1@9864000 {
+                        phandle = <0x165>;
+                        no-map;
+                        reg = <0x0 0x9864000 0x0 0x4000>;
+                };
+
+                vdev0buffer@9868000 {
+                        phandle = <0x164>;
+                        no-map;
+                        reg = <0x0 0x9868000 0x0 0x100000>;
+                };
+
+                libmetal_elf@9968000 {
+                        phandle = <0x16e>;
+                        no-map;
+                        reg = <0x0 0x9968000 0x0 0x60000>;
+                };
+
+                libmetal_desc0@99c8000 {
+                        no-map;
+                        reg = <0x0 0x99c8000 0x0 0x4000>;
+                };
+
+                libmetal_desc1@99cc000 {
+                        no-map;
+                        reg = <0x0 0x99cc000 0x0 0x4000>;
+                };
+
+                libmetal_data@99d0000 {
+                        no-map;
+                        reg = <0x0 0x99d0000 0x0 0x40000>;
                 };
         };
 };

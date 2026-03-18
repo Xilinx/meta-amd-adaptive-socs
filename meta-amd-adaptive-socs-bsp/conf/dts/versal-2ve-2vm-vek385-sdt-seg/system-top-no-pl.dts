@@ -10382,8 +10382,8 @@
         };
 
         chosen {
-                stdout-path = "serial0:115200n8";
-                bootargs = "earlycon=pl011,mmio32,0xf1920000 console=ttyAMA0,115200";
+                stdout-path = "serial1:115200n8";
+                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
         };
 
         reserved-memory {
@@ -11023,5 +11023,19 @@
                 ps_wizard_0_ps11_0_ocm_ram_2_memory = "/memory@BBE00000";
                 ps_wizard_0_ps11_0_ocm_ram_3_memory = "/memory@BBE80000";
                 usb_hub_delay = "/enable-delay";
+        };
+
+        domains {
+
+                APU_Linux {
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_a78 0xff 0x3>;
+                        os,type = "linux";
+
+                        chosen {
+                                stdout-path = "serial1:115200n8";
+                                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
+                        };
+                };
         };
 };

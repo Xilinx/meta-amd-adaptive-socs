@@ -2222,8 +2222,8 @@
         };
 
         chosen {
-                stdout-path = "serial0:115200n8";
                 bootargs = "console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8 versal_sysmon.secure_mode=1";
+                stdout-path = "serial0:115200n8";
         };
 
         aliases {
@@ -2424,5 +2424,19 @@
                 noc_lpddr1_ddr_memory = "/memory@50000000000";
                 noc_lpddr2_ddr_memory = "/memory@60000000000";
                 gic = "/axi/interrupt-controller@f9000000";
+        };
+
+        domains {
+
+                APU_Linux {
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_a72 0xf 0x80000003>;
+                        os,type = "linux";
+
+                        chosen {
+                                bootargs = "console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8 versal_sysmon.secure_mode=1";
+                                stdout-path = "serial0:115200n8";
+                        };
+                };
         };
 };

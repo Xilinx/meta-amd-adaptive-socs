@@ -1180,8 +1180,8 @@
         };
 
         chosen {
-                stdout-path = "serial0:115200n8";
                 bootargs = "earlycon";
+                stdout-path = "serial0:115200n8";
         };
 
         aliases {
@@ -1308,5 +1308,19 @@
                 ps7_qspi_linear_0 = "/axi/ps7_qspi_linear@fc000000";
                 ps7_ddr_0_memory = "/memory@00100000";
                 usb_phy0 = "/phy0@e0002000";
+        };
+
+        domains {
+
+                APU_Linux {
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_a9 0x3 0x80000003>;
+                        os,type = "linux";
+
+                        chosen {
+                                bootargs = "earlycon";
+                                stdout-path = "serial0:115200n8";
+                        };
+                };
         };
 };

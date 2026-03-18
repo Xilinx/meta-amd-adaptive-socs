@@ -1868,38 +1868,43 @@
                                         };
 
                                         partition@1580000 {
+                                                label = "U-Boot UEFI Variables";
+                                                reg = <0x1580000 0x40000>;
+                                        };
+
+                                        partition@15c0000 {
                                                 label = "Bank A Space";
-                                                reg = <0x1580000 0x7200000>;
-                                        };
-
-                                        partition@8780000 {
-                                                label = "U-Boot Variables Bank A";
-                                                reg = <0x8780000 0x20000>;
-                                        };
-
-                                        partition@87a0000 {
-                                                label = "U-Boot Variables Bank A Backup";
-                                                reg = <0x87a0000 0x20000>;
+                                                reg = <0x15c0000 0x7200000>;
                                         };
 
                                         partition@87c0000 {
+                                                label = "U-Boot Variables Bank A";
+                                                reg = <0x87c0000 0x20000>;
+                                        };
+
+                                        partition@87e0000 {
+                                                label = "U-Boot Variables Bank A Backup";
+                                                reg = <0x87e0000 0x20000>;
+                                        };
+
+                                        partition@8800000 {
                                                 label = "Bank B Space";
-                                                reg = <0x87c0000 0x7200000>;
-                                        };
-
-                                        partition@f9c0000 {
-                                                label = "U-Boot Variables Bank B";
-                                                reg = <0xf9c0000 0x20000>;
-                                        };
-
-                                        partition@f9e0000 {
-                                                label = "U-Boot Variables Bank B Backup";
-                                                reg = <0xf9e0000 0x20000>;
+                                                reg = <0x8800000 0x7200000>;
                                         };
 
                                         partition@fa00000 {
+                                                label = "U-Boot Variables Bank B";
+                                                reg = <0xfa00000 0x20000>;
+                                        };
+
+                                        partition@fa20000 {
+                                                label = "U-Boot Variables Bank B Backup";
+                                                reg = <0xfa20000 0x20000>;
+                                        };
+
+                                        partition@fa40000 {
                                                 label = "User Scratchpad";
-                                                reg = <0xfa00000 0x5e0000>;
+                                                reg = <0xfa40000 0x5c0000>;
                                         };
                                 };
                         };
@@ -3923,19 +3928,19 @@
                 };
 
                 libmetal_uio_desc0@99c8000 {
-                        phandle = <0x290>;
+                        phandle = <0x295>;
                         compatible = "uio";
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
                 libmetal_uio_desc1@99cc000 {
-                        phandle = <0x291>;
+                        phandle = <0x296>;
                         compatible = "uio";
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
                 libmetal_uio_data@99d0000 {
-                        phandle = <0x292>;
+                        phandle = <0x297>;
                         compatible = "uio";
                         reg = <0x0 0x99d0000 0x0 0x40000>;
                 };
@@ -4110,73 +4115,182 @@
                 bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
         };
 
+        domains {
+
+                APU_Linux {
+                        phandle = <0x298>;
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_a78 0xff 0x3>;
+                        os,type = "linux";
+                        reserved-memory = <0x289 0x28a 0x28b 0x28c 0x28d 0x28e 0x28f 0x290 0x291 0x292>;
+                        memory = <0x0 0x0 0x0 0x80000000 0x8 0x0 0x0 0x80000000 0x500 0x0 0x1 0x0 0x600 0x0 0x0 0x80000000>;
+
+                        chosen {
+                                stdout-path = "serial1:115200n8";
+                                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
+                        };
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+
+                                remoteproc-relation {
+                                        compatible = "openamp,remoteproc-v2";
+
+                                        relation0 {
+                                                remote = <0x293>;
+                                                elfload = <0x2b 0x2c 0x2d 0x291 0x292>;
+                                        };
+                                };
+
+                                rpmsg-relation {
+                                        compatible = "openamp,rpmsg-v1";
+
+                                        relation0 {
+                                                remote = <0x293>;
+                                                carveouts = <0x28e 0x28f 0x290>;
+                                                mbox = <0x1e3>;
+                                        };
+                                };
+
+                                libmetal-relation {
+                                        compatible = "libmetal,ipc-v1";
+
+                                        relation0 {
+                                                remote = <0x294>;
+                                                carveouts = <0x295 0x296 0x297>;
+                                                mbox = <0x1a5>;
+                                                timer = <0xa0>;
+                                        };
+                                };
+                        };
+                };
+
+                RPU_Zephyr {
+                        phandle = <0x293>;
+                        compatible = "openamp,domain-v1";
+                        os,type = "zephyr";
+                        xlnx,ddr-boot = <0x1>;
+                        xlnx,zephyr,mems = "ddrboot@9800100";
+                        sram = <0x0 0x9800100 0x0 0x5ff00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
+                        reserved-memory = <0x291>;
+                        rpu_pd_val = <0xc9 0x181100bf 0xc9 0x183180cb 0xc9 0x183180cc 0xc9 0x183180cd>;
+                        cpu_config_str = "split";
+                        core_num = "0";
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+                                cluster_cpu = "cortexr52_0";
+
+                                rpmsg-relation {
+                                        compatible = "openamp,rpmsg-v1";
+
+                                        relation0 {
+                                                host = <0x298>;
+                                                mbox = <0x1f1>;
+                                                carveouts = <0x28e 0x28f 0x290>;
+                                        };
+                                };
+                        };
+                };
+
+                RPU_1_BM {
+                        phandle = <0x294>;
+                        compatible = "openamp,domain-v1";
+                        os,type = "baremetal";
+                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xeba80000 0x0 0x10000 0x0 0xeba90000 0x0 0x8000 0x0 0xebaa0000 0x0 0x8000>;
+                        rpu_pd_val = <0xc9 0x181100c0>;
+                        cpu_config_str = "split";
+                        core_num = "1";
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+                                cluster_cpu = "cortexr52_1";
+
+                                libmetal-relation {
+                                        compatible = "libmetal,ipc-v1";
+
+                                        relation0 {
+                                                host = <0x298>;
+                                                carveouts = <0x295 0x296 0x297>;
+                                                mbox = <0x197>;
+                                                timer = <0x9f 0xa0>;
+                                                elfload = <0x299>;
+                                        };
+                                };
+                        };
+                };
+        };
+
         reserved-memory {
                 #size-cells = <0x2>;
                 #address-cells = <0x2>;
                 ranges;
 
-                ddrboot9800100: ddrboot@9800100 {
+                plm_reserved_memory@00000000 {
+                        phandle = <0x289>;
+                        no-map;
+                        reg = <0x0 0x0 0x0 0x1000000>;
+                };
+
+                tfa_reserved_memory@1000000 {
+                        phandle = <0x28a>;
+                        no-map;
+                        reg = <0x0 0x1000000 0x0 0x600000>;
+                };
+
+                cma_reserved@0840000000 {
+                        phandle = <0x28b>;
+                        compatible = "shared-dma-pool";
+                        reusable;
+                        linux,cma-default;
+                        reg = <0x8 0x40000000 0x0 0x40000000>;
+                };
+
+                cma_reserved@50000000000 {
                         phandle = <0x28c>;
+                        compatible = "shared-dma-pool";
+                        reusable;
+                        linux,cma-default;
+                        reg = <0x500 0x0 0x1 0x0>;
+                };
+
+                cma_reserved@60000000000 {
+                        phandle = <0x28d>;
+                        compatible = "shared-dma-pool";
+                        reusable;
+                        linux,cma-default;
+                        reg = <0x600 0x0 0x0 0x80000000>;
+                };
+
+                ddrboot9800100: ddrboot@9800100 {
+                        phandle = <0x291>;
                         no-map;
                         reg = <0x0 0x9800100 0x0 0x5ff00>;
                 };
 
                 vdev0vring09860000: vdev0vring0@9860000 {
-                        phandle = <0x289>;
+                        phandle = <0x28e>;
                         no-map;
                         reg = <0x0 0x9860000 0x0 0x4000>;
                 };
 
                 vdev0vring19864000: vdev0vring1@9864000 {
-                        phandle = <0x28a>;
+                        phandle = <0x28f>;
                         no-map;
                         reg = <0x0 0x9864000 0x0 0x4000>;
                 };
 
                 vdev0buffer9868000: vdev0buffer@9868000 {
-                        phandle = <0x28b>;
+                        phandle = <0x290>;
                         no-map;
                         reg = <0x0 0x9868000 0x0 0x40000>;
                         compatible = "shared-dma-pool";
                 };
 
                 rsctbl9800000: rsctbl@9800000 {
-                        phandle = <0x28d>;
+                        phandle = <0x292>;
                         no-map;
                         reg = <0x0 0x9800000 0x0 0x100>;
-                };
-
-                libmetal_elf@9968000 {
-                        phandle = <0x294>;
-                        no-map;
-                        reg = <0x0 0x9968000 0x0 0x60000>;
-                };
-
-                libmetal_desc0@99c8000 {
-                        no-map;
-                        reg = <0x0 0x99c8000 0x0 0x4000>;
-                };
-
-                libmetal_desc1@99cc000 {
-                        no-map;
-                        reg = <0x0 0x99cc000 0x0 0x4000>;
-                };
-
-                libmetal_data@99d0000 {
-                        no-map;
-                        reg = <0x0 0x99d0000 0x0 0x40000>;
-                };
-
-                plm_region: buffer@0 {
-                        phandle = <0x6>;
-                        no-map;
-                        reg = <0x0 0x0 0x0 0x1000000>;
-                };
-
-                tfa_region: buffer@1000000 {
-                        phandle = <0x7>;
-                        no-map;
-                        reg = <0x0 0x1000000 0x0 0x600000>;
                 };
 
                 rpu6_fw: rproc6@0c000000 {
@@ -4186,13 +4300,13 @@
                 };
 
                 rproc_D_0_6_calib_load: rpu6_calib_load {
-                        phandle = <0x8>;
+                        phandle = <0x6>;
                         no-map;
                         reg = <0x0 0xf800000 0x0 0x28000>;
                 };
 
                 rproc_D_0_6_hal_mem_priv: rpu6_hal_mem_priv {
-                        phandle = <0x9>;
+                        phandle = <0x7>;
                         no-map;
                         reg = <0x0 0xf828000 0x0 0x1001000>;
                 };
@@ -4204,13 +4318,13 @@
                 };
 
                 rproc_D_1_7_calib_load: rpu7_calib_load {
-                        phandle = <0x14>;
+                        phandle = <0x8>;
                         no-map;
                         reg = <0x0 0x1402a000 0x0 0x28000>;
                 };
 
                 rproc_D_1_7_hal_mem_priv: rpu7_hal_mem_priv {
-                        phandle = <0x15>;
+                        phandle = <0x9>;
                         no-map;
                         reg = <0x0 0x14052000 0x0 0x1001000>;
                 };
@@ -4222,13 +4336,13 @@
                 };
 
                 rproc_E_0_8_calib_load: rpu8_calib_load {
-                        phandle = <0x16>;
+                        phandle = <0x14>;
                         no-map;
                         reg = <0x0 0x18854000 0x0 0x28000>;
                 };
 
                 rproc_E_0_8_hal_mem_priv: rpu8_hal_mem_priv {
-                        phandle = <0x17>;
+                        phandle = <0x15>;
                         no-map;
                         reg = <0x0 0x1887c000 0x0 0x1001000>;
                 };
@@ -4240,79 +4354,57 @@
                 };
 
                 rproc_E_1_9_calib_load: rpu9_calib_load {
-                        phandle = <0x1b>;
+                        phandle = <0x16>;
                         no-map;
                         reg = <0x0 0x1d07e000 0x0 0x28000>;
                 };
 
                 rproc_E_1_9_hal_mem_priv: rpu9_hal_mem_priv {
-                        phandle = <0x1c>;
+                        phandle = <0x17>;
                         no-map;
                         reg = <0x0 0x1d0a6000 0x0 0x1001000>;
                 };
 
                 isp_mbox_buffer: isp_mbox_buffer@1E0A8000 {
-                        phandle = <0x1d>;
+                        phandle = <0x1b>;
                         no-map;
                         reg = <0x0 0x1e0a8000 0x0 0x400000>;
                 };
 
                 rpu_shared_mem: rpu_shared_mem@1E4A8000 {
-                        phandle = <0x1e>;
+                        phandle = <0x1c>;
                         no-map;
                         reg = <0x0 0x1e4a8000 0x0 0x40000>;
                 };
 
                 isp_vring: vring@1fff7000 {
-                        phandle = <0x1f>;
+                        phandle = <0x1d>;
                         no-map;
                         reg = <0x0 0x1fff7000 0x0 0x8000>;
                 };
 
                 tcm_rpu6: rpu6_tcm {
-                        phandle = <0x20>;
+                        phandle = <0x1e>;
                         no-map;
                         reg = <0x0 0xebb80000 0x0 0x30000>;
                 };
 
                 tcm_rpu7: rpu7_tcm {
-                        phandle = <0x21>;
+                        phandle = <0x1f>;
                         no-map;
                         reg = <0x0 0xebbc0000 0x0 0x30000>;
                 };
 
                 tcm_rpu8: rpu8_tcm {
-                        phandle = <0x22>;
+                        phandle = <0x20>;
                         no-map;
                         reg = <0x0 0xebc00000 0x0 0x30000>;
                 };
 
                 tcm_rpu9: rpu9_tcm {
-                        phandle = <0x23>;
+                        phandle = <0x21>;
                         no-map;
                         reg = <0x0 0xebc40000 0x0 0x30000>;
-                };
-
-                cma_reserved_1: cma_reserved@0840000000 {
-                        phandle = <0x24>;
-                        compatible = "shared-dma-pool";
-                        reusable;
-                        reg = <0x8 0x40000000 0x0 0x40000000>;
-                        linux,cma-default;
-                };
-
-                cma_reserved_2: cma_reserved@50000000000 {
-                        phandle = <0x25>;
-                        compatible = "shared-dma-pool";
-                        reusable;
-                        reg = <0x500 0x0 0x1 0x0>;
-                };
-
-                cma_reserved_3: cma_reserved@60000000000 {
-                        phandle = <0x26>;
-                        compatible = "shared-dma-pool";
-                        reusable;
-                        reg = <0x600 0x0 0x0 0x80000000>;
                 };
         };
 
@@ -4629,8 +4721,6 @@
                 vdev0buffer9868000 = "/reserved-memory/vdev0buffer@9868000";
                 rsctbl9800000 = "/reserved-memory/rsctbl@9800000";
                 gic = "/axi/interrupt-controller@e2000000";
-                plm_region = "/reserved-memory/buffer@0";
-                tfa_region = "/reserved-memory/buffer@1000000";
                 rpu6_fw = "/reserved-memory/rproc6@0c000000";
                 rproc_D_0_6_calib_load = "/reserved-memory/rpu6_calib_load";
                 rproc_D_0_6_hal_mem_priv = "/reserved-memory/rpu6_hal_mem_priv";
@@ -4650,110 +4740,10 @@
                 tcm_rpu7 = "/reserved-memory/rpu7_tcm";
                 tcm_rpu8 = "/reserved-memory/rpu8_tcm";
                 tcm_rpu9 = "/reserved-memory/rpu9_tcm";
-                cma_reserved_1 = "/reserved-memory/cma_reserved@0840000000";
-                cma_reserved_2 = "/reserved-memory/cma_reserved@50000000000";
-                cma_reserved_3 = "/reserved-memory/cma_reserved@60000000000";
-        };
-
-        domains {
-
-                APU_Linux {
-                        phandle = <0x293>;
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_a78 0xff 0x3>;
-                        os,type = "linux";
-                        memory = <0x0 0x0 0x0 0x80000000 0x8 0x0 0x0 0x80000000 0x500 0x0 0x1 0x0 0x600 0x0 0x0 0x80000000>;
-                        reserved-memory = <0x289 0x28a 0x28b 0x28c 0x28d>;
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-
-                                        relation0 {
-                                                remote = <0x28e>;
-                                                elfload = <0x2b 0x2c 0x2d 0x28c 0x28d>;
-                                        };
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                remote = <0x28e>;
-                                                carveouts = <0x289 0x28a 0x28b>;
-                                                mbox = <0x1e3>;
-                                        };
-                                };
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                remote = <0x28f>;
-                                                carveouts = <0x290 0x291 0x292>;
-                                                mbox = <0x1a5>;
-                                                timer = <0xa0>;
-                                        };
-                                };
-                        };
-                };
-
-                RPU_Zephyr {
-                        phandle = <0x28e>;
-                        compatible = "openamp,domain-v1";
-                        os,type = "zephyr";
-                        xlnx,ddr-boot = <0x1>;
-                        xlnx,zephyr,mems = "ddrboot@9800100";
-                        sram = <0x0 0x9800100 0x0 0x5ff00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
-                        reserved-memory = <0x28c>;
-                        rpu_pd_val = <0xc9 0x181100bf 0xc9 0x183180cb 0xc9 0x183180cc 0xc9 0x183180cd>;
-                        cpu_config_str = "split";
-                        core_num = "0";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "cortexr52_0";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                host = <0x293>;
-                                                mbox = <0x1f1>;
-                                                carveouts = <0x289 0x28a 0x28b>;
-                                        };
-                                };
-                        };
-                };
-
-                RPU_1_BM {
-                        phandle = <0x28f>;
-                        compatible = "openamp,domain-v1";
-                        os,type = "baremetal";
-                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xeba80000 0x0 0x10000 0x0 0xeba90000 0x0 0x8000 0x0 0xebaa0000 0x0 0x8000>;
-                        rpu_pd_val = <0xc9 0x181100c0>;
-                        cpu_config_str = "split";
-                        core_num = "1";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "cortexr52_1";
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                host = <0x293>;
-                                                carveouts = <0x290 0x291 0x292>;
-                                                mbox = <0x197>;
-                                                timer = <0x9f 0xa0>;
-                                                elfload = <0x294>;
-                                        };
-                                };
-                        };
-                };
+                r52_6 = "/remoteproc@ebb80000/r52f@0";
+                r52_7 = "/remoteproc@ebb80000/r52f@1";
+                r52_8 = "/remoteproc@ebc00000/r52f@0";
+                r52_9 = "/remoteproc@ebc00000/r52f@1";
         };
 
         remoteproc@eba00000 {
@@ -4789,7 +4779,8 @@
                 xlnx,cluster-mode = <0x0>;
                 ranges = <0x0 0x0 0x0 0xebb80000 0x0 0x10000 0x0 0x10000 0x0 0xebb90000 0x0 0x8000 0x0 0x18000 0x0 0xebba0000 0x0 0x8000 0x1 0x0 0x0 0xebbc0000 0x0 0x10000 0x1 0x10000 0x0 0xebbd0000 0x0 0x8000 0x1 0x18000 0x0 0xebbe0000 0x0 0x8000>;
 
-                r52f@0 {
+                r52_6: r52f@0 {
+                        phandle = <0x22>;
                         compatible = "xlnx,versal2-r52f";
                         power-domains = <&versal2_firmware 0x181100f3>,
                          <&versal2_firmware 0x18318106>,
@@ -4800,7 +4791,8 @@
                         memory-region = <&rpu6_fw>;
                 };
 
-                r52f@1 {
+                r52_7: r52f@1 {
+                        phandle = <0x23>;
                         compatible = "xlnx,versal2-r52f";
                         power-domains = <&versal2_firmware 0x181100f4>,
                          <&versal2_firmware 0x18318109>,
@@ -4819,7 +4811,8 @@
                 xlnx,cluster-mode = <0x0>;
                 ranges = <0x0 0x0 0x0 0xebc00000 0x0 0x10000 0x0 0x10000 0x0 0xebc10000 0x0 0x8000 0x0 0x18000 0x0 0xebc20000 0x0 0x8000 0x1 0x0 0x0 0xebc40000 0x0 0x10000 0x1 0x10000 0x0 0xebc50000 0x0 0x8000 0x1 0x18000 0x0 0xebc60000 0x0 0x8000>;
 
-                r52f@0 {
+                r52_8: r52f@0 {
+                        phandle = <0x24>;
                         compatible = "xlnx,versal2-r52f";
                         power-domains = <&versal2_firmware 0x181100f5>,
                          <&versal2_firmware 0x1831810c>,
@@ -4830,7 +4823,8 @@
                         memory-region = <&rpu8_fw>;
                 };
 
-                r52f@1 {
+                r52_9: r52f@1 {
+                        phandle = <0x25>;
                         compatible = "xlnx,versal2-r52f";
                         power-domains = <&versal2_firmware 0x181100f6>,
                          <&versal2_firmware 0x1831810f>,

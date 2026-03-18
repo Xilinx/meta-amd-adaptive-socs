@@ -3914,8 +3914,8 @@
         };
 
         chosen {
-                stdout-path = "serial0:115200n8";
-                bootargs = "earlycon=pl011,mmio32,0xf1920000 console=ttyAMA0,115200";
+                stdout-path = "serial1:115200n8";
+                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
         };
 
         reserved-memory {
@@ -4232,5 +4232,19 @@
                 NoC_C4_ddr_memory = "/memory@60000000000";
                 usb_hub_delay = "/enable-delay";
                 gic = "/axi/interrupt-controller@e2000000";
+        };
+
+        domains {
+
+                APU_Linux {
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_a78 0xff 0x3>;
+                        os,type = "linux";
+
+                        chosen {
+                                stdout-path = "serial1:115200n8";
+                                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
+                        };
+                };
         };
 };
