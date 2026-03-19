@@ -2092,19 +2092,19 @@
                 };
 
                 libmetal_uio_desc0@99c8000 {
-                        phandle = <0x175>;
+                        phandle = <0x177>;
                         compatible = "uio";
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
                 libmetal_uio_desc1@99cc000 {
-                        phandle = <0x176>;
+                        phandle = <0x178>;
                         compatible = "uio";
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
                 libmetal_uio_data@99d0000 {
-                        phandle = <0x177>;
+                        phandle = <0x179>;
                         compatible = "uio";
                         reg = <0x0 0x99d0000 0x0 0x40000>;
                 };
@@ -2449,8 +2449,8 @@
         };
 
         chosen {
-                stdout-path = "serial0:115200n8";
-                bootargs = "console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8 root=/dev/ram0 rw init_fatal_sh=1 cma=1000M";
+                stdout-path = "serial0:115200";
+                bootargs = "console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8";
         };
 
         aliases {
@@ -2662,33 +2662,49 @@
                 #address-cells = <0x2>;
                 ranges;
 
+                cma_bank1@50000000000 {
+                        phandle = <0x16f>;
+                        compatible = "shared-dma-pool";
+                        reusable;
+                        linux,cma-default;
+                        reg = <0x500 0x0 0x0 0xc0000000>;
+                };
+
+                cma_bank2@60000000000 {
+                        phandle = <0x170>;
+                        compatible = "shared-dma-pool";
+                        reusable;
+                        linux,cma-default;
+                        reg = <0x600 0x0 0x0 0xc0000000>;
+                };
+
                 rproc09800000: rproc0@9800000 {
-                        phandle = <0x172>;
+                        phandle = <0x174>;
                         no-map;
                         reg = <0x0 0x9800000 0x0 0x60000>;
                 };
 
                 vdev0vring09860000: vdev0vring0@9860000 {
-                        phandle = <0x171>;
+                        phandle = <0x173>;
                         no-map;
                         reg = <0x0 0x9860000 0x0 0x4000>;
                 };
 
                 vdev0vring19864000: vdev0vring1@9864000 {
-                        phandle = <0x170>;
+                        phandle = <0x172>;
                         no-map;
                         reg = <0x0 0x9864000 0x0 0x4000>;
                 };
 
                 vdev0buffer9868000: vdev0buffer@9868000 {
-                        phandle = <0x16f>;
+                        phandle = <0x171>;
                         no-map;
                         reg = <0x0 0x9868000 0x0 0x100000>;
                         compatible = "shared-dma-pool";
                 };
 
                 libmetal_elf@9968000 {
-                        phandle = <0x179>;
+                        phandle = <0x17b>;
                         no-map;
                         reg = <0x0 0x9968000 0x0 0x60000>;
                 };
@@ -2712,11 +2728,11 @@
         domains {
 
                 APU_Linux {
-                        phandle = <0x178>;
+                        phandle = <0x17a>;
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_a72 0x1 0x80000003>;
                         os,type = "linux";
-                        reserved-memory = <0x16f 0x170 0x171 0x172>;
+                        reserved-memory = <0x16f 0x170 0x171 0x172 0x173 0x174>;
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
@@ -2725,8 +2741,8 @@
                                         compatible = "openamp,remoteproc-v2";
 
                                         relation0 {
-                                                remote = <0x173>;
-                                                elfload = <0x8d 0x157 0x172>;
+                                                remote = <0x175>;
+                                                elfload = <0x8d 0x157 0x174>;
                                         };
                                 };
 
@@ -2734,9 +2750,9 @@
                                         compatible = "openamp,rpmsg-v1";
 
                                         relation0 {
-                                                remote = <0x173>;
+                                                remote = <0x175>;
                                                 mbox = <0x125>;
-                                                carveouts = <0x171 0x170 0x16f>;
+                                                carveouts = <0x173 0x172 0x171>;
                                                 timer = <0x75 0x76>;
                                         };
                                 };
@@ -2745,8 +2761,8 @@
                                         compatible = "libmetal,ipc-v1";
 
                                         relation0 {
-                                                remote = <0x174>;
-                                                carveouts = <0x175 0x176 0x177>;
+                                                remote = <0x176>;
+                                                carveouts = <0x177 0x178 0x179>;
                                                 mbox = <0x13a>;
                                                 timer = <0x77>;
                                         };
@@ -2755,11 +2771,11 @@
                 };
 
                 R5_0_FREERTOS {
-                        phandle = <0x173>;
+                        phandle = <0x175>;
                         compatible = "openamp,domain-v1";
                         os,type = "freertos";
                         sram = <0x0 0x9800000 0x0 0x6000 0x0 0xffe00000 0x0 0x10000>;
-                        reserved-memory = <0x16f 0x170 0x171 0x172>;
+                        reserved-memory = <0x171 0x172 0x173 0x174>;
                         rpu_pd_val = <0x93 0x18110005 0x93 0x1831800b 0x93 0x1831800c>;
                         cpu_config_str = "split";
                         core_num = "0";
@@ -2772,9 +2788,9 @@
                                         compatible = "openamp,rpmsg-v1";
 
                                         relation0 {
-                                                host = <0x178>;
+                                                host = <0x17a>;
                                                 mbox = <0x113>;
-                                                carveouts = <0x171 0x170 0x16f>;
+                                                carveouts = <0x173 0x172 0x171>;
                                                 timer = <0x78>;
                                         };
                                 };
@@ -2782,7 +2798,7 @@
                 };
 
                 R5_1_BAREMETAL {
-                        phandle = <0x174>;
+                        phandle = <0x176>;
                         compatible = "openamp,domain-v1";
                         os,type = "baremetal";
                         sram = <0x0 0x9968000 0x0 0x60000 0x0 0xffe90000 0x0 0x10000>;
@@ -2794,11 +2810,11 @@
                                         compatible = "libmetal,ipc-v1";
 
                                         relation0 {
-                                                host = <0x178>;
-                                                carveouts = <0x175 0x176 0x177>;
+                                                host = <0x17a>;
+                                                carveouts = <0x177 0x178 0x179>;
                                                 mbox = <0x11f>;
                                                 timer = <0x77 0x78>;
-                                                elfload = <0x179>;
+                                                elfload = <0x17b>;
                                         };
                                 };
                         };

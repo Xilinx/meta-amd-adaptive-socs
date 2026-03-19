@@ -2261,8 +2261,8 @@
         };
 
         chosen {
-                stdout-path = "serial0:115200n8";
-                bootargs = "console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8 root=/dev/ram0 rw init_fatal_sh=1 cma=1000M";
+                stdout-path = "serial0:115200";
+                bootargs = "console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8";
         };
 
         aliases {
@@ -2463,8 +2463,6 @@
                 noc_lpddr0_ddr_memory = "/memory@00000000";
                 noc_lpddr1_ddr_memory = "/memory@50000000000";
                 noc_lpddr2_ddr_memory = "/memory@60000000000";
-                cma_bank150000000000 = "/reserved-memory/cma_bank1@50000000000";
-                cma_bank260000000000 = "/reserved-memory/cma_bank2@60000000000";
                 gic = "/axi/interrupt-controller@f9000000";
         };
 
@@ -2473,7 +2471,7 @@
                 #size-cells = <0x2>;
                 #address-cells = <0x2>;
 
-                cma_bank150000000000: cma_bank1@50000000000 {
+                cma_bank1@50000000000 {
                         phandle = <0x16f>;
                         compatible = "shared-dma-pool";
                         reusable;
@@ -2481,7 +2479,7 @@
                         reg = <0x500 0x0 0x0 0xc0000000>;
                 };
 
-                cma_bank260000000000: cma_bank2@60000000000 {
+                cma_bank2@60000000000 {
                         phandle = <0x170>;
                         compatible = "shared-dma-pool";
                         reusable;
@@ -2494,12 +2492,9 @@
 
                 APU_Linux {
                         compatible = "openamp,domain-v1";
-                        cpus = <&cpus_a72 0x1 0x80000003>;
+                        cpus = <&cpus_a72 0xf 0x80000003>;
                         os,type = "linux";
-                        access = <&cma_bank150000000000 0x0>,
-                         <&cma_bank260000000000 0x0>;
                         reserved-memory = <0x16f 0x170>;
-                        access-json = "[{\"dev\": \"cma_bank1\", \"flags\": 0}, {\"dev\": \"cma_bank2\", \"flags\": 0}]";
                 };
         };
 };

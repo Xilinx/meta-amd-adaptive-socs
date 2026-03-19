@@ -3544,6 +3544,11 @@
                         reserved-memory = <0x288 0x289 0x28a 0x28b 0x28c 0x28d 0x28e 0x28f 0x290 0x291>;
                         memory = <0x0 0x0 0x0 0x80000000 0x8 0x0 0x1 0x80000000 0x500 0x0 0x2 0x0 0x600 0x0 0x1 0x0>;
 
+                        chosen {
+                                stdout-path = "serial1:115200n8";
+                                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
+                        };
+
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
 
@@ -3590,6 +3595,13 @@
                         rpu_pd_val = <0xc9 0x181100bf>;
                         cpu_config_str = "split";
                         core_num = "0";
+
+                        chosen {
+                                stdout-path = "serial0:115200n8";
+                                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
+                                zephyr,console = "serial0";
+                                zephyr,shell-uart = "serial0";
+                        };
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";

@@ -4102,6 +4102,119 @@
                 bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
         };
 
+        domains {
+
+                APU_Linux {
+                        phandle = <0x297>;
+                        compatible = "openamp,domain-v1";
+                        cpus = <&cpus_a78 0xff 0x3>;
+                        os,type = "linux";
+                        reserved-memory = <0x288 0x289 0x28a 0x28b 0x28c 0x28d 0x28e 0x28f 0x290 0x291>;
+                        memory = <0x0 0x0 0x0 0x80000000 0x8 0x0 0x1 0x80000000 0x500 0x0 0x2 0x0 0x600 0x0 0x1 0x0>;
+
+                        chosen {
+                                stdout-path = "serial1:115200n8";
+                                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
+                        };
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+
+                                remoteproc-relation {
+                                        compatible = "openamp,remoteproc-v2";
+
+                                        relation0 {
+                                                remote = <0x292>;
+                                                elfload = <0x2b 0x2c 0x2d 0x290 0x291>;
+                                        };
+                                };
+
+                                rpmsg-relation {
+                                        compatible = "openamp,rpmsg-v1";
+
+                                        relation0 {
+                                                remote = <0x292>;
+                                                carveouts = <0x28d 0x28e 0x28f>;
+                                                mbox = <0x1e2>;
+                                        };
+                                };
+
+                                libmetal-relation {
+                                        compatible = "libmetal,ipc-v1";
+
+                                        relation0 {
+                                                remote = <0x293>;
+                                                carveouts = <0x294 0x295 0x296>;
+                                                mbox = <0x1a4>;
+                                                timer = <0xa0>;
+                                        };
+                                };
+                        };
+                };
+
+                RPU_Zephyr {
+                        phandle = <0x292>;
+                        compatible = "openamp,domain-v1";
+                        os,type = "zephyr";
+                        xlnx,ddr-boot = <0x1>;
+                        xlnx,zephyr,mems = "ddrboot@9800100";
+                        sram = <0x0 0x9800100 0x0 0x5ff00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
+                        reserved-memory = <0x290>;
+                        rpu_pd_val = <0xc9 0x181100bf 0xc9 0x183180cb 0xc9 0x183180cc 0xc9 0x183180cd>;
+                        cpu_config_str = "split";
+                        core_num = "0";
+
+                        chosen {
+                                stdout-path = "serial0:115200n8";
+                                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
+                                zephyr,console = "serial0";
+                                zephyr,shell-uart = "serial0";
+                        };
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+                                cluster_cpu = "cortexr52_0";
+
+                                rpmsg-relation {
+                                        compatible = "openamp,rpmsg-v1";
+
+                                        relation0 {
+                                                host = <0x297>;
+                                                mbox = <0x1f0>;
+                                                carveouts = <0x28d 0x28e 0x28f>;
+                                        };
+                                };
+                        };
+                };
+
+                RPU_1_BM {
+                        phandle = <0x293>;
+                        compatible = "openamp,domain-v1";
+                        os,type = "baremetal";
+                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xeba80000 0x0 0x10000 0x0 0xeba90000 0x0 0x8000 0x0 0xebaa0000 0x0 0x8000>;
+                        rpu_pd_val = <0xc9 0x181100c0>;
+                        cpu_config_str = "split";
+                        core_num = "1";
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+                                cluster_cpu = "cortexr52_1";
+
+                                libmetal-relation {
+                                        compatible = "libmetal,ipc-v1";
+
+                                        relation0 {
+                                                host = <0x297>;
+                                                carveouts = <0x294 0x295 0x296>;
+                                                mbox = <0x196>;
+                                                timer = <0x9f 0xa0>;
+                                                elfload = <0x298>;
+                                        };
+                                };
+                        };
+                };
+        };
+
         reserved-memory {
                 #size-cells = <0x2>;
                 #address-cells = <0x2>;
@@ -4622,107 +4735,6 @@
                 r52_7 = "/remoteproc@ebb80000/r52f@1";
                 r52_8 = "/remoteproc@ebc00000/r52f@0";
                 r52_9 = "/remoteproc@ebc00000/r52f@1";
-        };
-
-        domains {
-
-                APU_Linux {
-                        phandle = <0x297>;
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_a78 0xff 0x3>;
-                        os,type = "linux";
-                        reserved-memory = <0x288 0x289 0x28a 0x28b 0x28c 0x28d 0x28e 0x28f 0x290 0x291>;
-                        memory = <0x0 0x0 0x0 0x80000000 0x8 0x0 0x1 0x80000000 0x500 0x0 0x2 0x0 0x600 0x0 0x1 0x0>;
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-
-                                        relation0 {
-                                                remote = <0x292>;
-                                                elfload = <0x2b 0x2c 0x2d 0x290 0x291>;
-                                        };
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                remote = <0x292>;
-                                                carveouts = <0x28d 0x28e 0x28f>;
-                                                mbox = <0x1e2>;
-                                        };
-                                };
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                remote = <0x293>;
-                                                carveouts = <0x294 0x295 0x296>;
-                                                mbox = <0x1a4>;
-                                                timer = <0xa0>;
-                                        };
-                                };
-                        };
-                };
-
-                RPU_Zephyr {
-                        phandle = <0x292>;
-                        compatible = "openamp,domain-v1";
-                        os,type = "zephyr";
-                        xlnx,ddr-boot = <0x1>;
-                        xlnx,zephyr,mems = "ddrboot@9800100";
-                        sram = <0x0 0x9800100 0x0 0x5ff00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
-                        reserved-memory = <0x290>;
-                        rpu_pd_val = <0xc9 0x181100bf 0xc9 0x183180cb 0xc9 0x183180cc 0xc9 0x183180cd>;
-                        cpu_config_str = "split";
-                        core_num = "0";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "cortexr52_0";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                host = <0x297>;
-                                                mbox = <0x1f0>;
-                                                carveouts = <0x28d 0x28e 0x28f>;
-                                        };
-                                };
-                        };
-                };
-
-                RPU_1_BM {
-                        phandle = <0x293>;
-                        compatible = "openamp,domain-v1";
-                        os,type = "baremetal";
-                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xeba80000 0x0 0x10000 0x0 0xeba90000 0x0 0x8000 0x0 0xebaa0000 0x0 0x8000>;
-                        rpu_pd_val = <0xc9 0x181100c0>;
-                        cpu_config_str = "split";
-                        core_num = "1";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "cortexr52_1";
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                host = <0x297>;
-                                                carveouts = <0x294 0x295 0x296>;
-                                                mbox = <0x196>;
-                                                timer = <0x9f 0xa0>;
-                                                elfload = <0x298>;
-                                        };
-                                };
-                        };
-                };
         };
 
         remoteproc@eba00000 {
