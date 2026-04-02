@@ -2001,6 +2001,73 @@
                         interrupt-parent = <&imux>;
                         compatible = "xlnx,zocl-versal";
                 };
+
+                leds {
+                        compatible = "gpio-leds";
+
+                        pl_led0: led-0 {
+                                phandle = <0x187>;
+                                label = "pl_led0";
+                                default-state = "off";
+                        };
+
+                        pl_led1: led-1 {
+                                phandle = <0x188>;
+                                label = "pl_led1";
+                                default-state = "off";
+                        };
+
+                        pl_led2: led-2 {
+                                phandle = <0x189>;
+                                label = "pl_led2";
+                                default-state = "off";
+                        };
+
+                        pl_led3: led-3 {
+                                phandle = <0x18a>;
+                                label = "pl_led3";
+                                default-state = "off";
+                        };
+                };
+
+                pl_gpio_keys: gpio-keys {
+                        phandle = <0x18b>;
+                        compatible = "gpio-keys-polled";
+                        label = "pl-gpio-keys";
+                        poll-interval = <0x64>;
+
+                        pl_dip_sw0 {
+                                label = "pl_dip_sw0";
+                                linux,code = <0x100>;
+                        };
+
+                        pl_dip_sw1 {
+                                label = "pl_dip_sw1";
+                                linux,code = <0x101>;
+                        };
+
+                        pl_dip_sw2 {
+                                label = "pl_dip_sw2";
+                                linux,code = <0x102>;
+                        };
+
+                        pl_dip_sw3 {
+                                label = "pl_dip_sw3";
+                                linux,code = <0x103>;
+                        };
+
+                        pl_pb0 {
+                                label = "pl_pb0";
+                                linux,code = <0x104>;
+                                debounce-interval = <0xa>;
+                        };
+
+                        pl_pb1 {
+                                label = "pl_pb1";
+                                linux,code = <0x105>;
+                                debounce-interval = <0xa>;
+                        };
+                };
         };
 
         chosen {
@@ -2141,5 +2208,10 @@
                 amba_pl = "/amba_pl";
                 misc_clk_0 = "/amba_pl/misc_clk_0";
                 aie_core_ref_clk_0 = "/amba_pl/aie_core_ref_clk_0";
+                pl_led0 = "/amba_pl/leds/led-0";
+                pl_led1 = "/amba_pl/leds/led-1";
+                pl_led2 = "/amba_pl/leds/led-2";
+                pl_led3 = "/amba_pl/leds/led-3";
+                pl_gpio_keys = "/amba_pl/gpio-keys";
         };
 };

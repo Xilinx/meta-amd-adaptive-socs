@@ -2300,19 +2300,19 @@
                 };
 
                 libmetal_uio_desc0@99c8000 {
-                        phandle = <0x18f>;
+                        phandle = <0x194>;
                         compatible = "uio";
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
                 libmetal_uio_desc1@99cc000 {
-                        phandle = <0x190>;
+                        phandle = <0x195>;
                         compatible = "uio";
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
                 libmetal_uio_data@99d0000 {
-                        phandle = <0x191>;
+                        phandle = <0x196>;
                         compatible = "uio";
                         reg = <0x0 0x99d0000 0x0 0x40000>;
                 };
@@ -2625,6 +2625,7 @@
                         xlnx,tri-default = <0xffffffff>;
                         xlnx,name = "axi_gpio_0";
                         xlnx,all-inputs = <0x0>;
+                        gpio-line-names = "pl_led0", "pl_led1", "pl_led2", "pl_led3";
                 };
 
                 axi_gpio_1: gpio@a6020000 {
@@ -2655,6 +2656,7 @@
                         xlnx,tri-default = <0xffffffff>;
                         xlnx,name = "axi_gpio_1";
                         xlnx,all-inputs = <0x1>;
+                        gpio-line-names = "pl_pb0", "pl_pb1";
                 };
 
                 axi_gpio_2: gpio@a6030000 {
@@ -2685,6 +2687,7 @@
                         xlnx,tri-default = <0xffffffff>;
                         xlnx,name = "axi_gpio_2";
                         xlnx,all-inputs = <0x1>;
+                        gpio-line-names = "pl_dip_sw0", "pl_dip_sw1", "pl_dip_sw2", "pl_dip_sw3";
                 };
 
                 axi_uart16550_0: serial@a6000000 {
@@ -2724,6 +2727,83 @@
                         interrupts = <0x0 0x89 0x4 0x0 0x90 0x4 0x0 0x91 0x4 0x0 0x92 0x4 0x0 0x93 0x4 0x0 0x94 0x4 0x0 0x95 0x4 0x0 0x96 0x4>;
                         interrupt-parent = <&gic_r5>;
                         compatible = "xlnx,zocl-versal";
+                };
+
+                leds {
+                        compatible = "gpio-leds";
+
+                        pl_led0: led-0 {
+                                phandle = <0x187>;
+                                label = "pl_led0";
+                                gpios = <&axi_gpio_0 0x0 0x0>;
+                                default-state = "off";
+                        };
+
+                        pl_led1: led-1 {
+                                phandle = <0x188>;
+                                label = "pl_led1";
+                                gpios = <&axi_gpio_0 0x1 0x0>;
+                                default-state = "off";
+                        };
+
+                        pl_led2: led-2 {
+                                phandle = <0x189>;
+                                label = "pl_led2";
+                                gpios = <&axi_gpio_0 0x2 0x0>;
+                                default-state = "off";
+                        };
+
+                        pl_led3: led-3 {
+                                phandle = <0x18a>;
+                                label = "pl_led3";
+                                gpios = <&axi_gpio_0 0x3 0x0>;
+                                default-state = "off";
+                        };
+                };
+
+                pl_gpio_keys: gpio-keys {
+                        phandle = <0x18b>;
+                        compatible = "gpio-keys-polled";
+                        label = "pl-gpio-keys";
+                        poll-interval = <0x64>;
+
+                        pl_dip_sw0 {
+                                label = "pl_dip_sw0";
+                                gpios = <&axi_gpio_2 0x0 0x0>;
+                                linux,code = <0x100>;
+                        };
+
+                        pl_dip_sw1 {
+                                label = "pl_dip_sw1";
+                                gpios = <&axi_gpio_2 0x1 0x0>;
+                                linux,code = <0x101>;
+                        };
+
+                        pl_dip_sw2 {
+                                label = "pl_dip_sw2";
+                                gpios = <&axi_gpio_2 0x2 0x0>;
+                                linux,code = <0x102>;
+                        };
+
+                        pl_dip_sw3 {
+                                label = "pl_dip_sw3";
+                                gpios = <&axi_gpio_2 0x3 0x0>;
+                                linux,code = <0x103>;
+                        };
+
+                        pl_pb0 {
+                                label = "pl_pb0";
+                                gpios = <&axi_gpio_1 0x0 0x0>;
+                                linux,code = <0x104>;
+                                debounce-interval = <0xa>;
+                        };
+
+                        pl_pb1 {
+                                label = "pl_pb1";
+                                gpios = <&axi_gpio_1 0x1 0x0>;
+                                linux,code = <0x105>;
+                                debounce-interval = <0xa>;
+                        };
                 };
         };
 
@@ -2983,6 +3063,11 @@
                 axi_gpio_2 = "/amba_pl/gpio@a6030000";
                 axi_uart16550_0 = "/amba_pl/serial@a6000000";
                 aie_core_ref_clk_0 = "/amba_pl/aie_core_ref_clk_0";
+                pl_led0 = "/amba_pl/leds/led-0";
+                pl_led1 = "/amba_pl/leds/led-1";
+                pl_led2 = "/amba_pl/leds/led-2";
+                pl_led3 = "/amba_pl/leds/led-3";
+                pl_gpio_keys = "/amba_pl/gpio-keys";
                 noc_lpddr0_ddr_memory = "/memory@00000000";
                 axi_bram_ctrl_0_memory = "/memory@a4000000";
                 CIPS_0_pspmc_0_psv_ocm_ram_0_memory = "/memory@FFFC0000";
@@ -2994,7 +3079,7 @@
                 #address-cells = <0x2>;
 
                 cma_bank1@50000000000 {
-                        phandle = <0x187>;
+                        phandle = <0x18c>;
                         compatible = "shared-dma-pool";
                         reusable;
                         linux,cma-default;
@@ -3002,7 +3087,7 @@
                 };
 
                 cma_bank2@60000000000 {
-                        phandle = <0x188>;
+                        phandle = <0x18d>;
                         compatible = "shared-dma-pool";
                         reusable;
                         linux,cma-default;
@@ -3010,31 +3095,31 @@
                 };
 
                 rproc0@9800000 {
-                        phandle = <0x18c>;
+                        phandle = <0x191>;
                         no-map;
                         reg = <0x0 0x9800000 0x0 0x60000>;
                 };
 
                 vdev0vring0@9860000 {
-                        phandle = <0x18b>;
+                        phandle = <0x190>;
                         no-map;
                         reg = <0x0 0x9860000 0x0 0x4000>;
                 };
 
                 vdev0vring1@9864000 {
-                        phandle = <0x18a>;
+                        phandle = <0x18f>;
                         no-map;
                         reg = <0x0 0x9864000 0x0 0x4000>;
                 };
 
                 vdev0buffer@9868000 {
-                        phandle = <0x189>;
+                        phandle = <0x18e>;
                         no-map;
                         reg = <0x0 0x9868000 0x0 0x100000>;
                 };
 
                 libmetal_elf@9968000 {
-                        phandle = <0x193>;
+                        phandle = <0x198>;
                         no-map;
                         reg = <0x0 0x9968000 0x0 0x60000>;
                 };
@@ -3058,10 +3143,10 @@
         domains {
 
                 APU_Linux {
-                        phandle = <0x192>;
+                        phandle = <0x197>;
                         compatible = "openamp,domain-v1";
                         os,type = "linux";
-                        reserved-memory = <0x187 0x188 0x189 0x18a 0x18b 0x18c>;
+                        reserved-memory = <0x18c 0x18d 0x18e 0x18f 0x190 0x191>;
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
@@ -3070,8 +3155,8 @@
                                         compatible = "openamp,remoteproc-v2";
 
                                         relation0 {
-                                                remote = <0x18d>;
-                                                elfload = <0x8d 0x165 0x18c>;
+                                                remote = <0x192>;
+                                                elfload = <0x8d 0x165 0x191>;
                                         };
                                 };
 
@@ -3079,9 +3164,9 @@
                                         compatible = "openamp,rpmsg-v1";
 
                                         relation0 {
-                                                remote = <0x18d>;
+                                                remote = <0x192>;
                                                 mbox = <0x133>;
-                                                carveouts = <0x18b 0x18a 0x189>;
+                                                carveouts = <0x190 0x18f 0x18e>;
                                                 timer = <0x75 0x76>;
                                         };
                                 };
@@ -3090,8 +3175,8 @@
                                         compatible = "libmetal,ipc-v1";
 
                                         relation0 {
-                                                remote = <0x18e>;
-                                                carveouts = <0x18f 0x190 0x191>;
+                                                remote = <0x193>;
+                                                carveouts = <0x194 0x195 0x196>;
                                                 mbox = <0x148>;
                                                 timer = <0x77>;
                                         };
@@ -3100,12 +3185,12 @@
                 };
 
                 R5_0_FREERTOS {
-                        phandle = <0x18d>;
+                        phandle = <0x192>;
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_r5_0 0x1 0x0>;
                         os,type = "freertos";
                         sram = <0x0 0x9800000 0x0 0x6000 0x0 0xffe00000 0x0 0x10000>;
-                        reserved-memory = <0x189 0x18a 0x18b 0x18c>;
+                        reserved-memory = <0x18e 0x18f 0x190 0x191>;
                         rpu_pd_val = <0x93 0x18110005>;
                         cpu_config_str = "split";
                         core_num = "0";
@@ -3118,9 +3203,9 @@
                                         compatible = "openamp,rpmsg-v1";
 
                                         relation0 {
-                                                host = <0x192>;
+                                                host = <0x197>;
                                                 mbox = <0x121>;
-                                                carveouts = <0x18b 0x18a 0x189>;
+                                                carveouts = <0x190 0x18f 0x18e>;
                                                 timer = <0x78>;
                                         };
                                 };
@@ -3128,7 +3213,7 @@
                 };
 
                 R5_1_BAREMETAL {
-                        phandle = <0x18e>;
+                        phandle = <0x193>;
                         compatible = "openamp,domain-v1";
                         os,type = "baremetal";
                         sram = <0x0 0x9968000 0x0 0x60000 0x0 0xffe90000 0x0 0x10000>;
@@ -3140,11 +3225,11 @@
                                         compatible = "libmetal,ipc-v1";
 
                                         relation0 {
-                                                host = <0x192>;
-                                                carveouts = <0x18f 0x190 0x191>;
+                                                host = <0x197>;
+                                                carveouts = <0x194 0x195 0x196>;
                                                 mbox = <0x12d>;
                                                 timer = <0x77 0x78>;
-                                                elfload = <0x193>;
+                                                elfload = <0x198>;
                                         };
                                 };
                         };

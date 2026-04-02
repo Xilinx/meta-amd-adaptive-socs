@@ -106,6 +106,7 @@
         };
 
         axi_gpio_0: gpio@a6010000 {
+                gpio-line-names = "pl_led0", "pl_led1", "pl_led2", "pl_led3";
                 xlnx,all-inputs = <0x0>;
                 xlnx,name = "axi_gpio_0";
                 xlnx,tri-default = <0xffffffff>;
@@ -134,6 +135,7 @@
         };
 
         axi_gpio_1: gpio@a6020000 {
+                gpio-line-names = "pl_pb0", "pl_pb1";
                 xlnx,all-inputs = <0x1>;
                 xlnx,name = "axi_gpio_1";
                 xlnx,tri-default = <0xffffffff>;
@@ -162,6 +164,7 @@
         };
 
         axi_gpio_2: gpio@a6030000 {
+                gpio-line-names = "pl_dip_sw0", "pl_dip_sw1", "pl_dip_sw2", "pl_dip_sw3";
                 xlnx,all-inputs = <0x1>;
                 xlnx,name = "axi_gpio_2";
                 xlnx,tri-default = <0xffffffff>;
@@ -223,6 +226,78 @@
                 compatible = "xlnx,zocl-versal";
                 interrupt-parent = <&gic>;
                 interrupts = <0x0 0x89 0x4 0x0 0x90 0x4 0x0 0x91 0x4 0x0 0x92 0x4 0x0 0x93 0x4 0x0 0x94 0x4 0x0 0x95 0x4 0x0 0x96 0x4>;
+        };
+
+        leds {
+                compatible = "gpio-leds";
+
+                pl_led0: led-0 {
+                        default-state = "off";
+                        gpios = <&axi_gpio_0 0x0 0x0>;
+                        label = "pl_led0";
+                };
+
+                pl_led1: led-1 {
+                        default-state = "off";
+                        gpios = <&axi_gpio_0 0x1 0x0>;
+                        label = "pl_led1";
+                };
+
+                pl_led2: led-2 {
+                        default-state = "off";
+                        gpios = <&axi_gpio_0 0x2 0x0>;
+                        label = "pl_led2";
+                };
+
+                pl_led3: led-3 {
+                        default-state = "off";
+                        gpios = <&axi_gpio_0 0x3 0x0>;
+                        label = "pl_led3";
+                };
+        };
+
+        pl_gpio_keys: gpio-keys {
+                poll-interval = <0x64>;
+                label = "pl-gpio-keys";
+                compatible = "gpio-keys-polled";
+
+                pl_dip_sw0 {
+                        linux,code = <0x100>;
+                        gpios = <&axi_gpio_2 0x0 0x0>;
+                        label = "pl_dip_sw0";
+                };
+
+                pl_dip_sw1 {
+                        linux,code = <0x101>;
+                        gpios = <&axi_gpio_2 0x1 0x0>;
+                        label = "pl_dip_sw1";
+                };
+
+                pl_dip_sw2 {
+                        linux,code = <0x102>;
+                        gpios = <&axi_gpio_2 0x2 0x0>;
+                        label = "pl_dip_sw2";
+                };
+
+                pl_dip_sw3 {
+                        linux,code = <0x103>;
+                        gpios = <&axi_gpio_2 0x3 0x0>;
+                        label = "pl_dip_sw3";
+                };
+
+                pl_pb0 {
+                        debounce-interval = <0xa>;
+                        linux,code = <0x104>;
+                        gpios = <&axi_gpio_1 0x0 0x0>;
+                        label = "pl_pb0";
+                };
+
+                pl_pb1 {
+                        debounce-interval = <0xa>;
+                        linux,code = <0x105>;
+                        gpios = <&axi_gpio_1 0x1 0x0>;
+                        label = "pl_pb1";
+                };
         };
 };
 
