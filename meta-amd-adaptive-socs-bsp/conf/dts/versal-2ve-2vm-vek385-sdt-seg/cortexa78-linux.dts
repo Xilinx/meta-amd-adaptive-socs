@@ -505,7 +505,7 @@
                         #power-domain-cells = <0x1>;
 
                         versal2_reset: reset-controller {
-                                phandle = <0xf6>;
+                                phandle = <0xf1>;
                                 compatible = "xlnx,versal-reset";
                                 #reset-cells = <0x1>;
                         };
@@ -796,9 +796,12 @@
                                         interrupt-names = "JOB", "MMU", "GPU";
                                         interrupts = <0x0 0xb4 0x4 0x0 0xb4 0x4 0x0 0xb4 0x4>;
                                         arbiter-if = <&gpu_aw_message_a_0>;
+                                        reset-names = "gpu", "gpu_recov";
                                         system-coherency = <0x1f>;
                                         physical-memory-group-manager = <&gpu_physical_memory_group_manager>;
                                         clocks = <&versal2_clk 0xdd>;
+                                        resets = <&versal2_reset 0xc10411a>,
+                                         <&versal2_reset 0xc10411b>;
                                 };
                         };
                 };
@@ -956,7 +959,7 @@
                                         reg = <0xc>;
 
                                         dc_out_0: endpoint {
-                                                phandle = <0xf1>;
+                                                phandle = <0xf2>;
                                                 remote-endpoint = <&dptx_in_0>;
                                         };
                                 };
@@ -965,7 +968,7 @@
                                         reg = <0xd>;
 
                                         dc_out_1: endpoint {
-                                                phandle = <0xf2>;
+                                                phandle = <0xf3>;
                                                 remote-endpoint = <&dptx_in_1>;
                                         };
                                 };
@@ -974,7 +977,7 @@
                                         reg = <0xe>;
 
                                         dc_out_2: endpoint {
-                                                phandle = <0xf3>;
+                                                phandle = <0xf4>;
                                                 remote-endpoint = <&dptx_in_2>;
                                         };
                                 };
@@ -983,7 +986,7 @@
                                         reg = <0xf>;
 
                                         dc_out_3: endpoint {
-                                                phandle = <0xf4>;
+                                                phandle = <0xf5>;
                                                 remote-endpoint = <&dptx_in_3>;
                                         };
                                 };
@@ -3835,7 +3838,7 @@
         };
 
         clk50: clk50 {
-                phandle = <0xf5>;
+                phandle = <0xf6>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x2faf080>;
