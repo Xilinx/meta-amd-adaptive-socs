@@ -383,6 +383,7 @@
                         reg = <0xe0001000 0x1000>;
                         interrupts = <0x0 0x32 0x4>;
                         interrupt-parent = <&intc>;
+                        device_type = "serial";
                         xlnx,clock-freq = <0x2faf080>;
                         xlnx,has-modem = <0x0>;
                         xlnx,ip-name = "ps7_uart";
@@ -1171,6 +1172,7 @@
                         clocks = <&clkc 0xf>;
                         xlnx,all-outputs-2 = <0x0>;
                         gpio-controller;
+                        device_type = "gpio";
                         xlnx,interrupt-present = <0x0>;
                         xlnx,gpio2-board-interface = "Custom";
                         xlnx,edk-iptype = "PERIPHERAL";
@@ -1187,9 +1189,12 @@
 
         axi_bram_ctrl_0_memory: memory@40000000 {
                 phandle = <0x2>;
+                ranges = <0x0 0x40000000 0x2000>;
                 compatible = "xlnx,axi-bram-ctrl-4.1";
+                #address-cells = <0x1>;
                 xlnx,ip-name = "axi_bram_ctrl";
                 device_type = "memory";
+                #size-cells = <0x1>;
                 memory_type = "memory";
                 reg = <0x40000000 0x2000>;
         };
