@@ -10419,6 +10419,47 @@
                 #size-cells = <0x2>;
                 #address-cells = <0x2>;
 
+                plm_reserved_memory: plm_reserved_memory@00000000 {
+                        phandle = <0x28e>;
+                        label = "plm_reserved_memory";
+                        no-map;
+                        reg = <0x0 0x0 0x0 0x1000000>;
+                };
+
+                tfa_reserved_memory: tfa_reserved_memory@1000000 {
+                        phandle = <0x28f>;
+                        label = "tfa_reserved_memory";
+                        no-map;
+                        reg = <0x0 0x1000000 0x0 0x600000>;
+                };
+
+                cma_reserved_0840000000: cma_reserved@0840000000 {
+                        phandle = <0x290>;
+                        label = "cma_reserved_0840000000";
+                        compatible = "shared-dma-pool";
+                        reusable;
+                        linux,cma-default;
+                        reg = <0x8 0x40000000 0x0 0x40000000>;
+                };
+
+                cma_reserved_50000000000: cma_reserved@50000000000 {
+                        phandle = <0x291>;
+                        label = "cma_reserved_50000000000";
+                        compatible = "shared-dma-pool";
+                        reusable;
+                        linux,cma-default;
+                        reg = <0x500 0x0 0x1 0x0>;
+                };
+
+                cma_reserved_60000000000: cma_reserved@60000000000 {
+                        phandle = <0x292>;
+                        label = "cma_reserved_60000000000";
+                        compatible = "shared-dma-pool";
+                        reusable;
+                        linux,cma-default;
+                        reg = <0x600 0x0 0x0 0x80000000>;
+                };
+
                 ddrboot: ddrboot@9800100 {
                         phandle = <0x289>;
                         label = "ddrboot";
@@ -10448,51 +10489,10 @@
                 };
 
                 rsctbl: rsctbl@9800000 {
-                        phandle = <0x28e>;
+                        phandle = <0x293>;
                         label = "rsctbl";
                         no-map;
                         reg = <0x0 0x9800000 0x0 0x100>;
-                };
-
-                plm_reserved_memory: plm_reserved_memory@00000000 {
-                        phandle = <0x28f>;
-                        label = "plm_reserved_memory";
-                        no-map;
-                        reg = <0x0 0x0 0x0 0x1000000>;
-                };
-
-                tfa_reserved_memory: tfa_reserved_memory@1000000 {
-                        phandle = <0x290>;
-                        label = "tfa_reserved_memory";
-                        no-map;
-                        reg = <0x0 0x1000000 0x0 0x600000>;
-                };
-
-                cma_reserved_0840000000: cma_reserved@0840000000 {
-                        phandle = <0x291>;
-                        label = "cma_reserved_0840000000";
-                        compatible = "shared-dma-pool";
-                        reusable;
-                        linux,cma-default;
-                        reg = <0x8 0x40000000 0x0 0x40000000>;
-                };
-
-                cma_reserved_50000000000: cma_reserved@50000000000 {
-                        phandle = <0x292>;
-                        label = "cma_reserved_50000000000";
-                        compatible = "shared-dma-pool";
-                        reusable;
-                        linux,cma-default;
-                        reg = <0x500 0x0 0x1 0x0>;
-                };
-
-                cma_reserved_60000000000: cma_reserved@60000000000 {
-                        phandle = <0x293>;
-                        label = "cma_reserved_60000000000";
-                        compatible = "shared-dma-pool";
-                        reusable;
-                        linux,cma-default;
-                        reg = <0x600 0x0 0x0 0x80000000>;
                 };
 
                 libmetal_elf: libmetal_elf@9968000 {
@@ -11155,16 +11155,16 @@
                 ps_wizard_0_ps11_0_ocm_ram_2_memory = "/memory@BBE00000";
                 ps_wizard_0_ps11_0_ocm_ram_3_memory = "/memory@BBE80000";
                 usb_hub_delay = "/enable-delay";
-                ddrboot = "/reserved-memory/ddrboot@9800100";
-                vdev0vring0 = "/reserved-memory/vdev0vring0@9860000";
-                vdev0vring1 = "/reserved-memory/vdev0vring1@9864000";
-                vdev0buffer = "/reserved-memory/vdev0buffer@9868000";
-                rsctbl = "/reserved-memory/rsctbl@9800000";
                 plm_reserved_memory = "/reserved-memory/plm_reserved_memory@00000000";
                 tfa_reserved_memory = "/reserved-memory/tfa_reserved_memory@1000000";
                 cma_reserved_0840000000 = "/reserved-memory/cma_reserved@0840000000";
                 cma_reserved_50000000000 = "/reserved-memory/cma_reserved@50000000000";
                 cma_reserved_60000000000 = "/reserved-memory/cma_reserved@60000000000";
+                ddrboot = "/reserved-memory/ddrboot@9800100";
+                vdev0vring0 = "/reserved-memory/vdev0vring0@9860000";
+                vdev0vring1 = "/reserved-memory/vdev0vring1@9864000";
+                vdev0buffer = "/reserved-memory/vdev0buffer@9868000";
+                rsctbl = "/reserved-memory/rsctbl@9800000";
                 libmetal_elf = "/reserved-memory/libmetal_elf@9968000";
                 libmetal_desc0 = "/reserved-memory/libmetal_desc0@99c8000";
                 libmetal_desc1 = "/reserved-memory/libmetal_desc1@99cc000";
@@ -11214,8 +11214,8 @@
                         compatible = "openamp,domain-v1";
                         cpus = <&cpus_a78 0xff 0x3>;
                         os,type = "linux";
+                        reserved-memory = <0x28e 0x28f 0x290 0x291 0x292 0x28b 0x28c 0x28d 0x289 0x293>;
                         memory = <0x0 0x0 0x0 0x80000000 0x8 0x0 0x0 0x80000000 0x500 0x0 0x1 0x0 0x600 0x0 0x0 0x80000000>;
-                        reserved-memory = <0x28b 0x28c 0x28d 0x289 0x28e 0x28f 0x290 0x291 0x292 0x293>;
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
@@ -11225,7 +11225,7 @@
 
                                         relation0 {
                                                 remote = <0x294>;
-                                                elfload = <0x2b 0x2c 0x2d 0x289 0x28e>;
+                                                elfload = <0x2b 0x2c 0x2d 0x289 0x293>;
                                         };
                                 };
 
