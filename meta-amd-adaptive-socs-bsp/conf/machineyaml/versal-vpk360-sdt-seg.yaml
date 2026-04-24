@@ -1,0 +1,37 @@
+args:
+    - --hw-description https://edf.amd.com/sswreleases/rel-v2026.1/sdt/2026.1/2026.1_0422_1_04220616/external/versal-vpk360-sdt-seg/versal-vpk360-sdt-seg_2026.1_0422_1_04220616.tar.gz
+    - --machine-name versal-vpk360-sdt-seg
+    - -g full
+
+kconfig:
+    CONFIG_SUBSYSTEM_BOOTMODE_8: y
+
+machine:
+    pre:
+    post:
+        QEMU_HW_DTB_PS:
+            op: '='
+            val: "${QEMU_HW_DTB_PATH}/board-versal2-ps-vpk360.dtb"
+        QEMU_HW_DTB_PMC:
+            op: '='
+            val: "${QEMU_HW_DTB_PATH}/board-versal2-pmc-vpk360.dtb"
+        QEMU_FLASH_TYPE:
+            op: '='
+            val: 'ospi'
+        SPI_IMAGE_SIZE:
+            comment: 'OSPI flash size (256M)'
+            op: '='
+            val: '0x1000_0000'
+        QEMU_HW_BOOT_MODE:
+            op: '='
+            val: "8"
+        QEMU_HW_OSPI_FILE:
+            op: '='
+            val: "qemu-ospi-${MACHINE}.bin"
+        QEMU_SECONDARY_BOOT_MODE:
+            op: '='
+            val: '14'
+        QB_ROOTFS_OPT:
+            op: '='
+            val: "-drive if=sd,index=1,file=@ROOTFS@,format=raw"
+
