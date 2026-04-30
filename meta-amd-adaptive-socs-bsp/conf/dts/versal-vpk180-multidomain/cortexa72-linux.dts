@@ -2770,9 +2770,9 @@
                 APU_Linux {
                         phandle = <0x18c>;
                         compatible = "openamp,domain-v1";
-                        cpus = <&cpus_a72 0x1 0x80000003>;
-                        os,type = "linux";
                         reserved-memory = <0x183 0x184 0x185 0x186>;
+                        cpus = <&cpus_a72 0xf 0x80000003>;
+                        os,type = "linux";
 
                         chosen {
                                 bootargs = "console=ttyAMA0 earlycon=pl011,mmio32,0xFF000000,115200n8 versal_sysmon.secure_mode=1";
@@ -2818,9 +2818,9 @@
                 R5_0_FREERTOS {
                         phandle = <0x187>;
                         compatible = "openamp,domain-v1";
-                        os,type = "freertos";
                         sram = <0x0 0x9800000 0x0 0x6000 0x0 0xffe00000 0x0 0x10000>;
                         reserved-memory = <0x183 0x184 0x185 0x186>;
+                        os,type = "freertos";
                         rpu_pd_val = <0x90 0x18110005 0x90 0x1831800b 0x90 0x1831800c>;
                         cpu_config_str = "split";
                         core_num = "0";
@@ -2845,11 +2845,15 @@
                 R5_1_BAREMETAL {
                         phandle = <0x188>;
                         compatible = "openamp,domain-v1";
-                        os,type = "baremetal";
                         sram = <0x0 0x9968000 0x0 0x60000 0x0 0xffe90000 0x0 0x10000>;
+                        os,type = "baremetal";
+                        rpu_pd_val = <0x90 0x18110006>;
+                        cpu_config_str = "split";
+                        core_num = "1";
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
+                                cluster_cpu = "psv_cortexr5_1";
 
                                 libmetal-relation {
                                         compatible = "libmetal,ipc-v1";

@@ -11194,15 +11194,9 @@
                 APU_Linux {
                         phandle = <0x298>;
                         compatible = "openamp,domain-v1";
+                        reserved-memory = <0x289 0x28a 0x28b 0x28c 0x28d 0x28e 0x28f 0x290 0x291 0x292>;
                         cpus = <&cpus_a78 0xff 0x3>;
                         os,type = "linux";
-                        reserved-memory = <0x289 0x28a 0x28b 0x28c 0x28d 0x28e 0x28f 0x290 0x291 0x292>;
-                        memory = <0x0 0x0 0x0 0x80000000 0x8 0x0 0x1 0x80000000 0x500 0x0 0x2 0x0 0x600 0x0 0x1 0x0>;
-
-                        chosen {
-                                stdout-path = "serial1:115200n8";
-                                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
-                        };
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
@@ -11242,19 +11236,19 @@
                 RPU_Zephyr {
                         phandle = <0x293>;
                         compatible = "openamp,domain-v1";
-                        cpus = <&cpus_r52_0 0x1 0x80000003>;
-                        os,type = "zephyr";
                         xlnx,ddr-boot = <0x1>;
                         xlnx,zephyr,mems = "ddrboot@9800100";
                         sram = <0x0 0x9800100 0x0 0x5ff00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
                         reserved-memory = <0x291>;
+                        cpus = <&cpus_r52_0 0x1 0x80000003>;
+                        os,type = "zephyr";
                         rpu_pd_val = <0xc9 0x181100bf>;
                         cpu_config_str = "split";
                         core_num = "0";
 
                         chosen {
                                 stdout-path = "serial0:115200n8";
-                                bootargs = "earlycon=pl011,mmio32,0xf1930000 console=ttyAMA1,115200";
+                                bootargs = "earlycon=pl011,mmio32,0xf1920000 console=ttyAMA0,115200";
                                 zephyr,console = "serial0";
                                 zephyr,shell-uart = "serial0";
                         };
@@ -11278,9 +11272,9 @@
                 RPU_1_BM {
                         phandle = <0x294>;
                         compatible = "openamp,domain-v1";
+                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xeba80000 0x0 0x10000 0x0 0xeba90000 0x0 0x8000 0x0 0xebaa0000 0x0 0x8000>;
                         cpus = <&cpus_r52_1 0x2 0x80000003>;
                         os,type = "baremetal";
-                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xeba80000 0x0 0x10000 0x0 0xeba90000 0x0 0x8000 0x0 0xebaa0000 0x0 0x8000>;
                         rpu_pd_val = <0xc9 0x181100c0>;
                         cpu_config_str = "split";
                         core_num = "1";

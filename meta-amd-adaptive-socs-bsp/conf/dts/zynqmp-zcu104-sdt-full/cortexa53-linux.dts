@@ -2810,6 +2810,16 @@
                 gic = "/axi/interrupt-controller@f9010000";
         };
 
+        domains {
+
+                APU_Linux {
+                        compatible = "openamp,domain-v1";
+                        reserved-memory = <0x123>;
+                        cpus = <&cpus_a53 0xf 0x80000003>;
+                        os,type = "linux";
+                };
+        };
+
         reserved-memory {
                 ranges = <0x1>;
                 #size-cells = <0x2>;
@@ -2822,16 +2832,6 @@
                         reusable;
                         linux,cma-default;
                         reg = <0x0 0x0 0x0 0x2ee00000>;
-                };
-        };
-
-        domains {
-
-                APU_Linux {
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_a53 0xf 0x80000003>;
-                        os,type = "linux";
-                        reserved-memory = <0x123>;
                 };
         };
 };

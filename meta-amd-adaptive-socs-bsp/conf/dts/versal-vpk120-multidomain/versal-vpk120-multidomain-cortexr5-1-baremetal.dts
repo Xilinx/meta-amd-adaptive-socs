@@ -2911,6 +2911,106 @@
                 libmetal_data = "/reserved-memory/libmetal_data@99d0000";
         };
 
+        domains {
+
+                APU_Linux {
+                        phandle = <0x18c>;
+                        compatible = "openamp,domain-v1";
+                        reserved-memory = <0x183 0x184 0x185 0x186>;
+                        os,type = "linux";
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+
+                                remoteproc-relation {
+                                        compatible = "openamp,remoteproc-v2";
+
+                                        relation0 {
+                                                remote = <0x187>;
+                                                elfload = <0x8b 0x162 0x186>;
+                                        };
+                                };
+
+                                rpmsg-relation {
+                                        compatible = "openamp,rpmsg-v1";
+
+                                        relation0 {
+                                                remote = <0x187>;
+                                                mbox = <0x130>;
+                                                carveouts = <0x185 0x184 0x183>;
+                                                timer = <0x73 0x74>;
+                                        };
+                                };
+
+                                libmetal-relation {
+                                        compatible = "libmetal,ipc-v1";
+
+                                        relation0 {
+                                                remote = <0x188>;
+                                                carveouts = <0x189 0x18a 0x18b>;
+                                                mbox = <0x145>;
+                                                timer = <0x75>;
+                                        };
+                                };
+                        };
+                };
+
+                R5_0_FREERTOS {
+                        phandle = <0x187>;
+                        compatible = "openamp,domain-v1";
+                        sram = <0x0 0x9800000 0x0 0x6000 0x0 0xffe00000 0x0 0x10000>;
+                        reserved-memory = <0x183 0x184 0x185 0x186>;
+                        os,type = "freertos";
+                        rpu_pd_val = <0x90 0x18110005>;
+                        cpu_config_str = "split";
+                        core_num = "0";
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+                                cluster_cpu = "psv_cortexr5_0";
+
+                                rpmsg-relation {
+                                        compatible = "openamp,rpmsg-v1";
+
+                                        relation0 {
+                                                host = <0x18c>;
+                                                mbox = <0x11e>;
+                                                carveouts = <0x185 0x184 0x183>;
+                                                timer = <0x76>;
+                                        };
+                                };
+                        };
+                };
+
+                R5_1_BAREMETAL {
+                        phandle = <0x188>;
+                        compatible = "openamp,domain-v1";
+                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xffe90000 0x0 0x10000>;
+                        cpus = <&cpus_r5_1 0x2 0x80000003>;
+                        os,type = "baremetal";
+                        rpu_pd_val = <0x90 0x18110006>;
+                        cpu_config_str = "split";
+                        core_num = "1";
+
+                        domain-to-domain {
+                                compatible = "openamp,domain-to-domain-v1";
+                                cluster_cpu = "psv_cortexr5_1";
+
+                                libmetal-relation {
+                                        compatible = "libmetal,ipc-v1";
+
+                                        relation0 {
+                                                host = <0x18c>;
+                                                carveouts = <0x189 0x18a 0x18b>;
+                                                mbox = <0x12a>;
+                                                timer = <0x75 0x76>;
+                                                elfload = <0x18d>;
+                                        };
+                                };
+                        };
+                };
+        };
+
         reserved-memory {
                 ranges = <0x1>;
                 #size-cells = <0x2>;
@@ -2970,102 +3070,6 @@
                         label = "libmetal_data";
                         no-map;
                         reg = <0x0 0x99d0000 0x0 0x40000>;
-                };
-        };
-
-        domains {
-
-                APU_Linux {
-                        phandle = <0x18c>;
-                        compatible = "openamp,domain-v1";
-                        os,type = "linux";
-                        reserved-memory = <0x183 0x184 0x185 0x186>;
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-
-                                        relation0 {
-                                                remote = <0x187>;
-                                                elfload = <0x8b 0x162 0x186>;
-                                        };
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                remote = <0x187>;
-                                                mbox = <0x130>;
-                                                carveouts = <0x185 0x184 0x183>;
-                                                timer = <0x73 0x74>;
-                                        };
-                                };
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                remote = <0x188>;
-                                                carveouts = <0x189 0x18a 0x18b>;
-                                                mbox = <0x145>;
-                                                timer = <0x75>;
-                                        };
-                                };
-                        };
-                };
-
-                R5_0_FREERTOS {
-                        phandle = <0x187>;
-                        compatible = "openamp,domain-v1";
-                        os,type = "freertos";
-                        sram = <0x0 0x9800000 0x0 0x6000 0x0 0xffe00000 0x0 0x10000>;
-                        reserved-memory = <0x183 0x184 0x185 0x186>;
-                        rpu_pd_val = <0x90 0x18110005>;
-                        cpu_config_str = "split";
-                        core_num = "0";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "psv_cortexr5_0";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                host = <0x18c>;
-                                                mbox = <0x11e>;
-                                                carveouts = <0x185 0x184 0x183>;
-                                                timer = <0x76>;
-                                        };
-                                };
-                        };
-                };
-
-                R5_1_BAREMETAL {
-                        phandle = <0x188>;
-                        compatible = "openamp,domain-v1";
-                        cpus = <&cpus_r5_1 0x2 0x80000003>;
-                        os,type = "baremetal";
-                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xffe90000 0x0 0x10000>;
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                host = <0x18c>;
-                                                carveouts = <0x189 0x18a 0x18b>;
-                                                mbox = <0x12a>;
-                                                timer = <0x75 0x76>;
-                                                elfload = <0x18d>;
-                                        };
-                                };
-                        };
                 };
         };
 };
