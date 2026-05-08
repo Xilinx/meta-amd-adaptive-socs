@@ -17,6 +17,7 @@ SRC_URI:append:zynq-zc706-sdt-full = "\
     "
 SRC_URI:append:microblaze-v = "\
     file://u-boot-misc_mbv64.cfg \
+    file://mbv64.env \
     "
 
 # EFI variable storage on SPI flash - for machines with the UEFI
@@ -27,3 +28,13 @@ SRC_URI:append:versal-2ve-2vm-vek385-revb-multidomain = " file://efi-variable-sf
 SRC_URI:append:versal-vrk160-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-vrk165-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-2ve-2vm-vek386-multidomain = " file://efi-variable-sf.cfg"
+
+do_unpack:append:microblaze-v() {
+    bb.build.exec_func('do_env_config', d)
+}
+
+do_env_config() {
+    if [ -f "${WORKDIR}/mbv64.env" ]; then
+        cp ${WORKDIR}/mbv64.env ${S}/board/xilinx/mbv/mbv64.env
+    fi
+}
