@@ -1204,6 +1204,7 @@
                         phandle = <0xed>;
                         compatible = "xlnx,versal-sysmon";
                         status = "disabled";
+                        #io-channel-cells = <0x1>;
                         reg = <0x1 0x9270000 0x0 0x4000>;
                         xlnx,numchannels = [00];
                         #address-cells = <0x1>;
@@ -1215,6 +1216,7 @@
                         phandle = <0xee>;
                         compatible = "xlnx,versal-sysmon";
                         status = "disabled";
+                        #io-channel-cells = <0x1>;
                         reg = <0x1 0x11270000 0x0 0x4000>;
                         xlnx,numchannels = [00];
                         #address-cells = <0x1>;
@@ -1226,6 +1228,7 @@
                         phandle = <0xef>;
                         compatible = "xlnx,versal-sysmon";
                         status = "disabled";
+                        #io-channel-cells = <0x1>;
                         reg = <0x1 0x19270000 0x0 0x4000>;
                         xlnx,numchannels = [00];
                         #address-cells = <0x1>;
@@ -2015,19 +2018,19 @@
                         reg = <0x0 0xf11a0000 0x0 0x20000>;
                 };
 
-                libmetal_uio_desc0@99c8000 {
+                libmetal_uio_desc099c8000: libmetal_uio_desc0@99c8000 {
                         phandle = <0x18d>;
                         compatible = "uio";
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
-                libmetal_uio_desc1@99cc000 {
+                libmetal_uio_desc199cc000: libmetal_uio_desc1@99cc000 {
                         phandle = <0x18e>;
                         compatible = "uio";
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
-                libmetal_uio_data@99d0000 {
+                libmetal_uio_data99d0000: libmetal_uio_data@99d0000 {
                         phandle = <0x18f>;
                         compatible = "uio";
                         reg = <0x0 0x99d0000 0x0 0x40000>;
@@ -2820,6 +2823,9 @@
                 amba_pl = "/amba_pl";
                 axi_noc_0_ddr_memory = "/memory@00000000";
                 axi_noc_1_ddr_memory = "/memory@50000000000";
+                libmetal_uio_desc099c8000 = "/axi/libmetal_uio_desc0@99c8000";
+                libmetal_uio_desc199cc000 = "/axi/libmetal_uio_desc1@99cc000";
+                libmetal_uio_data99d0000 = "/axi/libmetal_uio_data@99d0000";
                 rproc0 = "/reserved-memory/rproc0@9800000";
                 vdev0vring0 = "/reserved-memory/vdev0vring0@9860000";
                 vdev0vring1 = "/reserved-memory/vdev0vring1@9864000";
@@ -2848,7 +2854,7 @@
 
                                         relation0 {
                                                 remote = <0x18b>;
-                                                elfload = <0x82 0x166 0x18a>;
+                                                elfload = <&rproc0>;
                                         };
                                 };
 
@@ -2924,7 +2930,7 @@
                                                 carveouts = <0x18d 0x18e 0x18f>;
                                                 mbox = <0x12e>;
                                                 timer = <0x6d 0x6e>;
-                                                elfload = <0x191>;
+                                                elfload = <&libmetal_elf>;
                                         };
                                 };
                         };
@@ -2932,9 +2938,9 @@
         };
 
         reserved-memory {
+                ranges;
                 #size-cells = <0x2>;
                 #address-cells = <0x2>;
-                ranges;
 
                 rproc0: rproc0@9800000 {
                         phandle = <0x18a>;
@@ -3013,7 +3019,7 @@
                          <&vdev0buffer>,
                          <&vdev0vring0>,
                          <&vdev0vring1>;
-                        mbox-names = "tx", "rx";
+                        mbox-names;
                 };
         };
 };

@@ -978,6 +978,7 @@
                         phandle = <0xbc>;
                         compatible = "xlnx,versal-sysmon";
                         status = "disabled";
+                        #io-channel-cells = <0x1>;
                         reg = <0x1 0x9270000 0x0 0x4000>;
                         xlnx,numchannels = [00];
                         #address-cells = <0x1>;
@@ -989,6 +990,7 @@
                         phandle = <0xbd>;
                         compatible = "xlnx,versal-sysmon";
                         status = "disabled";
+                        #io-channel-cells = <0x1>;
                         reg = <0x1 0x11270000 0x0 0x4000>;
                         xlnx,numchannels = [00];
                         #address-cells = <0x1>;
@@ -1000,6 +1002,7 @@
                         phandle = <0xbe>;
                         compatible = "xlnx,versal-sysmon";
                         status = "disabled";
+                        #io-channel-cells = <0x1>;
                         reg = <0x1 0x19270000 0x0 0x4000>;
                         xlnx,numchannels = [00];
                         #address-cells = <0x1>;
@@ -1809,19 +1812,19 @@
                         xlnx,ip-name = "psv_coresight";
                 };
 
-                libmetal_uio_desc0@99c8000 {
+                libmetal_uio_desc099c8000: libmetal_uio_desc0@99c8000 {
                         phandle = <0x159>;
                         compatible = "uio";
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
-                libmetal_uio_desc1@99cc000 {
+                libmetal_uio_desc199cc000: libmetal_uio_desc1@99cc000 {
                         phandle = <0x15a>;
                         compatible = "uio";
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
-                libmetal_uio_data@99d0000 {
+                libmetal_uio_data99d0000: libmetal_uio_data@99d0000 {
                         phandle = <0x15b>;
                         compatible = "uio";
                         reg = <0x0 0x99d0000 0x0 0x40000>;
@@ -2595,6 +2598,9 @@
                 user_key7 = "/firmware/versal-firmware/versal-sec-cfg/nvmem-layout/user-key@1f0";
                 amba_pl = "/amba_pl";
                 axi_noc2_0_ddr_memory = "/memory@00000000";
+                libmetal_uio_desc099c8000 = "/axi/libmetal_uio_desc0@99c8000";
+                libmetal_uio_desc199cc000 = "/axi/libmetal_uio_desc1@99cc000";
+                libmetal_uio_data99d0000 = "/axi/libmetal_uio_data@99d0000";
                 rproc0 = "/reserved-memory/rproc0@9800000";
                 vdev0vring0 = "/reserved-memory/vdev0vring0@9860000";
                 vdev0vring1 = "/reserved-memory/vdev0vring1@9864000";
@@ -2623,7 +2629,7 @@
 
                                         relation0 {
                                                 remote = <0x157>;
-                                                elfload = <0x61 0x75 0x156>;
+                                                elfload = <&rproc0>;
                                         };
                                 };
 
@@ -2699,7 +2705,7 @@
                                                 carveouts = <0x159 0x15a 0x15b>;
                                                 mbox = <0xfb>;
                                                 timer = <0x4b 0x4c>;
-                                                elfload = <0x15d>;
+                                                elfload = <&libmetal_elf>;
                                         };
                                 };
                         };
@@ -2707,9 +2713,9 @@
         };
 
         reserved-memory {
+                ranges;
                 #size-cells = <0x2>;
                 #address-cells = <0x2>;
-                ranges;
 
                 rproc0: rproc0@9800000 {
                         phandle = <0x156>;

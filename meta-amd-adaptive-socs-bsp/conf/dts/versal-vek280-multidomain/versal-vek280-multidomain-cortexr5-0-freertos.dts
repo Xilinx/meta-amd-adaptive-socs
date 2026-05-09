@@ -2299,19 +2299,19 @@
                         xlnx,name = "CIPS_0_pspmc_0_psv_scntrs_0";
                 };
 
-                libmetal_uio_desc0@99c8000 {
+                libmetal_uio_desc099c8000: libmetal_uio_desc0@99c8000 {
                         phandle = <0x194>;
                         compatible = "uio";
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
-                libmetal_uio_desc1@99cc000 {
+                libmetal_uio_desc199cc000: libmetal_uio_desc1@99cc000 {
                         phandle = <0x195>;
                         compatible = "uio";
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
-                libmetal_uio_data@99d0000 {
+                libmetal_uio_data99d0000: libmetal_uio_data@99d0000 {
                         phandle = <0x196>;
                         compatible = "uio";
                         reg = <0x0 0x99d0000 0x0 0x40000>;
@@ -3071,6 +3071,9 @@
                 noc_lpddr0_ddr_memory = "/memory@00000000";
                 axi_bram_ctrl_0_memory = "/memory@a4000000";
                 CIPS_0_pspmc_0_psv_ocm_ram_0_memory = "/memory@FFFC0000";
+                libmetal_uio_desc099c8000 = "/axi/libmetal_uio_desc0@99c8000";
+                libmetal_uio_desc199cc000 = "/axi/libmetal_uio_desc1@99cc000";
+                libmetal_uio_data99d0000 = "/axi/libmetal_uio_data@99d0000";
                 cma_reserved_50000000000 = "/reserved-memory/cma_reserved@50000000000";
                 cma_reserved_60000000000 = "/reserved-memory/cma_reserved@60000000000";
                 rproc0 = "/reserved-memory/rproc0@9800000";
@@ -3099,7 +3102,7 @@
 
                                         relation0 {
                                                 remote = <0x192>;
-                                                elfload = <0x8d 0x165 0x191>;
+                                                elfload = <&rproc0>;
                                         };
                                 };
 
@@ -3176,7 +3179,7 @@
                                                 carveouts = <0x194 0x195 0x196>;
                                                 mbox = <0x12d>;
                                                 timer = <0x77 0x78>;
-                                                elfload = <0x198>;
+                                                elfload = <&libmetal_elf>;
                                         };
                                 };
                         };
@@ -3184,7 +3187,7 @@
         };
 
         reserved-memory {
-                ranges = <0x1>;
+                ranges;
                 #size-cells = <0x2>;
                 #address-cells = <0x2>;
 

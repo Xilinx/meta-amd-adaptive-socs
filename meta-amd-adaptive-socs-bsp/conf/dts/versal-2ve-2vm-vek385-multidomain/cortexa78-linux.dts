@@ -3966,19 +3966,19 @@
                         xlnx,cfg-clk-freq-hz = <0x18cba80>;
                 };
 
-                libmetal_uio_desc0@99c8000 {
+                libmetal_uio_desc099c8000: libmetal_uio_desc0@99c8000 {
                         phandle = <0x298>;
                         compatible = "uio";
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
-                libmetal_uio_desc1@99cc000 {
+                libmetal_uio_desc199cc000: libmetal_uio_desc1@99cc000 {
                         phandle = <0x299>;
                         compatible = "uio";
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
-                libmetal_uio_data@99d0000 {
+                libmetal_uio_data99d0000: libmetal_uio_data@99d0000 {
                         phandle = <0x29a>;
                         compatible = "uio";
                         reg = <0x0 0x99d0000 0x0 0x40000>;
@@ -4162,9 +4162,9 @@
         };
 
         reserved-memory {
+                ranges;
                 #size-cells = <0x2>;
                 #address-cells = <0x2>;
-                ranges;
 
                 plm_reserved_memory: plm_reserved_memory@00000000 {
                         phandle = <0x28c>;
@@ -4714,6 +4714,9 @@
                 usb_hub_delay = "/enable-delay";
                 vdd_usb_hub = "/regulator-vdd-usb-hub";
                 vdd2_usb_hub = "/regulator-vdd2-usb-hub";
+                libmetal_uio_desc099c8000 = "/axi/libmetal_uio_desc0@99c8000";
+                libmetal_uio_desc199cc000 = "/axi/libmetal_uio_desc1@99cc000";
+                libmetal_uio_data99d0000 = "/axi/libmetal_uio_data@99d0000";
                 plm_reserved_memory = "/reserved-memory/plm_reserved_memory@00000000";
                 tfa_reserved_memory = "/reserved-memory/tfa_reserved_memory@1000000";
                 cma_reserved_0840000000 = "/reserved-memory/cma_reserved@0840000000";
@@ -4771,7 +4774,8 @@
 
                                         relation0 {
                                                 remote = <0x296>;
-                                                elfload = <0x2b 0x2c 0x2d 0x294 0x295>;
+                                                elfload = <&ddrboot>,
+                                                 <&rsctbl>;
                                         };
                                 };
 
@@ -4801,7 +4805,7 @@
                 RPU_Zephyr {
                         phandle = <0x296>;
                         compatible = "openamp,domain-v1";
-                        xlnx,ddr-boot = <0x1>;
+                        xlnx,ddr-boot;
                         xlnx,zephyr,mems = "ddrboot@9800100";
                         sram = <0x0 0x9800100 0x0 0x5ff00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
                         reserved-memory = <0x294>;
@@ -4854,7 +4858,7 @@
                                                 carveouts = <0x298 0x299 0x29a>;
                                                 mbox = <0x19a>;
                                                 timer = <0x9f 0xa0>;
-                                                elfload = <0x29c>;
+                                                elfload = <&libmetal_elf>;
                                         };
                                 };
                         };

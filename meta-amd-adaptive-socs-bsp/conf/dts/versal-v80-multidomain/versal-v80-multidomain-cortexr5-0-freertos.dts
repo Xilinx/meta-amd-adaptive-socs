@@ -2537,19 +2537,19 @@
                         xlnx,name = "versal_cips_0_pspmc_0_psv_scntrs_0";
                 };
 
-                libmetal_uio_desc0@99c8000 {
+                libmetal_uio_desc099c8000: libmetal_uio_desc0@99c8000 {
                         phandle = <0x18d>;
                         compatible = "uio";
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
-                libmetal_uio_desc1@99cc000 {
+                libmetal_uio_desc199cc000: libmetal_uio_desc1@99cc000 {
                         phandle = <0x18e>;
                         compatible = "uio";
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
-                libmetal_uio_data@99d0000 {
+                libmetal_uio_data99d0000: libmetal_uio_data@99d0000 {
                         phandle = <0x18f>;
                         compatible = "uio";
                         reg = <0x0 0x99d0000 0x0 0x40000>;
@@ -3050,6 +3050,9 @@
                 amba_pl = "/amba_pl";
                 axi_noc_0_ddr_memory = "/memory@00000000";
                 versal_cips_0_pspmc_0_psv_ocm_ram_0_memory = "/memory@FFFC0000";
+                libmetal_uio_desc099c8000 = "/axi/libmetal_uio_desc0@99c8000";
+                libmetal_uio_desc199cc000 = "/axi/libmetal_uio_desc1@99cc000";
+                libmetal_uio_data99d0000 = "/axi/libmetal_uio_data@99d0000";
                 rproc0 = "/reserved-memory/rproc0@9800000";
                 vdev0vring0 = "/reserved-memory/vdev0vring0@9860000";
                 vdev0vring1 = "/reserved-memory/vdev0vring1@9864000";
@@ -3076,7 +3079,7 @@
 
                                         relation0 {
                                                 remote = <0x18b>;
-                                                elfload = <0x82 0x166 0x18a>;
+                                                elfload = <&rproc0>;
                                         };
                                 };
 
@@ -3153,7 +3156,7 @@
                                                 carveouts = <0x18d 0x18e 0x18f>;
                                                 mbox = <0x12e>;
                                                 timer = <0x6d 0x6e>;
-                                                elfload = <0x191>;
+                                                elfload = <&libmetal_elf>;
                                         };
                                 };
                         };
@@ -3161,7 +3164,7 @@
         };
 
         reserved-memory {
-                ranges = <0x1>;
+                ranges;
                 #size-cells = <0x2>;
                 #address-cells = <0x2>;
 
