@@ -4,13 +4,16 @@ inherit:
 args:
     - --machine-name versal-vrk165-multidomain
     - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-multidomain-base.yaml \
+                    ${BSPLAYERDIR_amd-adaptive-socs-bsp}/conf/domainyaml/vrk165-linux-overlay.yaml \
                     ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-openamp-overlay.yaml \
                     ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-libmetal-overlay.yaml
 
 kconfig:
     CONFIG_YOCTO_BBMC_CORTEXR5_1_BAREMETAL: y
     CONFIG_YOCTO_BBMC_LINUX_DTSI: \
-          ${LAYER_PATH_xilinx-standalone-sdt}/recipes-bsp/device-tree/files/ospi-2g-memory-map.dtsi
+           ${LAYER_PATH_xilinx-standalone-sdt}/recipes-bsp/device-tree/files/ospi-2g-memory-map.dtsi \
+           ${LAYER_PATH_xilinx-virtualization}/recipes-bsp/device-tree/files/versal-xen.dtsi \
+           ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/platform-misc.dtsi
 
 machine:
     description: >-
@@ -21,6 +24,10 @@ machine:
         include:
             comment: "Enable meta-xilinx-imgrcvry if available"
             op: 'conf/enable-xilinx-imgrcvry.conf'
+        XLNX_CMAKE_BSP_VARS:pn-xilplmi:append:
+            comment: 'Enables the restoration of the multi-boot register for A/B firmware platforms'
+            op: '='
+            val: ' -DPLM_ENABLE_RESTORE_MULTIBOOT'
         PRODUCT_NAME:
             comment: 'UEFI Capsule Update / LVFS Configuration'
             op: '='

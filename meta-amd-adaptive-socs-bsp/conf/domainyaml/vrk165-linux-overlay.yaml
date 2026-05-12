@@ -1,0 +1,40 @@
+reserved-memory:
+  ranges: true
+  "#size-cells": 2
+  "#address-cells": 2
+
+  cma_reserved@800000000:
+    label: cma_reserved
+    start: 0x800000000
+    size: 2GB
+    compatible: "shared-dma-pool"
+    reusable: true
+    linux,cma-default: true
+
+  ddr_ch1@50000000000:
+    label: ddr_ch1
+    start: 0x50000000000
+    size: 4GB
+    no-map: true
+
+  ddr_ch2@60000000000:
+    label: ddr_ch2
+    start: 0x60000000000
+    size: 4GB
+    no-map: true
+
+  ddr_ch3@70000000000:
+    label: ddr_ch3
+    start: 0x70000000000
+    size: 4GB
+    no-map: true
+
+domains:
+  APU_Linux:
+    compatible: openamp,domain-v1
+    reserved-memory:
+      - cma_reserved@800000000
+      - ddr_ch1@50000000000
+      - ddr_ch2@60000000000
+      - ddr_ch3@70000000000
+
