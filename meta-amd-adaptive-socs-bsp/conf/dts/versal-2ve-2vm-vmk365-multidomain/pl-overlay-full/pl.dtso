@@ -1,0 +1,98 @@
+/dts-v1/;
+/plugin/;
+
+&fpga {
+        firmware-name = "vmk365_base_pld.pdi";
+
+        misc_clk_0: misc_clk_0 {
+                #clock-cells = <0x0>;
+                clock-frequency = <0x95031e0>;
+                compatible = "fixed-clock";
+        };
+};
+
+&amba {
+
+        axi_intc_0: interrupt-controller@b0000000 {
+                xlnx,name = "axi_intc_0";
+                xlnx,async-intr = <0xffffffff>;
+                interrupt-names = "irq";
+                interrupt-controller;
+                xlnx,ivar-rst-val = <0x10>;
+                xlnx,has-fast = <0x0>;
+                clock-names = "s_axi_aclk";
+                xlnx,is-fast = <0x0>;
+                xlnx,processor-clk-freq-mhz = <0x64>;
+                xlnx,cascade-master = <0x0>;
+                xlnx,sense-of-irq-level-type = "Active_High";
+                xlnx,intc-type = <0x0>;
+                xlnx,has-ipr = <0x1>;
+                xlnx,mb-clk-not-connected = <0x1>;
+                xlnx,edk-iptype = "PERIPHERAL";
+                xlnx,num-sync-ff = <0x2>;
+                xlnx,has-cie = <0x1>;
+                xlnx,enable-async = <0x0>;
+                xlnx,has-sie = <0x1>;
+                xlnx,num-intr-inputs = <0x20>;
+                xlnx,irq-connection = <0x1>;
+                xlnx,num-sw-intr = <0x0>;
+                xlnx,s-axi-aclk-freq-mhz = <0x95031e0>;
+                clocks = <&misc_clk_0>;
+                xlnx,addr-width = <0x20>;
+                reg = <0x0 0xb0000000 0x0 0x10000>;
+                xlnx,has-ilr = <0x0>;
+                xlnx,ip-name = "axi_intc";
+                xlnx,en-cascade-mode = <0x0>;
+                interrupt-parent = <&gic>;
+                xlnx,irq-active = <0x1>;
+                xlnx,ivar-reset-value = <0x10>;
+                xlnx,kind-of-lvl = <0xffffffff>;
+                xlnx,disable-synchronizers = <0x1>;
+                compatible = "xlnx,axi-intc-4.1", "xlnx,xps-intc-1.00.a";
+                xlnx,has-ivr = <0x1>;
+                xlnx,irq-is-level = <0x1>;
+                xlnx,kind-of-edge = <0xffffffff>;
+                xlnx,kind-of-intr = <0x1>;
+                xlnx,edk-special = "INTR_CTRL";
+                xlnx,sense-of-irq-edge-type = "Rising";
+                interrupts = <0x0 0x8f 0x4>;
+                #interrupt-cells = <0x2>;
+        };
+
+        zyxclmm_drm {
+                interrupts-extended = <&axi_intc_0 0x0 0x4>,
+                 <&axi_intc_0 0x1 0x4>,
+                 <&axi_intc_0 0x2 0x4>,
+                 <&axi_intc_0 0x3 0x4>,
+                 <&axi_intc_0 0x4 0x4>,
+                 <&axi_intc_0 0x5 0x4>,
+                 <&axi_intc_0 0x6 0x4>,
+                 <&axi_intc_0 0x7 0x4>,
+                 <&axi_intc_0 0x8 0x4>,
+                 <&axi_intc_0 0x9 0x4>,
+                 <&axi_intc_0 0xa 0x4>,
+                 <&axi_intc_0 0xb 0x4>,
+                 <&axi_intc_0 0xc 0x4>,
+                 <&axi_intc_0 0xd 0x4>,
+                 <&axi_intc_0 0xe 0x4>,
+                 <&axi_intc_0 0xf 0x4>,
+                 <&axi_intc_0 0x10 0x4>,
+                 <&axi_intc_0 0x11 0x4>,
+                 <&axi_intc_0 0x12 0x4>,
+                 <&axi_intc_0 0x13 0x4>,
+                 <&axi_intc_0 0x14 0x4>,
+                 <&axi_intc_0 0x15 0x4>,
+                 <&axi_intc_0 0x16 0x4>,
+                 <&axi_intc_0 0x17 0x4>,
+                 <&axi_intc_0 0x18 0x4>,
+                 <&axi_intc_0 0x19 0x4>,
+                 <&axi_intc_0 0x1a 0x4>,
+                 <&axi_intc_0 0x1b 0x4>,
+                 <&axi_intc_0 0x1c 0x4>,
+                 <&axi_intc_0 0x1d 0x4>,
+                 <&axi_intc_0 0x1e 0x4>,
+                 <&axi_intc_0 0x1f 0x4>;
+                compatible = "xlnx,zocl-versal";
+        };
+};
+
