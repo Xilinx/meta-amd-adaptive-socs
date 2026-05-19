@@ -118,6 +118,7 @@
                         xlnx,ivar-rst-val = <0x10>;
                         interrupt-controller;
                         xlnx,async-intr = <0xffffff38>;
+                        interrupts-extended = <&cpu0_intc 9>;
                 };
 
                 axi_gpio_0: gpio@40000000 {
@@ -541,5 +542,11 @@
                 phy0 = "/amba_pl/ethernet@40c00000/mdio/phy@1";
                 microblaze_riscv_0_local_memory_dlmb_bram_if_cntlr_memory = "/memory@0";
                 mig_7series_0_memory = "/memory@80000000";
+        };
+
+        int_timer: timer {
+                compatible = "riscv,timer";
+                bootph-all;
+                interrupts-extended = <&cpu0_intc 5>;
         };
 };
