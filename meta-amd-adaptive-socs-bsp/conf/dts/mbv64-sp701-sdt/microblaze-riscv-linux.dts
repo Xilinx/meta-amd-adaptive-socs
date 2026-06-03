@@ -12,7 +12,7 @@
         speed_grade = "2";
 
         cpus_microblaze_riscv_0: cpus {
-                phandle = <0x13>;
+                phandle = <0x12>;
                 #cpu-mask-cells = <0x1>;
                 compatible = "cpus,cluster";
                 #address-cells = <0x1>;
@@ -23,7 +23,7 @@
                 timebase-frequency = <0x5f5e100>;
 
                 microblaze_riscv_0: cpu@0 {
-                        phandle = <0x14>;
+                        phandle = <0x13>;
                         reg = <0x0>;
                         d-cache-size = <0x8000>;
                         bootph-all;
@@ -38,22 +38,22 @@
                         clocks = <&clk_cpu_0>;
 
                         cpu0_intc: interrupt-controller {
-                                phandle = <0x10>;
-                                #interrupt-cells = <0x1>;
                                 compatible = "riscv,cpu-intc";
+                                #interrupt-cells = <0x1>;
                                 interrupt-controller;
                         };
                 };
         };
 
         clock: clocks {
-                phandle = <0x15>;
+                phandle = <0x14>;
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
 
                 clk_cpu_0: clk_cpu@0 {
                         phandle = <0xf>;
                         compatible = "fixed-clock";
+                        bootph-all;
                         reg = <0x0>;
                         clock-frequency = <0x5f5e100>;
                         clock-output-names = "clk_cpu";
@@ -61,8 +61,9 @@
                 };
 
                 clk_bus_0: clk_bus_0@1 {
-                        phandle = <0x11>;
+                        phandle = <0x10>;
                         compatible = "fixed-clock";
+                        bootph-all;
                         reg = <0x1>;
                         clock-frequency = <0x5f5e100>;
                         clock-output-names = "clk_bus_0";
@@ -92,7 +93,6 @@
                         xlnx,kind-of-lvl = <0xffffffff>;
                         xlnx,ivar-reset-value = <0x10>;
                         xlnx,irq-active = <0x1>;
-                        interrupt-parent = <&cpu0_intc>;
                         xlnx,en-cascade-mode = <0x0>;
                         xlnx,ip-name = "axi_intc";
                         xlnx,has-ilr = <0x0>;
@@ -471,15 +471,15 @@
                         xlnx,phyrst-board-interface = "0";
                         xlnx,axiliteclkrate = <0x0>;
                         xlnx,rxlane1-placement = "0";
-                        phy-handle = <0x12>;
+                        phy-handle = <0x11>;
 
                         axi_ethernet_mdio: mdio {
-                                phandle = <0x17>;
+                                phandle = <0x16>;
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
 
                                 phy0: phy@1 {
-                                        phandle = <0x12>;
+                                        phandle = <0x11>;
                                         device_type = "ethernet-phy";
                                         reg = <0x1>;
                                         ti,rx-internal-delay = <0x3>;
@@ -525,7 +525,6 @@
         __symbols__ {
                 cpus_microblaze_riscv_0 = "/cpus_microblaze_riscv@0";
                 microblaze_riscv_0 = "/cpus_microblaze_riscv@0/cpu@0";
-                cpu0_intc = "/cpus_microblaze_riscv@0/cpu@0/interrupt-controller";
                 clock = "/clocks";
                 clk_cpu_0 = "/clocks/clk_cpu@0";
                 clk_bus_0 = "/clocks/clk_bus_0@1";
