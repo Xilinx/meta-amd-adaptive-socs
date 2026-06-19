@@ -1,0 +1,105 @@
+# VPK360 Linux domain memory overlay
+# Basecamp memory reservations - Versal Gen 1 / Versal Premium (VPK360)
+#
+# VPK360 DDR layout (from SDT xc2vp3602):
+#   DDRMC0 Region 0: 2GB  @ 0x0000000000   (Low DDR)
+#   DDRMC0 Region 1: 6GB  @ 0x0800000000   (32GB boundary)
+#   DDRMC1:          8GB  @ 0x50000000000
+#   DDRMC2:          4GB  @ 0x60000000000
+#
+
+reserved-memory:
+  ranges: true
+  "#size-cells": 2
+  "#address-cells": 2
+
+  plm_reserved_memory@00000000:
+    label: plm_reserved_memory
+    no-map: true
+    start: 0x00000000
+    size: 16M
+
+  # 0x01000000 - 0x0155FFFF  (6MB) - TFA transfer list / handoffs
+  tfa_transfer_reserved@1000000:
+    label: tfa_transfer_reserved
+    no-map: true
+    start: 0x01000000
+    size: 6M
+
+
+  # 0x0A000000 - 0x0A01FFFF  (128KB) - SCMI server agents shared memory pool
+  scmi_shm_reserved@a000000:
+    label: scmi_shm_reserved
+    no-map: true
+    start: 0x0A000000
+    size: 128K
+
+  # 0x0A020000 - 0x0A07FFFF  (384KB) - SCMI server (text+data+bss)
+  # XMPU: TFA Custom packages
+  scmi_server_reserved@a020000:
+    label: scmi_server_reserved
+    no-map: true
+    start: 0x0A020000
+    size: 384K
+
+  # 0x0A080000 - 0x0A3FFFFF  (3584KB) - Reserved for other TFA custom packages
+  # XMPU: TFA Custom packages
+  tfa_pkg_reserved@a080000:
+    label: tfa_pkg_reserved
+    no-map: true
+    start: 0x0A080000
+    size: 3584K
+
+  # 0x0A400000 - 0x0A7FFFFF  (4MB) - CPM6 PCIe RP RPU firmware
+  # For RPU firmware text + data + bss (2MB per controller)
+  cpm6_pcie_rp_reserved@a400000:
+    label: cpm6_pcie_rp_reserved
+    no-map: true
+    start: 0x0A400000
+    size: 4M
+
+  # ---------------------------------------------------------------
+  # High DDR - CMA pools
+  # Replaces cma=1024M bootarg per Basecamp recommendation
+  # ---------------------------------------------------------------
+
+  # DDRMC0 Region 1: 1GB default CMA at +1GB offset from 32GB boundary
+  # linux,cma-default: true  → used for all DMA allocations by default
+  cma_reserved@840000000:
+    label: cma_reserved_840000000
+    start: 0x0840000000
+    size: 1G
+    compatible: "shared-dma-pool"
+    reusable: true
+    linux,cma-default: true
+
+  # DDRMC1 (8GB @ 0x50000000000) - additional CMA pool for high-BW DMA
+  # (e.g. PCIe CPM6 DMA transfers)
+  cma_reserved@50000000000:
+    label: cma_reserved_50000000000
+    start: 0x50000000000
+    size: 8G
+    compatible: "shared-dma-pool"
+    reusable: true
+
+  # DDRMC2 (4GB @ 0x60000000000) - additional CMA pool
+  cma_reserved@60000000000:
+    label: cma_reserved_60000000000
+    start: 0x60000000000
+    size: 4G
+    compatible: "shared-dma-pool"
+    reusable: true
+
+domains:
+  APU_Linux:
+    compatible: openamp,domain-v1
+    reserved-memory:
+      - plm_reserved_memory@00000000
+      - tfa_transfer_reserved@1000000
+      - scmi_shm_reserved@a000000
+      - scmi_server_reserved@a020000
+      - tfa_pkg_reserved@a080000
+      - cpm6_pcie_rp_reserved@a400000
+      - cma_reserved@840000000
+      - cma_reserved@50000000000
+      - cma_reserved@60000000000
