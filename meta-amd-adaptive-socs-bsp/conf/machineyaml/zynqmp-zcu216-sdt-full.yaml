@@ -10,6 +10,16 @@ kconfig:
 
 machine:
     description: >-
-        Machine configuration for the AMD Zynq UltraScale+ MPSoC ZCU216
+        Machine configuration for the AMD Zynq UltraScale+ RFSoC ZCU216
         evaluation kit (Cortex-A53 Linux plus FSBL and MicroBlaze PMU
         sub-machines), built from system device tree.
+    post:
+        QB_MEM:
+            op: '='
+            val: "-m 4G"
+        QEMU_HW_DTB_PS:
+            op: '='
+            val: "${QEMU_HW_DTB_PATH}/board-zynqmp-zcu102.dtb"
+        QEMU_HW_DTB_PMU:
+            op: '='
+            val: "${QEMU_HW_DTB_PATH}/zynqmp-pmu.dtb"
