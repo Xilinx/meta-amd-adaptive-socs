@@ -38,22 +38,22 @@
                         clocks = <&clk_cpu_0>;
 
                         cpu0_intc: interrupt-controller {
-                                phandle = <0x27>;
-                                #interrupt-cells = <0x1>;
                                 compatible = "riscv,cpu-intc";
+                                #interrupt-cells = <0x1>;
                                 interrupt-controller;
                         };
                 };
         };
 
         clock: clocks {
-                phandle = <0x28>;
+                phandle = <0x27>;
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
 
                 clk_cpu_0: clk_cpu@0 {
                         phandle = <0x23>;
                         compatible = "fixed-clock";
+                        bootph-all;
                         reg = <0x0>;
                         clock-frequency = <0x5f5e100>;
                         clock-output-names = "clk_cpu";
@@ -63,6 +63,7 @@
                 clk_bus_0: clk_bus_0@1 {
                         phandle = <0x24>;
                         compatible = "fixed-clock";
+                        bootph-all;
                         reg = <0x1>;
                         clock-frequency = <0x5f5e100>;
                         clock-output-names = "clk_bus_0";
@@ -119,6 +120,53 @@
                         interrupt-controller;
                         xlnx,async-intr = <0xfffffe0c>;
                         interrupts-extended = <&cpu0_intc 9>;
+                };
+
+                axi_ethernet_0_dma: dma@41e00000 {
+                        phandle = <0x20>;
+                        interrupts = <0x4 0x2 0x5 0x2>;
+                        compatible = "xlnx,eth-dma";
+                        xlnx,s2mm-data-width = <0x20>;
+                        xlnx,mm2s-burst-size = <0x10>;
+                        xlnx,m-axi-mm2s-data-width = <0x20>;
+                        clock-frequency = <0x5f5e100>;
+                        xlnx,num-s2mm-channels = <0x1>;
+                        xlnx,dlytmr-resolution = <0x7d>;
+                        axistream-control-connected = <&axi_ethernet_0>;
+                        interrupt-parent = <&microblaze_riscv_0_axi_intc>;
+                        xlnx,sg-length-width = <0x10>;
+                        xlnx,prmry-is-aclk-async = <0x0>;
+                        xlnx,include-s2mm-sf = <0x1>;
+                        #dma-cells = <0x1>;
+                        xlnx,ip-name = "axi_dma";
+                        xlnx,single-interface = <0x0>;
+                        xlnx,sg-include-stscntrl-strm = <0x1>;
+                        xlnx,include-s2mm-dre = <0x1>;
+                        reg = <0x0 0x41e00000 0x0 0x10000>;
+                        xlnx,addr-width = <0x20>;
+                        xlnx,include-s2mm = <0x1>;
+                        clocks = <&clk_bus_0>;
+                        xlnx,s-axis-s2mm-tdata-width = <0x20>;
+                        xlnx,micro-dma = <0x0>;
+                        xlnx,increase-throughput = <0x0>;
+                        xlnx,mm2s-data-width = <0x20>;
+                        xlnx,addrwidth = <0x20>;
+                        xlnx,sg-use-stsapp-length = <0x1>;
+                        xlnx,m-axis-mm2s-tdata-width = <0x20>;
+                        xlnx,include-dre;
+                        xlnx,edk-iptype = "PERIPHERAL";
+                        xlnx,s2mm-burst-size = <0x10>;
+                        xlnx,m-axi-s2mm-data-width = <0x20>;
+                        xlnx,num-queues = /bits/ 16 <0x0001>;
+                        xlnx,num-mm2s-channels = <0x1>;
+                        xlnx,enable-multi-channel = <0x0>;
+                        status = "okay";
+                        xlnx,include-mm2s-sf = <0x1>;
+                        clock-names = "s_axi_lite_aclk";
+                        axistream-connected = <&axi_ethernet_0>;
+                        interrupt-names = "mm2s_introut", "s2mm_introut";
+                        xlnx,include-mm2s = <0x1>;
+                        xlnx,include-mm2s-dre = <0x1>;
                 };
 
                 axi_gpio_0: gpio@40000000 {
@@ -179,53 +227,6 @@
                         xlnx,use-board-flow;
                         xlnx,tri-default = <0xffffffff>;
                         xlnx,all-inputs = <0x1>;
-                };
-
-                axi_ethernet_0_dma: dma@41e00000 {
-                        phandle = <0x20>;
-                        interrupts = <0x4 0x2 0x5 0x2>;
-                        compatible = "xlnx,eth-dma";
-                        xlnx,s2mm-data-width = <0x20>;
-                        xlnx,mm2s-burst-size = <0x10>;
-                        xlnx,m-axi-mm2s-data-width = <0x20>;
-                        clock-frequency = <0x5f5e100>;
-                        xlnx,num-s2mm-channels = <0x1>;
-                        xlnx,dlytmr-resolution = <0x7d>;
-                        axistream-control-connected = <&axi_ethernet_0>;
-                        interrupt-parent = <&microblaze_riscv_0_axi_intc>;
-                        xlnx,sg-length-width = <0x10>;
-                        xlnx,prmry-is-aclk-async = <0x0>;
-                        xlnx,include-s2mm-sf = <0x1>;
-                        #dma-cells = <0x1>;
-                        xlnx,ip-name = "axi_dma";
-                        xlnx,single-interface = <0x0>;
-                        xlnx,sg-include-stscntrl-strm = <0x1>;
-                        xlnx,include-s2mm-dre = <0x1>;
-                        reg = <0x0 0x41e00000 0x0 0x10000>;
-                        xlnx,addr-width = <0x20>;
-                        xlnx,include-s2mm = <0x1>;
-                        clocks = <&clk_bus_0>;
-                        xlnx,s-axis-s2mm-tdata-width = <0x20>;
-                        xlnx,micro-dma = <0x0>;
-                        xlnx,increase-throughput = <0x0>;
-                        xlnx,mm2s-data-width = <0x20>;
-                        xlnx,addrwidth = <0x20>;
-                        xlnx,sg-use-stsapp-length = <0x1>;
-                        xlnx,m-axis-mm2s-tdata-width = <0x20>;
-                        xlnx,include-dre;
-                        xlnx,edk-iptype = "PERIPHERAL";
-                        xlnx,s2mm-burst-size = <0x10>;
-                        xlnx,m-axi-s2mm-data-width = <0x20>;
-                        xlnx,num-queues = /bits/ 16 <0x0001>;
-                        xlnx,num-mm2s-channels = <0x1>;
-                        xlnx,enable-multi-channel = <0x0>;
-                        status = "okay";
-                        xlnx,include-mm2s-sf = <0x1>;
-                        clock-names = "s_axi_lite_aclk";
-                        axistream-connected = <&axi_ethernet_0>;
-                        interrupt-names = "mm2s_introut", "s2mm_introut";
-                        xlnx,include-mm2s = <0x1>;
-                        xlnx,include-mm2s-dre = <0x1>;
                 };
 
                 axi_iic_0: i2c@40800000 {
@@ -693,9 +694,10 @@
                 pmcbridge_0_pmcl_ospi_0: pmcbridge_0_pmcl_ospi_0@4090000 {
                         phandle = <0xc>;
                         is-stacked = <0x0>;
-                        compatible = "xlnx,pmc-ospi-11.0", "xlnx,pmc-ospi";
+                        compatible = "xlnx,pmc-ospi-11.0", "xlnx,pmc-ospi", "amd,pmc-ospi", "cdns,qspi-nor";
                         status = "okay";
                         xlnx,ip-name = "pmc_ospi";
+                        bootph-all;
                         reg = <0x0 0x4090000 0x0 0x10000>;
                         is-dual = <0x0>;
                 };
@@ -840,7 +842,7 @@
                         xlnx,rxlane1-placement = "0";
 
                         axi_ethernet_0_mdio: mdio {
-                                phandle = <0x2b>;
+                                phandle = <0x2a>;
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
                         };
@@ -883,15 +885,14 @@
         __symbols__ {
                 cpus_microblaze_riscv_0 = "/cpus_microblaze_riscv@0";
                 microblaze_riscv_0 = "/cpus_microblaze_riscv@0/cpu@0";
-                cpu0_intc = "/cpus_microblaze_riscv@0/cpu@0/interrupt-controller";
                 clock = "/clocks";
                 clk_cpu_0 = "/clocks/clk_cpu@0";
                 clk_bus_0 = "/clocks/clk_bus_0@1";
                 amba_pl = "/amba_pl";
                 microblaze_riscv_0_axi_intc = "/amba_pl/interrupt-controller@41200000";
+                axi_ethernet_0_dma = "/amba_pl/dma@41e00000";
                 axi_gpio_0 = "/amba_pl/gpio@40000000";
                 axi_gpio_1 = "/amba_pl/gpio@40010000";
-                axi_ethernet_0_dma = "/amba_pl/dma@41e00000";
                 axi_iic_0 = "/amba_pl/i2c@40800000";
                 axi_timer_0 = "/amba_pl/timer@41c00000";
                 axi_uartlite_0 = "/amba_pl/serial@40600000";
