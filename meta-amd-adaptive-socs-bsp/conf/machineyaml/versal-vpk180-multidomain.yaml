@@ -19,7 +19,42 @@ machine:
         and MicroBlaze PMC/PSM sub-machines built from system device
         tree.
     post:
+        include:
+            comment: "Enable meta-xilinx-imgrcvry if available"
+            op: 'conf/enable-xilinx-imgrcvry.conf'
+        XLNX_CMAKE_BSP_VARS:pn-xilplmi:append:
+            comment: 'Enables the restoration of the multi-boot register for A/B firmware platforms'
+            op: '='
+            val: ' -DPLM_ENABLE_RESTORE_MULTIBOOT'
+        CFLAGS:pn-image-selector:append:
+            comment: 'Enable QSPI flash'
+            op: '='
+            val: ' -DXIS_QSPI_FLSH'
         BOOTBIN_INC:
             comment: 'Enable libmetal application'
-            op: '=' 
+            op: '='
             val: 'libmetal-demo-rpu1.inc'
+        SPI_IMAGE_SIZE:
+            comment: 'QSPI flash size (256MB)'
+            op: '='
+            val: '0x1000_0000'
+        SPI_BOOTBIN_OFFSET:
+            comment: 'Boot.bin A/B offsets for 256MB QSPI'
+            op: '='
+            val: '0x15C_0000 0x880_0000'
+        SPI_USER_SCRATCH_OFFSET:
+            op: '='
+            val: '0xFA4_0000'
+        SPI_MANIFEST_OFFSET:
+            op: '='
+            val: '0xFFF_0000'
+        PRODUCT_NAME:
+            comment: 'UEFI Capsule Update / LVFS Configuration'
+            op: '='
+            val: 'VPK180'
+        PRODUCT_GUID:
+            op: '='
+            val: '683c7197-e225-57c7-a675-cd6e6050289e'
+        PRODUCT_URL:
+            op: '='
+            val: 'https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal.html'
