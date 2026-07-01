@@ -18,13 +18,42 @@ machine:
         and MicroBlaze PMC/PSM sub-machines built from system device
         tree.
     post:
-        QEMU_HW_DTB_PS:
+        include:
+            comment: "Enable meta-xilinx-imgrcvry if available"
+            op: 'conf/enable-xilinx-imgrcvry.conf'
+        XLNX_CMAKE_BSP_VARS:pn-xilplmi:append:
+            comment: 'Enables the restoration of the multi-boot register for A/B firmware platforms'
             op: '='
-            val: "${QEMU_HW_DTB_PATH}/board-versal-ps-vpk120.dtb"
-        QEMU_HW_DTB_PMC:
+            val: ' -DPLM_ENABLE_RESTORE_MULTIBOOT'
+        CFLAGS:pn-image-selector:append:
+            comment: 'Enable QSPI flash'
             op: '='
-            val: "${QEMU_HW_DTB_PATH}/board-versal-pmc-virt.dtb"
+            val: ' -DXIS_QSPI_FLSH'
         BOOTBIN_INC:
             comment: 'Enable libmetal application'
-            op: '=' 
+            op: '='
             val: 'libmetal-demo-rpu1.inc'
+        SPI_IMAGE_SIZE:
+            comment: 'QSPI flash size (256MB)'
+            op: '='
+            val: '0x1000_0000'
+        SPI_BOOTBIN_OFFSET:
+            comment: 'Boot.bin A/B offsets for 256MB QSPI'
+            op: '='
+            val: '0x15C_0000 0x880_0000'
+        SPI_USER_SCRATCH_OFFSET:
+            op: '='
+            val: '0xFA4_0000'
+        SPI_MANIFEST_OFFSET:
+            op: '='
+            val: '0xFFF_0000'
+        PRODUCT_NAME:
+            comment: 'UEFI Capsule Update / LVFS Configuration'
+            op: '='
+            val: 'VPK120'
+        PRODUCT_GUID:
+            op: '='
+            val: 'c43a8e0d-75f6-4e39-92e7-f1a84d5c41be'
+        PRODUCT_URL:
+            op: '='
+            val: 'https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal.html'
