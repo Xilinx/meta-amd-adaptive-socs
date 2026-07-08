@@ -1,18 +1,18 @@
 /dts-v1/;
 / {
         board = "scu200";
-        compatible = "xlnx,scu200-riscv", "qemu,mbv", "amd,mbv";
+        compatible = "amd,mbv-scu200-revA", "amd,mbv-scu200", "amd,mbv";
         device_id = "xcsu200p";
         #address-cells = <0x2>;
         variant = "spartanuplus", "spartanuplusaes1";
-        model = "SCU200 AMD Microblaze RISCV 64bit";
+        model = "MB-V SCU200 revA";
         #size-cells = <0x2>;
         slrcount = <0x1>;
         family = "microblaze_riscv";
         speed_grade = "2";
 
         cpus_microblaze_riscv_0: cpus {
-                phandle = <0x25>;
+                phandle = <0x26>;
                 #cpu-mask-cells = <0x1>;
                 compatible = "cpus,cluster";
                 #address-cells = <0x1>;
@@ -23,7 +23,7 @@
                 timebase-frequency = <0x5f5e100>;
 
                 microblaze_riscv_0: cpu@0 {
-                        phandle = <0x26>;
+                        phandle = <0x27>;
                         reg = <0x0>;
                         d-cache-size = <0x8000>;
                         bootph-all;
@@ -46,7 +46,7 @@
         };
 
         clock: clocks {
-                phandle = <0x27>;
+                phandle = <0x28>;
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
 
@@ -257,6 +257,27 @@
                         xlnx,smbus-pmbus-host = <0x0>;
                         xlnx,axi-aclk-freq-mhz = <0x64>;
                         xlnx,sda-inertial-delay = <0x0>;
+                        #address-cells = <0x1>;
+                        #size-cells = <0x0>;
+
+                        i2carb: i2c-arbitrator@72 {
+                                phandle = <0x29>;
+                                compatible = "nxp,pca9541";
+                                reg = <0x72>;
+
+                                i2carb1: i2c-arb {
+                                        phandle = <0x2a>;
+                                        #address-cells = <0x1>;
+                                        #size-cells = <0x0>;
+
+                                        eeprom_user: eeprom@57 {
+                                                phandle = <0x2b>;
+                                                bootph-all;
+                                                compatible = "atmel,24c1025";
+                                                reg = <0x57>;
+                                        };
+                                };
+                        };
                 };
 
                 axi_timer_0: timer@41c00000 {
@@ -700,6 +721,33 @@
                         bootph-all;
                         reg = <0x0 0x4090000 0x0 0x10000>;
                         is-dual = <0x0>;
+                        #address-cells = <0x1>;
+                        #size-cells = <0x0>;
+                        clocks = <&clk_cpu_0>;
+                        cdns,fifo-depth = <0x100>;
+                        cdns,fifo-width = <0x4>;
+
+                        flash@0 {
+                                bootph-all;
+                                compatible = "jedec,spi-nor";
+                                reg = <0x0>;
+                                #address-cells = <0x1>;
+                                #size-cells = <0x1>;
+                                cdns,read-delay = <0x0>;
+                                cdns,tshsl-ns = <0x0>;
+                                cdns,tsd2d-ns = <0x0>;
+                                cdns,tchsh-ns = <0xa>;
+                                cdns,tslch-ns = <0xa>;
+                                spi-tx-bus-width = <0x8>;
+                                spi-rx-bus-width = <0x8>;
+                                spi-max-frequency = <0x1312d00>;
+                                no-wp;
+
+                                partition@0 {
+                                        label = "spi0-flash0";
+                                        reg = <0x0 0x8000000>;
+                                };
+                        };
                 };
 
                 pmcbridge_0_pmcl_puf_0: pmcbridge_0_pmcl_puf_0@4080000 {
@@ -840,11 +888,22 @@
                         xlnx,phyrst-board-interface = "0";
                         xlnx,axiliteclkrate = <0x0>;
                         xlnx,rxlane1-placement = "0";
+                        phy-handle = <0x25>;
 
                         axi_ethernet_0_mdio: mdio {
-                                phandle = <0x2a>;
+                                phandle = <0x2e>;
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
+
+                                phy0: ethernet-phy@1 {
+                                        phandle = <0x25>;
+                                        #phy-cells = <0x1>;
+                                        compatible = "ethernet-phy-id2000.a231";
+                                        reg = <0x1>;
+                                        ti,dp83867-rxctrl-strap-quirk;
+                                        reset-assert-us = <0x9c4>;
+                                        reset-deassert-us = <0x1f4>;
+                                };
                         };
                 };
         };
@@ -871,6 +930,7 @@
 
         chosen {
                 stdout-path = "serial0:115200n8";
+                bootargs = "console=ttyUL0,115200 earlycon root=/dev/ram0 rw";
         };
 
         aliases {
@@ -894,6 +954,9 @@
                 axi_gpio_0 = "/amba_pl/gpio@40000000";
                 axi_gpio_1 = "/amba_pl/gpio@40010000";
                 axi_iic_0 = "/amba_pl/i2c@40800000";
+                i2carb = "/amba_pl/i2c@40800000/i2c-arbitrator@72";
+                i2carb1 = "/amba_pl/i2c@40800000/i2c-arbitrator@72/i2c-arb";
+                eeprom_user = "/amba_pl/i2c@40800000/i2c-arbitrator@72/i2c-arb/eeprom@57";
                 axi_timer_0 = "/amba_pl/timer@41c00000";
                 axi_uartlite_0 = "/amba_pl/serial@40600000";
                 axi_uartlite_1 = "/amba_pl/serial@40610000";
@@ -920,6 +983,7 @@
                 pmcbridge_0_slave_boot_stream_0 = "/amba_pl/pmcbridge_0_slave_boot_stream_0@4050000";
                 axi_ethernet_0 = "/amba_pl/ethernet@40c00000";
                 axi_ethernet_0_mdio = "/amba_pl/ethernet@40c00000/mdio";
+                phy0 = "/amba_pl/ethernet@40c00000/mdio/ethernet-phy@1";
                 lpddrmc_0_ddr_memory = "/memory@80000000";
                 microblaze_riscv_0_local_memory_dlmb_bram_if_cntlr_memory = "/memory@0";
         };
