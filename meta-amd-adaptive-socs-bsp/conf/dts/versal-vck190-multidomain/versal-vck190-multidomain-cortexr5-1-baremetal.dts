@@ -609,7 +609,6 @@
 
                                 phy1: ethernet-phy@1 {
                                         phandle = <0xb0>;
-                                        #phy-cells = <0x1>;
                                         compatible = "ethernet-phy-id2000.a231";
                                         reg = <0x1>;
                                         ti,rx-internal-delay = <0xb>;
@@ -623,7 +622,6 @@
 
                                 phy2: ethernet-phy@2 {
                                         phandle = <0xb1>;
-                                        #phy-cells = <0x1>;
                                         compatible = "ethernet-phy-id2000.a231";
                                         reg = <0x2>;
                                         ti,rx-internal-delay = <0xb>;
@@ -859,8 +857,6 @@
                         is-dual = <0x1>;
 
                         flash@0 {
-                                #address-cells = <0x1>;
-                                #size-cells = <0x1>;
                                 compatible = "m25p80", "jedec,spi-nor";
                                 reg = <0x0 0x1>;
                                 parallel-memories = /bits/ 64 <0x8000000 0x8000000>;
@@ -868,9 +864,15 @@
                                 spi-rx-bus-width = <0x4>;
                                 spi-max-frequency = <0x8f0d180>;
 
-                                partition@0 {
-                                        label = "spi0-flash0";
-                                        reg = <0x0 0x10000000>;
+                                partitions {
+                                        compatible = "fixed-partitions";
+                                        #address-cells = <0x1>;
+                                        #size-cells = <0x1>;
+
+                                        partition@0 {
+                                                label = "spi0-flash0";
+                                                reg = <0x0 0x10000000>;
+                                        };
                                 };
                         };
                 };
