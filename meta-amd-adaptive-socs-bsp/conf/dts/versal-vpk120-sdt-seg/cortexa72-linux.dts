@@ -175,7 +175,7 @@
                 phandle = <0xab>;
                 compatible = "xlnx,versal-thermal";
                 #thermal-sensor-cells = <0x1>;
-                io-channels = <&sysmon0 0x7>;
+                io-channels = <&sysmon0 0x9>;
                 io-channel-names = "sysmon-temp-channel";
         };
 
@@ -877,7 +877,7 @@
                         #io-channel-cells = <0x1>;
                         reg = <0x0 0xf1270000 0x0 0x4000>;
                         interrupts = <0x0 0x90 0x4>;
-                        xlnx,numchannels = [07];
+                        xlnx,numchannels = [09];
                         #address-cells = <0x2>;
                         #size-cells = <0x2>;
                         xlnx,nodeid = <0x18224055>;
@@ -891,26 +891,29 @@
                         xlnx,sat-9-y = <0x1a12>;
                         xlnx,sat-22-x = <0x30d9>;
                         xlnx,meas-0-root-id = <0x0>;
+                        xlnx,meas-7-slr-number = <0x0>;
                         xlnx,sat-22-y = <0x1a12>;
-                        xlnx,meas-1-root-id = <0x5>;
+                        xlnx,meas-1-root-id = <0x7>;
                         xlnx,ip-name = "psv_pmc_sysmon";
-                        xlnx,meas-2-root-id = <0x1>;
                         xlnx,sat-16-desc = "Clocking , column , satellite";
+                        xlnx,meas-2-root-id = <0x8>;
                         xlnx,meas-2-slr-number = <0x0>;
-                        xlnx,meas-3-root-id = <0x2>;
+                        xlnx,meas-3-root-id = <0x5>;
                         xlnx,sat-9-desc = "VNOC , satellite";
                         xlnx,sat-26-x = <0x1c9b>;
-                        xlnx,meas-4-root-id = <0x3>;
+                        xlnx,meas-4-root-id = <0x1>;
                         xlnx,sat-26-y = <0x2606>;
-                        xlnx,meas-5-root-id = <0x4>;
+                        xlnx,meas-5-root-id = <0x2>;
                         xlnx,sat-10-x = <0x5955>;
                         xlnx,sat-64-x = <0x5f>;
                         xlnx,sat-2-x = <0x5f>;
-                        xlnx,meas-6-root-id = <0x6>;
+                        xlnx,meas-6-root-id = <0x3>;
                         xlnx,sat-10-y = <0x2606>;
                         xlnx,sat-64-y = <0xb4d>;
                         xlnx,sat-2-y = <0xb4d>;
+                        xlnx,meas-7-root-id = <0x4>;
                         xlnx,sat-13-desc = "Clocking , column , satellite";
+                        xlnx,meas-8-root-id = <0x6>;
                         xlnx,sat-6-desc = "XPIO , satellite";
                         xlnx,sat-14-x = <0x684e>;
                         xlnx,sat-6-x = <0x5887>;
@@ -934,6 +937,7 @@
                         xlnx,sat-11-y = <0x3009>;
                         xlnx,sat-3-y = <0x618>;
                         status = "okay";
+                        xlnx,meas-8-slr-number = <0x0>;
                         xlnx,sat-15-desc = "Clocking , column , satellite";
                         xlnx,sat-15-x = <0x684e>;
                         xlnx,sat-8-desc = "VNOC , satellite";
@@ -960,28 +964,30 @@
                         xlnx,sat-12-y = <0x29d0>;
                         xlnx,sat-4-y = <0x618>;
                         xlnx,meas-1-slr-number = <0x0>;
-                        xlnx,sat-16-x = <0x684e>;
                         xlnx,sat-17-desc = "Clocking , column , satellite";
+                        xlnx,sat-16-x = <0x684e>;
                         xlnx,sat-8-x = <0x5955>;
                         xlnx,sat-16-y = <0x11e9>;
                         xlnx,sat-8-y = <0xe1f>;
                         xlnx,meas-0 = "VCCAUX";
-                        xlnx,meas-1 = "VCC_SOC";
+                        xlnx,meas-1 = "VCCINT";
                         xlnx,sat-21-x = <0x30d9>;
-                        xlnx,meas-2 = "VCCAUX_PMC";
+                        xlnx,meas-2 = "VCC_RAM";
                         xlnx,sat-21-y = <0xe1f>;
-                        xlnx,meas-3 = "VCC_PMC";
+                        xlnx,meas-3 = "VCC_SOC";
                         xlnx,sat-14-desc = "Clocking , column , satellite";
-                        xlnx,meas-4 = "VCC_PSFP";
+                        xlnx,meas-4 = "VCCAUX_PMC";
                         xlnx,sat-7-desc = "XPIO , satellite";
-                        xlnx,meas-5 = "VCC_PSLP";
+                        xlnx,meas-5 = "VCC_PMC";
                         xlnx,sat-26-desc = "VNOC , satellite";
                         xlnx,sat-25-x = <0x1c9b>;
-                        xlnx,meas-6 = "VP_VN";
+                        xlnx,meas-6 = "VCC_PSFP";
                         xlnx,sat-25-y = <0x1a12>;
+                        xlnx,meas-7 = "VCC_PSLP";
                         xlnx,sat-63-x = <0x5f>;
                         xlnx,sat-1-x = <0x5f>;
                         xlnx,meas-4-slr-number = <0x0>;
+                        xlnx,meas-8 = "VP_VN";
                         xlnx,sat-11-desc = "Clocking , column , satellite";
                         xlnx,sat-63-y = <0xb4d>;
                         xlnx,sat-1-y = <0xb4d>;
@@ -995,6 +1001,16 @@
                         supply@0 {
                                 reg = <0x0>;
                                 xlnx,name = "vccaux";
+                        };
+
+                        supply@7 {
+                                reg = <0x7>;
+                                xlnx,name = "vccint";
+                        };
+
+                        supply@8 {
+                                reg = <0x8>;
+                                xlnx,name = "vcc_ram";
                         };
 
                         supply@5 {
