@@ -26,6 +26,7 @@ SRC_URI:append:microblaze-v = "\
 # EFI variable storage on SPI flash - for machines with the UEFI
 # variables partition in their OSPI layout (offset 0x1580000)
 SRC_URI:append:versal-vek280-multidomain = " file://efi-variable-sf.cfg"
+SRC_URI:append:versal-vhk158-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-2ve-2vm-vek385-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-2ve-2vm-vek385-revb-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-vrk160-multidomain = " file://efi-variable-sf.cfg"

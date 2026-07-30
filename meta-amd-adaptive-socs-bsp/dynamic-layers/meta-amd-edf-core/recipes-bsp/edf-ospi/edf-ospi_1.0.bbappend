@@ -1,5 +1,6 @@
 COMPATIBLE_MACHINE:versal-vrk160-multidomain = "${MACHINE}"
 COMPATIBLE_MACHINE:versal-vek280-multidomain = "${MACHINE}"
+COMPATIBLE_MACHINE:versal-vhk158-multidomain = "${MACHINE}"
 COMPATIBLE_MACHINE:versal-2ve-2vm-vek385-multidomain = "${MACHINE}"
 COMPATIBLE_MACHINE:versal-2ve-2vm-vek385-revb-multidomain = "${MACHINE}"
 COMPATIBLE_MACHINE:versal-vrk165-multidomain = "${MACHINE}"
