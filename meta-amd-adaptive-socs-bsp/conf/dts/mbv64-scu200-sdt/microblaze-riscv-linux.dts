@@ -12,7 +12,7 @@
         speed_grade = "2";
 
         cpus_microblaze_riscv_0: cpus {
-                phandle = <0x26>;
+                phandle = <0x29>;
                 #cpu-mask-cells = <0x1>;
                 compatible = "cpus,cluster";
                 #address-cells = <0x1>;
@@ -23,7 +23,7 @@
                 timebase-frequency = <0x5f5e100>;
 
                 microblaze_riscv_0: cpu@0 {
-                        phandle = <0x27>;
+                        phandle = <0x2a>;
                         reg = <0x0>;
                         d-cache-size = <0x8000>;
                         bootph-all;
@@ -46,7 +46,7 @@
         };
 
         clock: clocks {
-                phandle = <0x28>;
+                phandle = <0x2b>;
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
 
@@ -261,17 +261,17 @@
                         #size-cells = <0x0>;
 
                         i2carb: i2c-arbitrator@72 {
-                                phandle = <0x29>;
+                                phandle = <0x2c>;
                                 compatible = "nxp,pca9541";
                                 reg = <0x72>;
 
                                 i2carb1: i2c-arb {
-                                        phandle = <0x2a>;
+                                        phandle = <0x2d>;
                                         #address-cells = <0x1>;
                                         #size-cells = <0x0>;
 
                                         eeprom_user: eeprom@57 {
-                                                phandle = <0x2b>;
+                                                phandle = <0x2e>;
                                                 bootph-all;
                                                 compatible = "atmel,24c1025";
                                                 reg = <0x57>;
@@ -710,6 +710,207 @@
                         status = "okay";
                         xlnx,ip-name = "pmcl_global";
                         reg = <0x0 0x40a0000 0x0 0x20000>;
+                        clocks = <&clk_cpu_0>;
+                        clock-names = "ref";
+                        bootph-all;
+
+                        pmc_reset: reset-controller {
+                                phandle = <0x26>;
+                                compatible = "amd,pmc-reset";
+                                #reset-cells = <0x1>;
+                                bootph-all;
+                        };
+
+                        pmc_clk: clock-controller {
+                                phandle = <0x25>;
+                                compatible = "amd,pmc-clk";
+                                #clock-cells = <0x1>;
+                                bootph-all;
+                        };
+
+                        pmc_pinctrl: pinctrl {
+                                phandle = <0x31>;
+                                compatible = "amd,pmc-pinctrl";
+                                bootph-all;
+
+                                ospi_default: ospi-state {
+                                        phandle = <0x27>;
+                                        groups = "ospi";
+                                        function = "ospi";
+                                        bootph-all;
+                                };
+                        };
+
+                        pmc_nvmem: nvmem {
+                                phandle = <0x32>;
+                                compatible = "amd,pmc-nvmem";
+
+                                nvmem-layout {
+                                        compatible = "fixed-layout";
+                                        #address-cells = <0x1>;
+                                        #size-cells = <0x1>;
+
+                                        reset_reason: reset-reason@70 {
+                                                phandle = <0x33>;
+                                                reg = <0x70 0x4>;
+                                        };
+
+                                        last_reset_reason: last-reset-reason@74 {
+                                                phandle = <0x34>;
+                                                reg = <0x74 0x4>;
+                                        };
+
+                                        boot_mode_por: boot-mode-por@78 {
+                                                phandle = <0x35>;
+                                                reg = <0x78 0x4>;
+                                        };
+
+                                        boot_mode_user: boot-mode-user@7c {
+                                                phandle = <0x36>;
+                                                reg = <0x7c 0x4>;
+                                        };
+
+                                        global_gen_storage0: global-gen-storage0@a0 {
+                                                phandle = <0x37>;
+                                                reg = <0xa0 0x4>;
+                                        };
+
+                                        global_gen_storage1: global-gen-storage1@a4 {
+                                                phandle = <0x38>;
+                                                reg = <0xa4 0x4>;
+                                        };
+
+                                        global_gen_storage2: global-gen-storage2@a8 {
+                                                phandle = <0x39>;
+                                                reg = <0xa8 0x4>;
+                                        };
+
+                                        global_gen_storage3: global-gen-storage3@ac {
+                                                phandle = <0x3a>;
+                                                reg = <0xac 0x4>;
+                                        };
+
+                                        global_gen_storage4: global-gen-storage4@b0 {
+                                                phandle = <0x3b>;
+                                                reg = <0xb0 0x4>;
+                                        };
+
+                                        global_gen_storage5: global-gen-storage5@b4 {
+                                                phandle = <0x3c>;
+                                                reg = <0xb4 0x4>;
+                                        };
+
+                                        global_gen_storage6: global-gen-storage6@b8 {
+                                                phandle = <0x3d>;
+                                                reg = <0xb8 0x4>;
+                                        };
+
+                                        global_gen_storage7: global-gen-storage7@bc {
+                                                phandle = <0x3e>;
+                                                reg = <0xbc 0x4>;
+                                        };
+
+                                        pers_glob_gen_storage0: pers-glob-gen-storage0@c0 {
+                                                phandle = <0x3f>;
+                                                reg = <0xc0 0x4>;
+                                        };
+
+                                        pers_glob_gen_storage1: pers-glob-gen-storage1@c4 {
+                                                phandle = <0x40>;
+                                                reg = <0xc4 0x4>;
+                                        };
+
+                                        pers_glob_gen_storage2: pers-glob-gen-storage2@c8 {
+                                                phandle = <0x41>;
+                                                reg = <0xc8 0x4>;
+                                        };
+
+                                        pers_glob_gen_storage3: pers-glob-gen-storage3@cc {
+                                                phandle = <0x42>;
+                                                reg = <0xcc 0x4>;
+                                        };
+
+                                        pers_glob_gen_storage4: pers-glob-gen-storage4@d0 {
+                                                phandle = <0x43>;
+                                                reg = <0xd0 0x4>;
+                                        };
+
+                                        pers_glob_gen_storage5: pers-glob-gen-storage5@d4 {
+                                                phandle = <0x44>;
+                                                reg = <0xd4 0x4>;
+                                        };
+
+                                        pers_glob_gen_storage6: pers-glob-gen-storage6@d8 {
+                                                phandle = <0x45>;
+                                                reg = <0xd8 0x4>;
+                                        };
+
+                                        pers_glob_gen_storage7: pers-glob-gen-storage7@dc {
+                                                phandle = <0x46>;
+                                                reg = <0xdc 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash0: pmc-fw-auth-hash0@160 {
+                                                phandle = <0x47>;
+                                                reg = <0x160 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash1: pmc-fw-auth-hash1@164 {
+                                                phandle = <0x48>;
+                                                reg = <0x164 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash2: pmc-fw-auth-hash2@168 {
+                                                phandle = <0x49>;
+                                                reg = <0x168 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash3: pmc-fw-auth-hash3@16c {
+                                                phandle = <0x4a>;
+                                                reg = <0x16c 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash4: pmc-fw-auth-hash4@170 {
+                                                phandle = <0x4b>;
+                                                reg = <0x170 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash5: pmc-fw-auth-hash5@174 {
+                                                phandle = <0x4c>;
+                                                reg = <0x174 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash6: pmc-fw-auth-hash6@178 {
+                                                phandle = <0x4d>;
+                                                reg = <0x178 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash7: pmc-fw-auth-hash7@17c {
+                                                phandle = <0x4e>;
+                                                reg = <0x17c 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash8: pmc-fw-auth-hash8@180 {
+                                                phandle = <0x4f>;
+                                                reg = <0x180 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash9: pmc-fw-auth-hash9@184 {
+                                                phandle = <0x50>;
+                                                reg = <0x184 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash10: pmc-fw-auth-hash10@188 {
+                                                phandle = <0x51>;
+                                                reg = <0x188 0x4>;
+                                        };
+
+                                        pmc_fw_auth_hash11: pmc-fw-auth-hash11@18c {
+                                                phandle = <0x52>;
+                                                reg = <0x18c 0x4>;
+                                        };
+                                };
+                        };
                 };
 
                 pmcbridge_0_pmcl_ospi_0: pmcbridge_0_pmcl_ospi_0@4090000 {
@@ -723,7 +924,10 @@
                         is-dual = <0x0>;
                         #address-cells = <0x1>;
                         #size-cells = <0x0>;
-                        clocks = <&clk_cpu_0>;
+                        clocks = <&pmc_clk 0x2>;
+                        resets = <&pmc_reset 0x2>;
+                        pinctrl-names = "default";
+                        pinctrl-0 = <0x27>;
                         cdns,fifo-depth = <0x100>;
                         cdns,fifo-width = <0x4>;
 
@@ -888,15 +1092,15 @@
                         xlnx,phyrst-board-interface = "0";
                         xlnx,axiliteclkrate = <0x0>;
                         xlnx,rxlane1-placement = "0";
-                        phy-handle = <0x25>;
+                        phy-handle = <0x28>;
 
                         axi_ethernet_0_mdio: mdio {
-                                phandle = <0x2e>;
+                                phandle = <0x53>;
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
 
                                 phy0: ethernet-phy@1 {
-                                        phandle = <0x25>;
+                                        phandle = <0x28>;
                                         #phy-cells = <0x1>;
                                         compatible = "ethernet-phy-id2000.a231";
                                         reg = <0x1>;
@@ -970,6 +1174,43 @@
                 pmcbridge_0_pmcl_ecdsa_rsa_0 = "/amba_pl/pmcbridge_0_pmcl_ecdsa_rsa_0@4140000";
                 pmcbridge_0_pmcl_efuse_0 = "/amba_pl/pmcbridge_0_pmcl_efuse_0@4160000";
                 pmcbridge_0_pmcl_global_0 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000";
+                pmc_reset = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/reset-controller";
+                pmc_clk = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/clock-controller";
+                pmc_pinctrl = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/pinctrl";
+                ospi_default = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/pinctrl/ospi-state";
+                pmc_nvmem = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem";
+                reset_reason = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/reset-reason@70";
+                last_reset_reason = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/last-reset-reason@74";
+                boot_mode_por = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/boot-mode-por@78";
+                boot_mode_user = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/boot-mode-user@7c";
+                global_gen_storage0 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/global-gen-storage0@a0";
+                global_gen_storage1 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/global-gen-storage1@a4";
+                global_gen_storage2 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/global-gen-storage2@a8";
+                global_gen_storage3 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/global-gen-storage3@ac";
+                global_gen_storage4 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/global-gen-storage4@b0";
+                global_gen_storage5 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/global-gen-storage5@b4";
+                global_gen_storage6 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/global-gen-storage6@b8";
+                global_gen_storage7 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/global-gen-storage7@bc";
+                pers_glob_gen_storage0 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pers-glob-gen-storage0@c0";
+                pers_glob_gen_storage1 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pers-glob-gen-storage1@c4";
+                pers_glob_gen_storage2 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pers-glob-gen-storage2@c8";
+                pers_glob_gen_storage3 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pers-glob-gen-storage3@cc";
+                pers_glob_gen_storage4 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pers-glob-gen-storage4@d0";
+                pers_glob_gen_storage5 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pers-glob-gen-storage5@d4";
+                pers_glob_gen_storage6 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pers-glob-gen-storage6@d8";
+                pers_glob_gen_storage7 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pers-glob-gen-storage7@dc";
+                pmc_fw_auth_hash0 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash0@160";
+                pmc_fw_auth_hash1 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash1@164";
+                pmc_fw_auth_hash2 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash2@168";
+                pmc_fw_auth_hash3 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash3@16c";
+                pmc_fw_auth_hash4 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash4@170";
+                pmc_fw_auth_hash5 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash5@174";
+                pmc_fw_auth_hash6 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash6@178";
+                pmc_fw_auth_hash7 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash7@17c";
+                pmc_fw_auth_hash8 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash8@180";
+                pmc_fw_auth_hash9 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash9@184";
+                pmc_fw_auth_hash10 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash10@188";
+                pmc_fw_auth_hash11 = "/amba_pl/pmcbridge_0_pmcl_global_0@40a0000/nvmem/nvmem-layout/pmc-fw-auth-hash11@18c";
                 pmcbridge_0_pmcl_ospi_0 = "/amba_pl/pmcbridge_0_pmcl_ospi_0@4090000";
                 pmcbridge_0_pmcl_puf_0 = "/amba_pl/pmcbridge_0_pmcl_puf_0@4080000";
                 pmcbridge_0_pmcl_sha3_0 = "/amba_pl/pmcbridge_0_pmcl_sha3_0@4100000";
