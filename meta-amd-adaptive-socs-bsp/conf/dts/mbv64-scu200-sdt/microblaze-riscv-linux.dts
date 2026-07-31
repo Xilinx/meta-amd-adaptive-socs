@@ -12,7 +12,7 @@
         speed_grade = "2";
 
         cpus_microblaze_riscv_0: cpus {
-                phandle = <0x29>;
+                phandle = <0x2a>;
                 #cpu-mask-cells = <0x1>;
                 compatible = "cpus,cluster";
                 #address-cells = <0x1>;
@@ -23,7 +23,7 @@
                 timebase-frequency = <0x5f5e100>;
 
                 microblaze_riscv_0: cpu@0 {
-                        phandle = <0x2a>;
+                        phandle = <0x2b>;
                         reg = <0x0>;
                         d-cache-size = <0x8000>;
                         bootph-all;
@@ -46,12 +46,12 @@
         };
 
         clock: clocks {
-                phandle = <0x2b>;
+                phandle = <0x2c>;
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
 
                 clk_cpu_0: clk_cpu@0 {
-                        phandle = <0x23>;
+                        phandle = <0x24>;
                         compatible = "fixed-clock";
                         bootph-all;
                         reg = <0x0>;
@@ -61,7 +61,7 @@
                 };
 
                 clk_bus_0: clk_bus_0@1 {
-                        phandle = <0x24>;
+                        phandle = <0x25>;
                         compatible = "fixed-clock";
                         bootph-all;
                         reg = <0x1>;
@@ -72,7 +72,7 @@
         };
 
         amba_pl: amba_pl {
-                phandle = <0x22>;
+                phandle = <0x23>;
                 ranges;
                 compatible = "simple-bus";
                 #address-cells = <0x2>;
@@ -84,7 +84,7 @@
                         #interrupt-cells = <0x2>;
                         xlnx,sense-of-irq-edge-type = "Rising";
                         xlnx,edk-special = "INTR_CTRL";
-                        xlnx,kind-of-intr = <0x1c4>;
+                        xlnx,kind-of-intr = <0x3c4>;
                         xlnx,kind-of-edge = <0xffffffff>;
                         xlnx,irq-is-level = <0x1>;
                         xlnx,has-ivr = <0x1>;
@@ -101,7 +101,7 @@
                         xlnx,s-axi-aclk-freq-mhz = <0x64>;
                         xlnx,num-sw-intr = <0x0>;
                         xlnx,irq-connection = <0x0>;
-                        xlnx,num-intr-inputs = <0x9>;
+                        xlnx,num-intr-inputs = <0xa>;
                         xlnx,has-sie = <0x1>;
                         xlnx,enable-async = <0x0>;
                         xlnx,has-cie = <0x1>;
@@ -261,17 +261,17 @@
                         #size-cells = <0x0>;
 
                         i2carb: i2c-arbitrator@72 {
-                                phandle = <0x2c>;
+                                phandle = <0x2d>;
                                 compatible = "nxp,pca9541";
                                 reg = <0x72>;
 
                                 i2carb1: i2c-arb {
-                                        phandle = <0x2d>;
+                                        phandle = <0x2e>;
                                         #address-cells = <0x1>;
                                         #size-cells = <0x0>;
 
                                         eeprom_user: eeprom@57 {
-                                                phandle = <0x2e>;
+                                                phandle = <0x2f>;
                                                 bootph-all;
                                                 compatible = "atmel,24c1025";
                                                 reg = <0x57>;
@@ -381,7 +381,7 @@
                 };
 
                 lpddrmc_0: lpddrmc@80000000 {
-                        phandle = <0x21>;
+                        phandle = <0x22>;
                         xlnx,s1-axi-wuser-width = <0x8>;
                         xlnx,xmpu-reg1-wr;
                         xlnx,lpddrmc-axi-id-width = <0x1>;
@@ -647,6 +647,48 @@
                         xlnx,tdstrain = <0x15fc>;
                 };
 
+                mdm_1: mdm_riscv@44a00000 {
+                        phandle = <0x21>;
+                        interrupts = <0x9 0x0>;
+                        xlnx,trace-async-reset = <0x0>;
+                        compatible = "xlnx,mdm-riscv-1.0";
+                        xlnx,data-size = <0x20>;
+                        xlnx,addr-size = <0x38>;
+                        xlnx,xmtc = <0x0>;
+                        xlnx,avoid-primitives = <0x0>;
+                        xlnx,bscanid = <0x0>;
+                        xlnx,trace-output = <0x0>;
+                        xlnx,debug-interface = <0x0>;
+                        interrupt-parent = <&microblaze_riscv_0_axi_intc>;
+                        xlnx,use-uart = <0x1>;
+                        xlnx,mb-dbg-ports = <0x1>;
+                        xlnx,jtag-chain = <0x2>;
+                        xlnx,ext-trig-reset-value = <0xf1234>;
+                        xlnx,trig-in-ports = <0x1>;
+                        xlnx,ip-name = "mdm_riscv";
+                        xlnx,brk = <0x0>;
+                        xlnx,dbg-reg-access = <0x0>;
+                        xlnx,use-bscan-switch = <0x0>;
+                        reg = <0x0 0x44a00000 0x0 0x10000>;
+                        xlnx,use-bscan = <0x0>;
+                        xlnx,trace-id = <0x6e>;
+                        xlnx,lmb-protocol = <0x0>;
+                        xlnx,dtm-idcode = <0x93>;
+                        xlnx,trace-data-width = <0x20>;
+                        xlnx,edk-iptype = "PERIPHERAL";
+                        xlnx,use-jtag-bscan = <0x1>;
+                        xlnx,interconnect = <0x2>;
+                        xlnx,use-cross-trigger = <0x0>;
+                        xlnx,trace-protocol = <0x1>;
+                        status = "okay";
+                        interrupt-names = "Interrupt";
+                        xlnx,use-config-reset = <0x0>;
+                        xlnx,trig-out-ports = <0x1>;
+                        xlnx,device = "xcsu200p";
+                        xlnx,dbg-mem-access = <0x0>;
+                        xlnx,trace-clk-out-phase = <0x5a>;
+                };
+
                 pmcbridge_0_ccu_apb_0: pmcbridge_0_ccu_apb_0@4130000 {
                         phandle = <0x14>;
                         compatible = "xlnx,ccu-apb-11.0";
@@ -715,26 +757,26 @@
                         bootph-all;
 
                         pmc_reset: reset-controller {
-                                phandle = <0x26>;
+                                phandle = <0x27>;
                                 compatible = "amd,pmc-reset";
                                 #reset-cells = <0x1>;
                                 bootph-all;
                         };
 
                         pmc_clk: clock-controller {
-                                phandle = <0x25>;
+                                phandle = <0x26>;
                                 compatible = "amd,pmc-clk";
                                 #clock-cells = <0x1>;
                                 bootph-all;
                         };
 
                         pmc_pinctrl: pinctrl {
-                                phandle = <0x31>;
+                                phandle = <0x32>;
                                 compatible = "amd,pmc-pinctrl";
                                 bootph-all;
 
                                 ospi_default: ospi-state {
-                                        phandle = <0x27>;
+                                        phandle = <0x28>;
                                         groups = "ospi";
                                         function = "ospi";
                                         bootph-all;
@@ -742,7 +784,7 @@
                         };
 
                         pmc_nvmem: nvmem {
-                                phandle = <0x32>;
+                                phandle = <0x33>;
                                 compatible = "amd,pmc-nvmem";
 
                                 nvmem-layout {
@@ -751,162 +793,162 @@
                                         #size-cells = <0x1>;
 
                                         reset_reason: reset-reason@70 {
-                                                phandle = <0x33>;
+                                                phandle = <0x34>;
                                                 reg = <0x70 0x4>;
                                         };
 
                                         last_reset_reason: last-reset-reason@74 {
-                                                phandle = <0x34>;
+                                                phandle = <0x35>;
                                                 reg = <0x74 0x4>;
                                         };
 
                                         boot_mode_por: boot-mode-por@78 {
-                                                phandle = <0x35>;
+                                                phandle = <0x36>;
                                                 reg = <0x78 0x4>;
                                         };
 
                                         boot_mode_user: boot-mode-user@7c {
-                                                phandle = <0x36>;
+                                                phandle = <0x37>;
                                                 reg = <0x7c 0x4>;
                                         };
 
                                         global_gen_storage0: global-gen-storage0@a0 {
-                                                phandle = <0x37>;
+                                                phandle = <0x38>;
                                                 reg = <0xa0 0x4>;
                                         };
 
                                         global_gen_storage1: global-gen-storage1@a4 {
-                                                phandle = <0x38>;
+                                                phandle = <0x39>;
                                                 reg = <0xa4 0x4>;
                                         };
 
                                         global_gen_storage2: global-gen-storage2@a8 {
-                                                phandle = <0x39>;
+                                                phandle = <0x3a>;
                                                 reg = <0xa8 0x4>;
                                         };
 
                                         global_gen_storage3: global-gen-storage3@ac {
-                                                phandle = <0x3a>;
+                                                phandle = <0x3b>;
                                                 reg = <0xac 0x4>;
                                         };
 
                                         global_gen_storage4: global-gen-storage4@b0 {
-                                                phandle = <0x3b>;
+                                                phandle = <0x3c>;
                                                 reg = <0xb0 0x4>;
                                         };
 
                                         global_gen_storage5: global-gen-storage5@b4 {
-                                                phandle = <0x3c>;
+                                                phandle = <0x3d>;
                                                 reg = <0xb4 0x4>;
                                         };
 
                                         global_gen_storage6: global-gen-storage6@b8 {
-                                                phandle = <0x3d>;
+                                                phandle = <0x3e>;
                                                 reg = <0xb8 0x4>;
                                         };
 
                                         global_gen_storage7: global-gen-storage7@bc {
-                                                phandle = <0x3e>;
+                                                phandle = <0x3f>;
                                                 reg = <0xbc 0x4>;
                                         };
 
                                         pers_glob_gen_storage0: pers-glob-gen-storage0@c0 {
-                                                phandle = <0x3f>;
+                                                phandle = <0x40>;
                                                 reg = <0xc0 0x4>;
                                         };
 
                                         pers_glob_gen_storage1: pers-glob-gen-storage1@c4 {
-                                                phandle = <0x40>;
+                                                phandle = <0x41>;
                                                 reg = <0xc4 0x4>;
                                         };
 
                                         pers_glob_gen_storage2: pers-glob-gen-storage2@c8 {
-                                                phandle = <0x41>;
+                                                phandle = <0x42>;
                                                 reg = <0xc8 0x4>;
                                         };
 
                                         pers_glob_gen_storage3: pers-glob-gen-storage3@cc {
-                                                phandle = <0x42>;
+                                                phandle = <0x43>;
                                                 reg = <0xcc 0x4>;
                                         };
 
                                         pers_glob_gen_storage4: pers-glob-gen-storage4@d0 {
-                                                phandle = <0x43>;
+                                                phandle = <0x44>;
                                                 reg = <0xd0 0x4>;
                                         };
 
                                         pers_glob_gen_storage5: pers-glob-gen-storage5@d4 {
-                                                phandle = <0x44>;
+                                                phandle = <0x45>;
                                                 reg = <0xd4 0x4>;
                                         };
 
                                         pers_glob_gen_storage6: pers-glob-gen-storage6@d8 {
-                                                phandle = <0x45>;
+                                                phandle = <0x46>;
                                                 reg = <0xd8 0x4>;
                                         };
 
                                         pers_glob_gen_storage7: pers-glob-gen-storage7@dc {
-                                                phandle = <0x46>;
+                                                phandle = <0x47>;
                                                 reg = <0xdc 0x4>;
                                         };
 
                                         pmc_fw_auth_hash0: pmc-fw-auth-hash0@160 {
-                                                phandle = <0x47>;
+                                                phandle = <0x48>;
                                                 reg = <0x160 0x4>;
                                         };
 
                                         pmc_fw_auth_hash1: pmc-fw-auth-hash1@164 {
-                                                phandle = <0x48>;
+                                                phandle = <0x49>;
                                                 reg = <0x164 0x4>;
                                         };
 
                                         pmc_fw_auth_hash2: pmc-fw-auth-hash2@168 {
-                                                phandle = <0x49>;
+                                                phandle = <0x4a>;
                                                 reg = <0x168 0x4>;
                                         };
 
                                         pmc_fw_auth_hash3: pmc-fw-auth-hash3@16c {
-                                                phandle = <0x4a>;
+                                                phandle = <0x4b>;
                                                 reg = <0x16c 0x4>;
                                         };
 
                                         pmc_fw_auth_hash4: pmc-fw-auth-hash4@170 {
-                                                phandle = <0x4b>;
+                                                phandle = <0x4c>;
                                                 reg = <0x170 0x4>;
                                         };
 
                                         pmc_fw_auth_hash5: pmc-fw-auth-hash5@174 {
-                                                phandle = <0x4c>;
+                                                phandle = <0x4d>;
                                                 reg = <0x174 0x4>;
                                         };
 
                                         pmc_fw_auth_hash6: pmc-fw-auth-hash6@178 {
-                                                phandle = <0x4d>;
+                                                phandle = <0x4e>;
                                                 reg = <0x178 0x4>;
                                         };
 
                                         pmc_fw_auth_hash7: pmc-fw-auth-hash7@17c {
-                                                phandle = <0x4e>;
+                                                phandle = <0x4f>;
                                                 reg = <0x17c 0x4>;
                                         };
 
                                         pmc_fw_auth_hash8: pmc-fw-auth-hash8@180 {
-                                                phandle = <0x4f>;
+                                                phandle = <0x50>;
                                                 reg = <0x180 0x4>;
                                         };
 
                                         pmc_fw_auth_hash9: pmc-fw-auth-hash9@184 {
-                                                phandle = <0x50>;
+                                                phandle = <0x51>;
                                                 reg = <0x184 0x4>;
                                         };
 
                                         pmc_fw_auth_hash10: pmc-fw-auth-hash10@188 {
-                                                phandle = <0x51>;
+                                                phandle = <0x52>;
                                                 reg = <0x188 0x4>;
                                         };
 
                                         pmc_fw_auth_hash11: pmc-fw-auth-hash11@18c {
-                                                phandle = <0x52>;
+                                                phandle = <0x53>;
                                                 reg = <0x18c 0x4>;
                                         };
                                 };
@@ -927,7 +969,7 @@
                         clocks = <&pmc_clk 0x2>;
                         resets = <&pmc_reset 0x2>;
                         pinctrl-names = "default";
-                        pinctrl-0 = <0x27>;
+                        pinctrl-0 = <0x28>;
                         cdns,fifo-depth = <0x100>;
                         cdns,fifo-width = <0x4>;
 
@@ -1092,15 +1134,15 @@
                         xlnx,phyrst-board-interface = "0";
                         xlnx,axiliteclkrate = <0x0>;
                         xlnx,rxlane1-placement = "0";
-                        phy-handle = <0x28>;
+                        phy-handle = <0x29>;
 
                         axi_ethernet_0_mdio: mdio {
-                                phandle = <0x53>;
+                                phandle = <0x54>;
                                 #address-cells = <0x1>;
                                 #size-cells = <0x0>;
 
                                 phy0: ethernet-phy@1 {
-                                        phandle = <0x28>;
+                                        phandle = <0x29>;
                                         #phy-cells = <0x1>;
                                         compatible = "ethernet-phy-id2000.a231";
                                         reg = <0x1>;
@@ -1166,6 +1208,7 @@
                 axi_uartlite_1 = "/amba_pl/serial@40610000";
                 axi_uartlite_2 = "/amba_pl/serial@40620000";
                 lpddrmc_0 = "/amba_pl/lpddrmc@80000000";
+                mdm_1 = "/amba_pl/mdm_riscv@44a00000";
                 pmcbridge_0_ccu_apb_0 = "/amba_pl/pmcbridge_0_ccu_apb_0@4130000";
                 pmcbridge_0_ccu_rd_stream_0 = "/amba_pl/pmcbridge_0_ccu_rd_stream_0@4060000";
                 pmcbridge_0_ccu_wr_stream_0 = "/amba_pl/pmcbridge_0_ccu_wr_stream_0@4070000";
