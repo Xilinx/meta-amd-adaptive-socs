@@ -34,6 +34,7 @@ SRC_URI:append:versal-vrk160-revb-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-vrk165-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-vrk165-revb-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-2ve-2vm-vek386-multidomain = " file://efi-variable-sf.cfg"
+SRC_URI:append:versal-2vp-vpk360-multidomain = " file://efi-variable-sf.cfg"
 
 do_unpack:append:microblaze-v() {
     bb.build.exec_func('do_env_config', d)
