@@ -6,6 +6,7 @@ FILESEXTRAPATHS:prepend:versal-2vp-vpk360-sdt-seg := "${THISDIR}/u-boot-xlnx:"
 FILESEXTRAPATHS:prepend:zynq-zc702-sdt-full := "${THISDIR}/u-boot-xlnx:"
 FILESEXTRAPATHS:prepend:zynq-zc706-sdt-full := "${THISDIR}/u-boot-xlnx:"
 FILESEXTRAPATHS:prepend:microblaze-v := "${THISDIR}/u-boot-xlnx:"
+FILESEXTRAPATHS:prepend:mbv64-scu200-revb-sdt := "${THISDIR}/u-boot-xlnx:"
 
 SRC_URI:append:versal-2ve-2vm = "\
     file://u-boot-misc.cfg \
@@ -19,6 +20,9 @@ SRC_URI:append:zynq-zc706-sdt-full = "\
 SRC_URI:append:microblaze-v = "\
     file://u-boot-misc_mbv64.cfg \
     file://mbv64.env \
+    "
+SRC_URI:append:mbv64-scu200-revb-sdt = "\
+    file://u-boot-misc_mbv64-scu200-revb.cfg \
     "
 
 # EFI variable storage on SPI flash - for machines with the UEFI
