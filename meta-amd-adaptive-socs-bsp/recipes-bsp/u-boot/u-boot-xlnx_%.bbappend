@@ -39,8 +39,14 @@ do_unpack:append:microblaze-v() {
     bb.build.exec_func('do_env_config', d)
 }
 
+# scriptaddr must live in DDR, whose base differs per board (reva 0x80000000,
+# revb 0x100000000). Derive it from DDR_BASEADDR like meta-amd-edf does.
+MBV_SCRIPTADDR_OFFSET ?= "0x04000000"
+MBV_SCRIPTADDR = "${@'0x%x' % (int(d.getVar('DDR_BASEADDR') or '0x80000000', 16) + int(d.getVar('MBV_SCRIPTADDR_OFFSET'), 16))}"
+
 do_env_config() {
     if [ -f "${WORKDIR}/mbv64.env" ]; then
-        cp ${WORKDIR}/mbv64.env ${S}/board/xilinx/mbv/mbv64.env
+        sed -e 's/@@SCRIPTADDR@@/${MBV_SCRIPTADDR}/' \
+            ${WORKDIR}/mbv64.env > ${S}/board/xilinx/mbv/mbv64.env
     fi
 }
