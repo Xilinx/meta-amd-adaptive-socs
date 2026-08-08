@@ -1,6 +1,7 @@
 args:
     - --hw-description https://edf.amd.com/sswreleases/rel-v2026.2/sdt/2026.2/2026.2_0809_1_08090727/external/versal-vpk360-sdt-seg/versal-vpk360-sdt-seg_2026.2_0809_1_08090727.tar.gz
     - --machine-name versal-vpk360-sdt-seg
+    - --require-machine versal-2vp-generic
     - -g full
 
 kconfig:
@@ -15,6 +16,10 @@ machine:
         evaluation kit: Cortex-A72 Linux plus MicroBlaze PMC/PSM
         firmware sub-machines.
     pre:
+        BIF_TOPLEVEL_ATTR[id_code]:
+            comment: ID Code, can be found in SDTGen bif file
+            op: '='
+            val: "0x04c74093"
     post:
         QEMU_HW_DTB_PS:
             op: '='
