@@ -1,0 +1,27 @@
+args:
+    - --hw-description https://edf.amd.com/sswreleases/rel-v2026.1/sdt/2026.1.1/2026.1.1_0806_1_08060400/external/versal-vrk165-revb-sdt-seg/versal-vrk165-revb-sdt-seg_2026.1.1_0806_1_08060400.tar.gz
+    - --machine-name versal-vrk165-revb-sdt-seg
+    - -g full
+
+kconfig:
+    CONFIG_SUBSYSTEM_BOOTMODE_8: y
+
+machine:
+    description: >-
+        Segmented SDT machine for the AMD Versal RF VRK165 REVB evaluation
+        kit: Cortex-A72 Linux plus MicroBlaze PMC/PSM firmware
+        sub-machines.
+    post:
+        QEMU_HW_DTB_PS:
+            op: '='
+            val: "${QEMU_HW_DTB_PATH}/board-versal-ps-vrk165-revB.dtb"
+        QEMU_HW_DTB_PMC:
+            op: '='
+            val: "${QEMU_HW_DTB_PATH}/board-versal-pmc-virt.dtb"
+        QEMU_FLASH_TYPE:
+            op: '='
+            val: 'ospi'
+        SPI_IMAGE_SIZE:
+            comment: 'OSPI flash size (256M)'
+            op: '='
+            val: '0x1000_0000'
