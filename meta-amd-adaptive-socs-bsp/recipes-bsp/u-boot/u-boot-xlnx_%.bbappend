@@ -31,6 +31,7 @@ SRC_URI:append:versal-2ve-2vm-vek385-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-2ve-2vm-vek385-revb-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-vrk160-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-vrk165-multidomain = " file://efi-variable-sf.cfg"
+SRC_URI:append:versal-vrk165-revb-multidomain = " file://efi-variable-sf.cfg"
 SRC_URI:append:versal-2ve-2vm-vek386-multidomain = " file://efi-variable-sf.cfg"
 
 do_unpack:append:microblaze-v() {
