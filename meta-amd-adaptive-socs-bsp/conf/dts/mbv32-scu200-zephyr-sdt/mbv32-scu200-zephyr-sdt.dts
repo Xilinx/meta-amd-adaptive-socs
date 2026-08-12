@@ -1,0 +1,206 @@
+/dts-v1/;
+/ {
+        board = "scu200";
+        compatible = "xlnx,scu200-riscv", "qemu,mbv", "amd,mbv";
+        device_id = "xcsu200p";
+        #address-cells = <0x1>;
+        variant = "spartanuplus", "spartanuplusaes1";
+        model = "SCU200 AMD Microblaze RISCV 32bit";
+        #size-cells = <0x1>;
+        slrcount = <0x1>;
+        family = "microblaze_riscv";
+        speed_grade = "2";
+        pruned-sdt = <0x1>;
+
+        cpus_microblaze_riscv_0: cpus {
+                phandle = <0x23>;
+                #cpu-mask-cells = <0x1>;
+                #address-cells = <0x1>;
+                bootph-all;
+                #size-cells = <0x0>;
+                #ranges-address-cells = <0x1>;
+                #ranges-size-cells = <0x1>;
+
+                microblaze_riscv_0: cpu@0 {
+                        phandle = <0x24>;
+                        reg = <0x0>;
+                        clock-frequency = <0x5f5e100>;
+                        riscv,isa = "rv32imac_zicsr_zifencei_zicbom";
+                        compatible = "amd,mbv32", "riscv";
+                        device_type = "cpu";
+
+                        cpu_intc: interrupt-controller {
+                                phandle = <0x26>;
+                                compatible = "riscv,cpu-intc";
+                                #interrupt-cells = <0x1>;
+                                interrupt-controller;
+                        };
+                };
+        };
+
+        clock: clocks {
+                phandle = <0x25>;
+                #address-cells = <0x1>;
+                #size-cells = <0x0>;
+
+                clk_cpu_0: clk_cpu {
+                        phandle = <0x21>;
+                        compatible = "fixed-clock";
+                        clock-frequency = <0x5f5e100>;
+                        #clock-cells = <0x0>;
+                };
+
+                clk_bus_0: clk_bus_0 {
+                        phandle = <0x22>;
+                        compatible = "fixed-clock";
+                        clock-frequency = <0x5f5e100>;
+                        #clock-cells = <0x0>;
+                };
+        };
+
+        lpddrmc_0_ddr_memory: memory@80000000 {
+                phandle = <0x1>;
+                device_type = "memory";
+                reg = <0x80000000 0x80000000>;
+        };
+
+        microblaze_riscv_0_local_memory_dlmb_bram_if_cntlr_memory: memory@0 {
+                phandle = <0x2>;
+                compatible = "mmio-sram";
+                #address-cells = <0x1>;
+                device_type = "memory";
+                #size-cells = <0x1>;
+                reg = <0x0 0x20000>;
+        };
+
+        chosen {
+                stdout-path = "serial0:115200n8";
+                zephyr,console = "serial0";
+                zephyr,shell-uart = "serial0";
+                zephyr,sram = "/memory@80000000";
+        };
+
+        aliases {
+                serial0 = "/soc/serial@40600000";
+                serial1 = "/soc/serial@40610000";
+                serial2 = "/soc/serial@40620000";
+                i2c0 = "/soc/i2c@40800000";
+        };
+
+        amba_pl: soc {
+                phandle = <0x20>;
+                #size-cells = <0x1>;
+                bootph-all;
+                #address-cells = <0x1>;
+                compatible = "simple-bus";
+                ranges;
+
+                microblaze_riscv_0_axi_intc: interrupt-controller@41200000 {
+                        phandle = <0x1d>;
+                        interrupt-controller;
+                        xlnx,is-fast = <0x0>;
+                        xlnx,num-intr-inputs = <0x5>;
+                        reg = <0x41200000 0x10000>;
+                        compatible = "xlnx,axi-intc-4.1", "xlnx,xps-intc-1.00.a";
+                        xlnx,kind-of-intr = <0x1c>;
+                        #interrupt-cells = <0x2>;
+                        interrupt-parent = <&cpu_intc>;
+                        interrupts-extended = <&cpu_intc 11>;
+                };
+
+                axi_gpio_0: gpio@40000000 {
+                        phandle = <0x17>;
+                        xlnx,all-inputs = <0x1>;
+                        xlnx,tri-default = <0xffffffff>;
+                        xlnx,gpio2-width = <0x8>;
+                        xlnx,dout-default-2 = <0x0>;
+                        gpio-controller;
+                        xlnx,all-outputs-2 = <0x1>;
+                        xlnx,all-inputs-2 = <0x0>;
+                        reg = <0x40000000 0x10000>;
+                        xlnx,tri-default-2 = <0xffffffff>;
+                        xlnx,is-dual = <0x1>;
+                        xlnx,dout-default = <0x0>;
+                        xlnx,gpio-width = <0x8>;
+                        #gpio-cells = <0x2>;
+                        xlnx,all-outputs = <0x0>;
+                        compatible = "xlnx,xps-gpio-1.00.a";
+
+                        axi_gpio_0_1: gpio2 {
+                                phandle = <0x3>;
+                                #gpio-cells = <0x2>;
+                                gpio-controller;
+                                compatible = "xlnx,xps-gpio-1.00.a-gpio2";
+                        };
+                };
+
+                axi_gpio_1: gpio@40010000 {
+                        phandle = <0x18>;
+                        xlnx,all-inputs = <0x1>;
+                        xlnx,tri-default = <0xffffffff>;
+                        xlnx,gpio2-width = <0x20>;
+                        xlnx,dout-default-2 = <0x0>;
+                        gpio-controller;
+                        xlnx,all-outputs-2 = <0x0>;
+                        xlnx,all-inputs-2 = <0x0>;
+                        reg = <0x40010000 0x10000>;
+                        xlnx,tri-default-2 = <0xffffffff>;
+                        xlnx,is-dual = <0x0>;
+                        xlnx,dout-default = <0x0>;
+                        xlnx,gpio-width = <0x5>;
+                        #gpio-cells = <0x2>;
+                        xlnx,all-outputs = <0x0>;
+                        compatible = "xlnx,xps-gpio-1.00.a";
+                };
+
+                axi_iic_0: i2c@40800000 {
+                        phandle = <0x1c>;
+                        #size-cells = <0x0>;
+                        #address-cells = <0x1>;
+                        reg = <0x40800000 0x10000>;
+                        interrupt-parent = <&microblaze_riscv_0_axi_intc>;
+                        compatible = "xlnx,xps-iic-2.1";
+                        interrupts = <0x1 0x2>;
+                };
+
+                axi_timer_0: timer@41c00000 {
+                        phandle = <0x1e>;
+                        clocks = <&clk_bus_0>;
+                        reg = <0x41c00000 0x10000>;
+                        xlnx,one-timer-only = <0x0>;
+                        interrupt-parent = <&microblaze_riscv_0_axi_intc>;
+                        compatible = "amd,xps-timer-1.00.a";
+                        interrupts = <0x0 0x2>;
+                };
+
+                axi_uartlite_0: serial@40600000 {
+                        phandle = <0x19>;
+                        current-speed = <0x1c200>;
+                        clocks = <&clk_bus_0>;
+                        reg = <0x40600000 0x10000>;
+                        interrupt-parent = <&microblaze_riscv_0_axi_intc>;
+                        compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
+                        interrupts = <0x2 0x0>;
+                };
+
+                axi_uartlite_1: serial@40610000 {
+                        phandle = <0x1a>;
+                        current-speed = <0x1c200>;
+                        clocks = <&clk_bus_0>;
+                        reg = <0x40610000 0x10000>;
+                        interrupt-parent = <&microblaze_riscv_0_axi_intc>;
+                        compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
+                        interrupts = <0x3 0x0>;
+                };
+
+                axi_uartlite_2: serial@40620000 {
+                        phandle = <0x1b>;
+                        current-speed = <0x1c200>;
+                        clocks = <&clk_bus_0>;
+                        reg = <0x40620000 0x10000>;
+                        interrupt-parent = <&microblaze_riscv_0_axi_intc>;
+                        compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
+                        interrupts = <0x4 0x0>;
+                };
+        };
+};
