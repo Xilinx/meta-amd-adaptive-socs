@@ -968,51 +968,14 @@
                 };
         };
 
-        NoC_C0_C1_ddr_memory: memory@00000000 {
-                phandle = <0x4>;
-                compatible = "xlnx,axi-noc2-1.1";
-                xlnx,ip-name = "axi_noc2";
-                device_type = "memory";
-                reg = <0x0 0x100000 0x0 0x7ff00000>;
-                memory_type = "memory";
-        };
-
-        ps_wizard_0_ps11_0_ocm_ram_0_memory: memory@BBF00000 {
-                phandle = <0xe>;
-                compatible = "xlnx,ocm-ram-11.0", "mmio-sram";
-                device_type = "memory";
-                reg = <0x0 0xbbf00000 0x0 0x80000>;
-        };
-
-        ps_wizard_0_ps11_0_ocm_ram_1_memory: memory@BBF80000 {
-                phandle = <0xf>;
-                compatible = "xlnx,ocm-ram-11.0", "mmio-sram";
-                device_type = "memory";
-                reg = <0x0 0xbbf80000 0x0 0x80000>;
-        };
-
-        ps_wizard_0_ps11_0_ocm_ram_2_memory: memory@BBE00000 {
-                phandle = <0x10>;
-                compatible = "xlnx,ocm-ram-11.0", "mmio-sram";
-                device_type = "memory";
-                reg = <0x0 0xbbe00000 0x0 0x80000>;
-        };
-
-        ps_wizard_0_ps11_0_ocm_ram_3_memory: memory@BBE80000 {
-                phandle = <0x11>;
-                compatible = "xlnx,ocm-ram-11.0", "mmio-sram";
-                device_type = "memory";
-                reg = <0x0 0xbbe80000 0x0 0x80000>;
-        };
-
         chosen {
                 stdout-path = "serial0:115200n8";
                 bootargs = "earlycon=pl011,mmio32,0xf1920000 console=ttyAMA0,115200";
                 zephyr,console = "serial0";
                 zephyr,shell-uart = "serial0";
                 zephyr,ipc_shm = "/reserved-memory/ipc@9860000";
-                zephyr,ipc = "/mbox_ipi_eb3b0000_eb3b1000";
                 zephyr,sram = "/reserved-memory/ddrboot@9800100";
+                zephyr,ipc = "/mbox_ipi_eb3b0000_eb3b1000";
         };
 
         reserved-memory {
@@ -1077,9 +1040,11 @@
                         reg = <0x0 0x99d0000 0x0 0x40000>;
                 };
 
-                ipc@9860000 {
+                ipc_shm: ipc@9860000 {
+                        phandle = <0x2a4>;
                         reg = <0x0 0x9860000 0x0 0x48000>;
                         compatible = "mmio-sram";
+                        status = "okay";
                 };
         };
 
@@ -1096,6 +1061,43 @@
                 status = "okay";
                 mboxes = <&ipi_2_nobuf_to_ipi_1_nobuf 0x0>,
                  <&ipi_2_nobuf_to_ipi_1_nobuf 0x1>;
+        };
+
+        NoC_C0_C1_ddr_memory: memory@100000 {
+                phandle = <0x4>;
+                compatible = "xlnx,axi-noc2-1.1";
+                xlnx,ip-name = "axi_noc2";
+                device_type = "memory";
+                reg = <0x0 0x100000 0x0 0x7ff00000>;
+                memory_type = "memory";
+        };
+
+        ps_wizard_0_ps11_0_ocm_ram_0_memory: memory@bbf00000 {
+                phandle = <0xe>;
+                compatible = "xlnx,ocm-ram-11.0", "mmio-sram";
+                device_type = "memory";
+                reg = <0x0 0xbbf00000 0x0 0x80000>;
+        };
+
+        ps_wizard_0_ps11_0_ocm_ram_1_memory: memory@bbf80000 {
+                phandle = <0xf>;
+                compatible = "xlnx,ocm-ram-11.0", "mmio-sram";
+                device_type = "memory";
+                reg = <0x0 0xbbf80000 0x0 0x80000>;
+        };
+
+        ps_wizard_0_ps11_0_ocm_ram_2_memory: memory@bbe00000 {
+                phandle = <0x10>;
+                compatible = "xlnx,ocm-ram-11.0", "mmio-sram";
+                device_type = "memory";
+                reg = <0x0 0xbbe00000 0x0 0x80000>;
+        };
+
+        ps_wizard_0_ps11_0_ocm_ram_3_memory: memory@bbe80000 {
+                phandle = <0x11>;
+                compatible = "xlnx,ocm-ram-11.0", "mmio-sram";
+                device_type = "memory";
+                reg = <0x0 0xbbe80000 0x0 0x80000>;
         };
 
         adma_ref_clk: adma_ref_clk {
@@ -1261,11 +1263,6 @@
                 ipi_2_nobuf_to_ipi_pmc = "/axi/mailbox@eb3b1000/child@eb320000";
                 ipi_2_nobuf_to_ipi_pmc_nobuf = "/axi/mailbox@eb3b1000/child@eb390000";
                 gic_r52 = "/axi/interrupt-controller@e2000000";
-                NoC_C0_C1_ddr_memory = "/memory@00000000";
-                ps_wizard_0_ps11_0_ocm_ram_0_memory = "/memory@BBF00000";
-                ps_wizard_0_ps11_0_ocm_ram_1_memory = "/memory@BBF80000";
-                ps_wizard_0_ps11_0_ocm_ram_2_memory = "/memory@BBE00000";
-                ps_wizard_0_ps11_0_ocm_ram_3_memory = "/memory@BBE80000";
                 plm_reserved_memory = "/reserved-memory/plm_reserved_memory@00000000";
                 tfa_reserved_memory = "/reserved-memory/tfa_reserved_memory@1000000";
                 ddrboot = "/reserved-memory/ddrboot@9800100";
@@ -1274,6 +1271,12 @@
                 libmetal_desc0 = "/reserved-memory/libmetal_desc0@99c8000";
                 libmetal_desc1 = "/reserved-memory/libmetal_desc1@99cc000";
                 libmetal_data = "/reserved-memory/libmetal_data@99d0000";
+                ipc_shm = "/reserved-memory/ipc@9860000";
+                NoC_C0_C1_ddr_memory = "/memory@100000";
+                ps_wizard_0_ps11_0_ocm_ram_0_memory = "/memory@bbf00000";
+                ps_wizard_0_ps11_0_ocm_ram_1_memory = "/memory@bbf80000";
+                ps_wizard_0_ps11_0_ocm_ram_2_memory = "/memory@bbe00000";
+                ps_wizard_0_ps11_0_ocm_ram_3_memory = "/memory@bbe80000";
                 adma_ref_clk = "/adma_ref_clk";
                 can0_ref_clock = "/can0_ref_clock";
                 can1_ref_clock = "/can1_ref_clock";
