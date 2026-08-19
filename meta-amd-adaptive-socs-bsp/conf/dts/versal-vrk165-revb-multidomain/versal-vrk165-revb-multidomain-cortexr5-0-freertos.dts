@@ -110,6 +110,8 @@
                  <0xff0a0000 &ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0 0xff0a0000 0x10000>,
                  <0xff0b0000 &gpio0 0xff0b0000 0x10000>,
                  <0xff0c0000 &gem0 0xff0c0000 0x10000>,
+                 <0xff0e0000 &ttc0 0xff0e0000 0x10000>,
+                 <0xff0f0000 &ttc1 0xff0f0000 0x10000>,
                  <0xff100000 &ttc2 0xff100000 0x10000>,
                  <0xff110000 &ttc3 0xff110000 0x10000>,
                  <0xff130000 &ps_wizard_0_pmcps_0_psv_scntr_0 0xff130000 0x10000>,
@@ -1043,10 +1045,55 @@
                         };
                 };
 
+                ttc0: timer@ff0e0000 {
+                        phandle = <0x52>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupts = <0x0 0x25 0x4 0x0 0x26 0x4 0x0 0x27 0x4>;
+                        interrupt-parent = <&gic_r5>;
+                        reg = <0x0 0xff0e0000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        clocks = <&versal_clk 0x27>;
+                        power-domains = <&versal_firmware 0x18224024>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x5f5e100>;
+                        xlnx,ttc-clk1-clksrc = <0x0>;
+                        xlnx,clock-freq = <0x5f5e100>;
+                        xlnx,ttc-clk2-clksrc = <0x0>;
+                        xlnx,ip-name = "psv_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x5f5e100>;
+                        xlnx,ttc-clk1-freq-hz = <0x5f5e100>;
+                        xlnx,ttc-clk0-clksrc = <0x0>;
+                        xlnx,name = "ps_wizard_0_pmcps_0_psv_ttc_0";
+                        #pwm-cells = <0x3>;
+                };
+
+                ttc1: timer@ff0f0000 {
+                        phandle = <0x53>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupts = <0x0 0x28 0x4 0x0 0x29 0x4 0x0 0x2a 0x4>;
+                        interrupt-parent = <&gic_r5>;
+                        reg = <0x0 0xff0f0000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        clocks = <&versal_clk 0x28>;
+                        power-domains = <&versal_firmware 0x18224025>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x5f5e100>;
+                        xlnx,ttc-clk1-clksrc = <0x0>;
+                        xlnx,clock-freq = <0x5f5e100>;
+                        xlnx,ttc-clk2-clksrc = <0x0>;
+                        xlnx,ip-name = "psv_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x5f5e100>;
+                        xlnx,ttc-clk1-freq-hz = <0x5f5e100>;
+                        xlnx,ttc-clk0-clksrc = <0x0>;
+                        xlnx,name = "ps_wizard_0_pmcps_0_psv_ttc_1";
+                };
+
                 ttc2: timer@ff100000 {
                         phandle = <0x54>;
                         linux,uio-name = "libmetal-timer";
-                        compatible = "uio";
+                        compatible = "cdns,ttc";
                         status = "okay";
                         interrupts = <0x0 0x2b 0x4 0x0 0x2c 0x4 0x0 0x2d 0x4>;
                         interrupt-parent = <&gic_r5>;
@@ -2516,6 +2563,7 @@
         pwm_fan: pwm-fan {
                 phandle = <0x165>;
                 compatible = "pwm-fan";
+                pwms = <&ttc0 0x2 0x9c40 0x1>;
         };
 
         usb_hub_delay: enable-delay {
@@ -2594,6 +2642,8 @@
                 smmu = "/axi/iommu@fd800000";
                 ospi = "/axi/spi@f1010000";
                 sysmon0 = "/axi/sysmon@f1270000";
+                ttc0 = "/axi/timer@ff0e0000";
+                ttc1 = "/axi/timer@ff0f0000";
                 ttc2 = "/axi/timer@ff100000";
                 ttc3 = "/axi/timer@ff110000";
                 usb0 = "/axi/usb@ff9d0000";

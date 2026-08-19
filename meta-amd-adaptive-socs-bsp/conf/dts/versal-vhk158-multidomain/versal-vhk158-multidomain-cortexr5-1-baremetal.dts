@@ -140,6 +140,8 @@
                  <0xff080000 &CIPS_0_pspmc_0_psv_lpd_iou_slcr_0 0xff080000 0x20000>,
                  <0xff0a0000 &CIPS_0_pspmc_0_psv_lpd_iou_secure_slcr_0 0xff0a0000 0x10000>,
                  <0xff0c0000 &gem0 0xff0c0000 0x10000>,
+                 <0xff0e0000 &ttc0 0xff0e0000 0x10000>,
+                 <0xff0f0000 &ttc1 0xff0f0000 0x10000>,
                  <0xff100000 &ttc2 0xff100000 0x10000>,
                  <0xff110000 &ttc3 0xff110000 0x10000>,
                  <0xff130000 &CIPS_0_pspmc_0_psv_scntr_0 0xff130000 0x10000>,
@@ -825,13 +827,13 @@
                         xlnx,sat-17-y = <0x65f>;
                         xlnx,sat-9-y = <0x161d>;
                         xlnx,sat-22-x = <0x1c9b>;
-                        xlnx,meas-0-root-id = <0x0>;
+                        xlnx,meas-0-root-id = <0x6>;
                         xlnx,meas-7-slr-number = <0x0>;
                         xlnx,sat-22-y = <0x1252>;
-                        xlnx,meas-1-root-id = <0x8>;
+                        xlnx,meas-1-root-id = <0x0>;
                         xlnx,ip-name = "psv_pmc_sysmon";
                         xlnx,sat-16-desc = "HBM , Satellite , (left)";
-                        xlnx,meas-2-root-id = <0x9>;
+                        xlnx,meas-2-root-id = <0x4>;
                         xlnx,meas-2-slr-number = <0x0>;
                         xlnx,meas-3-root-id = <0x5>;
                         xlnx,sat-9-desc = "Clocking , column , satellite";
@@ -839,17 +841,17 @@
                         xlnx,meas-4-root-id = <0x7>;
                         xlnx,sat-28-desc = "Clocking , column , satellite";
                         xlnx,sat-26-y = <0x1be2>;
-                        xlnx,meas-5-root-id = <0x2>;
+                        xlnx,meas-5-root-id = <0x1>;
                         xlnx,sat-10-x = <0x69c9>;
                         xlnx,sat-64-x = <0x5f>;
                         xlnx,sat-2-x = <0x5f>;
-                        xlnx,meas-6-root-id = <0x3>;
+                        xlnx,meas-6-root-id = <0x2>;
                         xlnx,sat-10-y = <0xfee>;
                         xlnx,sat-64-y = <0xb4d>;
                         xlnx,sat-2-y = <0x38d>;
-                        xlnx,meas-7-root-id = <0x4>;
+                        xlnx,meas-7-root-id = <0x3>;
                         xlnx,sat-13-desc = "VNOC , satellite";
-                        xlnx,meas-8-root-id = <0x6>;
+                        xlnx,meas-8-root-id = <0x8>;
                         xlnx,sat-6-desc = "HBM , Satellite , (right)";
                         xlnx,sat-14-x = <0x4517>;
                         xlnx,sat-6-x = <0x5a6e>;
@@ -937,18 +939,18 @@
                         xlnx,sat-13-y = <0x65f>;
                         xlnx,sat-5-y = <0x1e46>;
 
-                        supply@0 {
-                                reg = <0x0>;
+                        supply@6 {
+                                reg = <0x6>;
                                 xlnx,name = "vccaux";
                         };
 
-                        supply@8 {
-                                reg = <0x8>;
+                        supply@0 {
+                                reg = <0x0>;
                                 xlnx,name = "vccint";
                         };
 
-                        supply@9 {
-                                reg = <0x9>;
+                        supply@4 {
+                                reg = <0x4>;
                                 xlnx,name = "vcc_ram";
                         };
 
@@ -962,31 +964,75 @@
                                 xlnx,name = "vccaux_pmc";
                         };
 
+                        supply@1 {
+                                reg = <0x1>;
+                                xlnx,name = "vcc_pmc";
+                        };
+
                         supply@2 {
                                 reg = <0x2>;
-                                xlnx,name = "vcc_pmc";
+                                xlnx,name = "vcc_psfp";
                         };
 
                         supply@3 {
                                 reg = <0x3>;
-                                xlnx,name = "vcc_psfp";
-                        };
-
-                        supply@4 {
-                                reg = <0x4>;
                                 xlnx,name = "vcc_pslp";
                         };
 
-                        supply@6 {
-                                reg = <0x6>;
+                        supply@8 {
+                                reg = <0x8>;
                                 xlnx,name = "vp_vn";
                         };
+                };
+
+                ttc0: timer@ff0e0000 {
+                        phandle = <0x72>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupts = <0x0 0x25 0x4 0x0 0x26 0x4 0x0 0x27 0x4>;
+                        interrupt-parent = <&gic_r5>;
+                        reg = <0x0 0xff0e0000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        clocks = <&versal_clk 0x27>;
+                        power-domains = <&versal_firmware 0x18224024>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x8f0cba9>;
+                        xlnx,ttc-clk1-clksrc = <0x0>;
+                        xlnx,clock-freq = <0x8f0cba9>;
+                        xlnx,ttc-clk2-clksrc = <0x0>;
+                        xlnx,ip-name = "psv_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x8f0cba9>;
+                        xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
+                        xlnx,ttc-clk0-clksrc = <0x0>;
+                        xlnx,name = "CIPS_0_pspmc_0_psv_ttc_0";
+                };
+
+                ttc1: timer@ff0f0000 {
+                        phandle = <0x73>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupts = <0x0 0x28 0x4 0x0 0x29 0x4 0x0 0x2a 0x4>;
+                        interrupt-parent = <&gic_r5>;
+                        reg = <0x0 0xff0f0000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        clocks = <&versal_clk 0x28>;
+                        power-domains = <&versal_firmware 0x18224025>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x8f0cba9>;
+                        xlnx,ttc-clk1-clksrc = <0x0>;
+                        xlnx,clock-freq = <0x8f0cba9>;
+                        xlnx,ttc-clk2-clksrc = <0x0>;
+                        xlnx,ip-name = "psv_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x8f0cba9>;
+                        xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
+                        xlnx,ttc-clk0-clksrc = <0x0>;
+                        xlnx,name = "CIPS_0_pspmc_0_psv_ttc_1";
                 };
 
                 ttc2: timer@ff100000 {
                         phandle = <0x74>;
                         linux,uio-name = "libmetal-timer";
-                        compatible = "uio";
+                        compatible = "cdns,ttc";
                         status = "okay";
                         interrupts = <0x0 0x2b 0x4 0x0 0x2c 0x4 0x0 0x2d 0x4>;
                         interrupt-parent = <&gic_r5>;
@@ -2770,6 +2816,8 @@
                 smmu = "/axi/iommu@fd800000";
                 ospi = "/axi/spi@f1010000";
                 sysmon0 = "/axi/sysmon@f1270000";
+                ttc0 = "/axi/timer@ff0e0000";
+                ttc1 = "/axi/timer@ff0f0000";
                 ttc2 = "/axi/timer@ff100000";
                 ttc3 = "/axi/timer@ff110000";
                 usb0 = "/axi/usb@ff9d0000";
