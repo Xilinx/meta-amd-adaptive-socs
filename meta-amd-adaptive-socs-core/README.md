@@ -5,6 +5,10 @@ socs core metadata features such as recipes for cache output of system device tr
 generator(sdtgen), system device tree files, boot pdi and common image features
 etc.
 
+This layer provides components that are optional, not required to boot, for a
+BSP.  Most of the items in this repository will consist of examples of some
+type, including loadable firmware files.
+
 ## Dependencies
 
 This layer depends on:
