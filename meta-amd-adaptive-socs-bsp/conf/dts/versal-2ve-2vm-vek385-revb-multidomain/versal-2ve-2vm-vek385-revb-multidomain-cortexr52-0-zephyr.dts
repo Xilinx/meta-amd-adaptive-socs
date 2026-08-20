@@ -563,14 +563,14 @@
                         };
 
                         ttc6_timer1: counter@1 {
-                                phandle = <0x2a>;
+                                phandle = <0x2d>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x1>;
                                 interrupts = <0x0 0x31 0x4 0xa0>;
                         };
 
                         ttc6_timer2: counter@2 {
-                                phandle = <0x2b>;
+                                phandle = <0x2e>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x2>;
                                 interrupts = <0x0 0x31 0x4 0xa0>;
@@ -588,21 +588,21 @@
                         #size-cells = <0x0>;
 
                         ttc7_timer0: counter@0 {
-                                phandle = <0x2c>;
+                                phandle = <0x2f>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x0>;
                                 interrupts = <0x0 0x32 0x4 0xa0>;
                         };
 
                         ttc7_timer1: counter@1 {
-                                phandle = <0x2d>;
+                                phandle = <0x30>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x1>;
                                 interrupts = <0x0 0x32 0x4 0xa0>;
                         };
 
                         ttc7_timer2: counter@2 {
-                                phandle = <0x2e>;
+                                phandle = <0x31>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x2>;
                                 interrupts = <0x0 0x32 0x4 0xa0>;
@@ -938,6 +938,30 @@
                         };
                 };
 
+                r52_0a_atcm_global: r52_0a_atcm_global@0 {
+                        phandle = <0x2a>;
+                        status = "okay";
+                        compatible = "zephyr,memory-region", "xlnx,tcm";
+                        reg = <0x0 0x0 0x0 0x10000>;
+                        zephyr,memory-region = "R52_0A_ATCM_GLOBAL";
+                };
+
+                r52_0a_btcm_global: r52_0a_btcm_global@10000 {
+                        phandle = <0x2b>;
+                        status = "okay";
+                        compatible = "zephyr,memory-region", "xlnx,tcm";
+                        reg = <0x0 0x10000 0x0 0x8000>;
+                        zephyr,memory-region = "R52_0A_BTCM_GLOBAL";
+                };
+
+                r52_0a_ctcm_global: r52_0a_ctcm_global@20000 {
+                        phandle = <0x2c>;
+                        status = "okay";
+                        compatible = "zephyr,memory-region", "xlnx,tcm";
+                        reg = <0x0 0x20000 0x0 0x8000>;
+                        zephyr,memory-region = "R52_0A_CTCM_GLOBAL";
+                };
+
                 gic_r52: interrupt-controller@e2000000 {
                         phandle = <0xd3>;
                         status = "okay";
@@ -954,7 +978,7 @@
                 zephyr,console = "serial0";
                 zephyr,shell-uart = "serial0";
                 zephyr,ipc_shm = "/reserved-memory/ipc@9860000";
-                zephyr,sram = "/reserved-memory/ddrboot@9800100";
+                zephyr,sram = "/axi/r52_0a_atcm_global@0";
                 zephyr,ipc = "/mbox_ipi_eb3b0000_eb3b1000";
         };
 
@@ -979,17 +1003,17 @@
 
                 ddrboot: ddrboot@9800100 {
                         phandle = <0x29d>;
-                        label = "ddrboot";
-                        no-map;
-                        reg = <0x0 0x9800100 0x0 0x5ff00>;
-                        device_type = "memory";
+                        reg = <0x0 0x9800100 0x0 0x5ef00>;
+                        compatible = "zephyr,memory-region";
+                        zephyr,memory-region = "DDRBOOT";
                 };
 
                 rsctbl: rsctbl@9800000 {
                         phandle = <0x29e>;
-                        label = "rsctbl";
-                        no-map;
                         reg = <0x0 0x9800000 0x0 0x100>;
+                        compatible = "zephyr,memory-region";
+                        zephyr,memory-region = "RSCTBL";
+                        zephyr,memory-attr = <0x200000>;
                 };
 
                 libmetal_elf: libmetal_elf@9968000 {
@@ -1347,6 +1371,9 @@
                 ipi_2_nobuf_to_ipi_6_nobuf = "/axi/mailbox@eb3b1000/child@eb3b5000";
                 ipi_2_nobuf_to_ipi_pmc = "/axi/mailbox@eb3b1000/child@eb320000";
                 ipi_2_nobuf_to_ipi_pmc_nobuf = "/axi/mailbox@eb3b1000/child@eb390000";
+                r52_0a_atcm_global = "/axi/r52_0a_atcm_global@0";
+                r52_0a_btcm_global = "/axi/r52_0a_btcm_global@10000";
+                r52_0a_ctcm_global = "/axi/r52_0a_ctcm_global@20000";
                 gic_r52 = "/axi/interrupt-controller@e2000000";
                 plm_reserved_memory = "/reserved-memory/plm_reserved_memory@00000000";
                 tfa_reserved_memory = "/reserved-memory/tfa_reserved_memory@1000000";

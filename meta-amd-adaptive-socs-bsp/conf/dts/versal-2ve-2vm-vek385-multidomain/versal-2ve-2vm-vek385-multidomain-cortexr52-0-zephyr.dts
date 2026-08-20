@@ -188,7 +188,7 @@
                         reg = <0x0 0xf1a60000 0x0 0x1000>;
 
                         gem0_mac: ethernet_mac {
-                                phandle = <0xc>;
+                                phandle = <0x12>;
                                 compatible = "xlnx,gem";
                                 status = "okay";
                                 clock-frequency = <0x7735464>;
@@ -204,6 +204,25 @@
                                 discard-rx-fcs;
                                 unicast-hash;
                                 local-mac-address = [00 0A 35 00 01 02];
+                                phy-handle = <&phy0>;
+                        };
+
+                        gem0_mdio: mdio {
+                                phandle = <0x3>;
+                                compatible = "xlnx,gem-mdio";
+                                status = "okay";
+                                #address-cells = <0x1>;
+                                #size-cells = <0x0>;
+
+                                phy0: ethernet-phy@1 {
+                                        phandle = <0x1>;
+                                        reg = <0x1>;
+                                        compatible = "ti,dp83867";
+                                        ti,rx-internal-delay = <0x8>;
+                                        ti,tx-internal-delay = <0xa>;
+                                        ti,interface-type = "rgmii-id";
+                                        status = "okay";
+                                };
                         };
                 };
 
@@ -216,7 +235,7 @@
                         #size-cells = <0x0>;
 
                         gpio0_bank0: gpio0_bank@0 {
-                                phandle = <0xd>;
+                                phandle = <0x13>;
                                 compatible = "xlnx,ps-gpio-bank";
                                 reg = <0x0>;
                                 #gpio-cells = <0x2>;
@@ -225,7 +244,7 @@
                         };
 
                         gpio0_bank3: gpio0_bank@3 {
-                                phandle = <0x12>;
+                                phandle = <0x14>;
                                 compatible = "xlnx,ps-gpio-bank";
                                 reg = <0x3>;
                                 #gpio-cells = <0x2>;
@@ -234,7 +253,7 @@
                         };
 
                         gpio0_bank4: gpio0_bank@4 {
-                                phandle = <0x13>;
+                                phandle = <0x15>;
                                 compatible = "xlnx,ps-gpio-bank";
                                 reg = <0x4>;
                                 #gpio-cells = <0x2>;
@@ -252,7 +271,7 @@
                         #size-cells = <0x0>;
 
                         gpio1_bank0: gpio1_bank@0 {
-                                phandle = <0x14>;
+                                phandle = <0x16>;
                                 compatible = "xlnx,ps-gpio-bank";
                                 reg = <0x0>;
                                 #gpio-cells = <0x2>;
@@ -261,7 +280,7 @@
                         };
 
                         gpio1_bank1: gpio1_bank@1 {
-                                phandle = <0x15>;
+                                phandle = <0x17>;
                                 compatible = "xlnx,ps-gpio-bank";
                                 reg = <0x1>;
                                 #gpio-cells = <0x2>;
@@ -270,7 +289,7 @@
                         };
 
                         gpio1_bank3: gpio1_bank@3 {
-                                phandle = <0x16>;
+                                phandle = <0x18>;
                                 compatible = "xlnx,ps-gpio-bank";
                                 reg = <0x3>;
                                 #gpio-cells = <0x2>;
@@ -279,7 +298,7 @@
                         };
 
                         gpio1_bank4: gpio1_bank@4 {
-                                phandle = <0x17>;
+                                phandle = <0x19>;
                                 compatible = "xlnx,ps-gpio-bank";
                                 reg = <0x4>;
                                 #gpio-cells = <0x2>;
@@ -288,7 +307,7 @@
                         };
 
                         gpio1_bank2: gpio1_bank@2 {
-                                phandle = <0x18>;
+                                phandle = <0x1a>;
                                 compatible = "xlnx,ps-gpio-bank";
                                 reg = <0x2>;
                                 #gpio-cells = <0x2>;
@@ -297,7 +316,7 @@
                         };
 
                         gpio1_bank5: gpio1_bank@5 {
-                                phandle = <0x19>;
+                                phandle = <0x1b>;
                                 compatible = "xlnx,ps-gpio-bank";
                                 reg = <0x5>;
                                 #gpio-cells = <0x2>;
@@ -396,21 +415,21 @@
                         #size-cells = <0x0>;
 
                         ttc0_timer0: counter@0 {
-                                phandle = <0x1a>;
+                                phandle = <0x1c>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x0>;
                                 interrupts = <0x0 0x2b 0x4 0xa0>;
                         };
 
                         ttc0_timer1: counter@1 {
-                                phandle = <0x1b>;
+                                phandle = <0x1d>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x1>;
                                 interrupts = <0x0 0x2b 0x4 0xa0>;
                         };
 
                         ttc0_timer2: counter@2 {
-                                phandle = <0x1c>;
+                                phandle = <0x1e>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x2>;
                                 interrupts = <0x0 0x2b 0x4 0xa0>;
@@ -428,21 +447,21 @@
                         #size-cells = <0x0>;
 
                         ttc1_timer0: counter@0 {
-                                phandle = <0x1d>;
+                                phandle = <0x1f>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x0>;
                                 interrupts = <0x0 0x2c 0x4 0xa0>;
                         };
 
                         ttc1_timer1: counter@1 {
-                                phandle = <0x1e>;
+                                phandle = <0x20>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x1>;
                                 interrupts = <0x0 0x2c 0x4 0xa0>;
                         };
 
                         ttc1_timer2: counter@2 {
-                                phandle = <0x1f>;
+                                phandle = <0x21>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x2>;
                                 interrupts = <0x0 0x2c 0x4 0xa0>;
@@ -460,21 +479,21 @@
                         #size-cells = <0x0>;
 
                         ttc2_timer0: counter@0 {
-                                phandle = <0x20>;
+                                phandle = <0x22>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x0>;
                                 interrupts = <0x0 0x2d 0x4 0xa0>;
                         };
 
                         ttc2_timer1: counter@1 {
-                                phandle = <0x21>;
+                                phandle = <0x23>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x1>;
                                 interrupts = <0x0 0x2d 0x4 0xa0>;
                         };
 
                         ttc2_timer2: counter@2 {
-                                phandle = <0x22>;
+                                phandle = <0x24>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x2>;
                                 interrupts = <0x0 0x2d 0x4 0xa0>;
@@ -492,21 +511,21 @@
                         #size-cells = <0x0>;
 
                         ttc4_timer0: counter@0 {
-                                phandle = <0x23>;
+                                phandle = <0x25>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x0>;
                                 interrupts = <0x0 0x2f 0x4 0xa0>;
                         };
 
                         ttc4_timer1: counter@1 {
-                                phandle = <0x24>;
+                                phandle = <0x26>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x1>;
                                 interrupts = <0x0 0x2f 0x4 0xa0>;
                         };
 
                         ttc4_timer2: counter@2 {
-                                phandle = <0x25>;
+                                phandle = <0x27>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x2>;
                                 interrupts = <0x0 0x2f 0x4 0xa0>;
@@ -524,21 +543,21 @@
                         #size-cells = <0x0>;
 
                         ttc5_timer0: counter@0 {
-                                phandle = <0x26>;
+                                phandle = <0x28>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x0>;
                                 interrupts = <0x0 0x30 0x4 0xa0>;
                         };
 
                         ttc5_timer1: counter@1 {
-                                phandle = <0x27>;
+                                phandle = <0x29>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x1>;
                                 interrupts = <0x0 0x30 0x4 0xa0>;
                         };
 
                         ttc5_timer2: counter@2 {
-                                phandle = <0x28>;
+                                phandle = <0x2d>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x2>;
                                 interrupts = <0x0 0x30 0x4 0xa0>;
@@ -556,21 +575,21 @@
                         #size-cells = <0x0>;
 
                         ttc6_timer0: counter@0 {
-                                phandle = <0x29>;
+                                phandle = <0x2e>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x0>;
                                 interrupts = <0x0 0x31 0x4 0xa0>;
                         };
 
                         ttc6_timer1: counter@1 {
-                                phandle = <0x2a>;
+                                phandle = <0x2f>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x1>;
                                 interrupts = <0x0 0x31 0x4 0xa0>;
                         };
 
                         ttc6_timer2: counter@2 {
-                                phandle = <0x2b>;
+                                phandle = <0x30>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x2>;
                                 interrupts = <0x0 0x31 0x4 0xa0>;
@@ -588,21 +607,21 @@
                         #size-cells = <0x0>;
 
                         ttc7_timer0: counter@0 {
-                                phandle = <0x2c>;
+                                phandle = <0x31>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x0>;
                                 interrupts = <0x0 0x32 0x4 0xa0>;
                         };
 
                         ttc7_timer1: counter@1 {
-                                phandle = <0x2d>;
+                                phandle = <0x32>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x1>;
                                 interrupts = <0x0 0x32 0x4 0xa0>;
                         };
 
                         ttc7_timer2: counter@2 {
-                                phandle = <0x2e>;
+                                phandle = <0x33>;
                                 compatible = "xlnx,ttc-counter";
                                 reg = <0x2>;
                                 interrupts = <0x0 0x32 0x4 0xa0>;
@@ -938,6 +957,30 @@
                         };
                 };
 
+                r52_0a_atcm_global: r52_0a_atcm_global@0 {
+                        phandle = <0x2a>;
+                        status = "okay";
+                        compatible = "zephyr,memory-region", "xlnx,tcm";
+                        reg = <0x0 0x0 0x0 0x10000>;
+                        zephyr,memory-region = "R52_0A_ATCM_GLOBAL";
+                };
+
+                r52_0a_btcm_global: r52_0a_btcm_global@10000 {
+                        phandle = <0x2b>;
+                        status = "okay";
+                        compatible = "zephyr,memory-region", "xlnx,tcm";
+                        reg = <0x0 0x10000 0x0 0x8000>;
+                        zephyr,memory-region = "R52_0A_BTCM_GLOBAL";
+                };
+
+                r52_0a_ctcm_global: r52_0a_ctcm_global@20000 {
+                        phandle = <0x2c>;
+                        status = "okay";
+                        compatible = "zephyr,memory-region", "xlnx,tcm";
+                        reg = <0x0 0x20000 0x0 0x8000>;
+                        zephyr,memory-region = "R52_0A_CTCM_GLOBAL";
+                };
+
                 gic_r52: interrupt-controller@e2000000 {
                         phandle = <0xd3>;
                         status = "okay";
@@ -954,7 +997,7 @@
                 zephyr,console = "serial0";
                 zephyr,shell-uart = "serial0";
                 zephyr,ipc_shm = "/reserved-memory/ipc@9860000";
-                zephyr,sram = "/reserved-memory/ddrboot@9800100";
+                zephyr,sram = "/axi/r52_0a_atcm_global@0";
                 zephyr,ipc = "/mbox_ipi_eb3b0000_eb3b1000";
         };
 
@@ -979,17 +1022,17 @@
 
                 ddrboot: ddrboot@9800100 {
                         phandle = <0x29e>;
-                        label = "ddrboot";
-                        no-map;
-                        reg = <0x0 0x9800100 0x0 0x5ff00>;
-                        device_type = "memory";
+                        reg = <0x0 0x9800100 0x0 0x5ef00>;
+                        compatible = "zephyr,memory-region";
+                        zephyr,memory-region = "DDRBOOT";
                 };
 
                 rsctbl: rsctbl@9800000 {
                         phandle = <0x29f>;
-                        label = "rsctbl";
-                        no-map;
                         reg = <0x0 0x9800000 0x0 0x100>;
+                        compatible = "zephyr,memory-region";
+                        zephyr,memory-region = "RSCTBL";
+                        zephyr,memory-attr = <0x200000>;
                 };
 
                 libmetal_elf: libmetal_elf@9968000 {
@@ -1186,63 +1229,63 @@
         };
 
         adma_ref_clk: adma_ref_clk {
-                phandle = <0x1>;
+                phandle = <0x5>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x1ad27480>;
         };
 
         can0_ref_clock: can0_ref_clock {
-                phandle = <0x3>;
-                compatible = "fixed-clock";
-                #clock-cells = <0x0>;
-                clock-frequency = <0x98961be>;
-        };
-
-        can1_ref_clock: can1_ref_clock {
-                phandle = <0x5>;
-                compatible = "fixed-clock";
-                #clock-cells = <0x0>;
-                clock-frequency = <0x98961be>;
-        };
-
-        can2_ref_clock: can2_ref_clock {
                 phandle = <0x6>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x98961be>;
         };
 
-        can3_ref_clock: can3_ref_clock {
+        can1_ref_clock: can1_ref_clock {
                 phandle = <0x7>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x98961be>;
         };
 
-        i2c0_ref_clock: i2c0_ref_clock {
+        can2_ref_clock: can2_ref_clock {
                 phandle = <0x8>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x98961be>;
         };
 
-        i2c1_ref_clock: i2c1_ref_clock {
+        can3_ref_clock: can3_ref_clock {
                 phandle = <0x9>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x98961be>;
         };
 
-        i2c8_ref_clock: i2c8_ref_clock {
+        i2c0_ref_clock: i2c0_ref_clock {
                 phandle = <0xa>;
+                compatible = "fixed-clock";
+                #clock-cells = <0x0>;
+                clock-frequency = <0x98961be>;
+        };
+
+        i2c1_ref_clock: i2c1_ref_clock {
+                phandle = <0xb>;
+                compatible = "fixed-clock";
+                #clock-cells = <0x0>;
+                clock-frequency = <0x98961be>;
+        };
+
+        i2c8_ref_clock: i2c8_ref_clock {
+                phandle = <0xc>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x8f0cba9>;
         };
 
         ufshc_ref_clock: ufshc_ref_clock {
-                phandle = <0xb>;
+                phandle = <0xd>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x18cba80>;
@@ -1267,6 +1310,8 @@
                 can3 = "/axi/can@f1a10000";
                 gem0 = "/axi/ethernet@f1a60000";
                 gem0_mac = "/axi/ethernet@f1a60000/ethernet_mac";
+                gem0_mdio = "/axi/ethernet@f1a60000/mdio";
+                phy0 = "/axi/ethernet@f1a60000/mdio/ethernet-phy@1";
                 gpio0 = "/axi/gpio@f1a50000";
                 gpio0_bank0 = "/axi/gpio@f1a50000/gpio0_bank@0";
                 gpio0_bank3 = "/axi/gpio@f1a50000/gpio0_bank@3";
@@ -1347,6 +1392,9 @@
                 ipi_2_nobuf_to_ipi_6_nobuf = "/axi/mailbox@eb3b1000/child@eb3b5000";
                 ipi_2_nobuf_to_ipi_pmc = "/axi/mailbox@eb3b1000/child@eb320000";
                 ipi_2_nobuf_to_ipi_pmc_nobuf = "/axi/mailbox@eb3b1000/child@eb390000";
+                r52_0a_atcm_global = "/axi/r52_0a_atcm_global@0";
+                r52_0a_btcm_global = "/axi/r52_0a_btcm_global@10000";
+                r52_0a_ctcm_global = "/axi/r52_0a_ctcm_global@20000";
                 gic_r52 = "/axi/interrupt-controller@e2000000";
                 plm_reserved_memory = "/reserved-memory/plm_reserved_memory@00000000";
                 tfa_reserved_memory = "/reserved-memory/tfa_reserved_memory@1000000";

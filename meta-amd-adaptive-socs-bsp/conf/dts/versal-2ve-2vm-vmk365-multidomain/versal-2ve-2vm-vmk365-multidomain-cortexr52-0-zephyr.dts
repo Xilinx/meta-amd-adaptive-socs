@@ -859,6 +859,30 @@
                         };
                 };
 
+                r52_0a_atcm_global: r52_0a_atcm_global@0 {
+                        phandle = <0x1d>;
+                        status = "okay";
+                        compatible = "zephyr,memory-region", "xlnx,tcm";
+                        reg = <0x0 0x0 0x0 0x10000>;
+                        zephyr,memory-region = "R52_0A_ATCM_GLOBAL";
+                };
+
+                r52_0a_btcm_global: r52_0a_btcm_global@10000 {
+                        phandle = <0x1e>;
+                        status = "okay";
+                        compatible = "zephyr,memory-region", "xlnx,tcm";
+                        reg = <0x0 0x10000 0x0 0x8000>;
+                        zephyr,memory-region = "R52_0A_BTCM_GLOBAL";
+                };
+
+                r52_0a_ctcm_global: r52_0a_ctcm_global@20000 {
+                        phandle = <0x1f>;
+                        status = "okay";
+                        compatible = "zephyr,memory-region", "xlnx,tcm";
+                        reg = <0x0 0x20000 0x0 0x8000>;
+                        zephyr,memory-region = "R52_0A_CTCM_GLOBAL";
+                };
+
                 gic_r52: interrupt-controller@e2000000  {
                         phandle = <0x90>;
                         status = "okay";
@@ -875,7 +899,7 @@
                 zephyr,console = "serial0";
                 zephyr,shell-uart = "serial0";
                 zephyr,ipc_shm = "/reserved-memory/ipc@9860000";
-                zephyr,sram = "/reserved-memory/ddrboot@9800100";
+                zephyr,sram = "/axi/r52_0a_atcm_global@0";
                 zephyr,ipc = "/mbox_ipi_eb3b0000_eb3b1000";
         };
 
@@ -892,17 +916,17 @@
 
                 ddrboot: ddrboot@9800100 {
                         phandle = <0x246>;
-                        label = "ddrboot";
-                        no-map;
-                        reg = <0x0 0x9800100 0x0 0x5ff00>;
-                        device_type = "memory";
+                        reg = <0x0 0x9800100 0x0 0x5ef00>;
+                        compatible = "zephyr,memory-region";
+                        zephyr,memory-region = "DDRBOOT";
                 };
 
                 rsctbl: rsctbl@9800000 {
                         phandle = <0x247>;
-                        label = "rsctbl";
-                        no-map;
                         reg = <0x0 0x9800000 0x0 0x100>;
+                        compatible = "zephyr,memory-region";
+                        zephyr,memory-region = "RSCTBL";
+                        zephyr,memory-attr = <0x200000>;
                 };
 
                 libmetal_elf: libmetal_elf@9968000 {

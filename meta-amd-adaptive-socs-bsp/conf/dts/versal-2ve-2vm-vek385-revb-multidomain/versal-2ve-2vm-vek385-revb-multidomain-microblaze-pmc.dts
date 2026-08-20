@@ -2744,8 +2744,9 @@
                 ddrboot: ddrboot@9800100 {
                         phandle = <0x29d>;
                         label = "ddrboot";
+                        mpu-policy = "readable", "writable", "executable", "cacheable", "static";
                         no-map;
-                        reg = <0x0 0x9800100 0x0 0x5ff00>;
+                        reg = <0x0 0x9800100 0x0 0x5ef00>;
                 };
 
                 vdev0vring0: vdev0vring0@9860000 {
@@ -2772,6 +2773,7 @@
                 rsctbl: rsctbl@9800000 {
                         phandle = <0x29e>;
                         label = "rsctbl";
+                        mpu-policy = "readable", "writable";
                         no-map;
                         reg = <0x0 0x9800000 0x0 0x100>;
                 };
@@ -3213,14 +3215,29 @@
                 RPU_Zephyr {
                         phandle = <0x2ac>;
                         compatible = "openamp,domain-v1";
+                        os,type = "zephyr";
+                        zephyr-version = "4.3";
                         xlnx,ddr-boot;
                         xlnx,zephyr,mems = "ddrboot@9800100";
-                        sram = <0x0 0x9800100 0x0 0x5ff00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
-                        reserved-memory = <0x29d>;
-                        os,type = "zephyr";
+                        sram = <0x0 0x9800100 0x0 0x5ef00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
+                        reserved-memory = <0x29d 0x29e>;
                         rpu_pd_val = <0xd5 0x181100bf>;
                         cpu_config_str = "split";
                         core_num = "0";
+                        linker_file_output_name = "openamp-zephyr.ld";
+                        linker-entry = "_vector_table";
+                        linker_memories = <0x2a 0x2b 0x2c 0x29d 0x29e>;
+                        linker-section-vector-table = <0x2a>;
+                        linker-section-vector-table-offset = <0x0>;
+                        linker-section-text = <0x2a>;
+                        linker-section-rodata = <0x2a>;
+                        linker-section-data = <0x2b>;
+                        linker-section-bss = <0x2b>;
+                        linker-section-noinit = <0x2b>;
+                        linker-section-heap = <0x2b>;
+                        linker-section-stack = <0x2b>;
+                        linker-section-resource-table = <0x29e>;
+                        linker-section-resource-table-offset = <0x0>;
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
@@ -3258,7 +3275,7 @@
                                                 host = <0x2b1>;
                                                 carveouts = <0x2ae 0x2af 0x2b0>;
                                                 mbox = <0x1a9>;
-                                                timer = <0xab 0xac>;
+                                                timer = <0xac>;
                                                 elfload = <&libmetal_elf>;
                                         };
                                 };
