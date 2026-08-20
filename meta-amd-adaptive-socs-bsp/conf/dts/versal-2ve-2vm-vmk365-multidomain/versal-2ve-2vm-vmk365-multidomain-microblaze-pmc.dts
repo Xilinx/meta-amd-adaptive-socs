@@ -2097,21 +2097,21 @@
                 };
 
                 libmetal_uio_desc099c8000: libmetal_uio_desc0@99c8000 {
-                        phandle = <0x24a>;
+                        phandle = <0x24b>;
                         linux,uio-name = "libmetal-desc0";
                         compatible = "uio";
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
                 libmetal_uio_desc199cc000: libmetal_uio_desc1@99cc000 {
-                        phandle = <0x24b>;
+                        phandle = <0x24c>;
                         linux,uio-name = "libmetal-desc1";
                         compatible = "uio";
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
                 libmetal_uio_data99d0000: libmetal_uio_data@99d0000 {
-                        phandle = <0x24c>;
+                        phandle = <0x24d>;
                         linux,uio-name = "libmetal-data";
                         compatible = "uio";
                         reg = <0x0 0x99d0000 0x0 0x40000>;
@@ -2249,6 +2249,7 @@
         };
 
         chosen {
+                zephyr,ram-console = "/reserved-memory/trace@985f000";
                 stdout-path = "serial0:115200n8";
                 bootargs = "console=ttyAMA0,115200";
         };
@@ -2269,32 +2270,40 @@
                         label = "ddrboot";
                         mpu-policy = "readable", "writable", "executable", "cacheable", "static";
                         no-map;
-                        reg = <0x0 0x9800100 0x0 0x5ef00>;
+                        reg = <0x0 0x9800100 0x0 0x5de00>;
                 };
 
-                vdev0vring0: vdev0vring0@9860000 {
+                trace_buffer: trace@985f000 {
+                        phandle = <0x247>;
+                        label = "trace_buffer";
+                        mpu-policy = "readable", "writable";
+                        no-map;
+                        reg = <0x0 0x985f000 0x0 0x1000>;
+                };
+
+                vdev0vring0: vdev0vring0@9880000 {
                         phandle = <0x243>;
                         label = "vdev0vring0";
                         no-map;
-                        reg = <0x0 0x9860000 0x0 0x4000>;
+                        reg = <0x0 0x9880000 0x0 0x4000>;
                 };
 
-                vdev0vring1: vdev0vring1@9864000 {
+                vdev0vring1: vdev0vring1@9884000 {
                         phandle = <0x244>;
                         label = "vdev0vring1";
                         no-map;
-                        reg = <0x0 0x9864000 0x0 0x4000>;
+                        reg = <0x0 0x9884000 0x0 0x4000>;
                 };
 
-                vdev0buffer: vdev0buffer@9868000 {
+                vdev0buffer: vdev0buffer@9888000 {
                         phandle = <0x245>;
                         label = "vdev0buffer";
                         no-map;
-                        reg = <0x0 0x9868000 0x0 0x40000>;
+                        reg = <0x0 0x9888000 0x0 0x78000>;
                 };
 
                 rsctbl: rsctbl@9800000 {
-                        phandle = <0x247>;
+                        phandle = <0x248>;
                         label = "rsctbl";
                         mpu-policy = "readable", "writable";
                         no-map;
@@ -2302,28 +2311,28 @@
                 };
 
                 libmetal_elf: libmetal_elf@9968000 {
-                        phandle = <0x24e>;
+                        phandle = <0x24f>;
                         label = "libmetal_elf";
                         no-map;
                         reg = <0x0 0x9968000 0x0 0x60000>;
                 };
 
                 libmetal_desc0: libmetal_desc0@99c8000 {
-                        phandle = <0x24f>;
+                        phandle = <0x250>;
                         label = "libmetal_desc0";
                         no-map;
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
                 libmetal_desc1: libmetal_desc1@99cc000 {
-                        phandle = <0x250>;
+                        phandle = <0x251>;
                         label = "libmetal_desc1";
                         no-map;
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
                 libmetal_data: libmetal_data@99d0000 {
-                        phandle = <0x251>;
+                        phandle = <0x252>;
                         label = "libmetal_data";
                         no-map;
                         reg = <0x0 0x99d0000 0x0 0x40000>;
@@ -2510,9 +2519,10 @@
                 libmetal_uio_desc199cc000 = "/axi/libmetal_uio_desc1@99cc000";
                 libmetal_uio_data99d0000 = "/axi/libmetal_uio_data@99d0000";
                 ddrboot = "/reserved-memory/ddrboot@9800100";
-                vdev0vring0 = "/reserved-memory/vdev0vring0@9860000";
-                vdev0vring1 = "/reserved-memory/vdev0vring1@9864000";
-                vdev0buffer = "/reserved-memory/vdev0buffer@9868000";
+                trace_buffer = "/reserved-memory/trace@985f000";
+                vdev0vring0 = "/reserved-memory/vdev0vring0@9880000";
+                vdev0vring1 = "/reserved-memory/vdev0vring1@9884000";
+                vdev0buffer = "/reserved-memory/vdev0buffer@9888000";
                 rsctbl = "/reserved-memory/rsctbl@9800000";
                 libmetal_elf = "/reserved-memory/libmetal_elf@9968000";
                 libmetal_desc0 = "/reserved-memory/libmetal_desc0@99c8000";
@@ -2523,9 +2533,9 @@
         domains {
 
                 APU_Linux {
-                        phandle = <0x24d>;
+                        phandle = <0x24e>;
                         compatible = "openamp,domain-v1";
-                        reserved-memory = <0x243 0x244 0x245 0x246 0x247>;
+                        reserved-memory = <0x243 0x244 0x245 0x246 0x247 0x248>;
                         os,type = "linux";
 
                         domain-to-domain {
@@ -2535,8 +2545,9 @@
                                         compatible = "openamp,remoteproc-v2";
 
                                         relation0 {
-                                                remote = <0x248>;
+                                                remote = <0x249>;
                                                 elfload = <&ddrboot>,
+                                                 <&trace_buffer>,
                                                  <&rsctbl>;
                                         };
                                 };
@@ -2545,7 +2556,7 @@
                                         compatible = "openamp,rpmsg-v1";
 
                                         relation0 {
-                                                remote = <0x248>;
+                                                remote = <0x249>;
                                                 carveouts = <0x243 0x244 0x245>;
                                                 mbox = <0x1af>;
                                         };
@@ -2555,8 +2566,8 @@
                                         compatible = "libmetal,ipc-v1";
 
                                         relation0 {
-                                                remote = <0x249>;
-                                                carveouts = <0x24a 0x24b 0x24c>;
+                                                remote = <0x24a>;
+                                                carveouts = <0x24b 0x24c 0x24d>;
                                                 mbox = <0x16e>;
                                                 timer = <0x78>;
                                         };
@@ -2565,20 +2576,20 @@
                 };
 
                 RPU_Zephyr {
-                        phandle = <0x248>;
+                        phandle = <0x249>;
                         compatible = "openamp,domain-v1";
                         os,type = "zephyr";
                         zephyr-version = "4.3";
                         xlnx,ddr-boot;
                         xlnx,zephyr,mems = "ddrboot@9800100";
-                        sram = <0x0 0x9800100 0x0 0x5ef00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
-                        reserved-memory = <0x246 0x247>;
+                        sram = <0x0 0x9800100 0x0 0x5de00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
+                        reserved-memory = <0x246 0x247 0x248>;
                         rpu_pd_val = <0x92 0x181100bf>;
                         cpu_config_str = "split";
                         core_num = "0";
                         linker_file_output_name = "openamp-zephyr.ld";
                         linker-entry = "_vector_table";
-                        linker_memories = <0x1d 0x1e 0x1f 0x246 0x247>;
+                        linker_memories = <0x1d 0x1e 0x1f 0x246 0x248>;
                         linker-section-vector-table = <0x1d>;
                         linker-section-vector-table-offset = <0x0>;
                         linker-section-text = <0x1d>;
@@ -2588,7 +2599,7 @@
                         linker-section-noinit = <0x1e>;
                         linker-section-heap = <0x1e>;
                         linker-section-stack = <0x1e>;
-                        linker-section-resource-table = <0x247>;
+                        linker-section-resource-table = <0x248>;
                         linker-section-resource-table-offset = <0x0>;
 
                         domain-to-domain {
@@ -2599,7 +2610,7 @@
                                         compatible = "openamp,rpmsg-v1";
 
                                         relation0 {
-                                                host = <0x24d>;
+                                                host = <0x24e>;
                                                 mbox = <0x1bd>;
                                                 carveouts = <0x243 0x244 0x245>;
                                         };
@@ -2608,7 +2619,7 @@
                 };
 
                 RPU_1_BM {
-                        phandle = <0x249>;
+                        phandle = <0x24a>;
                         compatible = "openamp,domain-v1";
                         sram = <0x0 0x9968000 0x0 0x60000 0x0 0xeba80000 0x0 0x10000 0x0 0xeba90000 0x0 0x8000 0x0 0xebaa0000 0x0 0x8000>;
                         os,type = "baremetal";
@@ -2624,8 +2635,8 @@
                                         compatible = "libmetal,ipc-v1";
 
                                         relation0 {
-                                                host = <0x24d>;
-                                                carveouts = <0x24a 0x24b 0x24c>;
+                                                host = <0x24e>;
+                                                carveouts = <0x24b 0x24c 0x24d>;
                                                 mbox = <0x160>;
                                                 timer = <0x78>;
                                                 elfload = <&libmetal_elf>;
