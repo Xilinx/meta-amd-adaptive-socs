@@ -41,7 +41,7 @@ do_unpack:append:microblaze-v() {
 }
 
 do_env_config() {
-    if [ -f "${WORKDIR}/mbv64.env" ]; then
-        cp ${WORKDIR}/mbv64.env ${S}/board/xilinx/mbv/mbv64.env
+    if [ -f "${UNPACKDIR}/mbv64.env" ]; then
+        cp ${UNPACKDIR}/mbv64.env ${S}/board/xilinx/mbv/mbv64.env
     fi
 }
