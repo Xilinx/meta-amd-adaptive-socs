@@ -9,7 +9,9 @@ args:
 
 kconfig:
     CONFIG_YOCTO_BBMC_LINUX_DTSI: \
-        ${LAYER_PATH_xilinx-virtualization}/recipes-bsp/device-tree/files/zynqmp-xen.dtsi
+        ${LAYER_PATH_xilinx-standalone-sdt}/recipes-bsp/device-tree/files/qspi-512Mb-memory-map.dtsi \
+        ${LAYER_PATH_xilinx-virtualization}/recipes-bsp/device-tree/files/zynqmp-xen.dtsi \
+        ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/platform-misc.dtsi
 
 machine:
     description: >-
@@ -21,3 +23,49 @@ machine:
             comment: 'Enable libmetal application'
             op: '='
             val: 'libmetal-demo-rpu1.inc'
+        include:
+            comment: "Enable meta-xilinx-imgrcvry if available"
+            op: 'conf/enable-xilinx-imgrcvry.conf'
+        CFLAGS:append:pn-image-selector:
+            comment: 'Enable QSPI flash'
+            op: '='
+            val: ' -DXIS_QSPI_FLSH'
+        QEMU_FLASH_TYPE:
+            op: '='
+            val: 'qspi'
+        SPI_IMAGE_SIZE:
+            comment: 'QSPI flash size (64MB)'
+            op: '='
+            val: '0x400_0000'
+        SPI_BOOTBIN_OFFSET:
+            comment: 'Boot.bin A/B offsets for 64MB QSPI'
+            op: '='
+            val: '0x15C_0000 0x260_0000'
+        SPI_USER_SCRATCH_OFFSET:
+            op: '='
+            val: '0x364_0000'
+        SPI_MANIFEST_OFFSET:
+            op: '='
+            val: '0x3FF_0000'
+        PRODUCT_NAME:
+            comment: 'UEFI Capsule Update / LVFS Configuration'
+            op: '='
+            val: 'ZCU104'
+        PRODUCT_GUID:
+            op: '='
+            val: '1a2d18f9-c48a-5142-96b1-429524a78c8c'
+        PRODUCT_URL:
+            op: '='
+            val: 'https://www.amd.com/en/products/adaptive-socs-and-fpgas/evaluation-boards/zcu104.html'
+        IMGRCVRY_KERNEL_ADDR:
+            comment: 'Recovery kernel - above CMA (0x2EE00000) and kernel_comp_addr_r (0x33C00000), below fdt_addr_r (0x40000000)'
+            op: '='
+            val: '0x34000000'
+        IMGRCVRY_ROOTFS_ADDR:
+            comment: 'Recovery rootfs address'
+            op: '='
+            val: '0x38000000'
+        PREBOOT_CFG_FILE:
+            comment: 'Preboot config file'
+            op: '='
+            val: 'file://preboot_cmd_zynqmp_multidomain.cfg'
