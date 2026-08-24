@@ -592,6 +592,36 @@
                                 clock-names = "pss_ref_clk", "video_clk", "pss_alt_ref_clk", "aux_ref_clk", "gt_crx_ref_clk";
                         };
                 };
+
+                fwu-mdata {
+                        compatible = "u-boot,fwu-mdata-mtd";
+                        fwu-mdata-store = <&qspi_flash>;
+                        mdata-parts = "SystemReady-DT Update Metadata", "SystemReady-DT Update Metadata Backup";
+
+                        fwu-bank0 {
+                                id = <0x0>;
+                                label = "Bank A Space";
+
+                                fwu-image0 {
+                                        id = <0x0>;
+                                        offset = <0x0>;
+                                        size = <0x1000000>;
+                                        uuid = "0b931b7e-b2f6-11ef-8565-eb65d140066b";
+                                };
+                        };
+
+                        fwu-bank1 {
+                                id = <0x1>;
+                                label = "Bank B Space";
+
+                                fwu-image0 {
+                                        id = <0x0>;
+                                        offset = <0x0>;
+                                        size = <0x1000000>;
+                                        uuid = "1243d800-b2f6-11ef-8f4f-8bddc3aa326d";
+                                };
+                        };
+                };
         };
 
         timer {
@@ -1654,7 +1684,8 @@
                         is-dual = <0x0>;
                         iommus = <&smmu 0x873>;
 
-                        flash@0 {
+                        qspi_flash: flash@0 {
+                                phandle = <0x2>;
                                 compatible = "m25p80", "jedec,spi-nor";
                                 reg = <0x0>;
                                 spi-tx-bus-width = <0x4>;
@@ -1667,23 +1698,88 @@
                                         #size-cells = <0x1>;
 
                                         partition@0 {
-                                                label = "qspi-fsbl-uboot";
-                                                reg = <0x0 0x100000>;
+                                                label = "Image Selector";
+                                                reg = <0x0 0x60000>;
                                         };
 
-                                        partition@100000 {
-                                                label = "qspi-linux";
-                                                reg = <0x100000 0x500000>;
+                                        partition@60000 {
+                                                label = "Image Selector Backup";
+                                                reg = <0x60000 0x60000>;
                                         };
 
-                                        partition@600000 {
-                                                label = "qspi-device-tree";
-                                                reg = <0x600000 0x20000>;
+                                        partition@c0000 {
+                                                label = "Image Selector Scratchpad";
+                                                reg = <0xc0000 0x20000>;
                                         };
 
-                                        partition@620000 {
-                                                label = "qspi-rootfs";
-                                                reg = <0x620000 0x5e0000>;
+                                        partition@e0000 {
+                                                label = "Image Recovery";
+                                                reg = <0xe0000 0x1400000>;
+                                        };
+
+                                        partition@14e0000 {
+                                                label = "Image Recovery Scratchpad";
+                                                reg = <0x14e0000 0x20000>;
+                                        };
+
+                                        partition@1500000 {
+                                                label = "SystemReady-DT Update Metadata";
+                                                reg = <0x1500000 0x20000>;
+                                        };
+
+                                        partition@1520000 {
+                                                label = "SystemReady-DT Update Metadata Backup";
+                                                reg = <0x1520000 0x20000>;
+                                        };
+
+                                        partition@1540000 {
+                                                label = "U-Boot storage variables";
+                                                reg = <0x1540000 0x20000>;
+                                        };
+
+                                        partition@1560000 {
+                                                label = "U-Boot storage variables backup";
+                                                reg = <0x1560000 0x20000>;
+                                        };
+
+                                        partition@1580000 {
+                                                label = "U-Boot UEFI Variables";
+                                                reg = <0x1580000 0x40000>;
+                                        };
+
+                                        partition@15c0000 {
+                                                label = "Bank A Space";
+                                                reg = <0x15c0000 0x1000000>;
+                                        };
+
+                                        partition@25c0000 {
+                                                label = "U-Boot Variables Bank A";
+                                                reg = <0x25c0000 0x20000>;
+                                        };
+
+                                        partition@25e0000 {
+                                                label = "U-Boot Variables Bank A Backup";
+                                                reg = <0x25e0000 0x20000>;
+                                        };
+
+                                        partition@2600000 {
+                                                label = "Bank B Space";
+                                                reg = <0x2600000 0x1000000>;
+                                        };
+
+                                        partition@3600000 {
+                                                label = "U-Boot Variables Bank B";
+                                                reg = <0x3600000 0x20000>;
+                                        };
+
+                                        partition@3620000 {
+                                                label = "U-Boot Variables Bank B Backup";
+                                                reg = <0x3620000 0x20000>;
+                                        };
+
+                                        partition@3640000 {
+                                                label = "User Scratchpad";
+                                                reg = <0x3640000 0x9c0000>;
                                         };
                                 };
                         };
@@ -1815,7 +1911,7 @@
                         compatible = "arm,mmu-500";
                         reg = <0x0 0xfd800000 0x0 0x20000>;
                         #iommu-cells = <0x1>;
-                        status = "okay";
+                        status = "disabled";
                         #global-interrupts = <0x1>;
                         interrupt-parent = <&gic>;
                         interrupts = <0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4 0x0 0x9b 0x4>;
@@ -3357,6 +3453,7 @@
                 psu_cortexa53_3 = "/cpus/cpu@3";
                 L2 = "/cpus/l2-cache";
                 CPU_SLEEP_0 = "/cpus/idle-states/cpu-sleep-0";
+                qspi_flash = "/axi/spi@ff0f0000/flash@0";
         };
 
         domains {
