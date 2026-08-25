@@ -1,14 +1,14 @@
-SUMMARY = "OpenAMP RPU firmware demo payloads (echo, matrix multiply, \
-rpc_demo) for the AMD Versal AI Edge VEK280 evaluation kit."
-DESCRIPTION = "Pre-built Cortex-R5 OpenAMP firmware demo payloads \
-(echo, matrix-multiply, rpc_demo) that the APU-side OpenAMP example \
-applications load onto the RPU on the AMD Versal AI Edge VEK280 \
-evaluation kit."
-
+SUMMARY = " Zephyr OpenAMP RPU firmware demo "
+DESCRIPTION = " RPU SIDE OpenAMP RPU FW for Zehyr Demo "
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-vek280-multidomain_packagegroup-openamp-fw-examples/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
+LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-vek280-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/08180849/external/packagegroup-openamp-fw-examples/versal-vek280-multidomain_packagegroup-openamp-fw-examples_08180849.tar.gz"
-SRC_URI[sha256sum] = "12401695a17dd913b43c3c9b06c59ab3a240aca2457b56e0e5470d5d995d68de"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/08250736/external/openamp-zephyr-demo/versal-vek280-multidomain_openamp-zephyr-demo_08250736.tar.gz"
+SRC_URI[sha256sum] = "8a00ed334f71aebdd38e434c2f3c7c039b464abc117ccddb0d81a7fe2aecc409"
 
+COMPATIBLE_MACHINE = "^$"
+COMPATIBLE_MACHINE:amd-cortexa72-common = "${MACHINE}"
+
+OPENAMPFW_BOARD = "vek280"
+OPENAMPFW_PKGDIR_SUFFIX:versal = "openamp-zephyr-demo"
 require conf/includes/openamp-fw-example.inc
