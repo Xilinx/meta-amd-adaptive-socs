@@ -2,6 +2,7 @@
 # the directory to the search path; the SRC_URI:append lines below control
 # which machines actually consume each .cfg/.env file.
 FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot-xlnx:"
+FILESEXTRAPATHS:prepend:mbv64-scu200-revb-sdt := "${THISDIR}/u-boot-xlnx:"
 
 SRC_URI:append:versal-2ve-2vm-vek385-sdt-seg = "\
     file://u-boot-misc.cfg \
@@ -21,6 +22,9 @@ SRC_URI:append:zynq-zc706-sdt-full = "\
 SRC_URI:append:microblaze-v = "\
     file://u-boot-misc_mbv64.cfg \
     file://mbv64.env \
+    "
+SRC_URI:append:mbv64-scu200-revb-sdt = "\
+    file://u-boot-misc_mbv64-scu200-revb.cfg \
     "
 
 # EFI variable storage on SPI flash - for machines with the UEFI
