@@ -2,7 +2,7 @@
 # Generate the sdt-index file
 #
 # Usage:
-# cd sources/meta-xilinx-tools
+# cd sources/meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp
 # ./scripts/hdf-repository-generate-srcuri.sh \
 #    https://artifactory.xilinx.com/artifactory/petalinux-hwproj-dev/misc/2026.1 \
 #    /usr/local/sdt-examples \
