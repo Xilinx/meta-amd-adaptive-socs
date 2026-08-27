@@ -24,8 +24,7 @@ This layer depends on:
 	URI:
         https://git.yoctoproject.org/meta-xilinx (official version)
         https://github.com/Xilinx/meta-xilinx (development and AMD release)
-	layers: meta-xilinx-core, meta-xilinx-standalone, meta-xilinx-standalone-sdt,
-	        meta-microblaze.
+	layers: meta-xilinx-core.
 	branch: scarthgap or AMD release version (e.g. rel-v2026.1)
 
 	URI: https://git.yoctoproject.org/meta-security
