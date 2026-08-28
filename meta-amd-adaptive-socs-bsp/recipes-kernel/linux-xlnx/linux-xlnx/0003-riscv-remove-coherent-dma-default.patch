@@ -1,0 +1,42 @@
+From mboxrd@z Thu Jan  1 00:00:00 1970
+From: Venkatesh Odela <venkatesh.odela@amd.com>
+Subject: [LINUX PATCH] riscv: remove coherent DMA default
+Date: Fri, 14 Aug 2026 16:39:59 +0530
+Message-ID: <20260814110959.2238808-1-venkatesh.odela@amd.com>
+Content-Transfer-Encoding: 8bit
+Return-Path: <>
+MIME-Version: 1.0
+To: git-dev@amd.com
+Cc: harini.katakam@amd.com
+List-ID: <git-dev@amd.com>
+Content-Type: text/plain; charset="utf-8"
+
+Explicit cache management is required on some RISC-V systems.
+
+Remove ARCH_DMA_DEFAULT_COHERENT to reflect that in the default case.
+
+Signed-off-by: Venkatesh Odela <venkatesh.odela@amd.com>
+
+Upstream-Status: Pending
+
+---
+ arch/riscv/Kconfig | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index fadec20b87a8..7d1e9a25f4b5 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -18,7 +18,6 @@ config RISCV
+ 	select ACPI_REDUCED_HARDWARE_ONLY if ACPI
+ 	select ACPI_RIMT if ACPI
+ 	select ACPI_SPCR_TABLE if ACPI
+-	select ARCH_DMA_DEFAULT_COHERENT
+ 	select ARCH_ENABLE_HUGEPAGE_MIGRATION if HUGETLB_PAGE && MIGRATION
+ 	select ARCH_ENABLE_MEMORY_HOTPLUG if SPARSEMEM_VMEMMAP
+ 	select ARCH_ENABLE_MEMORY_HOTREMOVE if MEMORY_HOTPLUG
+-- 
+2.25.1
+
+
+

@@ -1,0 +1,56 @@
+From mboxrd@z Thu Jan  1 00:00:00 1970
+From: Venkatesh Odela <venkatesh.odela@amd.com>
+Subject: [LINUX PATCH] net: axienet: Reset core before 64-bit DMA detection
+Date: Mon, 17 Aug 2026 18:39:06 +0530
+Message-ID: <20260817130906.755845-1-venkatesh.odela@amd.com>
+Content-Transfer-Encoding: 8bit
+Return-Path: <>
+MIME-Version: 1.0
+To: git-dev@amd.com
+Cc: harini.katakam@amd.com, Suraj.Gupta2@amd.com, Ravikanth.Tuniki@amd.com
+List-ID: <git-dev@amd.com>
+Content-Type: text/plain; charset="utf-8"
+
+64-bit DMA detection will fail if axienet was started before (by boot
+loader, boot ROM, etc). In this state axienet will not start properly.
+XAXIDMA_TX_CDESC_OFFSET + 4 register (MM2S_CURDESC_MSB) is used to detect
+64-bit DMA capability here. But datasheet says: When DMACR.RS is 1
+(axienet is in enabled state), CURDESC_PTR becomes Read Only (RO) and
+is used to fetch the first descriptor. So iowrite32()/ioread32() trick
+to this register to detect 64-bit DMA will not work.
+Reset the core after clocks are enabled and before running 64-bit DMA
+autodetection.
+
+Fixes: e4a46b3732db ("net: axienet: added multichannel DMA support")
+Signed-off-by: Venkatesh Odela <venkatesh.odela@amd.com>
+
+Upstream-Status: Backport see below
+
+https://github.com/torvalds/linux/commit/f1bc9fc4a06de0108e0dca2a9a7e99ba1fc632f9
+https://github.com/torvalds/linux/commit/f735c40ed93ccaeb52d026def47ac1a423df7133
+
+---
+ drivers/net/ethernet/xilinx/xilinx_axienet_main.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/drivers/net/ethernet/xilinx/xilinx_axienet_main.c b/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
+index f8b111d63772..21e97a535518 100644
+--- a/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
++++ b/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
+@@ -5838,6 +5838,11 @@ static int axienet_probe(struct platform_device *pdev)
+ 		}
+ #endif
+ 
++		/* Reset core now that clocks are enabled, prior to 64-bit DMA detection */
++		ret = __axienet_device_reset(lp->dq[0]);
++		if (ret)
++			goto err_disable_clk;
++
+ 		/* Autodetect the need for 64-bit DMA pointers.
+ 		 * When the IP is configured for a bus width bigger than 32 bits,
+ 		 * writing the MSB registers is mandatory, even if they are all 0.
+-- 
+2.34.1
+
+
+

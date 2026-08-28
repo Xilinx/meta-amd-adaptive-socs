@@ -1,0 +1,123 @@
+From mboxrd@z Thu Jan  1 00:00:00 1970
+From: Venkatesh Odela <venkatesh.odela@amd.com>
+Subject: [LINUX PATCH] net: axienet: invalidate BD cache before reading status on RISC-V
+Date: Tue, 18 Aug 2026 09:20:54 +0530
+Message-ID: <20260818035054.1235112-1-venkatesh.odela@amd.com>
+Content-Transfer-Encoding: 8bit
+Return-Path: <>
+MIME-Version: 1.0
+To: git-dev@amd.com
+Cc: harini.katakam@amd.com, Suraj.Gupta2@amd.com, Ravikanth.Tuniki@amd.com, SushilKumar.Singh@amd.com, siva.durga.prasad.paladugu@amd.com, radhey.shyam.pandey@amd.com
+List-ID: <git-dev@amd.com>
+Content-Type: text/plain; charset="utf-8"
+
+On RISC-V systems with non-coherent DMA, the AXI DMA engine updates
+buffer descriptor (BD) status in memory while the CPU may retain a
+stale cached copy. Without syncing the BD for CPU access, TX completion
+and RX poll can miss the COMPLETE bit and stall or drop traffic.
+
+This patch adds a helper, axienet_invalidate_bd_and_read_status(), that
+calls dma_sync_single_for_cpu() on buffer descriptor rings before reading
+the COMPLETE bit in TX completion (axienet_free_tx_chain) and RX poll
+(xaxienet_rx_poll). The change is gated entirely behind CONFIG_RISCV.
+
+This change is limited to RISC-V as temporary fix.
+
+Signed-off-by: Venkatesh Odela <venkatesh.odela@amd.com>
+
+Upstream-Status: Inappropriate (temporary workaround)
+---
+ .../net/ethernet/xilinx/xilinx_axienet_main.c | 45 ++++++++++++++++++-
+ 1 file changed, 43 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/ethernet/xilinx/xilinx_axienet_main.c b/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
+index 21e97a535518..a1d88d43bac1 100644
+--- a/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
++++ b/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
+@@ -41,6 +41,7 @@
+ #include <linux/ethtool.h>
+ #include <linux/dmaengine.h>
+ #include <linux/dma-mapping.h>
++#include <linux/dma-map-ops.h>
+ #include <linux/dma/xilinx_dma.h>
+ #include <linux/circ_buf.h>
+ #include <net/netdev_queues.h>
+@@ -97,6 +98,28 @@
+ 
+ static void axienet_rx_submit_desc(struct net_device *ndev);
+ 
++#if defined(CONFIG_RISCV)
++/*
++ * On RISC-V non-coherent DMA, the AXI DMA engine updates BD status in RAM.
++ * Invalidate the BD cache line for CPU, then read status (COMPLETE bit).
++ */
++static u32 axienet_invalidate_bd_and_read_status(struct device *dev,
++						 dma_addr_t bd_p,
++						 struct axidma_bd *bd_v,
++						 struct axidma_bd *cur_p)
++{
++	dma_addr_t bd_phys = bd_p + (cur_p - bd_v) * sizeof(*cur_p);
++
++	if (!dev_is_dma_coherent(dev)) {
++		dma_sync_single_for_cpu(dev, bd_phys, sizeof(*cur_p),
++					DMA_FROM_DEVICE);
++		/* Ensure we see the invalidated BD before reading status */
++		dma_rmb();
++	}
++	return cur_p->status;
++}
++#endif
++
+ /* Option table for setting up Axi Ethernet hardware options */
+ static struct axienet_option axienet_options[] = {
+ 	/* Turn on jumbo packet support for both Rx and Tx */
+@@ -1589,7 +1612,12 @@ static int axienet_free_tx_chain(struct axienet_dma_q *q, u32 first_bd,
+ 		status = cur_p->sband_stats;
+ #else
+ 		cur_p = &q->tx_bd_v[(first_bd + i) % lp->tx_bd_num];
++#if defined(CONFIG_RISCV)
++		status = axienet_invalidate_bd_and_read_status(lp->dev, q->tx_bd_p,
++							       q->tx_bd_v, cur_p);
++#else
+ 		status = cur_p->status;
++#endif
+ #endif
+ 
+ 		/* If force is not specified, clean up only descriptors
+@@ -2634,16 +2662,29 @@ int xaxienet_rx_poll(struct napi_struct *napi, int quota)
+ 
+ 		cur_p = &q->rxq_bd_v[q->rx_bd_ci];
+ 	}
+-#else
++#else /* !CONFIG_AXIENET_HAS_MCDMA */
+ 	struct axidma_bd *cur_p = &q->rx_bd_v[q->rx_bd_ci];
++#if defined(CONFIG_RISCV)
++	struct device *dev = ndev->dev.parent;
++	u32 status;
+ 
++	status = axienet_invalidate_bd_and_read_status(dev, q->rx_bd_p,
++						       q->rx_bd_v, cur_p);
++	while ((status & XAXIDMA_BD_STS_COMPLETE_MASK) && (work_done < quota)) {
++#else
+ 	while ((cur_p->status & XAXIDMA_BD_STS_COMPLETE_MASK) &&
+ 	       (work_done < quota)) {
++#endif
+ 		work_done += axienet_recv(lp->ndev, quota - work_done, q);
++
+ 		cur_p = &q->rx_bd_v[q->rx_bd_ci];
++#if defined(CONFIG_RISCV)
++		status = axienet_invalidate_bd_and_read_status(dev, q->rx_bd_p,
++							       q->rx_bd_v, cur_p);
++#endif
+ 	}
+ 
+-#endif
++#endif /* !CONFIG_AXIENET_HAS_MCDMA */
+ 	if (work_done < quota) {
+ 		napi_complete(napi);
+ #ifdef CONFIG_AXIENET_HAS_MCDMA
+-- 
+2.34.1
+
+
+
