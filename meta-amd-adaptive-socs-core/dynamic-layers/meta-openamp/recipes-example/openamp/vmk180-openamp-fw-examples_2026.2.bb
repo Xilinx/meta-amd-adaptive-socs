@@ -6,9 +6,10 @@ applications load onto the RPU on the AMD Versal Prime VMK180 \
 evaluation kit."
 
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-vmk180-multidomain_packagegroup-openamp-fw-examples/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
+LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-vmk180-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/08180849/external/packagegroup-openamp-fw-examples/versal-vmk180-multidomain_packagegroup-openamp-fw-examples_08180849.tar.gz"
-SRC_URI[sha256sum] = "4b4d26d730db28f8101489aef51d18f4da1a8bd13c3c68d6241ecfcba6ffc8cb"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/08281142/external/openamp-zephyr-demo/versal-vmk180-multidomain_openamp-zephyr-demo_08281142.tar.gz"
+SRC_URI[sha256sum] = "2a0ce4eefa7f0ef650686281baa148036f59bc90396f9a8712bbb643524065b2"
 
+OPENAMPFW_PKGDIR_SUFFIX = "openamp-zephyr-demo"
 require conf/includes/openamp-fw-example.inc
