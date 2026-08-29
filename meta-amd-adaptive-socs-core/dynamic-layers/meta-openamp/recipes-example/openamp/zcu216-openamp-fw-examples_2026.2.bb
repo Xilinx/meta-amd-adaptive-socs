@@ -10,5 +10,5 @@ COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa53-common = "${MACHINE}"
 
 OPENAMPFW_BOARD = "zcu216"
-OPENAMPFW_PKGDIR_SUFFIX:zynqmp = "openamp-zephyr-demo"
+OPENAMPFW_PKGDIR_SUFFIX = "openamp-zephyr-demo"
 require conf/includes/openamp-fw-example.inc

@@ -10,5 +10,5 @@ COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa72-common = "${MACHINE}"
 
 OPENAMPFW_BOARD = "vek280"
-OPENAMPFW_PKGDIR_SUFFIX:versal = "openamp-zephyr-demo"
+OPENAMPFW_PKGDIR_SUFFIX = "openamp-zephyr-demo"
 require conf/includes/openamp-fw-example.inc
