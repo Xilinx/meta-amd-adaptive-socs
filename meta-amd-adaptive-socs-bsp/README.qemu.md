@@ -22,5 +22,4 @@ in a production environment.
 
 | FPGA/SoC Fam | machine              | description                  |
 |--------------|----------------------|------------------------------|
-| MB-V (32)    | qemu-microblaze-v-32 | 32-bit RISC-V (Microblaze-V) |
 | MB-V (64)    | qemu-microblaze-v-64 | 64-bit RISC-V (Microblaze-V) |

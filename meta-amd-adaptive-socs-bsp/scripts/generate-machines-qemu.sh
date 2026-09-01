@@ -2,7 +2,6 @@
 
 ### The following table controls the automatic generated of the machine .conf files (lines start with #M#)
 ### Machine                 Board                          PRE    POST
-#M# qemu-microblaze-v-32    none                           none   none
 #M# qemu-microblaze-v-64    none                           none   none
 
 this=$(realpath $0)
