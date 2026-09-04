@@ -3,8 +3,8 @@ DESCRIPTION = " RPU SIDE OpenAMP RPU FW for Zehyr Demo "
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-vpk120-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/09030751/external/openamp-zephyr-demo/versal-vpk120-multidomain_openamp-zephyr-demo_09030751.tar.gz"
-SRC_URI[sha256sum] = "d9bc015bfd1b281f667ae7e8cea6411ff216cd4910139524e4c2a9d88db1cf25"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/09040838/external/openamp-zephyr-demo/versal-vpk120-multidomain_openamp-zephyr-demo_09040838.tar.gz"
+SRC_URI[sha256sum] = "079f6b94514eae26dea116ba23fad44604eeff70bd2468e543c143a7b88ab6dd"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa72-common = "${MACHINE}"
