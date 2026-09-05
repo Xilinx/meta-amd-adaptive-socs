@@ -7,8 +7,8 @@ applications load onto the RPU on the AMD Versal VPK360 board."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-2vp-vpk360-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/09040838/external/openamp-zephyr-demo/versal-2vp-vpk360-multidomain_openamp-zephyr-demo_09040838.tar.gz"
-SRC_URI[sha256sum] = "6bb30bb9d993a55caec76ffb1262f17088a01a4d616b96625c8ec1b354c9bee0"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/09050743/external/openamp-zephyr-demo/versal-2vp-vpk360-multidomain_openamp-zephyr-demo_09050743.tar.gz"
+SRC_URI[sha256sum] = "bc83af70f414113d84ab2bad42e31f10c335da844f23dd35b27371785fec5956"
 
 OPENAMPFW_BOARD = "versal-vpk360"
 OPENAMPFW_PKGDIR_SUFFIX = "openamp-zephyr-demo"
