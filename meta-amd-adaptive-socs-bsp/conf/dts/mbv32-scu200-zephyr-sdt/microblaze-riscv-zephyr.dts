@@ -107,7 +107,7 @@
                         xlnx,kind-of-intr = <0x1c>;
                         #interrupt-cells = <0x2>;
                         interrupt-parent = <&cpu_intc>;
-                        interrupts-extended = <&cpu_intc 11>;
+                        interrupts-extended = <&cpu_intc 0xb>;
                 };
 
                 axi_gpio_0: gpio@40000000 {
@@ -215,5 +215,35 @@
                         compatible = "xlnx,axi-uartlite-2.0", "xlnx,xps-uartlite-1.00.a";
                         interrupts = <0x4 0x0>;
                 };
+
+                pmcbridge_0_pmcl_trng_0: pmcbridge_0_pmcl_trng_0@4120000 {
+                        phandle = <0x13>;
+                        reg = <0x4120000 0x10000>;
+                        status = "okay";
+                        compatible = "xlnx,pmcl-trng-11.0";
+                };
+        };
+
+        __symbols__ {
+                cpus_microblaze_riscv_0 = "/cpus";
+                microblaze_riscv_0 = "/cpus/cpu@0";
+                cpu_intc = "/cpus/cpu@0/interrupt-controller";
+                clock = "/clocks";
+                clk_cpu_0 = "/clocks/clk_cpu";
+                clk_bus_0 = "/clocks/clk_bus_0";
+                lpddrmc_0_ddr_memory = "/memory@80000000";
+                microblaze_riscv_0_local_memory_dlmb_bram_if_cntlr_memory = "/memory@0";
+                amba_pl = "/soc";
+                microblaze_riscv_0_axi_intc = "/soc/interrupt-controller@41200000";
+                axi_gpio_0 = "/soc/gpio@40000000";
+                axi_gpio_0_1 = "/soc/gpio@40000000/gpio2";
+                axi_gpio_1 = "/soc/gpio@40010000";
+                axi_iic_0 = "/soc/i2c@40800000";
+                eeprom0 = "/soc/i2c@40800000/eeprom@50";
+                axi_timer_0 = "/soc/timer@41c00000";
+                axi_uartlite_0 = "/soc/serial@40600000";
+                axi_uartlite_1 = "/soc/serial@40610000";
+                axi_uartlite_2 = "/soc/serial@40620000";
+                pmcbridge_0_pmcl_trng_0 = "/soc/pmcbridge_0_pmcl_trng_0@4120000";
         };
 };

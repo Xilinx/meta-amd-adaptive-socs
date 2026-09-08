@@ -1015,29 +1015,29 @@
                         xlnx,meas-0-root-id = <0x0>;
                         xlnx,meas-7-slr-number = <0x0>;
                         xlnx,sat-22-y = <0x25ed>;
-                        xlnx,meas-1-root-id = <0x7>;
+                        xlnx,meas-1-root-id = <0x2>;
                         xlnx,ip-name = "psv_pmc_sysmon";
                         xlnx,sat-16-desc = "Clocking , column , satellite";
-                        xlnx,meas-2-root-id = <0x8>;
+                        xlnx,meas-2-root-id = <0x6>;
                         xlnx,meas-2-slr-number = <0x0>;
-                        xlnx,meas-3-root-id = <0x5>;
+                        xlnx,meas-3-root-id = <0x7>;
                         xlnx,sat-9-desc = "ME , satellite";
                         xlnx,sat-26-x = <0x18d1>;
                         xlnx,meas-4-root-id = <0x1>;
                         xlnx,sat-28-desc = "ME , satellite";
                         xlnx,sat-26-y = <0x19f9>;
-                        xlnx,meas-5-root-id = <0x2>;
+                        xlnx,meas-5-root-id = <0x3>;
                         xlnx,sat-10-x = <0x2995>;
                         xlnx,sat-64-x = <0x23>;
                         xlnx,sat-2-x = <0x23>;
-                        xlnx,meas-6-root-id = <0x3>;
+                        xlnx,meas-6-root-id = <0x4>;
                         xlnx,sat-10-y = <0x34f8>;
                         xlnx,sat-64-y = <0xb34>;
                         xlnx,sat-2-y = <0xb34>;
-                        xlnx,meas-7-root-id = <0x4>;
+                        xlnx,meas-7-root-id = <0x5>;
                         xlnx,sat-13-desc = "Clocking , column , satellite";
                         xlnx,sat-31-x = <0xa0e>;
-                        xlnx,meas-8-root-id = <0x6>;
+                        xlnx,meas-8-root-id = <0x8>;
                         xlnx,sat-6-desc = "VNOC , satellite";
                         xlnx,sat-31-y = <0x2ff0>;
                         xlnx,sat-14-x = <0x40b7>;
@@ -1137,18 +1137,18 @@
                                 xlnx,name = "vccaux";
                         };
 
-                        supply@7 {
-                                reg = <0x7>;
+                        supply@2 {
+                                reg = <0x2>;
                                 xlnx,name = "vccint";
                         };
 
-                        supply@8 {
-                                reg = <0x8>;
+                        supply@6 {
+                                reg = <0x6>;
                                 xlnx,name = "vcc_ram";
                         };
 
-                        supply@5 {
-                                reg = <0x5>;
+                        supply@7 {
+                                reg = <0x7>;
                                 xlnx,name = "vcc_soc";
                         };
 
@@ -1157,23 +1157,23 @@
                                 xlnx,name = "vccaux_pmc";
                         };
 
-                        supply@2 {
-                                reg = <0x2>;
-                                xlnx,name = "vcc_pmc";
-                        };
-
                         supply@3 {
                                 reg = <0x3>;
-                                xlnx,name = "vcc_psfp";
+                                xlnx,name = "vcc_pmc";
                         };
 
                         supply@4 {
                                 reg = <0x4>;
+                                xlnx,name = "vcc_psfp";
+                        };
+
+                        supply@5 {
+                                reg = <0x5>;
                                 xlnx,name = "vcc_pslp";
                         };
 
-                        supply@6 {
-                                reg = <0x6>;
+                        supply@8 {
+                                reg = <0x8>;
                                 xlnx,name = "vp_vn";
                         };
                 };
@@ -1214,6 +1214,48 @@
                         xlnx,nodeid = <0x18227055>;
                 };
 
+                ttc0: timer@ff0e0000 {
+                        phandle = <0x75>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupts = <0x0 0x25 0x4 0x0 0x26 0x4 0x0 0x27 0x4>;
+                        interrupt-parent = <&gic>;
+                        reg = <0x0 0xff0e0000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        clocks = <&versal_clk 0x27>;
+                        power-domains = <&versal_firmware 0x18224024>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk1-clksrc = <0x0>;
+                        xlnx,clock-freq = <0x8f0d0f7>;
+                        xlnx,ttc-clk2-clksrc = <0x0>;
+                        xlnx,ip-name = "psv_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk1-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk0-clksrc = <0x0>;
+                };
+
+                ttc1: timer@ff0f0000 {
+                        phandle = <0x76>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupts = <0x0 0x28 0x4 0x0 0x29 0x4 0x0 0x2a 0x4>;
+                        interrupt-parent = <&gic>;
+                        reg = <0x0 0xff0f0000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        clocks = <&versal_clk 0x28>;
+                        power-domains = <&versal_firmware 0x18224025>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk1-clksrc = <0x0>;
+                        xlnx,clock-freq = <0x8f0d0f7>;
+                        xlnx,ttc-clk2-clksrc = <0x0>;
+                        xlnx,ip-name = "psv_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk1-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk0-clksrc = <0x0>;
+                };
+
                 ttc2: timer@ff100000 {
                         phandle = <0x77>;
                         linux,uio-name = "libmetal-timer";
@@ -1225,6 +1267,27 @@
                         timer-width = <0x20>;
                         clocks = <&versal_clk 0x29>;
                         power-domains = <&versal_firmware 0x18224026>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk1-clksrc = <0x0>;
+                        xlnx,clock-freq = <0x8f0d0f7>;
+                        xlnx,ttc-clk2-clksrc = <0x0>;
+                        xlnx,ip-name = "psv_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk1-freq-hz = <0x8f0d0f7>;
+                        xlnx,ttc-clk0-clksrc = <0x0>;
+                };
+
+                ttc3: timer@ff110000 {
+                        phandle = <0x78>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupts = <0x0 0x2e 0x4 0x0 0x2f 0x4 0x0 0x30 0x4>;
+                        interrupt-parent = <&gic>;
+                        reg = <0x0 0xff110000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        clocks = <&versal_clk 0x2a>;
+                        power-domains = <&versal_firmware 0x18224027>;
                         xlnx,ttc-board-interface = "custom";
                         xlnx,ttc-clk2-freq-hz = <0x8f0d0f7>;
                         xlnx,ttc-clk1-clksrc = <0x0>;
@@ -2073,21 +2136,21 @@
                 };
 
                 libmetal_uio_desc099c8000: libmetal_uio_desc0@99c8000 {
-                        phandle = <0x199>;
+                        phandle = <0x197>;
                         linux,uio-name = "libmetal-desc0";
                         compatible = "uio";
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
                 libmetal_uio_desc199cc000: libmetal_uio_desc1@99cc000 {
-                        phandle = <0x19a>;
+                        phandle = <0x198>;
                         linux,uio-name = "libmetal-desc1";
                         compatible = "uio";
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
                 libmetal_uio_data99d0000: libmetal_uio_data@99d0000 {
-                        phandle = <0x19b>;
+                        phandle = <0x199>;
                         linux,uio-name = "libmetal-data";
                         compatible = "uio";
                         reg = <0x0 0x99d0000 0x0 0x40000>;
@@ -2765,7 +2828,10 @@
                 sysmon1 = "/axi/sysmon@109270000";
                 sysmon2 = "/axi/sysmon@111270000";
                 sysmon3 = "/axi/sysmon@119270000";
+                ttc0 = "/axi/timer@ff0e0000";
+                ttc1 = "/axi/timer@ff0f0000";
                 ttc2 = "/axi/timer@ff100000";
+                ttc3 = "/axi/timer@ff110000";
                 usb0 = "/axi/usb@ff9d0000";
                 dwc3_0 = "/axi/usb@ff9d0000/usb@fe200000";
                 cpm_pciea = "/axi/pci@fca10000";
@@ -2909,10 +2975,8 @@
                 libmetal_uio_desc099c8000 = "/axi/libmetal_uio_desc0@99c8000";
                 libmetal_uio_desc199cc000 = "/axi/libmetal_uio_desc1@99cc000";
                 libmetal_uio_data99d0000 = "/axi/libmetal_uio_data@99d0000";
-                vdu_mem_reg_0 = "/reserved-memory/vdu_reserved_mem0@50000000000";
-                vdu_mem_reg_1 = "/reserved-memory/vdu_reserved_mem1@50080000000";
-                vdu_mem_reg_2 = "/reserved-memory/vdu_reserved_mem2@60000000000";
-                vdu_mem_reg_3 = "/reserved-memory/vdu_reserved_mem3@60080000000";
+                cma_reserved_50000000000 = "/reserved-memory/cma_reserved@50000000000";
+                cma_reserved_60000000000 = "/reserved-memory/cma_reserved@60000000000";
                 cma_reserved = "/reserved-memory/cma_reserved@800000000";
                 vdev0vring0 = "/reserved-memory/vdev0vring0@9880000";
                 vdev0vring1 = "/reserved-memory/vdev0vring1@9884000";
@@ -2931,160 +2995,31 @@
                 CPU_SLEEP_0 = "/cpus/idle-states/cpu-sleep-0";
         };
 
-        domains {
-
-                APU_Linux {
-                        phandle = <0x19c>;
-                        compatible = "openamp,domain-v1";
-                        reserved-memory = <0x18c 0x18d 0x18e 0x18f 0x190 0x191 0x192 0x193 0x194 0x195 0x196>;
-                        cpus = <&cpus_a72 0xf 0x80000003>;
-                        os,type = "linux";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-
-                                        relation0 {
-                                                remote = <0x197>;
-                                                elfload = <&rproc0>,
-                                                 <&trace_buffer>,
-                                                 <&rsctbl>;
-                                        };
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                remote = <0x197>;
-                                                carveouts = <0x193 0x192 0x191>;
-                                                mbox = <0x133>;
-                                        };
-                                };
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                remote = <0x198>;
-                                                carveouts = <0x199 0x19a 0x19b>;
-                                                mbox = <0x148>;
-                                                timer = <0x77>;
-                                        };
-                                };
-                        };
-                };
-
-                R5_0_ZEPHYR {
-                        phandle = <0x197>;
-                        compatible = "openamp,domain-v1";
-                        zephyr-version = "4.3";
-                        sram = <0x0 0x9800000 0x0 0x20000 0x0 0x0 0x0 0x10000 0x0 0x20000 0x0 0x10000>;
-                        reserved-memory = <0x191 0x192 0x193 0x194 0x195 0x196>;
-                        os,type = "zephyr";
-                        rpu_pd_val = <0x93 0x18110005 0x93 0x1831800b 0x93 0x1831800c>;
-                        cpu_config_str = "split";
-                        core_num = "0";
-                        linker_file_output_name = "openamp-zephyr.ld";
-                        linker-entry = "_vector_table";
-                        linker_memories = <0xa1 0xa3 0x194 0x196>;
-                        linker-section-vector-table = <0xa1>;
-                        linker-section-vector-table-offset = <0x0>;
-                        linker-section-text = <0x194>;
-                        linker-section-rodata = <0x194>;
-                        linker-section-data = <0xa3>;
-                        linker-section-bss = <0xa3>;
-                        linker-section-noinit = <0xa3>;
-                        linker-section-heap = <0xa3>;
-                        linker-section-stack = <0xa3>;
-                        linker-section-resource-table = <0x196>;
-                        linker-section-resource-table-offset = <0x0>;
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "psv_cortexr5_0";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                host = <0x19c>;
-                                                mbox = <0x121>;
-                                                carveouts = <0x193 0x192 0x191>;
-                                        };
-                                };
-                        };
-                };
-
-                R5_1_BAREMETAL {
-                        phandle = <0x198>;
-                        compatible = "openamp,domain-v1";
-                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xffe90000 0x0 0x10000>;
-                        os,type = "baremetal";
-                        rpu_pd_val = <0x93 0x18110006>;
-                        cpu_config_str = "split";
-                        core_num = "1";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "psv_cortexr5_1";
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                host = <0x19c>;
-                                                carveouts = <0x199 0x19a 0x19b>;
-                                                mbox = <0x12d>;
-                                                timer = <0x77>;
-                                                elfload = <&libmetal_elf>;
-                                        };
-                                };
-                        };
-                };
-        };
-
         reserved-memory {
                 ranges;
                 #size-cells = <0x2>;
                 #address-cells = <0x2>;
 
-                vdu_mem_reg_0: vdu_reserved_mem0@50000000000 {
+                cma_reserved_50000000000: cma_reserved@50000000000 {
                         phandle = <0x18c>;
-                        label = "vdu_mem_reg_0";
+                        label = "cma_reserved_50000000000";
                         compatible = "shared-dma-pool";
-                        no-map;
-                        reg = <0x500 0x0 0x0 0x80000000>;
+                        reusable;
+                        linux,cma-default;
+                        reg = <0x500 0x0 0x0 0xc0000000>;
                 };
 
-                vdu_mem_reg_1: vdu_reserved_mem1@50080000000 {
+                cma_reserved_60000000000: cma_reserved@60000000000 {
                         phandle = <0x18d>;
-                        label = "vdu_mem_reg_1";
+                        label = "cma_reserved_60000000000";
                         compatible = "shared-dma-pool";
-                        no-map;
-                        reg = <0x500 0x80000000 0x0 0x80000000>;
-                };
-
-                vdu_mem_reg_2: vdu_reserved_mem2@60000000000 {
-                        phandle = <0x18e>;
-                        label = "vdu_mem_reg_2";
-                        compatible = "shared-dma-pool";
-                        no-map;
-                        reg = <0x600 0x0 0x0 0x80000000>;
-                };
-
-                vdu_mem_reg_3: vdu_reserved_mem3@60080000000 {
-                        phandle = <0x18f>;
-                        label = "vdu_mem_reg_3";
-                        compatible = "shared-dma-pool";
-                        no-map;
-                        reg = <0x600 0x80000000 0x0 0x80000000>;
+                        reusable;
+                        linux,cma-default;
+                        reg = <0x600 0x0 0x0 0xc0000000>;
                 };
 
                 cma_reserved: cma_reserved@800000000 {
-                        phandle = <0x190>;
+                        phandle = <0x18e>;
                         label = "cma_reserved";
                         compatible = "shared-dma-pool";
                         reusable;
@@ -3093,21 +3028,21 @@
                 };
 
                 vdev0vring0: vdev0vring0@9880000 {
-                        phandle = <0x193>;
+                        phandle = <0x191>;
                         label = "vdev0vring0";
                         no-map;
                         reg = <0x0 0x9880000 0x0 0x4000>;
                 };
 
                 vdev0vring1: vdev0vring1@9884000 {
-                        phandle = <0x192>;
+                        phandle = <0x190>;
                         label = "vdev0vring1";
                         no-map;
                         reg = <0x0 0x9884000 0x0 0x4000>;
                 };
 
                 vdev0buffer: vdev0buffer@9888000 {
-                        phandle = <0x191>;
+                        phandle = <0x18f>;
                         label = "vdev0buffer";
                         no-map;
                         reg = <0x0 0x9888000 0x0 0x78000>;
@@ -3115,7 +3050,7 @@
                 };
 
                 trace_buffer: trace@985f000 {
-                        phandle = <0x195>;
+                        phandle = <0x193>;
                         label = "trace_buffer";
                         mpu-policy = "readable", "writable";
                         no-map;
@@ -3123,7 +3058,7 @@
                 };
 
                 rproc0: rproc0@9800000 {
-                        phandle = <0x194>;
+                        phandle = <0x192>;
                         label = "rproc0";
                         mpu-policy = "readable", "writable", "executable", "cacheable", "static";
                         no-map;
@@ -3131,7 +3066,7 @@
                 };
 
                 rsctbl: rsctbl@9820000 {
-                        phandle = <0x196>;
+                        phandle = <0x194>;
                         label = "rsctbl";
                         mpu-policy = "readable", "writable";
                         no-map;
@@ -3139,28 +3074,28 @@
                 };
 
                 libmetal_elf: libmetal_elf@9968000 {
-                        phandle = <0x19d>;
+                        phandle = <0x19b>;
                         label = "libmetal_elf";
                         no-map;
                         reg = <0x0 0x9968000 0x0 0x60000>;
                 };
 
                 libmetal_desc0: libmetal_desc0@99c8000 {
-                        phandle = <0x19e>;
+                        phandle = <0x19c>;
                         label = "libmetal_desc0";
                         no-map;
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
                 libmetal_desc1: libmetal_desc1@99cc000 {
-                        phandle = <0x19f>;
+                        phandle = <0x19d>;
                         label = "libmetal_desc1";
                         no-map;
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
                 libmetal_data: libmetal_data@99d0000 {
-                        phandle = <0x1a0>;
+                        phandle = <0x19e>;
                         label = "libmetal_data";
                         no-map;
                         reg = <0x0 0x99d0000 0x0 0x40000>;

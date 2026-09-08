@@ -1947,6 +1947,42 @@
                          <&zynqmp_clk 0x1f>;
                 };
 
+                ttc0: timer@ff110000 {
+                        phandle = <0x6a>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupt-parent = <&gic>;
+                        interrupts = <0x0 0x24 0x4 0x0 0x25 0x4 0x0 0x26 0x4>;
+                        reg = <0x0 0xff110000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        power-domains = <&zynqmp_firmware 0x18>;
+                        clocks = <&zynqmp_clk 0x1f>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x5f5e100>;
+                        xlnx,clock-freq = <0x5f5e100>;
+                        xlnx,ip-name = "psu_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x5f5e100>;
+                        xlnx,ttc-clk1-freq-hz = <0x5f5e100>;
+                };
+
+                ttc1: timer@ff120000 {
+                        phandle = <0x6b>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupt-parent = <&gic>;
+                        interrupts = <0x0 0x27 0x4 0x0 0x28 0x4 0x0 0x29 0x4>;
+                        reg = <0x0 0xff120000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        power-domains = <&zynqmp_firmware 0x19>;
+                        clocks = <&zynqmp_clk 0x1f>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x5f5e100>;
+                        xlnx,clock-freq = <0x5f5e100>;
+                        xlnx,ip-name = "psu_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x5f5e100>;
+                        xlnx,ttc-clk1-freq-hz = <0x5f5e100>;
+                };
+
                 ttc2: timer@ff130000 {
                         phandle = <0x6c>;
                         compatible = "uio";
@@ -1957,6 +1993,24 @@
                         reg = <0x0 0xff130000 0x0 0x1000>;
                         timer-width = <0x20>;
                         power-domains = <&zynqmp_firmware 0x1a>;
+                        clocks = <&zynqmp_clk 0x1f>;
+                        xlnx,ttc-board-interface = "custom";
+                        xlnx,ttc-clk2-freq-hz = <0x5f5e100>;
+                        xlnx,clock-freq = <0x5f5e100>;
+                        xlnx,ip-name = "psu_ttc";
+                        xlnx,ttc-clk0-freq-hz = <0x5f5e100>;
+                        xlnx,ttc-clk1-freq-hz = <0x5f5e100>;
+                };
+
+                ttc3: timer@ff140000 {
+                        phandle = <0x6d>;
+                        compatible = "cdns,ttc";
+                        status = "okay";
+                        interrupt-parent = <&gic>;
+                        interrupts = <0x0 0x2d 0x4 0x0 0x2e 0x4 0x0 0x2f 0x4>;
+                        reg = <0x0 0xff140000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        power-domains = <&zynqmp_firmware 0x1b>;
                         clocks = <&zynqmp_clk 0x1f>;
                         xlnx,ttc-board-interface = "custom";
                         xlnx,ttc-clk2-freq-hz = <0x5f5e100>;
@@ -3317,7 +3371,10 @@
                 smmu = "/axi/iommu@fd800000";
                 spi0 = "/axi/spi@ff040000";
                 spi1 = "/axi/spi@ff050000";
+                ttc0 = "/axi/timer@ff110000";
+                ttc1 = "/axi/timer@ff120000";
                 ttc2 = "/axi/timer@ff130000";
+                ttc3 = "/axi/timer@ff140000";
                 uart0 = "/axi/serial@ff000000";
                 uart1 = "/axi/serial@ff010000";
                 usb0 = "/axi/usb@ff9d0000";
@@ -3453,121 +3510,6 @@
                 L2 = "/cpus/l2-cache";
                 CPU_SLEEP_0 = "/cpus/idle-states/cpu-sleep-0";
                 qspi_flash = "/axi/spi@ff0f0000/flash@0";
-        };
-
-        domains {
-
-                APU_Linux {
-                        phandle = <0x176>;
-                        compatible = "openamp,domain-v1";
-                        reserved-memory = <0x16b 0x16c 0x16d 0x16e 0x16f 0x170>;
-                        cpus = <&cpus_a53 0xf 0x80000003>;
-                        os,type = "linux";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-
-                                        relation0 {
-                                                remote = <0x171>;
-                                                elfload = <&rproc0>,
-                                                 <&trace_buffer>,
-                                                 <&rsctbl>;
-                                        };
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                remote = <0x171>;
-                                                carveouts = <0x16d 0x16c 0x16b>;
-                                                mbox = <0x135>;
-                                        };
-                                };
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                remote = <0x172>;
-                                                carveouts = <0x173 0x174 0x175>;
-                                                mbox = <0x141>;
-                                                timer = <0x6c>;
-                                        };
-                                };
-                        };
-                };
-
-                R5_0_ZEPHYR {
-                        phandle = <0x171>;
-                        compatible = "openamp,domain-v1";
-                        zephyr-version = "4.3";
-                        sram = <0x0 0x9800000 0x0 0x20000 0x0 0x0 0x0 0x10000 0x0 0x20000 0x0 0x10000>;
-                        reserved-memory = <0x16b 0x16c 0x16d 0x16e 0x16f 0x170>;
-                        os,type = "zephyr";
-                        rpu_pd_val = <0x7f 0x7 0x7f 0xf 0x7f 0x10>;
-                        cpu_config_str = "split";
-                        core_num = "0";
-                        linker_file_output_name = "openamp-zephyr.ld";
-                        linker-entry = "_vector_table";
-                        linker_memories = <0x7b 0x7c 0x16e 0x170>;
-                        linker-section-vector-table = <0x7b>;
-                        linker-section-vector-table-offset = <0x0>;
-                        linker-section-text = <0x7b>;
-                        linker-section-rodata = <0x7b>;
-                        linker-section-data = <0x7c>;
-                        linker-section-bss = <0x7c>;
-                        linker-section-noinit = <0x7c>;
-                        linker-section-heap = <0x7c>;
-                        linker-section-stack = <0x7c>;
-                        linker-section-resource-table = <0x170>;
-                        linker-section-resource-table-offset = <0x0>;
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "psu_cortexr5_0";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                host = <0x176>;
-                                                mbox = <0xf9>;
-                                                carveouts = <0x16d 0x16c 0x16b>;
-                                        };
-                                };
-                        };
-                };
-
-                R5_1_BAREMETAL {
-                        phandle = <0x172>;
-                        compatible = "openamp,domain-v1";
-                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xffe90000 0x0 0x10000>;
-                        os,type = "baremetal";
-                        rpu_pd_val = <0x7f 0x8>;
-                        cpu_config_str = "split";
-                        core_num = "1";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "psu_cortexr5_1";
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                host = <0x176>;
-                                                carveouts = <0x173 0x174 0x175>;
-                                                mbox = <0x105>;
-                                                timer = <0x6c>;
-                                                elfload = <&libmetal_elf>;
-                                        };
-                                };
-                        };
-                };
         };
 
         reserved-memory {

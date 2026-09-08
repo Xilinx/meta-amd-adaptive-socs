@@ -39,6 +39,7 @@
                         clocks = <&clk_cpu_0>;
 
                         cpu0_intc: interrupt-controller {
+                                phandle = <0x3>;
                                 compatible = "riscv,cpu-intc";
                                 #interrupt-cells = <0x1>;
                                 interrupt-controller;
@@ -120,7 +121,7 @@
                         xlnx,ivar-rst-val = <0x10>;
                         interrupt-controller;
                         xlnx,async-intr = <0xfffffe0c>;
-                        interrupts-extended = <&cpu0_intc 9>;
+                        interrupts-extended = <&cpu0_intc 0x9>;
                 };
 
                 axi_ethernet_0_dma: dma@41e00000 {
@@ -1268,11 +1269,17 @@
                 axi_ethernet_0_mdio = "/amba_pl/ethernet@40c00000/mdio";
                 phy0 = "/amba_pl/ethernet@40c00000/mdio/ethernet-phy@1";
                 lpddrmc_0_ddr_memory = "/memory@80000000";
+                cpus_microblaze_riscv_0 = "/cpus";
+                microblaze_riscv_0 = "/cpus/cpu@0";
+                cpu0_intc = "/cpus/cpu@0/interrupt-controller";
+                microblaze_riscv_0_local_memory_dlmb_bram_if_cntlr_memory = "/sram@0";
+                int_timer = "/timer";
         };
 
         int_timer: timer {
+                phandle = <0x30>;
                 compatible = "riscv,timer";
                 bootph-all;
-                interrupts-extended = <&cpu0_intc 5>;
+                interrupts-extended = <&cpu0_intc 0x5>;
         };
 };
