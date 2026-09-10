@@ -3958,127 +3958,20 @@
                 libmetal_desc1 = "/reserved-memory/libmetal_desc1@99cc000";
                 libmetal_data = "/reserved-memory/libmetal_data@99d0000";
                 gic = "/axi/interrupt-controller@e2000000";
-        };
-
-        domains {
-
-                APU_Linux {
-                        phandle = <0x24e>;
-                        compatible = "openamp,domain-v1";
-                        reserved-memory = <0x243 0x244 0x245 0x246 0x247 0x248>;
-                        cpus = <&cpus_a78 0xff 0x3>;
-                        os,type = "linux";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-
-                                remoteproc-relation {
-                                        compatible = "openamp,remoteproc-v2";
-
-                                        relation0 {
-                                                remote = <0x249>;
-                                                elfload = <&ddrboot>,
-                                                 <&trace_buffer>,
-                                                 <&rsctbl>;
-                                        };
-                                };
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                remote = <0x249>;
-                                                carveouts = <0x243 0x244 0x245>;
-                                                mbox = <0x1af>;
-                                        };
-                                };
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                remote = <0x24a>;
-                                                carveouts = <0x24b 0x24c 0x24d>;
-                                                mbox = <0x16e>;
-                                                timer = <0x78>;
-                                        };
-                                };
-                        };
-                };
-
-                RPU_Zephyr {
-                        phandle = <0x249>;
-                        compatible = "openamp,domain-v1";
-                        os,type = "zephyr";
-                        zephyr-version = "4.3";
-                        xlnx,ddr-boot;
-                        xlnx,zephyr,mems = "ddrboot@9800100";
-                        sram = <0x0 0x9800100 0x0 0x5de00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
-                        reserved-memory = <0x246 0x247 0x248>;
-                        rpu_pd_val = <0x92 0x181100bf 0x92 0x183180cb 0x92 0x183180cc 0x92 0x183180cd>;
-                        cpu_config_str = "split";
-                        core_num = "0";
-                        linker_file_output_name = "openamp-zephyr.ld";
-                        linker-entry = "_vector_table";
-                        linker_memories = <0x1d 0x1e 0x1f 0x246 0x248>;
-                        linker-section-vector-table = <0x1d>;
-                        linker-section-vector-table-offset = <0x0>;
-                        linker-section-text = <0x1d>;
-                        linker-section-rodata = <0x1d>;
-                        linker-section-data = <0x1e>;
-                        linker-section-bss = <0x1e>;
-                        linker-section-noinit = <0x1e>;
-                        linker-section-heap = <0x1e>;
-                        linker-section-stack = <0x1e>;
-                        linker-section-resource-table = <0x248>;
-                        linker-section-resource-table-offset = <0x0>;
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "cortexr52_0";
-
-                                rpmsg-relation {
-                                        compatible = "openamp,rpmsg-v1";
-
-                                        relation0 {
-                                                host = <0x24e>;
-                                                mbox = <0x1bd>;
-                                                carveouts = <0x243 0x244 0x245>;
-                                        };
-                                };
-                        };
-                };
-
-                RPU_1_BM {
-                        phandle = <0x24a>;
-                        compatible = "openamp,domain-v1";
-                        sram = <0x0 0x9968000 0x0 0x60000 0x0 0xeba80000 0x0 0x10000 0x0 0xeba90000 0x0 0x8000 0x0 0xebaa0000 0x0 0x8000>;
-                        os,type = "baremetal";
-                        rpu_pd_val = <0x92 0x181100c0>;
-                        cpu_config_str = "split";
-                        core_num = "1";
-
-                        domain-to-domain {
-                                compatible = "openamp,domain-to-domain-v1";
-                                cluster_cpu = "cortexr52_1";
-
-                                libmetal-relation {
-                                        compatible = "libmetal,ipc-v1";
-
-                                        relation0 {
-                                                host = <0x24e>;
-                                                carveouts = <0x24b 0x24c 0x24d>;
-                                                mbox = <0x160>;
-                                                timer = <0x78>;
-                                                elfload = <&libmetal_elf>;
-                                        };
-                                };
-                        };
-                };
-
-                PMC_MB {
-                        compatible = "openamp,domain-v1";
-                };
+                cpus_a78 = "/cpus";
+                cortexa78_0 = "/cpus/cpu@0";
+                l2_00 = "/cpus/cpu@0/l2-cache";
+                cortexa78_1 = "/cpus/cpu@100";
+                l2_01 = "/cpus/cpu@100/l2-cache";
+                cortexa78_2 = "/cpus/cpu@10000";
+                l2_02 = "/cpus/cpu@10000/l2-cache";
+                cortexa78_3 = "/cpus/cpu@10100";
+                l2_03 = "/cpus/cpu@10100/l2-cache";
+                l3_0 = "/cpus/l3-0-cache";
+                CPU_RETENTION_0 = "/cpus/idle-states/cpu-retention-0";
+                its = "/axi/interrupt-controller@e2000000/msi-controller@e2040000";
+                its1 = "/axi/interrupt-controller@e2000000/msi-controller@e2060000";
+                its2 = "/axi/interrupt-controller@e2000000/msi-controller@e2080000";
         };
 
         remoteproc@eba00000 {
