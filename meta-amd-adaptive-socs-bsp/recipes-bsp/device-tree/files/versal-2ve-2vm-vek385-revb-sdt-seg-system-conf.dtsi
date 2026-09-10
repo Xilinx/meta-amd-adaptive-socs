@@ -1,3 +1,4 @@
+
 /*
  * Temporary DT nodes for VEK385 RevB Evaluation board.
  */
@@ -5,8 +6,6 @@
 / {
 	aliases {
 		nvmem1 = &eeprom;
-		/* Since UART0 is disabled below, so remove the unused alias dt property */
-		/delete-property/ serial0;
 	};
 
 /* Add remoteproc nodes required for loading isp firmware */
@@ -58,18 +57,9 @@
 };
 
 /*
-I2C Node (i2c@f1940000) in the PS device tree
-I2C access should be disabled from APU Linux as I2C0 is allocated
-for ISP/sensor processing in the RPU firmware. This ensures I2C0 is not
-accessed by Linux and remains dedicated to RPU operation.
-*/
-&i2c0 {
-	status = "disabled";
-};
-/*
-TTC timer nodes (timer@f1ea0000 to timer@f1ed0000) in the PS device tree causing conflict with
-the RPU firmware execution during Linux boot.So disabling them to ensures successful RPU log prints
-*/
+ * TTC4-TTC7 are reserved for ISP/RPU firmware. Keep them disabled in
+ * Linux until the ISP firmware processors are represented as domains.
+ */
 &ttc4 {
 	status = "disabled";
 };
@@ -83,8 +73,5 @@ the RPU firmware execution during Linux boot.So disabling them to ensures succes
 };
 
 &ttc7 {
-	status = "disabled";
-};
-&serial0 {
 	status = "disabled";
 };
