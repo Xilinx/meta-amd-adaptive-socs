@@ -215,6 +215,7 @@
                         compatible = "arm,cortex-r52";
                         device_type = "cpu";
                         reg = <0x1>;
+                        power-domains = <&scmi_devpd 0x1>;
                         xlnx,is-cache-coherent = <0x0>;
                         xlnx,timestamp-clk-freq = <0x5f5dd19>;
                         xlnx,pss-ref-clk-freq = <0x1fc9f08>;
@@ -253,17 +254,17 @@
                         arm,smc-id = <0xc2002001>;
                         #address-cells = <0x1>;
                         #size-cells = <0x0>;
-                        shmem = <0xf8>;
+                        shmem = <0xf9>;
                         bootph-all;
 
                         scmi_reset: protocol@16 {
-                                phandle = <0x106>;
+                                phandle = <0x107>;
                                 reg = <0x16>;
                                 #reset-cells = <0x1>;
                         };
 
                         scmi_devpd: protocol@11 {
-                                phandle = <0x10b>;
+                                phandle = <0xd9>;
                                 reg = <0x11>;
                                 #power-domain-cells = <0x1>;
                         };
@@ -370,7 +371,7 @@
         };
 
         versal_fpga: versal-fpga {
-                phandle = <0xfb>;
+                phandle = <0xfc>;
                 compatible = "xlnx,versal-fpga";
         };
 
@@ -409,7 +410,7 @@
         };
 
         sensor0: versal-thermal-sensor {
-                phandle = <0xfc>;
+                phandle = <0xfd>;
                 compatible = "xlnx,versal-thermal";
                 #thermal-sensor-cells = <0x1>;
                 io-channels = <&sysmon0 0x12>,
@@ -496,7 +497,7 @@
                 };
 
                 gpu_physical_memory_group_manager: physical-memory-group-manager {
-                        phandle = <0x100>;
+                        phandle = <0x101>;
                         compatible = "arm,physical-memory-group-manager";
                 };
 
@@ -547,13 +548,13 @@
                                 #size-cells = <0x2>;
 
                                 gpu_partition_config_a_0: gpu_partition_config@20000 {
-                                        phandle = <0xfd>;
+                                        phandle = <0xfe>;
                                         compatible = "arm,mali-gpu-partition-config";
                                         reg = <0x0 0x20000 0x0 0x10000>;
                                 };
 
                                 gpu_partition_control_a_0: gpu_partition_control@30000 {
-                                        phandle = <0xfe>;
+                                        phandle = <0xff>;
                                         compatible = "arm,mali-gpu-partition-control";
                                         reg = <0x0 0x30000 0x0 0x10000>;
                                         interrupt-parent = <&gic_r52>;
@@ -573,7 +574,7 @@
                                 };
 
                                 gpu_aw_message_a_0: gpu_aw_message@fffc0 {
-                                        phandle = <0xff>;
+                                        phandle = <0x100>;
                                         compatible = "arm,mali-gpu-aw-message";
                                         reg = <0x0 0xfffc0 0x0 0x40>;
                                         interrupt-parent = <&gic_r52>;
@@ -623,7 +624,7 @@
                                         reg = <0x0>;
 
                                         dptx_in_0: endpoint {
-                                                phandle = <0x107>;
+                                                phandle = <0x108>;
                                                 remote-endpoint = <&dc_out_0>;
                                         };
                                 };
@@ -632,7 +633,7 @@
                                         reg = <0x1>;
 
                                         dptx_in_1: endpoint {
-                                                phandle = <0x108>;
+                                                phandle = <0x109>;
                                                 remote-endpoint = <&dc_out_1>;
                                         };
                                 };
@@ -641,7 +642,7 @@
                                         reg = <0x2>;
 
                                         dptx_in_2: endpoint {
-                                                phandle = <0x109>;
+                                                phandle = <0x10a>;
                                                 remote-endpoint = <&dc_out_2>;
                                         };
                                 };
@@ -650,7 +651,7 @@
                                         reg = <0x3>;
 
                                         dptx_in_3: endpoint {
-                                                phandle = <0x10a>;
+                                                phandle = <0x10b>;
                                                 remote-endpoint = <&dc_out_3>;
                                         };
                                 };
@@ -751,7 +752,7 @@
                                         reg = <0xc>;
 
                                         dc_out_0: endpoint {
-                                                phandle = <0x101>;
+                                                phandle = <0x102>;
                                                 remote-endpoint = <&dptx_in_0>;
                                         };
                                 };
@@ -760,7 +761,7 @@
                                         reg = <0xd>;
 
                                         dc_out_1: endpoint {
-                                                phandle = <0x102>;
+                                                phandle = <0x103>;
                                                 remote-endpoint = <&dptx_in_1>;
                                         };
                                 };
@@ -769,7 +770,7 @@
                                         reg = <0xe>;
 
                                         dc_out_2: endpoint {
-                                                phandle = <0x103>;
+                                                phandle = <0x104>;
                                                 remote-endpoint = <&dptx_in_2>;
                                         };
                                 };
@@ -778,7 +779,7 @@
                                         reg = <0xf>;
 
                                         dc_out_3: endpoint {
-                                                phandle = <0x104>;
+                                                phandle = <0x105>;
                                                 remote-endpoint = <&dptx_in_3>;
                                         };
                                 };
@@ -2140,7 +2141,7 @@
                 };
 
                 ipi2: mailbox@eb350000 {
-                        phandle = <0xd9>;
+                        phandle = <0xda>;
                         status = "okay";
                         compatible = "xlnx,versal-ipi-mailbox";
                         interrupt-parent = <&gic_r52>;
@@ -3588,7 +3589,7 @@
         };
 
         scmi_buf: scmi-shmem@20001000 {
-                phandle = <0xf8>;
+                phandle = <0xf9>;
                 compatible = "arm,scmi-shmem";
                 reg = <0x0 0x20001000 0x0 0x1000>;
                 no-map;
@@ -3728,7 +3729,7 @@
                 ranges;
 
                 ipi_mailbox_pmu1: mailbox@eb3f0440 {
-                        phandle = <0xfa>;
+                        phandle = <0xfb>;
                         compatible = "xlnx,zynqmp-ipi-dest-mailbox";
                         reg = <0x0 0xeb3f0440 0x0 0x20 0x0 0xeb3f0460 0x0 0x20 0x0 0xeb3f0280 0x0 0x20 0x0 0xeb3f02a0 0x0 0x20>;
                         reg-names = "local_request_region", "local_response_region", "remote_request_region", "remote_response_region";
@@ -3738,7 +3739,7 @@
         };
 
         ref_clk: ref-clk {
-                phandle = <0xf9>;
+                phandle = <0xfa>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -3792,7 +3793,7 @@
         };
 
         clk50: clk50 {
-                phandle = <0x105>;
+                phandle = <0x106>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x2faf080>;
@@ -5931,6 +5932,7 @@
                         xlnx,zephyr,mems = "ddrboot@9800100";
                         sram = <0x0 0x9800100 0x0 0x5de00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
                         reserved-memory = <0x2a3 0x2a4 0x2a5>;
+                        rpu_pd_val = <0xd9 0x0>;
                         cpu_config_str = "split";
                         core_num = "0";
                         linker_file_output_name = "openamp-zephyr.ld";
@@ -5970,6 +5972,7 @@
                         sram = <0x0 0x9968000 0x0 0x60000 0x0 0xeba80000 0x0 0x10000 0x0 0xeba90000 0x0 0x8000 0x0 0xebaa0000 0x0 0x8000>;
                         cpus = <&cpus_r52_1 0x2 0x80000003>;
                         os,type = "baremetal";
+                        rpu_pd_val = <0xd9 0x1>;
                         cpu_config_str = "split";
                         core_num = "1";
 
