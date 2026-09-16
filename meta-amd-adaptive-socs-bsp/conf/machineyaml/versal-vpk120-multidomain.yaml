@@ -4,11 +4,13 @@ inherit:
 args:
     - --machine-name versal-vpk120-multidomain
     - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-multidomain-base.yaml \
+                    ${BSPLAYERDIR_amd-adaptive-socs-bsp}/conf/domainyaml/versal-domain-access-overlay.yaml \
                     ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-openamp-zephyr-common-overlay.yaml \
                     ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-openamp-zephyr-cips-overlay.yaml \
                     ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-libmetal-overlay.yaml
 
 kconfig:
+    CONFIG_SUBSYSTEM_DT_DOMAIN_ACCESS: y
     CONFIG_YOCTO_BBMC_LINUX_DTSI: \
         ${LAYER_PATH_xilinx-standalone-sdt}/recipes-bsp/device-tree/files/qspi-2g-memory-map.dtsi \
         ${LAYER_PATH_xilinx-virtualization}/recipes-bsp/device-tree/files/versal-xen.dtsi \

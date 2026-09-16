@@ -4,12 +4,14 @@ inherit:
 args:
     - --machine-name versal-vrk160-revb-multidomain
     - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-multidomain-base.yaml \
+                    ${BSPLAYERDIR_amd-adaptive-socs-bsp}/conf/domainyaml/versal-domain-access-overlay.yaml \
                     ${BSPLAYERDIR_amd-adaptive-socs-bsp}/conf/domainyaml/vrk160-linux-overlay.yaml \
                     ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-openamp-zephyr-common-overlay.yaml \
                     ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-openamp-zephyr-ps-wizard-overlay.yaml \
                     ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-libmetal-overlay.yaml
 
 kconfig:
+    CONFIG_SUBSYSTEM_DT_DOMAIN_ACCESS: y
     CONFIG_YOCTO_BBMC_CORTEXR5_1_BAREMETAL: y
     CONFIG_YOCTO_BBMC_LINUX_DTSI: \
         ${LAYER_PATH_xilinx-standalone-sdt}/recipes-bsp/device-tree/files/ospi-2g-memory-map.dtsi \
