@@ -1,0 +1,21 @@
+# Shared UART0 console policy for the Versal A72/R5 multidomain BSPs.
+domains:
+  APU_Linux:
+    compatible: openamp,domain-v1
+    access:
+      - dev: "*"
+      - dev: iommu@fd800000
+      # UART0 is also used by the R5 consoles.
+      - dev: serial@ff000000
+    memory:
+      - "*"
+
+  R5_0_ZEPHYR:
+    compatible: openamp,domain-v1
+    access:
+      - dev: serial@ff000000
+
+  R5_1_BAREMETAL:
+    compatible: openamp,domain-v1
+    access:
+      - dev: serial@ff000000
