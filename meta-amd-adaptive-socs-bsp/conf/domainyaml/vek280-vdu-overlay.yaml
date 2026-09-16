@@ -1,0 +1,65 @@
+reserved-memory:
+  ranges: true
+  "#size-cells": 2
+  "#address-cells": 2
+
+
+  vdu_reserved_mem0@50000000000:
+    label: vdu_mem_reg_0
+    compatible: shared-dma-pool
+    no-map: 1
+    start: 0x50000000000
+    size: 2G
+
+  vdu_reserved_mem1@50080000000:
+    label: vdu_mem_reg_1
+    compatible: shared-dma-pool
+    no-map: 1
+    start: 0x50080000000
+    size: 2G
+
+  vdu_reserved_mem2@60000000000:
+    label: vdu_mem_reg_2
+    compatible: shared-dma-pool
+    no-map: 1
+    start: 0x60000000000
+    size: 2G
+
+  vdu_reserved_mem3@60080000000:
+    label: vdu_mem_reg_3
+    compatible: shared-dma-pool
+    no-map: 1
+    start: 0x60080000000
+    size: 2G
+
+amba_pl:
+  al5d0:
+    memory-region:
+      - "&vdu_mem_reg_0"
+
+  al5d1:
+    memory-region:
+      - "&vdu_mem_reg_1"
+
+  al5d2:
+    memory-region:
+      - "&vdu_mem_reg_2"
+
+  al5d3:
+    memory-region:
+      - "&vdu_mem_reg_3"
+
+
+domains:
+   APU_Linux:
+       compatible: openamp,domain-v1
+       access:
+          - dev: al5d0
+          - dev: al5d1
+          - dev: al5d2
+          - dev: al5d3
+       reserved-memory:
+           - vdu_reserved_mem0@50000000000
+           - vdu_reserved_mem1@50080000000
+           - vdu_reserved_mem2@60000000000
+           - vdu_reserved_mem3@60080000000
