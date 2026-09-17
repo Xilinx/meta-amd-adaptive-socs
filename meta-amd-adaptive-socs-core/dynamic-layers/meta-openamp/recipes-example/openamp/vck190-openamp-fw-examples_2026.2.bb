@@ -8,9 +8,9 @@ evaluation kit."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-vck190-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/09160614/external/openamp-zephyr-demo/versal-vck190-multidomain_openamp-zephyr-demo_09160614.tar.gz"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/09170543/external/openamp-zephyr-demo/versal-vck190-multidomain_openamp-zephyr-demo_09170543.tar.gz"
 
-SRC_URI[sha256sum] = "19e72cd6b7aa1b15272d83b39fb86af397037bfb81db5eba023aa384aa9ceff5"
+SRC_URI[sha256sum] = "e377d56a8bd20c81e9235ca6fe4d2e662f7d332df7a0e6db418774c8119fec25"
 
 OPENAMPFW_PKGDIR_SUFFIX = "openamp-zephyr-demo"
 require conf/includes/openamp-fw-example.inc
