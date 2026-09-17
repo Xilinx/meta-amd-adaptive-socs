@@ -626,6 +626,21 @@ GROUP_END(OCM)
 
 SECTIONS
 {
+    /* Cortex-R52 TCM configuration consumed before stack setup.
+     * Bit 0 enables a local-address mapping; a zero word leaves
+     * the bank's existing boot-firmware configuration unchanged.
+     */
+    .tcm_config :
+    {
+        . = ALIGN(4);
+        z_arm_tcm_a_region = .;
+        LONG(0x00000000)
+        z_arm_tcm_b_region = .;
+        LONG(0x00010001)
+        z_arm_tcm_c_region = .;
+        LONG(0x00018001)
+    } > R52_0A_ATCM_GLOBAL
+
     .resource_table ORIGIN(RSCTBL) + 0x0 : SUBALIGN(4)
     {
         __resource_table_start = .;

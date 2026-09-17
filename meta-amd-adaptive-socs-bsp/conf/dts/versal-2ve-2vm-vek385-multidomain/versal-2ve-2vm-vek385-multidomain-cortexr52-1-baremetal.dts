@@ -73,6 +73,7 @@
                         compatible = "arm,cortex-r52";
                         device_type = "cpu";
                         reg = <0x1>;
+                        power-domains = <&scmi_devpd 0x1>;
                         xlnx,is-cache-coherent = <0x0>;
                         xlnx,timestamp-clk-freq = <0x5f5dd19>;
                         xlnx,pss-ref-clk-freq = <0x1fc9f08>;
@@ -103,17 +104,17 @@
                         arm,smc-id = <0xc2002001>;
                         #address-cells = <0x1>;
                         #size-cells = <0x0>;
-                        shmem = <0xf8>;
+                        shmem = <0xf9>;
                         bootph-all;
 
                         scmi_reset: protocol@16 {
-                                phandle = <0x106>;
+                                phandle = <0x107>;
                                 reg = <0x16>;
                                 #reset-cells = <0x1>;
                         };
 
                         scmi_devpd: protocol@11 {
-                                phandle = <0x10b>;
+                                phandle = <0xd9>;
                                 reg = <0x11>;
                                 #power-domain-cells = <0x1>;
                         };
@@ -220,7 +221,7 @@
         };
 
         versal_fpga: versal-fpga {
-                phandle = <0xfb>;
+                phandle = <0xfc>;
                 compatible = "xlnx,versal-fpga";
         };
 
@@ -259,7 +260,7 @@
         };
 
         sensor0: versal-thermal-sensor {
-                phandle = <0xfc>;
+                phandle = <0xfd>;
                 compatible = "xlnx,versal-thermal";
                 #thermal-sensor-cells = <0x1>;
                 io-channel-names = "sysmon-temp-channel", "aie-temp-ch1", "aie-temp-ch2", "aie-temp-ch3", "aie-temp-ch4", "aie-temp-ch5", "aie-temp-ch6", "aie-temp-ch7", "aie-temp-ch8";
@@ -395,7 +396,7 @@
                 };
 
                 ipi2: mailbox@eb350000 {
-                        phandle = <0xd9>;
+                        phandle = <0xda>;
                         status = "okay";
                         compatible = "xlnx,versal-ipi-mailbox";
                         interrupt-parent = <&gic_r52>;
@@ -649,7 +650,7 @@
         };
 
         scmi_buf: scmi-shmem@20001000 {
-                phandle = <0xf8>;
+                phandle = <0xf9>;
                 compatible = "arm,scmi-shmem";
                 reg = <0x0 0x20001000 0x0 0x1000>;
                 no-map;
@@ -901,7 +902,7 @@
                 ranges;
 
                 ipi_mailbox_pmu1: mailbox@eb3f0440 {
-                        phandle = <0xfa>;
+                        phandle = <0xfb>;
                         compatible = "xlnx,zynqmp-ipi-dest-mailbox";
                         reg = <0x0 0xeb3f0440 0x0 0x20 0x0 0xeb3f0460 0x0 0x20 0x0 0xeb3f0280 0x0 0x20 0x0 0xeb3f02a0 0x0 0x20>;
                         reg-names = "local_request_region", "local_response_region", "remote_request_region", "remote_response_region";
@@ -911,7 +912,7 @@
         };
 
         ref_clk: ref-clk {
-                phandle = <0xf9>;
+                phandle = <0xfa>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -965,7 +966,7 @@
         };
 
         clk50: clk50 {
-                phandle = <0x105>;
+                phandle = <0x106>;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
                 clock-frequency = <0x2faf080>;
@@ -1293,8 +1294,9 @@
                         sram = <0x0 0x9800100 0x0 0x5de00 0x0 0xeba00000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0xeba20000 0x0 0x8000>;
                         reserved-memory = <0x2ae 0x2af 0x2b0>;
                         access = <&serial0 0x0>;
+                        rpu_pd_val = <0xd9 0x0>;
                         cpu_config_str = "split";
-                        core_num = "0";
+                        core_num = <0x0>;
                         linker_file_output_name = "openamp-zephyr.ld";
                         linker-entry = "_vector_table";
                         linker_memories = <0x2a 0x2b 0x2c 0x2ae 0x2b0>;
@@ -1344,8 +1346,9 @@
                          <&libmetal_data 0x0>;
                         cpus = <&cpus_r52_1 0x2 0x80000003>;
                         os,type = "baremetal";
+                        rpu_pd_val = <0xd9 0x1>;
                         cpu_config_str = "split";
-                        core_num = "1";
+                        core_num = <0x1>;
                         access-json = "[{\"dev\": \"serial@f1920000\"}, {\"dev\": \"i2c@f1940000\"}, {\"dev\": \"timer@f1e90000\"}, {\"dev\": \"mailbox@eb350000\"}, {\"dev\": \"libmetal_uio_desc0@99c8000\"}, {\"dev\": \"libmetal_uio_desc1@99cc000\"}, {\"dev\": \"libmetal_uio_data@99d0000\"}, {\"dev\": \"libmetal_desc0@99c8000\"}, {\"dev\": \"libmetal_desc1@99cc000\"}, {\"dev\": \"libmetal_data@99d0000\"}]";
 
                         domain-to-domain {
