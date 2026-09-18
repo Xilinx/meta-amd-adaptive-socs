@@ -1,0 +1,1 @@
+../../meta-amd-adaptive-socs-bsp/scripts/update-machineyaml.sh

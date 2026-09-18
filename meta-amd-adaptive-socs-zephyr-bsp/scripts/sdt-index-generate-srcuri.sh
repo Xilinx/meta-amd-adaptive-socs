@@ -1,0 +1,1 @@
+../../meta-amd-adaptive-socs-bsp/scripts/sdt-index-generate-srcuri.sh
