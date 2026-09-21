@@ -1738,6 +1738,7 @@
                         compatible = "uio";
                         status = "okay";
                         linux,uio-name = "libmetal-ipi";
+                        libmetal,uio-ipi-bitmask = <0x10>;
 
                         ipi_5_to_ipi_0: child@ff330000 {
                                 phandle = <0x142>;
@@ -2962,6 +2963,7 @@
                         reg = <0x0 0x9888000 0x0 0x78000>;
                         no-map;
                         label = "vdev0buffer";
+                        compatible = "shared-dma-pool";
                 };
 
                 trace_buffer: trace@985f000 {
@@ -3014,6 +3016,33 @@
                         reg = <0x0 0x99d0000 0x0 0x40000>;
                         no-map;
                         label = "libmetal_data";
+                };
+        };
+
+        remoteproc@ffe00000 {
+                compatible = "xlnx,versal-r5fss";
+                #address-cells = <0x2>;
+                #size-cells = <0x2>;
+                xlnx,cluster-mode = <0x0>;
+                ranges = <0x0 0x0 0x0 0xffe00000 0x0 0x10000 0x0 0x20000 0x0 0xffe20000 0x0 0x10000>;
+                xlnx,tcm-mode = <0x0>;
+
+                r5f@0 {
+                        compatible = "xlnx,versal-r5f";
+                        power-domains = <&versal_firmware 0x18110005>,
+                         <&versal_firmware 0x1831800b>,
+                         <&versal_firmware 0x1831800c>;
+                        reg = <0x0 0x0 0x0 0x10000 0x0 0x20000 0x0 0x10000>;
+                        reg-names = "atcm0", "btcm0";
+                        memory-region = <&rproc0>,
+                         <&trace_buffer>,
+                         <&rsctbl>,
+                         <&vdev0buffer>,
+                         <&vdev0vring0>,
+                         <&vdev0vring1>;
+                        mboxes = <&ipi_3_to_ipi_1 0x0>,
+                         <&ipi_3_to_ipi_1 0x1>;
+                        mbox-names = "tx", "rx";
                 };
         };
 };
