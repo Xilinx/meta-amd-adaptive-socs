@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 inherit dfx_user_dts
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/09230529/external/fwapp/zc702-pl-bram-gpio-fw_2026.2_0923_1_09230529.tar.gz"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/09240541/external/fwapp/zc702-pl-bram-gpio-fw_2026.2_0924_1_09240541.tar.gz"
 
-SRC_URI[sha256sum] = "809e6fe6ba2b9e27b2f28eba627115e409d1a36b5e6228af9c5aca4e605734a2"
+SRC_URI[sha256sum] = "0e3e0919ee2da2f402226091d427f8c0cf34b64531faf487bc0f54d2e9aadf55"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa9thf-neon-common = "${MACHINE}"
