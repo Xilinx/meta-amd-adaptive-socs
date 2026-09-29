@@ -5,6 +5,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot-xlnx:"
 DEFAULT_UBOOT_PREBOOT_CFG:versal-2ve-2vm-vek385-sdt-seg = "file://u-boot-misc.cfg"
 DEFAULT_UBOOT_PREBOOT_CFG:versal-2ve-2vm-vek385-revb-sdt-seg = "file://u-boot-misc.cfg"
 DEFAULT_UBOOT_PREBOOT_CFG:versal-2ve-2vm-vek386-sdt-seg = "file://u-boot-misc.cfg"
+DEFAULT_UBOOT_PREBOOT_CFG:versal-2ve-2vm-vmk365-sdt-seg = "file://u-boot-misc_vmk365.cfg"
 DEFAULT_UBOOT_PREBOOT_CFG:zynq-zc702-sdt-full = "file://u-boot-misc_zynq.cfg"
 DEFAULT_UBOOT_PREBOOT_CFG:zynq-zc706-sdt-full = "file://u-boot-misc_zynq.cfg"
 
@@ -25,6 +26,7 @@ ASOCS_UBOOT_EFI_SF_CFG:versal-vrk165-multidomain = "file://efi-variable-sf.cfg"
 ASOCS_UBOOT_EFI_SF_CFG:versal-vrk165-revb-multidomain = "file://efi-variable-sf.cfg"
 ASOCS_UBOOT_EFI_SF_CFG:versal-2ve-2vm-vek386-multidomain = "file://efi-variable-sf.cfg"
 ASOCS_UBOOT_EFI_SF_CFG:versal-2vp-vpk360-multidomain = "file://efi-variable-sf.cfg"
+ASOCS_UBOOT_EFI_SF_CFG:versal-2ve-2vm-vmk365-multidomain = "file://efi-variable-sf.cfg"
 
 SRC_URI += "${ASOCS_UBOOT_EFI_SF_CFG}"
 
