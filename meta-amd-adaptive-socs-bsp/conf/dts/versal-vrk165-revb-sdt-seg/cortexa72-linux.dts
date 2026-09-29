@@ -677,7 +677,6 @@
                         interrupt-names = "alarm", "sec";
                         interrupts = <0x0 0x8e 0x4 0x0 0x8f 0x4>;
                         interrupt-parent = <&gic>;
-                        calibration = <0x7fff>;
                         clocks = <&rtc_clk>;
                         clock-names = "rtc";
                         power-domains = <&versal_firmware 0x18224034>;
@@ -1109,6 +1108,7 @@
                         phandle = <0xcc>;
                         compatible = "xlnx,versal-sysmon";
                         status = "disabled";
+                        #io-channel-cells = <0x1>;
                         reg = <0x1 0x9270000 0x0 0x4000>;
                         xlnx,numchannels = [00];
                         #address-cells = <0x1>;
@@ -1120,6 +1120,7 @@
                         phandle = <0xcd>;
                         compatible = "xlnx,versal-sysmon";
                         status = "disabled";
+                        #io-channel-cells = <0x1>;
                         reg = <0x1 0x11270000 0x0 0x4000>;
                         xlnx,numchannels = [00];
                         #address-cells = <0x1>;
@@ -1131,6 +1132,7 @@
                         phandle = <0xce>;
                         compatible = "xlnx,versal-sysmon";
                         status = "disabled";
+                        #io-channel-cells = <0x1>;
                         reg = <0x1 0x19270000 0x0 0x4000>;
                         xlnx,numchannels = [00];
                         #address-cells = <0x1>;
@@ -1294,7 +1296,7 @@
                         ranges = <0x2000000 0x0 0xe0010000 0x0 0xe0010000 0x0 0x10000000 0x43000000 0x80 0x0 0x80 0x0 0x0 0x80000000>;
                         msi-map = <0x0 &gic_its 0x0 0x10000>;
                         reg = <0x6 0x0 0x0 0x10000000 0x0 0xfca10000 0x0 0x1000>;
-                        reg-names = "cpm_slcr", "cfg";
+                        reg-names = "cfg", "cpm_slcr";
                         resets = <&versal_reset 0xc410054>;
 
                         pcie_intc_0: interrupt-controller {
@@ -1328,7 +1330,7 @@
                         ranges = <0x2000000 0x0 0xe0000000 0x0 0xe0000000 0x0 0x10000000 0x43000000 0x80 0x0 0x80 0x0 0x0 0x80000000>;
                         msi-map = <0x0 &gic_its 0x0 0x10000>;
                         reg = <0x6 0x0 0x0 0x10000000 0x0 0xfcdd0000 0x0 0x1000 0x0 0xfce20000 0x0 0x10000>;
-                        reg-names = "cpm_slcr", "cfg", "cpm_csr";
+                        reg-names = "cfg", "cpm_slcr", "cpm_csr";
                         resets = <&versal_reset 0xc410054>;
 
                         pcie_intc_2: interrupt-controller {
@@ -1372,261 +1374,6 @@
                         reg = <0x0 0xf2014050 0x0 0xc4>;
                 };
 
-                fpd_funnel: fpd-funnel@f0b20000 {
-                        phandle = <0xd5>;
-                        compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
-                        reg = <0x0 0xf0b20000 0x0 0x1000>;
-                        clock-names = "apb_pclk";
-                        status = "disabled";
-                        clocks = <&versal_clk 0x52>;
-
-                        in-ports {
-                                #address-cells = <0x1>;
-                                #size-cells = <0x0>;
-
-                                port@1 {
-                                        reg = <0x1>;
-
-                                        fpd_funnel_in_port1: endpoint {
-                                                phandle = <0x9e>;
-                                                remote-endpoint = <&apu_etf_out_port>;
-                                        };
-                                };
-                        };
-
-                        out-ports {
-
-                                port {
-
-                                        fpd_funnel_out_port: endpoint {
-                                                phandle = <0x95>;
-                                                remote-endpoint = <&fpd_etf_in_port>;
-                                        };
-                                };
-                        };
-                };
-
-                fpd_etf: fpd-etf@f0b30000 {
-                        phandle = <0xd6>;
-                        compatible = "arm,coresight-tmc", "arm,primecell";
-                        reg = <0x0 0xf0b30000 0x0 0x1000>;
-                        clock-names = "apb_pclk";
-                        status = "disabled";
-                        clocks = <&versal_clk 0x52>;
-
-                        in-ports {
-
-                                port {
-
-                                        fpd_etf_in_port: endpoint {
-                                                phandle = <0x94>;
-                                                remote-endpoint = <&fpd_funnel_out_port>;
-                                        };
-                                };
-                        };
-
-                        out-ports {
-
-                                port {
-
-                                        fpd_etf_out_port: endpoint {
-                                                phandle = <0x97>;
-                                                remote-endpoint = <&replicator_in_port>;
-                                        };
-                                };
-                        };
-                };
-
-                replicator: replicator@f0b40000 {
-                        phandle = <0xd7>;
-                        compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
-                        reg = <0x0 0xf0b40000 0x0 0x1000>;
-                        clock-names = "apb_pclk";
-                        status = "disabled";
-                        clocks = <&versal_clk 0x52>;
-
-                        in-ports {
-
-                                port {
-
-                                        replicator_in_port: endpoint {
-                                                phandle = <0x96>;
-                                                remote-endpoint = <&fpd_etf_out_port>;
-                                        };
-                                };
-                        };
-
-                        out-ports {
-                                #address-cells = <0x1>;
-                                #size-cells = <0x0>;
-
-                                port@0 {
-                                        reg = <0x0>;
-
-                                        replicator_out_port0: endpoint {
-                                                phandle = <0x99>;
-                                                remote-endpoint = <&etr_in_port>;
-                                        };
-                                };
-                        };
-                };
-
-                etr: etr@f0b50000 {
-                        phandle = <0xd8>;
-                        compatible = "arm,coresight-tmc", "arm,primecell";
-                        reg = <0x0 0xf0b50000 0x0 0x1000>;
-                        clock-names = "apb_pclk";
-                        status = "disabled";
-                        clocks = <&versal_clk 0x52>;
-
-                        in-ports {
-
-                                port {
-
-                                        etr_in_port: endpoint {
-                                                phandle = <0x98>;
-                                                remote-endpoint = <&replicator_out_port0>;
-                                        };
-                                };
-                        };
-                };
-
-                apu_funnel: funnel@f0c20000 {
-                        phandle = <0xd9>;
-                        compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
-                        reg = <0x0 0xf0c20000 0x0 0x1000>;
-                        clock-names = "apb_pclk";
-                        status = "disabled";
-                        clocks = <&versal_clk 0x52>;
-
-                        in-ports {
-                                #address-cells = <0x1>;
-                                #size-cells = <0x0>;
-
-                                port@0 {
-                                        reg = <0x0>;
-
-                                        funnel_in_port0: endpoint {
-                                                phandle = <0xa0>;
-                                                remote-endpoint = <&etm0_out_port>;
-                                        };
-                                };
-
-                                port@1 {
-                                        reg = <0x1>;
-
-                                        funnel_in_port1: endpoint {
-                                                phandle = <0xa2>;
-                                                remote-endpoint = <&etm1_out_port>;
-                                        };
-                                };
-                        };
-
-                        out-ports {
-
-                                port {
-
-                                        funnel_out_port: endpoint {
-                                                phandle = <0x9d>;
-                                                remote-endpoint = <&etf_in_port>;
-                                        };
-                                };
-                        };
-                };
-
-                apu_etf: etf@f0c30000 {
-                        phandle = <0xda>;
-                        compatible = "arm,coresight-tmc", "arm,primecell";
-                        reg = <0x0 0xf0c30000 0x0 0x1000>;
-                        clock-names = "apb_pclk";
-                        status = "disabled";
-                        clocks = <&versal_clk 0x52>;
-
-                        in-ports {
-
-                                port {
-
-                                        etf_in_port: endpoint {
-                                                phandle = <0x9c>;
-                                                remote-endpoint = <&funnel_out_port>;
-                                        };
-                                };
-                        };
-
-                        out-ports {
-
-                                port {
-
-                                        apu_etf_out_port: endpoint {
-                                                phandle = <0x93>;
-                                                remote-endpoint = <&fpd_funnel_in_port1>;
-                                        };
-                                };
-                        };
-                };
-
-                cpu0_debug: cpu0-debug@f0d00000 {
-                        phandle = <0xdb>;
-                        compatible = "arm,coresight-cpu-debug", "arm,primecell";
-                        reg = <0x0 0xf0d00000 0x0 0x1000>;
-                        clock-names = "apb_pclk";
-                        cpu = <&psv_cortexa72_0>;
-                        status = "disabled";
-                        clocks = <&versal_clk 0x52>;
-                };
-
-                etm0: etm@f0d30000 {
-                        phandle = <0xdc>;
-                        compatible = "arm,coresight-etm4x", "arm,primecell";
-                        reg = <0x0 0xf0d30000 0x0 0x1000>;
-                        clock-names = "apb_pclk";
-                        cpu = <&psv_cortexa72_0>;
-                        status = "disabled";
-                        clocks = <&versal_clk 0x52>;
-
-                        out-ports {
-
-                                port {
-
-                                        etm0_out_port: endpoint {
-                                                phandle = <0x9a>;
-                                                remote-endpoint = <&funnel_in_port0>;
-                                        };
-                                };
-                        };
-                };
-
-                cpu1_debug: cpu1-debug@f0d40000 {
-                        phandle = <0xdd>;
-                        compatible = "arm,coresight-cpu-debug", "arm,primecell";
-                        reg = <0x0 0xf0d40000 0x0 0x1000>;
-                        clock-names = "apb_pclk";
-                        cpu = <&psv_cortexa72_1>;
-                        status = "disabled";
-                        clocks = <&versal_clk 0x52>;
-                };
-
-                etm1: etm@f0d70000 {
-                        phandle = <0xde>;
-                        compatible = "arm,coresight-etm4x", "arm,primecell";
-                        reg = <0x0 0xf0d70000 0x0 0x1000>;
-                        clock-names = "apb_pclk";
-                        cpu = <&psv_cortexa72_1>;
-                        status = "disabled";
-                        clocks = <&versal_clk 0x52>;
-
-                        out-ports {
-
-                                port {
-
-                                        etm1_out_port: endpoint {
-                                                phandle = <0x9b>;
-                                                remote-endpoint = <&funnel_in_port1>;
-                                        };
-                                };
-                        };
-                };
-
                 dma0: pmcdma@f11c0000 {
                         phandle = <0x28>;
                         status = "okay";
@@ -1662,7 +1409,7 @@
                         reg-names = "ctrl", "msg";
 
                         ipi_0_to_ipi_0: child@ff330000 {
-                                phandle = <0xfd>;
+                                phandle = <0xf3>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -1671,7 +1418,7 @@
                         };
 
                         ipi_0_to_ipi_1: child@ff340000 {
-                                phandle = <0xfe>;
+                                phandle = <0xf4>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -1680,7 +1427,7 @@
                         };
 
                         ipi_0_to_ipi_2: child@ff350000 {
-                                phandle = <0xff>;
+                                phandle = <0xf5>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -1689,7 +1436,7 @@
                         };
 
                         ipi_0_to_ipi_3: child@ff360000 {
-                                phandle = <0x100>;
+                                phandle = <0xf6>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -1698,7 +1445,7 @@
                         };
 
                         ipi_0_to_ipi_4: child@ff370000 {
-                                phandle = <0x101>;
+                                phandle = <0xf7>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -1707,7 +1454,7 @@
                         };
 
                         ipi_0_to_ipi_5: child@ff380000 {
-                                phandle = <0x102>;
+                                phandle = <0xf8>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -1716,7 +1463,7 @@
                         };
 
                         ipi_0_to_ipi_6: child@ff3a0000 {
-                                phandle = <0x103>;
+                                phandle = <0xf9>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -1725,7 +1472,7 @@
                         };
 
                         ipi_0_to_ipi_pmc: child@ff320000 {
-                                phandle = <0x104>;
+                                phandle = <0xfa>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -1734,7 +1481,7 @@
                         };
 
                         ipi_0_to_ipi_pmc_nobuf: child@ff390000 {
-                                phandle = <0x105>;
+                                phandle = <0xfb>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -1743,7 +1490,7 @@
                         };
 
                         ipi_0_to_ipi_psm: child@ff310000 {
-                                phandle = <0x106>;
+                                phandle = <0xfc>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -1765,7 +1512,7 @@
                         reg-names = "ctrl", "msg";
 
                         ipi_3_to_ipi_0: child@ff330000 {
-                                phandle = <0x11b>;
+                                phandle = <0x111>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -1774,7 +1521,7 @@
                         };
 
                         ipi_3_to_ipi_1: child@ff340000 {
-                                phandle = <0x11c>;
+                                phandle = <0x112>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -1783,7 +1530,7 @@
                         };
 
                         ipi_3_to_ipi_2: child@ff350000 {
-                                phandle = <0x11d>;
+                                phandle = <0x113>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -1792,7 +1539,7 @@
                         };
 
                         ipi_3_to_ipi_3: child@ff360000 {
-                                phandle = <0x11e>;
+                                phandle = <0x114>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -1801,7 +1548,7 @@
                         };
 
                         ipi_3_to_ipi_4: child@ff370000 {
-                                phandle = <0x11f>;
+                                phandle = <0x115>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -1810,7 +1557,7 @@
                         };
 
                         ipi_3_to_ipi_5: child@ff380000 {
-                                phandle = <0x120>;
+                                phandle = <0x116>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -1819,7 +1566,7 @@
                         };
 
                         ipi_3_to_ipi_6: child@ff3a0000 {
-                                phandle = <0x121>;
+                                phandle = <0x117>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -1828,7 +1575,7 @@
                         };
 
                         ipi_3_to_ipi_pmc: child@ff320000 {
-                                phandle = <0x122>;
+                                phandle = <0x118>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -1837,7 +1584,7 @@
                         };
 
                         ipi_3_to_ipi_pmc_nobuf: child@ff390000 {
-                                phandle = <0x123>;
+                                phandle = <0x119>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -1846,7 +1593,7 @@
                         };
 
                         ipi_3_to_ipi_psm: child@ff310000 {
-                                phandle = <0x124>;
+                                phandle = <0x11a>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -1868,7 +1615,7 @@
                         reg-names = "ctrl", "msg";
 
                         ipi_4_to_ipi_0: child@ff330000 {
-                                phandle = <0x125>;
+                                phandle = <0x11b>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -1877,7 +1624,7 @@
                         };
 
                         ipi_4_to_ipi_1: child@ff340000 {
-                                phandle = <0x126>;
+                                phandle = <0x11c>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -1886,7 +1633,7 @@
                         };
 
                         ipi_4_to_ipi_2: child@ff350000 {
-                                phandle = <0x127>;
+                                phandle = <0x11d>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -1895,7 +1642,7 @@
                         };
 
                         ipi_4_to_ipi_3: child@ff360000 {
-                                phandle = <0x128>;
+                                phandle = <0x11e>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -1904,7 +1651,7 @@
                         };
 
                         ipi_4_to_ipi_4: child@ff370000 {
-                                phandle = <0x129>;
+                                phandle = <0x11f>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -1913,7 +1660,7 @@
                         };
 
                         ipi_4_to_ipi_5: child@ff380000 {
-                                phandle = <0x12a>;
+                                phandle = <0x120>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -1922,7 +1669,7 @@
                         };
 
                         ipi_4_to_ipi_6: child@ff3a0000 {
-                                phandle = <0x12b>;
+                                phandle = <0x121>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -1931,7 +1678,7 @@
                         };
 
                         ipi_4_to_ipi_pmc: child@ff320000 {
-                                phandle = <0x12c>;
+                                phandle = <0x122>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -1940,7 +1687,7 @@
                         };
 
                         ipi_4_to_ipi_pmc_nobuf: child@ff390000 {
-                                phandle = <0x12d>;
+                                phandle = <0x123>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -1949,7 +1696,7 @@
                         };
 
                         ipi_4_to_ipi_psm: child@ff310000 {
-                                phandle = <0x12e>;
+                                phandle = <0x124>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -1971,7 +1718,7 @@
                         reg-names = "ctrl", "msg";
 
                         ipi_5_to_ipi_0: child@ff330000 {
-                                phandle = <0x12f>;
+                                phandle = <0x125>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -1980,7 +1727,7 @@
                         };
 
                         ipi_5_to_ipi_1: child@ff340000 {
-                                phandle = <0x130>;
+                                phandle = <0x126>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -1989,7 +1736,7 @@
                         };
 
                         ipi_5_to_ipi_2: child@ff350000 {
-                                phandle = <0x131>;
+                                phandle = <0x127>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -1998,7 +1745,7 @@
                         };
 
                         ipi_5_to_ipi_3: child@ff360000 {
-                                phandle = <0x132>;
+                                phandle = <0x128>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -2007,7 +1754,7 @@
                         };
 
                         ipi_5_to_ipi_4: child@ff370000 {
-                                phandle = <0x133>;
+                                phandle = <0x129>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -2016,7 +1763,7 @@
                         };
 
                         ipi_5_to_ipi_5: child@ff380000 {
-                                phandle = <0x134>;
+                                phandle = <0x12a>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -2025,7 +1772,7 @@
                         };
 
                         ipi_5_to_ipi_6: child@ff3a0000 {
-                                phandle = <0x135>;
+                                phandle = <0x12b>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -2034,7 +1781,7 @@
                         };
 
                         ipi_5_to_ipi_pmc: child@ff320000 {
-                                phandle = <0x136>;
+                                phandle = <0x12c>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -2043,7 +1790,7 @@
                         };
 
                         ipi_5_to_ipi_pmc_nobuf: child@ff390000 {
-                                phandle = <0x137>;
+                                phandle = <0x12d>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -2052,7 +1799,7 @@
                         };
 
                         ipi_5_to_ipi_psm: child@ff310000 {
-                                phandle = <0x138>;
+                                phandle = <0x12e>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -2074,7 +1821,7 @@
                         reg-names = "ctrl";
 
                         ipi_6_to_ipi_0: child@ff330000 {
-                                phandle = <0x139>;
+                                phandle = <0x12f>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x2>;
@@ -2083,7 +1830,7 @@
                         };
 
                         ipi_6_to_ipi_1: child@ff340000 {
-                                phandle = <0x13a>;
+                                phandle = <0x130>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x3>;
@@ -2092,7 +1839,7 @@
                         };
 
                         ipi_6_to_ipi_2: child@ff350000 {
-                                phandle = <0x13b>;
+                                phandle = <0x131>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x4>;
@@ -2101,7 +1848,7 @@
                         };
 
                         ipi_6_to_ipi_3: child@ff360000 {
-                                phandle = <0x13c>;
+                                phandle = <0x132>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x5>;
@@ -2110,7 +1857,7 @@
                         };
 
                         ipi_6_to_ipi_4: child@ff370000 {
-                                phandle = <0x13d>;
+                                phandle = <0x133>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x6>;
@@ -2119,7 +1866,7 @@
                         };
 
                         ipi_6_to_ipi_5: child@ff380000 {
-                                phandle = <0x13e>;
+                                phandle = <0x134>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x7>;
@@ -2128,7 +1875,7 @@
                         };
 
                         ipi_6_to_ipi_6: child@ff3a0000 {
-                                phandle = <0x13f>;
+                                phandle = <0x135>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x9>;
@@ -2137,7 +1884,7 @@
                         };
 
                         ipi_6_to_ipi_pmc: child@ff320000 {
-                                phandle = <0x140>;
+                                phandle = <0x136>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x1>;
@@ -2146,7 +1893,7 @@
                         };
 
                         ipi_6_to_ipi_pmc_nobuf: child@ff390000 {
-                                phandle = <0x141>;
+                                phandle = <0x137>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x8>;
@@ -2155,7 +1902,7 @@
                         };
 
                         ipi_6_to_ipi_psm: child@ff310000 {
-                                phandle = <0x142>;
+                                phandle = <0x138>;
                                 compatible = "xlnx,versal-ipi-dest-mailbox";
                                 #mbox-cells = <0x1>;
                                 xlnx,ipi-id = <0x0>;
@@ -2198,7 +1945,7 @@
         };
 
         amba_xppu: indirect-bus@1 {
-                phandle = <0x14e>;
+                phandle = <0x144>;
                 compatible = "indirect-bus";
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
@@ -2232,7 +1979,7 @@
         };
 
         amba_xmpu: indirect-bus@2 {
-                phandle = <0x14f>;
+                phandle = <0x145>;
                 compatible = "indirect-bus";
                 #address-cells = <0x2>;
                 #size-cells = <0x2>;
@@ -2265,7 +2012,7 @@
                 };
 
                 ddrmc_xmpu_0: xmpu@f6080000 {
-                        phandle = <0x150>;
+                        phandle = <0x146>;
                         compatible = "xlnx,xmpu";
                         #firewall-cells = <0x0>;
                         reg = <0x0 0xf6080000 0x0 0x1000>;
@@ -2273,7 +2020,7 @@
                 };
 
                 ddrmc_xmpu_1: xmpu@f6220000 {
-                        phandle = <0x151>;
+                        phandle = <0x147>;
                         compatible = "xlnx,xmpu";
                         #firewall-cells = <0x0>;
                         reg = <0x0 0xf6220000 0x0 0x1000>;
@@ -2281,7 +2028,7 @@
                 };
 
                 ddrmc_xmpu_2: xmpu@f6390000 {
-                        phandle = <0x152>;
+                        phandle = <0x148>;
                         compatible = "xlnx,xmpu";
                         #firewall-cells = <0x0>;
                         reg = <0x0 0xf6390000 0x0 0x1000>;
@@ -2289,11 +2036,266 @@
                 };
 
                 ddrmc_xmpu_3: xmpu@f6500000 {
-                        phandle = <0x153>;
+                        phandle = <0x149>;
                         compatible = "xlnx,xmpu";
                         #firewall-cells = <0x0>;
                         reg = <0x0 0xf6500000 0x0 0x1000>;
                         status = "disabled";
+                };
+
+                fpd_funnel: fpd-funnel@f0b20000 {
+                        phandle = <0x14a>;
+                        compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
+                        reg = <0x0 0xf0b20000 0x0 0x1000>;
+                        clock-names = "apb_pclk";
+                        status = "disabled";
+                        clocks = <&versal_clk 0x52>;
+
+                        in-ports {
+                                #address-cells = <0x1>;
+                                #size-cells = <0x0>;
+
+                                port@1 {
+                                        reg = <0x1>;
+
+                                        fpd_funnel_in_port1: endpoint {
+                                                phandle = <0x9e>;
+                                                remote-endpoint = <&apu_etf_out_port>;
+                                        };
+                                };
+                        };
+
+                        out-ports {
+
+                                port {
+
+                                        fpd_funnel_out_port: endpoint {
+                                                phandle = <0x95>;
+                                                remote-endpoint = <&fpd_etf_in_port>;
+                                        };
+                                };
+                        };
+                };
+
+                fpd_etf: fpd-etf@f0b30000 {
+                        phandle = <0x14b>;
+                        compatible = "arm,coresight-tmc", "arm,primecell";
+                        reg = <0x0 0xf0b30000 0x0 0x1000>;
+                        clock-names = "apb_pclk";
+                        status = "disabled";
+                        clocks = <&versal_clk 0x52>;
+
+                        in-ports {
+
+                                port {
+
+                                        fpd_etf_in_port: endpoint {
+                                                phandle = <0x94>;
+                                                remote-endpoint = <&fpd_funnel_out_port>;
+                                        };
+                                };
+                        };
+
+                        out-ports {
+
+                                port {
+
+                                        fpd_etf_out_port: endpoint {
+                                                phandle = <0x97>;
+                                                remote-endpoint = <&replicator_in_port>;
+                                        };
+                                };
+                        };
+                };
+
+                replicator: replicator@f0b40000 {
+                        phandle = <0x14c>;
+                        compatible = "arm,coresight-dynamic-replicator", "arm,primecell";
+                        reg = <0x0 0xf0b40000 0x0 0x1000>;
+                        clock-names = "apb_pclk";
+                        status = "disabled";
+                        clocks = <&versal_clk 0x52>;
+
+                        in-ports {
+
+                                port {
+
+                                        replicator_in_port: endpoint {
+                                                phandle = <0x96>;
+                                                remote-endpoint = <&fpd_etf_out_port>;
+                                        };
+                                };
+                        };
+
+                        out-ports {
+                                #address-cells = <0x1>;
+                                #size-cells = <0x0>;
+
+                                port@0 {
+                                        reg = <0x0>;
+
+                                        replicator_out_port0: endpoint {
+                                                phandle = <0x99>;
+                                                remote-endpoint = <&etr_in_port>;
+                                        };
+                                };
+                        };
+                };
+
+                etr: etr@f0b50000 {
+                        phandle = <0x14d>;
+                        compatible = "arm,coresight-tmc", "arm,primecell";
+                        reg = <0x0 0xf0b50000 0x0 0x1000>;
+                        clock-names = "apb_pclk";
+                        status = "disabled";
+                        clocks = <&versal_clk 0x52>;
+
+                        in-ports {
+
+                                port {
+
+                                        etr_in_port: endpoint {
+                                                phandle = <0x98>;
+                                                remote-endpoint = <&replicator_out_port0>;
+                                        };
+                                };
+                        };
+                };
+
+                apu_funnel: funnel@f0c20000 {
+                        phandle = <0x14e>;
+                        compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
+                        reg = <0x0 0xf0c20000 0x0 0x1000>;
+                        clock-names = "apb_pclk";
+                        status = "disabled";
+                        clocks = <&versal_clk 0x52>;
+
+                        in-ports {
+                                #address-cells = <0x1>;
+                                #size-cells = <0x0>;
+
+                                port@0 {
+                                        reg = <0x0>;
+
+                                        funnel_in_port0: endpoint {
+                                                phandle = <0xa0>;
+                                                remote-endpoint = <&etm0_out_port>;
+                                        };
+                                };
+
+                                port@1 {
+                                        reg = <0x1>;
+
+                                        funnel_in_port1: endpoint {
+                                                phandle = <0xa2>;
+                                                remote-endpoint = <&etm1_out_port>;
+                                        };
+                                };
+                        };
+
+                        out-ports {
+
+                                port {
+
+                                        funnel_out_port: endpoint {
+                                                phandle = <0x9d>;
+                                                remote-endpoint = <&etf_in_port>;
+                                        };
+                                };
+                        };
+                };
+
+                apu_etf: etf@f0c30000 {
+                        phandle = <0x14f>;
+                        compatible = "arm,coresight-tmc", "arm,primecell";
+                        reg = <0x0 0xf0c30000 0x0 0x1000>;
+                        clock-names = "apb_pclk";
+                        status = "disabled";
+                        clocks = <&versal_clk 0x52>;
+
+                        in-ports {
+
+                                port {
+
+                                        etf_in_port: endpoint {
+                                                phandle = <0x9c>;
+                                                remote-endpoint = <&funnel_out_port>;
+                                        };
+                                };
+                        };
+
+                        out-ports {
+
+                                port {
+
+                                        apu_etf_out_port: endpoint {
+                                                phandle = <0x93>;
+                                                remote-endpoint = <&fpd_funnel_in_port1>;
+                                        };
+                                };
+                        };
+                };
+
+                cpu0_debug: cpu0-debug@f0d00000 {
+                        phandle = <0x150>;
+                        compatible = "arm,coresight-cpu-debug", "arm,primecell";
+                        reg = <0x0 0xf0d00000 0x0 0x1000>;
+                        clock-names = "apb_pclk";
+                        cpu = <&psv_cortexa72_0>;
+                        status = "disabled";
+                        clocks = <&versal_clk 0x52>;
+                };
+
+                etm0: etm@f0d30000 {
+                        phandle = <0x151>;
+                        compatible = "arm,coresight-etm4x", "arm,primecell";
+                        reg = <0x0 0xf0d30000 0x0 0x1000>;
+                        clock-names = "apb_pclk";
+                        cpu = <&psv_cortexa72_0>;
+                        status = "disabled";
+                        clocks = <&versal_clk 0x52>;
+
+                        out-ports {
+
+                                port {
+
+                                        etm0_out_port: endpoint {
+                                                phandle = <0x9a>;
+                                                remote-endpoint = <&funnel_in_port0>;
+                                        };
+                                };
+                        };
+                };
+
+                cpu1_debug: cpu1-debug@f0d40000 {
+                        phandle = <0x152>;
+                        compatible = "arm,coresight-cpu-debug", "arm,primecell";
+                        reg = <0x0 0xf0d40000 0x0 0x1000>;
+                        clock-names = "apb_pclk";
+                        cpu = <&psv_cortexa72_1>;
+                        status = "disabled";
+                        clocks = <&versal_clk 0x52>;
+                };
+
+                etm1: etm@f0d70000 {
+                        phandle = <0x153>;
+                        compatible = "arm,coresight-etm4x", "arm,primecell";
+                        reg = <0x0 0xf0d70000 0x0 0x1000>;
+                        clock-names = "apb_pclk";
+                        cpu = <&psv_cortexa72_1>;
+                        status = "disabled";
+                        clocks = <&versal_clk 0x52>;
+
+                        out-ports {
+
+                                port {
+
+                                        etm1_out_port: endpoint {
+                                                phandle = <0x9b>;
+                                                remote-endpoint = <&funnel_in_port1>;
+                                        };
+                                };
+                        };
                 };
         };
 
@@ -2619,30 +2621,6 @@
                 watchdog = "/axi/watchdog@fd4d0000";
                 watchdog1 = "/axi/watchdog@ff120000";
                 xilsem_edac = "/axi/edac@f2014050";
-                fpd_funnel_in_port1 = "/axi/fpd-funnel@f0b20000/in-ports/port@1/endpoint";
-                fpd_funnel_out_port = "/axi/fpd-funnel@f0b20000/out-ports/port/endpoint";
-                fpd_funnel = "/axi/fpd-funnel@f0b20000";
-                fpd_etf_in_port = "/axi/fpd-etf@f0b30000/in-ports/port/endpoint";
-                fpd_etf_out_port = "/axi/fpd-etf@f0b30000/out-ports/port/endpoint";
-                fpd_etf = "/axi/fpd-etf@f0b30000";
-                replicator_in_port = "/axi/replicator@f0b40000/in-ports/port/endpoint";
-                replicator_out_port0 = "/axi/replicator@f0b40000/out-ports/port@0/endpoint";
-                replicator = "/axi/replicator@f0b40000";
-                etr_in_port = "/axi/etr@f0b50000/in-ports/port/endpoint";
-                etr = "/axi/etr@f0b50000";
-                funnel_in_port0 = "/axi/funnel@f0c20000/in-ports/port@0/endpoint";
-                funnel_in_port1 = "/axi/funnel@f0c20000/in-ports/port@1/endpoint";
-                funnel_out_port = "/axi/funnel@f0c20000/out-ports/port/endpoint";
-                apu_funnel = "/axi/funnel@f0c20000";
-                etf_in_port = "/axi/etf@f0c30000/in-ports/port/endpoint";
-                apu_etf_out_port = "/axi/etf@f0c30000/out-ports/port/endpoint";
-                apu_etf = "/axi/etf@f0c30000";
-                cpu0_debug = "/axi/cpu0-debug@f0d00000";
-                etm0_out_port = "/axi/etm@f0d30000/out-ports/port/endpoint";
-                etm0 = "/axi/etm@f0d30000";
-                cpu1_debug = "/axi/cpu1-debug@f0d40000";
-                etm1_out_port = "/axi/etm@f0d70000/out-ports/port/endpoint";
-                etm1 = "/axi/etm@f0d70000";
                 dma0 = "/axi/pmcdma@f11c0000";
                 dma1 = "/axi/pmcdma@f11d0000";
                 ipi_0_to_ipi_0 = "/axi/mailbox@ff330000/child@ff330000";
@@ -2715,6 +2693,30 @@
                 ddrmc_xmpu_1 = "/indirect-bus@2/xmpu@f6220000";
                 ddrmc_xmpu_2 = "/indirect-bus@2/xmpu@f6390000";
                 ddrmc_xmpu_3 = "/indirect-bus@2/xmpu@f6500000";
+                fpd_funnel_in_port1 = "/indirect-bus@2/fpd-funnel@f0b20000/in-ports/port@1/endpoint";
+                fpd_funnel_out_port = "/indirect-bus@2/fpd-funnel@f0b20000/out-ports/port/endpoint";
+                fpd_funnel = "/indirect-bus@2/fpd-funnel@f0b20000";
+                fpd_etf_in_port = "/indirect-bus@2/fpd-etf@f0b30000/in-ports/port/endpoint";
+                fpd_etf_out_port = "/indirect-bus@2/fpd-etf@f0b30000/out-ports/port/endpoint";
+                fpd_etf = "/indirect-bus@2/fpd-etf@f0b30000";
+                replicator_in_port = "/indirect-bus@2/replicator@f0b40000/in-ports/port/endpoint";
+                replicator_out_port0 = "/indirect-bus@2/replicator@f0b40000/out-ports/port@0/endpoint";
+                replicator = "/indirect-bus@2/replicator@f0b40000";
+                etr_in_port = "/indirect-bus@2/etr@f0b50000/in-ports/port/endpoint";
+                etr = "/indirect-bus@2/etr@f0b50000";
+                funnel_in_port0 = "/indirect-bus@2/funnel@f0c20000/in-ports/port@0/endpoint";
+                funnel_in_port1 = "/indirect-bus@2/funnel@f0c20000/in-ports/port@1/endpoint";
+                funnel_out_port = "/indirect-bus@2/funnel@f0c20000/out-ports/port/endpoint";
+                apu_funnel = "/indirect-bus@2/funnel@f0c20000";
+                etf_in_port = "/indirect-bus@2/etf@f0c30000/in-ports/port/endpoint";
+                apu_etf_out_port = "/indirect-bus@2/etf@f0c30000/out-ports/port/endpoint";
+                apu_etf = "/indirect-bus@2/etf@f0c30000";
+                cpu0_debug = "/indirect-bus@2/cpu0-debug@f0d00000";
+                etm0_out_port = "/indirect-bus@2/etm@f0d30000/out-ports/port/endpoint";
+                etm0 = "/indirect-bus@2/etm@f0d30000";
+                cpu1_debug = "/indirect-bus@2/cpu1-debug@f0d40000";
+                etm1_out_port = "/indirect-bus@2/etm@f0d70000/out-ports/port/endpoint";
+                etm1 = "/indirect-bus@2/etm@f0d70000";
                 amba_xmpu = "/indirect-bus@2";
                 pl_alt_ref = "/pl-alt-ref";
                 ref = "/ref";
