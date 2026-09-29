@@ -1,6 +1,5 @@
 # Make board fragments searchable.
 FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot-xlnx:"
-FILESEXTRAPATHS:prepend:mbv64-scu200-revb-sdt := "${THISDIR}/u-boot-xlnx:"
 
 # Consumed as UBOOT_PREBOOT_CFG by meta-xilinx-core u-boot-xlnx.inc.
 DEFAULT_UBOOT_PREBOOT_CFG:versal-2ve-2vm-vek385-sdt-seg = "file://u-boot-misc.cfg"
@@ -13,10 +12,6 @@ SRC_URI:append:microblaze-v = "\
     file://u-boot-misc_mbv64.cfg \
     file://mbv64.env \
     "
-SRC_URI:append:mbv64-scu200-revb-sdt = "\
-    file://u-boot-misc_mbv64-scu200-revb.cfg \
-    "
-
 # EFI variable storage on SPI flash - for machines with the UEFI
 # variables partition in their OSPI layout (offset 0x1580000)
 ASOCS_UBOOT_EFI_SF_CFG = ""
