@@ -5,10 +5,12 @@ args:
     - --machine-name versal-2ve-2vm-vmk365-multidomain
     - --domain-file ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-2ve-2vm-multidomain-base.yaml \
                     ${BSPLAYERDIR_amd-adaptive-socs-bsp}/conf/domainyaml/vmk365-domain-access-overlay.yaml \
+                    ${BSPLAYERDIR_amd-adaptive-socs-bsp}/conf/domainyaml/vmk365-linux-overlay.yaml \
                     ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-2ve-2vm-openamp-overlay.yaml \
                     ${LAYER_PATH_xilinx-standalone-sdt}/conf/domainyaml/versal-2ve-2vm-libmetal-overlay.yaml
 kconfig:
     CONFIG_YOCTO_BBMC_LINUX_DTSI: \
+        ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/ospi-2g-memory-map.dtsi \
         ${LAYER_PATH_xilinx-virtualization}/recipes-bsp/device-tree/files/versal-2ve-2vm-xen.dtsi \
         ${BSPLAYERDIR_amd-adaptive-socs-bsp}/recipes-bsp/device-tree/files/platform-misc.dtsi
     CONFIG_SUBSYSTEM_OPTEE: y
@@ -18,8 +20,40 @@ kconfig:
     CONFIG_SUBSYSTEM_DT_DOMAIN_ACCESS: y
 
 machine:
+    pre:
+        UBOOT_ENTRYPOINT:
+            op: '?='
+            val: '0x20200000'
+        UBOOT_LOADADDRESS:
+            op: '?='
+            val: '0x20200000'
     post:
+        include:
+            comment: "Enable meta-xilinx-imgrcvry if available"
+            op: 'conf/enable-xilinx-imgrcvry.conf'
+        XLNX_CMAKE_BSP_VARS:append:pn-xilplmi:
+            comment: 'Enables the restoration of the multi-boot register for A/B firmware platforms'
+            op: '='
+            val: ' -DPLM_ENABLE_RESTORE_MULTIBOOT'
+        PRODUCT_NAME:
+            comment: 'UEFI Capsule Update / LVFS Configuration'
+            op: '='
+            val: 'VMK365'
+        PRODUCT_GUID:
+            op: '='
+            val: '0bfabdae-279f-5ef3-879f-04fd2b2f93d7'
+        PRODUCT_URL:
+            op: '='
+            val: 'https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal.html'
+        CFLAGS:append:pn-image-selector:
+            comment: 'Enable Push Button support and select FW update button on MIO 49'
+            op: '='
+            val: ' -DXIS_ENABLE_PB -DXIS_CONFIG_MIO'
         BOOTBIN_INC:
             comment: 'Enable libmetal application'
             op: '='
             val: 'libmetal-demo-rpu1.inc'
+        SPI_IMAGE_SIZE:
+            comment: 'OSPI flash size (256MB)'
+            op: '='
+            val: '0x1000_0000'
