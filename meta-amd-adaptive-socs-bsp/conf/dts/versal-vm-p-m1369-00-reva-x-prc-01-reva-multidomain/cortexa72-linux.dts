@@ -1016,6 +1016,27 @@
                         compatible = "xlnx,versal-sysmon";
                 };
 
+                ttc0: timer@ff0e0000 {
+                        phandle = <0x49>;
+                        xlnx,ttc-clk0-clksrc = <0x0>;
+                        xlnx,ttc-clk1-freq-hz = <0x5f5dd19>;
+                        xlnx,ttc-clk0-freq-hz = <0x5f5dd19>;
+                        xlnx,ip-name = "psv_ttc";
+                        xlnx,ttc-clk2-clksrc = <0x0>;
+                        xlnx,clock-freq = <0x5f5dd19>;
+                        xlnx,ttc-clk1-clksrc = <0x0>;
+                        xlnx,ttc-clk2-freq-hz = <0x5f5dd19>;
+                        xlnx,ttc-board-interface = "custom";
+                        power-domains = <&versal_firmware 0x18224024>;
+                        clocks = <&versal_clk 0x27>;
+                        timer-width = <0x20>;
+                        reg = <0x0 0xff0e0000 0x0 0x1000>;
+                        interrupt-parent = <&gic>;
+                        interrupts = <0x0 0x25 0x4 0x0 0x26 0x4 0x0 0x27 0x4>;
+                        status = "okay";
+                        compatible = "cdns,ttc";
+                };
+
                 ttc1: timer@ff0f0000 {
                         phandle = <0x4a>;
                         xlnx,ttc-clk0-clksrc = <0x0>;
@@ -1823,6 +1844,22 @@
                         compatible = "xlnx,coresight-1.0";
                 };
 
+                ps_wizard_0_pmcps_0_psv_r5_0_atcm: ps_wizard_0_pmcps_0_psv_r5_0_atcm {
+                        phandle = <0x160>;
+                        mpu-policy = "readable", "writable", "executable", "cacheable", "static";
+                        reg = <0x0 0x0 0x0 0x10000>;
+                        size = <0x10000>;
+                        start = <0x0>;
+                };
+
+                ps_wizard_0_pmcps_0_psv_r5_0_btcm: ps_wizard_0_pmcps_0_psv_r5_0_btcm {
+                        phandle = <0x161>;
+                        mpu-policy = "readable", "writable", "cacheable";
+                        reg = <0x0 0x20000 0x0 0x10000>;
+                        size = <0x10000>;
+                        start = <0x20000>;
+                };
+
                 libmetal_uio_desc099c8000: libmetal_uio_desc0@99c8000 {
                         phandle = <0x155>;
                         reg = <0x0 0x99c8000 0x0 0x4000>;
@@ -2380,6 +2417,15 @@
                 };
         };
 
+        amba_pl: amba_pl {
+                phandle = <0x152>;
+                firmware-name = "vm-p-m1369-00_base_pld.pdi";
+                #size-cells = <0x2>;
+                #address-cells = <0x2>;
+                compatible = "simple-bus";
+                ranges;
+        };
+
         axi_noc2_0_ddr_memory: memory@00000000 {
                 phandle = <0x3>;
                 memory_type = "memory";
@@ -2469,6 +2515,7 @@
                 sysmon1 = "/axi/sysmon@109270000";
                 sysmon2 = "/axi/sysmon@111270000";
                 sysmon3 = "/axi/sysmon@119270000";
+                ttc0 = "/axi/timer@ff0e0000";
                 ttc1 = "/axi/timer@ff0f0000";
                 ttc2 = "/axi/timer@ff100000";
                 ttc3 = "/axi/timer@ff110000";
@@ -2539,6 +2586,8 @@
                 ipi_6_to_ipi_psm = "/axi/mailbox@ff3a0000/child@ff310000";
                 ipi6 = "/axi/mailbox@ff3a0000";
                 coresight = "/axi/coresight@f0800000";
+                ps_wizard_0_pmcps_0_psv_r5_0_atcm = "/axi/ps_wizard_0_pmcps_0_psv_r5_0_atcm";
+                ps_wizard_0_pmcps_0_psv_r5_0_btcm = "/axi/ps_wizard_0_pmcps_0_psv_r5_0_btcm";
                 libmetal_uio_desc099c8000 = "/axi/libmetal_uio_desc0@99c8000";
                 libmetal_uio_desc199cc000 = "/axi/libmetal_uio_desc1@99cc000";
                 libmetal_uio_data99d0000 = "/axi/libmetal_uio_data@99d0000";
@@ -2604,6 +2653,7 @@
                 user_key7 = "/firmware/versal-firmware/versal-sec-cfg/nvmem-layout/user-key@1f0";
                 versal_sec_cfg = "/firmware/versal-firmware/versal-sec-cfg";
                 versal_firmware = "/firmware/versal-firmware";
+                amba_pl = "/amba_pl";
                 axi_noc2_0_ddr_memory = "/memory@00000000";
                 vdev0vring0 = "/reserved-memory/vdev0vring0@9880000";
                 vdev0vring1 = "/reserved-memory/vdev0vring1@9884000";

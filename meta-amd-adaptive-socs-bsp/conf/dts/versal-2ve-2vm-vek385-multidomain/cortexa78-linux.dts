@@ -454,9 +454,11 @@
                 i2c4 = "/axi/i2c@f1980000";
                 i2c3 = "/axi/i2c@f1970000";
                 i2c2 = "/axi/i2c@f1950000";
+                i2c1 = "/axi/i2c@f1940000";
                 mmc1 = "/axi/mmc@f1050000";
                 mmc0 = "/axi/mmc@f1040000";
                 serial1 = "/axi/serial@f1930000";
+                serial0 = "/axi/serial@f1920000";
                 nvmem1 = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/eeprom@54";
         };
 
@@ -1496,6 +1498,21 @@
                         compatible = "xlnx,pmc-gpio-1.0";
                 };
 
+                i2c0: i2c@f1940000 {
+                        phandle = <0xa3>;
+                        xlnx,iic-board-interface = "custom";
+                        xlnx,ip-name = "i2c";
+                        xlnx,i2c-clk-freq-hz = <0x98961be>;
+                        xlnx,clock-freq = <0x98961be>;
+                        power-domains = <&scmi_devpd 0xf>;
+                        clocks = <&scmi_clk 0x47>;
+                        interrupts = <0x0 0x15 0x4>;
+                        interrupt-parent = <&gic>;
+                        reg = <0x0 0xf1940000 0x0 0x1000>;
+                        status = "okay";
+                        compatible = "cdns,i2c-r1p14";
+                };
+
                 i2c1: i2c@f1950000 {
                         phandle = <0xa4>;
                         clock-frequency = <0x61a80>;
@@ -2021,6 +2038,30 @@
                         compatible = "xlnx,versal-net-emmc";
                 };
 
+                serial0: serial@f1920000 {
+                        phandle = <0xa1>;
+                        xlnx,uart-clk-freq-hz = <0x5f5dd19>;
+                        port-number = <0x0>;
+                        cts-override;
+                        xlnx,baudrate = <0x1c200>;
+                        xlnx,ip-name = "sbsauart";
+                        xlnx,has-modem = <0x0>;
+                        xlnx,uart-board-interface = "custom";
+                        xlnx,clock-freq = <0x5f5dd19>;
+                        device_type = "serial";
+                        power-domains = <&scmi_devpd 0x13>;
+                        clocks = <&scmi_clk 0x3a>,
+                         <&scmi_clk 0x34>;
+                        clock-names = "uartclk", "apb_pclk";
+                        reg-io-width = <0x4>;
+                        interrupts = <0x0 0x19 0x4>;
+                        interrupt-parent = <&gic>;
+                        reg = <0x0 0xf1920000 0x0 0x1000>;
+                        status = "okay";
+                        compatible = "arm,pl011", "arm,primecell";
+                        bootph-all;
+                };
+
                 serial1: serial@f1930000 {
                         phandle = <0xa2>;
                         xlnx,uart-clk-freq-hz = <0x5f5dd19>;
@@ -2384,6 +2425,27 @@
                         reg = <0x0 0xf1e70000 0x0 0x1000>;
                         timer-width = <0x20>;
                         interrupts = <0x0 0x2c 0x4 0x0 0x2c 0x4 0x0 0x2c 0x4>;
+                        interrupt-parent = <&gic>;
+                        status = "okay";
+                        compatible = "cdns,ttc";
+                };
+
+                ttc2: timer@f1e80000 {
+                        phandle = <0xb0>;
+                        xlnx,ttc-clk0-clksrc = "APB";
+                        xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
+                        xlnx,ttc-clk0-freq-hz = <0x8f0cba9>;
+                        xlnx,ip-name = "ttc";
+                        xlnx,ttc-clk2-clksrc = "APB";
+                        xlnx,clock-freq = <0x8f0cba9>;
+                        xlnx,ttc-clk1-clksrc = "APB";
+                        xlnx,ttc-clk2-freq-hz = <0x8f0cba9>;
+                        xlnx,ttc-board-interface = "custom";
+                        power-domains = <&scmi_devpd 0x18>;
+                        clocks = <&scmi_clk 0x13>;
+                        reg = <0x0 0xf1e80000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        interrupts = <0x0 0x2d 0x4 0x0 0x2d 0x4 0x0 0x2d 0x4>;
                         interrupt-parent = <&gic>;
                         status = "okay";
                         compatible = "cdns,ttc";
@@ -4847,6 +4909,7 @@
                 mmi_10gbe = "/axi/ethernet@ed920000";
                 gpio0 = "/axi/gpio@f1a50000";
                 gpio1 = "/axi/gpio@f1020000";
+                i2c0 = "/axi/i2c@f1940000";
                 tca6416_u37 = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/gpio@20";
                 eeprom = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/eeprom@54";
                 hub = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/i2c-mux@77/i2c@4/usb-hub@2d";
@@ -4877,6 +4940,7 @@
                 rtc = "/axi/rtc@f12a0000";
                 sdhci0 = "/axi/mmc@f1040000";
                 sdhci1 = "/axi/mmc@f1050000";
+                serial0 = "/axi/serial@f1920000";
                 serial1 = "/axi/serial@f1930000";
                 smmu = "/axi/iommu@ec000000";
                 spi0 = "/axi/spi@f19c0000";
@@ -4884,6 +4948,7 @@
                 sysmon0 = "/axi/sysmon@f1270000";
                 ttc0 = "/axi/timer@f1e60000";
                 ttc1 = "/axi/timer@f1e70000";
+                ttc2 = "/axi/timer@f1e80000";
                 ttc3 = "/axi/timer@f1e90000";
                 ttc4 = "/axi/timer@f1ea0000";
                 ttc5 = "/axi/timer@f1eb0000";

@@ -185,7 +185,9 @@
                  <0x0 0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0x0 0xf1300000 0x0 0x10000>,
                  <0x0 0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0x0 0xf1310000 0x0 0x10000>,
                  <0x0 0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0x0 0xf1800000 0x0 0x10000>,
+                 <0x0 0xf1920000 &serial0 0x0 0xf1920000 0x0 0x10000>,
                  <0x0 0xf1930000 &serial1 0x0 0xf1930000 0x0 0x10000>,
+                 <0x0 0xf1940000 &i2c0 0x0 0xf1940000 0x0 0x10000>,
                  <0x0 0xf1950000 &i2c1 0x0 0xf1950000 0x0 0x10000>,
                  <0x0 0xf19e0000 &can0 0x0 0xf19e0000 0x0 0x10000>,
                  <0x0 0xf19f0000 &can1 0x0 0xf19f0000 0x0 0x10000>,
@@ -198,6 +200,7 @@
                  <0x0 0xf1c00000 &dwc3_1 0x0 0xf1c00000 0x0 0x100000>,
                  <0x0 0xf1e60000 &ttc0 0x0 0xf1e60000 0x0 0x10000>,
                  <0x0 0xf1e70000 &ttc1 0x0 0xf1e70000 0x0 0x10000>,
+                 <0x0 0xf1e80000 &ttc2 0x0 0xf1e80000 0x0 0x10000>,
                  <0x0 0xf1e90000 &ttc3 0x0 0xf1e90000 0x0 0x10000>,
                  <0x0 0xf1ea0000 &ttc4 0x0 0xf1ea0000 0x0 0x10000>,
                  <0x0 0xf1eb0000 &ttc5 0x0 0xf1eb0000 0x0 0x10000>,
@@ -623,6 +626,2319 @@
                 };
         };
 
+        cpus_r52_0: cpus-r52@0 {
+                phandle = <0x130>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                 <0x100000 &NoC_C0_C1_ddr_memory 0x100000 0x7ff00000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xeb340000 &ipi1 0xeb340000 0x10000>,
+                 <0xeb3b1000 &ipi_nobuf2 0xeb3b1000 0x1000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb580000 &ps_wizard_0_ps11_0_rpu_a 0xeb580000 0x8000>,
+                 <0xeb590000 &ps_wizard_0_ps11_0_rpu_b 0xeb590000 0x8000>,
+                 <0xeb5a0000 &ps_wizard_0_ps11_0_rpu_c 0xeb5a0000 0x8000>,
+                 <0xeb5b0000 &ps_wizard_0_ps11_0_rpu_d 0xeb5b0000 0x8000>,
+                 <0xeb5c0000 &ps_wizard_0_ps11_0_rpu_e 0xeb5c0000 0x8000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec800000 &ps_wizard_0_ps11_0_intfpd_asild_gpv 0xec800000 0x4000>,
+                 <0xec804000 &ps_wizard_0_ps11_0_intfpd_asilb_gpv 0xec804000 0x4000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec880000 &ps_wizard_0_ps11_0_fpd_afi_0 0xec880000 0x10000>,
+                 <0xec890000 &ps_wizard_0_ps11_0_fpd_afi_1 0xec890000 0x10000>,
+                 <0xec8a0000 &ps_wizard_0_ps11_0_fpd_afi_2 0xec8a0000 0x10000>,
+                 <0xec8b0000 &ps_wizard_0_ps11_0_fpd_afi_3 0xec8b0000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0800000 &coresight 0xf0800000 0x4000>,
+                 <0xf08f0000 &ps_wizard_0_ps11_0_coresight_lpd_atm 0xf08f0000 0xf000>,
+                 <0xf0c40000 &ps_wizard_0_ps11_0_coresight_fpd_stm 0xf0c40000 0x4000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10a0000 &ps_wizard_0_ps11_0_pmc_ufs_0 0xf10a0000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf11e0000 &ps_wizard_0_ps11_0_pmc_aes 0xf11e0000 0x10000>,
+                 <0xf11f0000 &ps_wizard_0_ps11_0_pmc_bbram_ctrl 0xf11f0000 0x10000>,
+                 <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
+                 <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12f0000 &ps_wizard_0_ps11_0_pmc_xmpu_0 0xf12f0000 0x10000>,
+                 <0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0xf1300000 0x10000>,
+                 <0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0xf1310000 0x10000>,
+                 <0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0xf1800000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf19e0000 &can0 0xf19e0000 0x10000>,
+                 <0xf19f0000 &can1 0xf19f0000 0x10000>,
+                 <0xf1a00000 &can2 0xf1a00000 0x10000>,
+                 <0xf1a10000 &can3 0xf1a10000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
+                 <0xe2000000 &gic_r52 0xe2000000 0x10000>,
+                 <0x0 &ps_wizard_0_ps11_0_r52_tcm_alias 0x0 0x100000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&cortexr52_0>;
+                                };
+                        };
+                };
+
+                cortexr52_0: cpu@0 {
+                        phandle = <0xd8>;
+                        xlnx,cpu-clk-freq-hz = <0x34274ea8>;
+                        bus-handle = <0x2>;
+                        cpu-frequency = <0x34274ea8>;
+                        xlnx,cluster-number = <0x0>;
+                        xlnx,ip-name = "cortexr52";
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,is-cache-coherent = <0x0>;
+                        power-domains = <&scmi_devpd 0x0>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "arm,cortex-r52";
+                };
+        };
+
+        cpus_r52_1: cpus-r52@1 {
+                phandle = <0x131>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                 <0x100000 &NoC_C0_C1_ddr_memory 0x100000 0x7ff00000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xeb350000 &ipi2 0xeb350000 0x10000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb580000 &ps_wizard_0_ps11_0_rpu_a 0xeb580000 0x8000>,
+                 <0xeb590000 &ps_wizard_0_ps11_0_rpu_b 0xeb590000 0x8000>,
+                 <0xeb5a0000 &ps_wizard_0_ps11_0_rpu_c 0xeb5a0000 0x8000>,
+                 <0xeb5b0000 &ps_wizard_0_ps11_0_rpu_d 0xeb5b0000 0x8000>,
+                 <0xeb5c0000 &ps_wizard_0_ps11_0_rpu_e 0xeb5c0000 0x8000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec800000 &ps_wizard_0_ps11_0_intfpd_asild_gpv 0xec800000 0x4000>,
+                 <0xec804000 &ps_wizard_0_ps11_0_intfpd_asilb_gpv 0xec804000 0x4000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec880000 &ps_wizard_0_ps11_0_fpd_afi_0 0xec880000 0x10000>,
+                 <0xec890000 &ps_wizard_0_ps11_0_fpd_afi_1 0xec890000 0x10000>,
+                 <0xec8a0000 &ps_wizard_0_ps11_0_fpd_afi_2 0xec8a0000 0x10000>,
+                 <0xec8b0000 &ps_wizard_0_ps11_0_fpd_afi_3 0xec8b0000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0800000 &coresight 0xf0800000 0x4000>,
+                 <0xf08f0000 &ps_wizard_0_ps11_0_coresight_lpd_atm 0xf08f0000 0xf000>,
+                 <0xf0c40000 &ps_wizard_0_ps11_0_coresight_fpd_stm 0xf0c40000 0x4000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10a0000 &ps_wizard_0_ps11_0_pmc_ufs_0 0xf10a0000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf11e0000 &ps_wizard_0_ps11_0_pmc_aes 0xf11e0000 0x10000>,
+                 <0xf11f0000 &ps_wizard_0_ps11_0_pmc_bbram_ctrl 0xf11f0000 0x10000>,
+                 <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
+                 <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12f0000 &ps_wizard_0_ps11_0_pmc_xmpu_0 0xf12f0000 0x10000>,
+                 <0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0xf1300000 0x10000>,
+                 <0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0xf1310000 0x10000>,
+                 <0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0xf1800000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf19e0000 &can0 0xf19e0000 0x10000>,
+                 <0xf19f0000 &can1 0xf19f0000 0x10000>,
+                 <0xf1a00000 &can2 0xf1a00000 0x10000>,
+                 <0xf1a10000 &can3 0xf1a10000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
+                 <0xe2000000 &gic_r52 0xe2000000 0x10000>,
+                 <0x0 &ps_wizard_0_ps11_0_r52_tcm_alias 0x0 0x100000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&cortexr52_1>;
+                                };
+                        };
+                };
+
+                cortexr52_1: cpu@0 {
+                        phandle = <0xdb>;
+                        xlnx,cpu-clk-freq-hz = <0x34274ea8>;
+                        bus-handle = <0x2>;
+                        cpu-frequency = <0x34274ea8>;
+                        xlnx,cluster-number = <0x0>;
+                        xlnx,ip-name = "cortexr52";
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,is-cache-coherent = <0x0>;
+                        power-domains = <&scmi_devpd 0x1>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "arm,cortex-r52";
+                };
+        };
+
+        cpus_r52_2: cpus-r52@2 {
+                phandle = <0x132>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                 <0x100000 &NoC_C0_C1_ddr_memory 0x100000 0x7ff00000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb580000 &ps_wizard_0_ps11_0_rpu_a 0xeb580000 0x8000>,
+                 <0xeb590000 &ps_wizard_0_ps11_0_rpu_b 0xeb590000 0x8000>,
+                 <0xeb5a0000 &ps_wizard_0_ps11_0_rpu_c 0xeb5a0000 0x8000>,
+                 <0xeb5b0000 &ps_wizard_0_ps11_0_rpu_d 0xeb5b0000 0x8000>,
+                 <0xeb5c0000 &ps_wizard_0_ps11_0_rpu_e 0xeb5c0000 0x8000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec800000 &ps_wizard_0_ps11_0_intfpd_asild_gpv 0xec800000 0x4000>,
+                 <0xec804000 &ps_wizard_0_ps11_0_intfpd_asilb_gpv 0xec804000 0x4000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec880000 &ps_wizard_0_ps11_0_fpd_afi_0 0xec880000 0x10000>,
+                 <0xec890000 &ps_wizard_0_ps11_0_fpd_afi_1 0xec890000 0x10000>,
+                 <0xec8a0000 &ps_wizard_0_ps11_0_fpd_afi_2 0xec8a0000 0x10000>,
+                 <0xec8b0000 &ps_wizard_0_ps11_0_fpd_afi_3 0xec8b0000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0800000 &coresight 0xf0800000 0x4000>,
+                 <0xf08f0000 &ps_wizard_0_ps11_0_coresight_lpd_atm 0xf08f0000 0xf000>,
+                 <0xf0c40000 &ps_wizard_0_ps11_0_coresight_fpd_stm 0xf0c40000 0x4000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10a0000 &ps_wizard_0_ps11_0_pmc_ufs_0 0xf10a0000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf11e0000 &ps_wizard_0_ps11_0_pmc_aes 0xf11e0000 0x10000>,
+                 <0xf11f0000 &ps_wizard_0_ps11_0_pmc_bbram_ctrl 0xf11f0000 0x10000>,
+                 <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
+                 <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12f0000 &ps_wizard_0_ps11_0_pmc_xmpu_0 0xf12f0000 0x10000>,
+                 <0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0xf1300000 0x10000>,
+                 <0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0xf1310000 0x10000>,
+                 <0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0xf1800000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf19e0000 &can0 0xf19e0000 0x10000>,
+                 <0xf19f0000 &can1 0xf19f0000 0x10000>,
+                 <0xf1a00000 &can2 0xf1a00000 0x10000>,
+                 <0xf1a10000 &can3 0xf1a10000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
+                 <0xe2000000 &gic_r52 0xe2000000 0x10000>,
+                 <0x0 &ps_wizard_0_ps11_0_r52_tcm_alias 0x0 0x100000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&cortexr52_2>;
+                                };
+                        };
+                };
+
+                cortexr52_2: cpu@0 {
+                        phandle = <0xdc>;
+                        xlnx,cpu-clk-freq-hz = <0x34274ea8>;
+                        bus-handle = <0x2>;
+                        cpu-frequency = <0x34274ea8>;
+                        xlnx,cluster-number = <0x1>;
+                        xlnx,ip-name = "cortexr52";
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,is-cache-coherent = <0x0>;
+                        power-domains = <&scmi_devpd 0x2>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "arm,cortex-r52";
+                };
+        };
+
+        cpus_r52_3: cpus-r52@3 {
+                phandle = <0x133>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                 <0x100000 &NoC_C0_C1_ddr_memory 0x100000 0x7ff00000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb580000 &ps_wizard_0_ps11_0_rpu_a 0xeb580000 0x8000>,
+                 <0xeb590000 &ps_wizard_0_ps11_0_rpu_b 0xeb590000 0x8000>,
+                 <0xeb5a0000 &ps_wizard_0_ps11_0_rpu_c 0xeb5a0000 0x8000>,
+                 <0xeb5b0000 &ps_wizard_0_ps11_0_rpu_d 0xeb5b0000 0x8000>,
+                 <0xeb5c0000 &ps_wizard_0_ps11_0_rpu_e 0xeb5c0000 0x8000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec800000 &ps_wizard_0_ps11_0_intfpd_asild_gpv 0xec800000 0x4000>,
+                 <0xec804000 &ps_wizard_0_ps11_0_intfpd_asilb_gpv 0xec804000 0x4000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec880000 &ps_wizard_0_ps11_0_fpd_afi_0 0xec880000 0x10000>,
+                 <0xec890000 &ps_wizard_0_ps11_0_fpd_afi_1 0xec890000 0x10000>,
+                 <0xec8a0000 &ps_wizard_0_ps11_0_fpd_afi_2 0xec8a0000 0x10000>,
+                 <0xec8b0000 &ps_wizard_0_ps11_0_fpd_afi_3 0xec8b0000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0800000 &coresight 0xf0800000 0x4000>,
+                 <0xf08f0000 &ps_wizard_0_ps11_0_coresight_lpd_atm 0xf08f0000 0xf000>,
+                 <0xf0c40000 &ps_wizard_0_ps11_0_coresight_fpd_stm 0xf0c40000 0x4000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10a0000 &ps_wizard_0_ps11_0_pmc_ufs_0 0xf10a0000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf11e0000 &ps_wizard_0_ps11_0_pmc_aes 0xf11e0000 0x10000>,
+                 <0xf11f0000 &ps_wizard_0_ps11_0_pmc_bbram_ctrl 0xf11f0000 0x10000>,
+                 <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
+                 <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12f0000 &ps_wizard_0_ps11_0_pmc_xmpu_0 0xf12f0000 0x10000>,
+                 <0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0xf1300000 0x10000>,
+                 <0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0xf1310000 0x10000>,
+                 <0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0xf1800000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf19e0000 &can0 0xf19e0000 0x10000>,
+                 <0xf19f0000 &can1 0xf19f0000 0x10000>,
+                 <0xf1a00000 &can2 0xf1a00000 0x10000>,
+                 <0xf1a10000 &can3 0xf1a10000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
+                 <0xe2000000 &gic_r52 0xe2000000 0x10000>,
+                 <0x0 &ps_wizard_0_ps11_0_r52_tcm_alias 0x0 0x100000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&cortexr52_3>;
+                                };
+                        };
+                };
+
+                cortexr52_3: cpu@0 {
+                        phandle = <0xdd>;
+                        xlnx,cpu-clk-freq-hz = <0x34274ea8>;
+                        bus-handle = <0x2>;
+                        cpu-frequency = <0x34274ea8>;
+                        xlnx,cluster-number = <0x1>;
+                        xlnx,ip-name = "cortexr52";
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,is-cache-coherent = <0x0>;
+                        power-domains = <&scmi_devpd 0x3>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "arm,cortex-r52";
+                };
+        };
+
+        cpus_r52_4: cpus-r52@4 {
+                phandle = <0x134>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                 <0x100000 &NoC_C0_C1_ddr_memory 0x100000 0x7ff00000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb580000 &ps_wizard_0_ps11_0_rpu_a 0xeb580000 0x8000>,
+                 <0xeb590000 &ps_wizard_0_ps11_0_rpu_b 0xeb590000 0x8000>,
+                 <0xeb5a0000 &ps_wizard_0_ps11_0_rpu_c 0xeb5a0000 0x8000>,
+                 <0xeb5b0000 &ps_wizard_0_ps11_0_rpu_d 0xeb5b0000 0x8000>,
+                 <0xeb5c0000 &ps_wizard_0_ps11_0_rpu_e 0xeb5c0000 0x8000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec800000 &ps_wizard_0_ps11_0_intfpd_asild_gpv 0xec800000 0x4000>,
+                 <0xec804000 &ps_wizard_0_ps11_0_intfpd_asilb_gpv 0xec804000 0x4000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec880000 &ps_wizard_0_ps11_0_fpd_afi_0 0xec880000 0x10000>,
+                 <0xec890000 &ps_wizard_0_ps11_0_fpd_afi_1 0xec890000 0x10000>,
+                 <0xec8a0000 &ps_wizard_0_ps11_0_fpd_afi_2 0xec8a0000 0x10000>,
+                 <0xec8b0000 &ps_wizard_0_ps11_0_fpd_afi_3 0xec8b0000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0800000 &coresight 0xf0800000 0x4000>,
+                 <0xf08f0000 &ps_wizard_0_ps11_0_coresight_lpd_atm 0xf08f0000 0xf000>,
+                 <0xf0c40000 &ps_wizard_0_ps11_0_coresight_fpd_stm 0xf0c40000 0x4000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10a0000 &ps_wizard_0_ps11_0_pmc_ufs_0 0xf10a0000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf11e0000 &ps_wizard_0_ps11_0_pmc_aes 0xf11e0000 0x10000>,
+                 <0xf11f0000 &ps_wizard_0_ps11_0_pmc_bbram_ctrl 0xf11f0000 0x10000>,
+                 <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
+                 <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12f0000 &ps_wizard_0_ps11_0_pmc_xmpu_0 0xf12f0000 0x10000>,
+                 <0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0xf1300000 0x10000>,
+                 <0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0xf1310000 0x10000>,
+                 <0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0xf1800000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf19e0000 &can0 0xf19e0000 0x10000>,
+                 <0xf19f0000 &can1 0xf19f0000 0x10000>,
+                 <0xf1a00000 &can2 0xf1a00000 0x10000>,
+                 <0xf1a10000 &can3 0xf1a10000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
+                 <0xe2000000 &gic_r52 0xe2000000 0x10000>,
+                 <0x0 &ps_wizard_0_ps11_0_r52_tcm_alias 0x0 0x100000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&cortexr52_4>;
+                                };
+                        };
+                };
+
+                cortexr52_4: cpu@0 {
+                        phandle = <0xde>;
+                        xlnx,cpu-clk-freq-hz = <0x34274ea8>;
+                        bus-handle = <0x2>;
+                        cpu-frequency = <0x34274ea8>;
+                        xlnx,cluster-number = <0x2>;
+                        xlnx,ip-name = "cortexr52";
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,is-cache-coherent = <0x0>;
+                        power-domains = <&scmi_devpd 0x4>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "arm,cortex-r52";
+                };
+        };
+
+        cpus_r52_5: cpus-r52@5 {
+                phandle = <0x135>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                 <0x100000 &NoC_C0_C1_ddr_memory 0x100000 0x7ff00000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb580000 &ps_wizard_0_ps11_0_rpu_a 0xeb580000 0x8000>,
+                 <0xeb590000 &ps_wizard_0_ps11_0_rpu_b 0xeb590000 0x8000>,
+                 <0xeb5a0000 &ps_wizard_0_ps11_0_rpu_c 0xeb5a0000 0x8000>,
+                 <0xeb5b0000 &ps_wizard_0_ps11_0_rpu_d 0xeb5b0000 0x8000>,
+                 <0xeb5c0000 &ps_wizard_0_ps11_0_rpu_e 0xeb5c0000 0x8000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec800000 &ps_wizard_0_ps11_0_intfpd_asild_gpv 0xec800000 0x4000>,
+                 <0xec804000 &ps_wizard_0_ps11_0_intfpd_asilb_gpv 0xec804000 0x4000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec880000 &ps_wizard_0_ps11_0_fpd_afi_0 0xec880000 0x10000>,
+                 <0xec890000 &ps_wizard_0_ps11_0_fpd_afi_1 0xec890000 0x10000>,
+                 <0xec8a0000 &ps_wizard_0_ps11_0_fpd_afi_2 0xec8a0000 0x10000>,
+                 <0xec8b0000 &ps_wizard_0_ps11_0_fpd_afi_3 0xec8b0000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0800000 &coresight 0xf0800000 0x4000>,
+                 <0xf08f0000 &ps_wizard_0_ps11_0_coresight_lpd_atm 0xf08f0000 0xf000>,
+                 <0xf0c40000 &ps_wizard_0_ps11_0_coresight_fpd_stm 0xf0c40000 0x4000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10a0000 &ps_wizard_0_ps11_0_pmc_ufs_0 0xf10a0000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf11e0000 &ps_wizard_0_ps11_0_pmc_aes 0xf11e0000 0x10000>,
+                 <0xf11f0000 &ps_wizard_0_ps11_0_pmc_bbram_ctrl 0xf11f0000 0x10000>,
+                 <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
+                 <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12f0000 &ps_wizard_0_ps11_0_pmc_xmpu_0 0xf12f0000 0x10000>,
+                 <0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0xf1300000 0x10000>,
+                 <0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0xf1310000 0x10000>,
+                 <0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0xf1800000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf19e0000 &can0 0xf19e0000 0x10000>,
+                 <0xf19f0000 &can1 0xf19f0000 0x10000>,
+                 <0xf1a00000 &can2 0xf1a00000 0x10000>,
+                 <0xf1a10000 &can3 0xf1a10000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
+                 <0xe2000000 &gic_r52 0xe2000000 0x10000>,
+                 <0x0 &ps_wizard_0_ps11_0_r52_tcm_alias 0x0 0x100000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&cortexr52_5>;
+                                };
+                        };
+                };
+
+                cortexr52_5: cpu@0 {
+                        phandle = <0xdf>;
+                        xlnx,cpu-clk-freq-hz = <0x34274ea8>;
+                        bus-handle = <0x2>;
+                        cpu-frequency = <0x34274ea8>;
+                        xlnx,cluster-number = <0x2>;
+                        xlnx,ip-name = "cortexr52";
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,is-cache-coherent = <0x0>;
+                        power-domains = <&scmi_devpd 0x5>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "arm,cortex-r52";
+                };
+        };
+
+        cpus_r52_6: cpus-r52@6 {
+                phandle = <0x136>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                 <0x100000 &NoC_C0_C1_ddr_memory 0x100000 0x7ff00000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xeb3b2000 &ipi_nobuf3 0xeb3b2000 0x1000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb580000 &ps_wizard_0_ps11_0_rpu_a 0xeb580000 0x8000>,
+                 <0xeb590000 &ps_wizard_0_ps11_0_rpu_b 0xeb590000 0x8000>,
+                 <0xeb5a0000 &ps_wizard_0_ps11_0_rpu_c 0xeb5a0000 0x8000>,
+                 <0xeb5b0000 &ps_wizard_0_ps11_0_rpu_d 0xeb5b0000 0x8000>,
+                 <0xeb5c0000 &ps_wizard_0_ps11_0_rpu_e 0xeb5c0000 0x8000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec800000 &ps_wizard_0_ps11_0_intfpd_asild_gpv 0xec800000 0x4000>,
+                 <0xec804000 &ps_wizard_0_ps11_0_intfpd_asilb_gpv 0xec804000 0x4000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec880000 &ps_wizard_0_ps11_0_fpd_afi_0 0xec880000 0x10000>,
+                 <0xec890000 &ps_wizard_0_ps11_0_fpd_afi_1 0xec890000 0x10000>,
+                 <0xec8a0000 &ps_wizard_0_ps11_0_fpd_afi_2 0xec8a0000 0x10000>,
+                 <0xec8b0000 &ps_wizard_0_ps11_0_fpd_afi_3 0xec8b0000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0800000 &coresight 0xf0800000 0x4000>,
+                 <0xf08f0000 &ps_wizard_0_ps11_0_coresight_lpd_atm 0xf08f0000 0xf000>,
+                 <0xf0c40000 &ps_wizard_0_ps11_0_coresight_fpd_stm 0xf0c40000 0x4000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10a0000 &ps_wizard_0_ps11_0_pmc_ufs_0 0xf10a0000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf11e0000 &ps_wizard_0_ps11_0_pmc_aes 0xf11e0000 0x10000>,
+                 <0xf11f0000 &ps_wizard_0_ps11_0_pmc_bbram_ctrl 0xf11f0000 0x10000>,
+                 <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
+                 <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12f0000 &ps_wizard_0_ps11_0_pmc_xmpu_0 0xf12f0000 0x10000>,
+                 <0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0xf1300000 0x10000>,
+                 <0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0xf1310000 0x10000>,
+                 <0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0xf1800000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf19e0000 &can0 0xf19e0000 0x10000>,
+                 <0xf19f0000 &can1 0xf19f0000 0x10000>,
+                 <0xf1a00000 &can2 0xf1a00000 0x10000>,
+                 <0xf1a10000 &can3 0xf1a10000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
+                 <0xe2000000 &gic_r52 0xe2000000 0x10000>,
+                 <0x0 &ps_wizard_0_ps11_0_r52_tcm_alias 0x0 0x100000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&cortexr52_6>;
+                                };
+                        };
+                };
+
+                cortexr52_6: cpu@0 {
+                        phandle = <0xe1>;
+                        xlnx,cpu-clk-freq-hz = <0x34274ea8>;
+                        bus-handle = <0x2>;
+                        cpu-frequency = <0x34274ea8>;
+                        xlnx,cluster-number = <0x3>;
+                        xlnx,ip-name = "cortexr52";
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,is-cache-coherent = <0x0>;
+                        power-domains = <&scmi_devpd 0x6>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "arm,cortex-r52";
+                };
+        };
+
+        cpus_r52_7: cpus-r52@7 {
+                phandle = <0x137>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                 <0x100000 &NoC_C0_C1_ddr_memory 0x100000 0x7ff00000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xeb3b3000 &ipi_nobuf4 0xeb3b3000 0x1000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb580000 &ps_wizard_0_ps11_0_rpu_a 0xeb580000 0x8000>,
+                 <0xeb590000 &ps_wizard_0_ps11_0_rpu_b 0xeb590000 0x8000>,
+                 <0xeb5a0000 &ps_wizard_0_ps11_0_rpu_c 0xeb5a0000 0x8000>,
+                 <0xeb5b0000 &ps_wizard_0_ps11_0_rpu_d 0xeb5b0000 0x8000>,
+                 <0xeb5c0000 &ps_wizard_0_ps11_0_rpu_e 0xeb5c0000 0x8000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec800000 &ps_wizard_0_ps11_0_intfpd_asild_gpv 0xec800000 0x4000>,
+                 <0xec804000 &ps_wizard_0_ps11_0_intfpd_asilb_gpv 0xec804000 0x4000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec880000 &ps_wizard_0_ps11_0_fpd_afi_0 0xec880000 0x10000>,
+                 <0xec890000 &ps_wizard_0_ps11_0_fpd_afi_1 0xec890000 0x10000>,
+                 <0xec8a0000 &ps_wizard_0_ps11_0_fpd_afi_2 0xec8a0000 0x10000>,
+                 <0xec8b0000 &ps_wizard_0_ps11_0_fpd_afi_3 0xec8b0000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0800000 &coresight 0xf0800000 0x4000>,
+                 <0xf08f0000 &ps_wizard_0_ps11_0_coresight_lpd_atm 0xf08f0000 0xf000>,
+                 <0xf0c40000 &ps_wizard_0_ps11_0_coresight_fpd_stm 0xf0c40000 0x4000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10a0000 &ps_wizard_0_ps11_0_pmc_ufs_0 0xf10a0000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf11e0000 &ps_wizard_0_ps11_0_pmc_aes 0xf11e0000 0x10000>,
+                 <0xf11f0000 &ps_wizard_0_ps11_0_pmc_bbram_ctrl 0xf11f0000 0x10000>,
+                 <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
+                 <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12f0000 &ps_wizard_0_ps11_0_pmc_xmpu_0 0xf12f0000 0x10000>,
+                 <0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0xf1300000 0x10000>,
+                 <0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0xf1310000 0x10000>,
+                 <0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0xf1800000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf19e0000 &can0 0xf19e0000 0x10000>,
+                 <0xf19f0000 &can1 0xf19f0000 0x10000>,
+                 <0xf1a00000 &can2 0xf1a00000 0x10000>,
+                 <0xf1a10000 &can3 0xf1a10000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
+                 <0xe2000000 &gic_r52 0xe2000000 0x10000>,
+                 <0x0 &ps_wizard_0_ps11_0_r52_tcm_alias 0x0 0x100000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&cortexr52_7>;
+                                };
+                        };
+                };
+
+                cortexr52_7: cpu@0 {
+                        phandle = <0xe3>;
+                        xlnx,cpu-clk-freq-hz = <0x34274ea8>;
+                        bus-handle = <0x2>;
+                        cpu-frequency = <0x34274ea8>;
+                        xlnx,cluster-number = <0x3>;
+                        xlnx,ip-name = "cortexr52";
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,is-cache-coherent = <0x0>;
+                        power-domains = <&scmi_devpd 0x7>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "arm,cortex-r52";
+                };
+        };
+
+        cpus_r52_8: cpus-r52@8 {
+                phandle = <0x138>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                 <0x100000 &NoC_C0_C1_ddr_memory 0x100000 0x7ff00000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xeb3b4000 &ipi_nobuf5 0xeb3b4000 0x1000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb580000 &ps_wizard_0_ps11_0_rpu_a 0xeb580000 0x8000>,
+                 <0xeb590000 &ps_wizard_0_ps11_0_rpu_b 0xeb590000 0x8000>,
+                 <0xeb5a0000 &ps_wizard_0_ps11_0_rpu_c 0xeb5a0000 0x8000>,
+                 <0xeb5b0000 &ps_wizard_0_ps11_0_rpu_d 0xeb5b0000 0x8000>,
+                 <0xeb5c0000 &ps_wizard_0_ps11_0_rpu_e 0xeb5c0000 0x8000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec800000 &ps_wizard_0_ps11_0_intfpd_asild_gpv 0xec800000 0x4000>,
+                 <0xec804000 &ps_wizard_0_ps11_0_intfpd_asilb_gpv 0xec804000 0x4000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec880000 &ps_wizard_0_ps11_0_fpd_afi_0 0xec880000 0x10000>,
+                 <0xec890000 &ps_wizard_0_ps11_0_fpd_afi_1 0xec890000 0x10000>,
+                 <0xec8a0000 &ps_wizard_0_ps11_0_fpd_afi_2 0xec8a0000 0x10000>,
+                 <0xec8b0000 &ps_wizard_0_ps11_0_fpd_afi_3 0xec8b0000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0800000 &coresight 0xf0800000 0x4000>,
+                 <0xf08f0000 &ps_wizard_0_ps11_0_coresight_lpd_atm 0xf08f0000 0xf000>,
+                 <0xf0c40000 &ps_wizard_0_ps11_0_coresight_fpd_stm 0xf0c40000 0x4000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10a0000 &ps_wizard_0_ps11_0_pmc_ufs_0 0xf10a0000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf11e0000 &ps_wizard_0_ps11_0_pmc_aes 0xf11e0000 0x10000>,
+                 <0xf11f0000 &ps_wizard_0_ps11_0_pmc_bbram_ctrl 0xf11f0000 0x10000>,
+                 <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
+                 <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12f0000 &ps_wizard_0_ps11_0_pmc_xmpu_0 0xf12f0000 0x10000>,
+                 <0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0xf1300000 0x10000>,
+                 <0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0xf1310000 0x10000>,
+                 <0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0xf1800000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf19e0000 &can0 0xf19e0000 0x10000>,
+                 <0xf19f0000 &can1 0xf19f0000 0x10000>,
+                 <0xf1a00000 &can2 0xf1a00000 0x10000>,
+                 <0xf1a10000 &can3 0xf1a10000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
+                 <0xe2000000 &gic_r52 0xe2000000 0x10000>,
+                 <0x0 &ps_wizard_0_ps11_0_r52_tcm_alias 0x0 0x100000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&cortexr52_8>;
+                                };
+                        };
+                };
+
+                cortexr52_8: cpu@0 {
+                        phandle = <0xe5>;
+                        xlnx,cpu-clk-freq-hz = <0x34274ea8>;
+                        bus-handle = <0x2>;
+                        cpu-frequency = <0x34274ea8>;
+                        xlnx,cluster-number = <0x4>;
+                        xlnx,ip-name = "cortexr52";
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,is-cache-coherent = <0x0>;
+                        power-domains = <&scmi_devpd 0x8>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "arm,cortex-r52";
+                };
+        };
+
+        cpus_r52_9: cpus-r52@9 {
+                phandle = <0x139>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xf9000000 &amba_rpu 0xf9000000 0x3000>,
+                 <0x100000 &NoC_C0_C1_ddr_memory 0x100000 0x7ff00000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xeb3b5000 &ipi_nobuf6 0xeb3b5000 0x1000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb580000 &ps_wizard_0_ps11_0_rpu_a 0xeb580000 0x8000>,
+                 <0xeb590000 &ps_wizard_0_ps11_0_rpu_b 0xeb590000 0x8000>,
+                 <0xeb5a0000 &ps_wizard_0_ps11_0_rpu_c 0xeb5a0000 0x8000>,
+                 <0xeb5b0000 &ps_wizard_0_ps11_0_rpu_d 0xeb5b0000 0x8000>,
+                 <0xeb5c0000 &ps_wizard_0_ps11_0_rpu_e 0xeb5c0000 0x8000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec800000 &ps_wizard_0_ps11_0_intfpd_asild_gpv 0xec800000 0x4000>,
+                 <0xec804000 &ps_wizard_0_ps11_0_intfpd_asilb_gpv 0xec804000 0x4000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec880000 &ps_wizard_0_ps11_0_fpd_afi_0 0xec880000 0x10000>,
+                 <0xec890000 &ps_wizard_0_ps11_0_fpd_afi_1 0xec890000 0x10000>,
+                 <0xec8a0000 &ps_wizard_0_ps11_0_fpd_afi_2 0xec8a0000 0x10000>,
+                 <0xec8b0000 &ps_wizard_0_ps11_0_fpd_afi_3 0xec8b0000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf0800000 &coresight 0xf0800000 0x4000>,
+                 <0xf08f0000 &ps_wizard_0_ps11_0_coresight_lpd_atm 0xf08f0000 0xf000>,
+                 <0xf0c40000 &ps_wizard_0_ps11_0_coresight_fpd_stm 0xf0c40000 0x4000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10a0000 &ps_wizard_0_ps11_0_pmc_ufs_0 0xf10a0000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf11e0000 &ps_wizard_0_ps11_0_pmc_aes 0xf11e0000 0x10000>,
+                 <0xf11f0000 &ps_wizard_0_ps11_0_pmc_bbram_ctrl 0xf11f0000 0x10000>,
+                 <0xf1200000 &ps_wizard_0_ps11_0_pmc_rsa 0xf1200000 0x10000>,
+                 <0xf1210000 &ps_wizard_0_ps11_0_pmc_sha3 0xf1210000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf12f0000 &ps_wizard_0_ps11_0_pmc_xmpu_0 0xf12f0000 0x10000>,
+                 <0xf1300000 &ps_wizard_0_ps11_0_pmc_xppu_npi_0 0xf1300000 0x10000>,
+                 <0xf1310000 &ps_wizard_0_ps11_0_pmc_xppu_0 0xf1310000 0x10000>,
+                 <0xf1800000 &ps_wizard_0_ps11_0_pmc_sha2 0xf1800000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf19e0000 &can0 0xf19e0000 0x10000>,
+                 <0xf19f0000 &can1 0xf19f0000 0x10000>,
+                 <0xf1a00000 &can2 0xf1a00000 0x10000>,
+                 <0xf1a10000 &can3 0xf1a10000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xf8000000 &ps_wizard_0_ps11_0_fpd_cmn 0xf8000000 0x4000000>,
+                 <0xe2000000 &gic_r52 0xe2000000 0x10000>,
+                 <0x0 &ps_wizard_0_ps11_0_r52_tcm_alias 0x0 0x100000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&cortexr52_9>;
+                                };
+                        };
+                };
+
+                cortexr52_9: cpu@0 {
+                        phandle = <0xe7>;
+                        xlnx,cpu-clk-freq-hz = <0x34274ea8>;
+                        bus-handle = <0x2>;
+                        cpu-frequency = <0x34274ea8>;
+                        xlnx,cluster-number = <0x4>;
+                        xlnx,ip-name = "cortexr52";
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,is-cache-coherent = <0x0>;
+                        power-domains = <&scmi_devpd 0x9>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "arm,cortex-r52";
+                };
+        };
+
+        cpus_microblaze_0: cpus_microblaze@0 {
+                phandle = <0x13a>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0xeb320000 &ipi_pmc 0xeb320000 0x10000>,
+                 <0xeb390000 &ipi_pmc_nobuf 0xeb390000 0x10000>,
+                 <0xebd00000 &adma0 0xebd00000 0x10000>,
+                 <0xebd10000 &adma1 0xebd10000 0x10000>,
+                 <0xebd20000 &adma2 0xebd20000 0x10000>,
+                 <0xebd30000 &adma3 0xebd30000 0x10000>,
+                 <0xebd40000 &adma4 0xebd40000 0x10000>,
+                 <0xebd50000 &adma5 0xebd50000 0x10000>,
+                 <0xebd60000 &adma6 0xebd60000 0x10000>,
+                 <0xebd70000 &adma7 0xebd70000 0x10000>,
+                 <0xf0310000 &pmc_ppu1_mdm_0 0xf0310000 0x8000>,
+                 <0xf1000000 &i2c8 0xf1000000 0x10000>,
+                 <0xf1010000 &ospi 0xf1010000 0x10000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf10b0000 &ufshc 0xf10b0000 0x10000>,
+                 <0xf11c0000 &dma0 0xf11c0000 0x10000>,
+                 <0xf11d0000 &dma1 0xf11d0000 0x10000>,
+                 <0xf1230000 &trng 0xf1230000 0x10000>,
+                 <0xf1270000 &sysmon0 0xf1270000 0x30000>,
+                 <0xf12b0000 &pmc_cfu_apb_0 0xf12b0000 0x10000>,
+                 <0xf12d0000 &pmc_cfi_cframe_0 0xf12d0000 0x1000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1a60000 &gem0 0xf1a60000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1e60000 &ttc0 0xf1e60000 0x10000>,
+                 <0xf1e70000 &ttc1 0xf1e70000 0x10000>,
+                 <0xf1e80000 &ttc2 0xf1e80000 0x10000>,
+                 <0xf1e90000 &ttc3 0xf1e90000 0x10000>,
+                 <0xf1ea0000 &ttc4 0xf1ea0000 0x10000>,
+                 <0xf1eb0000 &ttc5 0xf1eb0000 0x10000>,
+                 <0xf1ec0000 &ttc6 0xf1ec0000 0x10000>,
+                 <0xf1ed0000 &ttc7 0xf1ed0000 0x10000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf0300000 &iomodule0 0xf0300000 0x1000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                pmc_0: cpu@0 {
+                        phandle = <0x13b>;
+                        xlnx,unaligned-exceptions = <0x1>;
+                        xlnx,m-axi-dc-user-value = <0x1f>;
+                        xlnx,dcache-victims = <0x0>;
+                        xlnx,m5-axis-protocol = "GENERIC";
+                        xlnx,fsl-links = <0x0>;
+                        xlnx,mmu-dtlb-size = <0x4>;
+                        xlnx,m15-axis-data-width = <0x20>;
+                        xlnx,instr-size = <0x20>;
+                        xlnx,m13-axis-data-width = <0x20>;
+                        xlnx,m11-axis-data-width = <0x20>;
+                        d-cache-baseaddr = <0x0>;
+                        xlnx,use-non-secure = <0x0>;
+                        xlnx,s3-axis-protocol = "GENERIC";
+                        xlnx,use-fpu = <0x0>;
+                        xlnx,use-hw-mul = <0x2>;
+                        xlnx,m8-axis-data-width = <0x20>;
+                        xlnx,m-axi-ic-data-width = <0x20>;
+                        xlnx,m6-axis-data-width = <0x20>;
+                        xlnx,g-template-list = <0x0>;
+                        xlnx,m4-axis-data-width = <0x20>;
+                        xlnx,allow-icache-wr = <0x1>;
+                        xlnx,num-sync-ff-clk-debug = <0x2>;
+                        xlnx,m2-axis-data-width = <0x20>;
+                        xlnx,s8-axis-protocol = "GENERIC";
+                        i-cache-highaddr = <0x3fffffff>;
+                        xlnx,m0-axis-data-width = <0x20>;
+                        xlnx,s13-axis-protocol = "GENERIC";
+                        xlnx,s15-axis-data-width = <0x20>;
+                        xlnx,pvr-user2 = <0x0>;
+                        xlnx,opcode-0x0-illegal = <0x1>;
+                        xlnx,ecc-use-ce-exception = <0x0>;
+                        xlnx,s13-axis-data-width = <0x20>;
+                        xlnx,m-axi-dc-addr-width = <0x20>;
+                        xlnx,s11-axis-data-width = <0x20>;
+                        xlnx,m13-axis-protocol = "GENERIC";
+                        i-cache-line-size = <0x10>;
+                        xlnx,debug-trace-size = <0x2000>;
+                        xlnx,pvr = <0x2>;
+                        xlnx,trace = <0x1>;
+                        xlnx,ill-opcode-exception = <0x1>;
+                        xlnx,dcache-always-used = <0x0>;
+                        xlnx,m4-axis-protocol = "GENERIC";
+                        xlnx,m-axi-dp-data-width = <0x20>;
+                        xlnx,ip-axi-mon = <0x0>;
+                        xlnx,ip-name = "pmc";
+                        xlnx,reset-msr-dce = <0x0>;
+                        xlnx,m-axi-dc-ruser-width = <0x1>;
+                        xlnx,icache-data-width = <0x0>;
+                        xlnx,debug-counter-width = <0x20>;
+                        xlnx,m9-axis-protocol = "GENERIC";
+                        xlnx,s2-axis-protocol = "GENERIC";
+                        xlnx,debug-profile-size = <0x0>;
+                        xlnx,lockstep-slave = <0x0>;
+                        xlnx,s7-axis-protocol = "GENERIC";
+                        xlnx,m-axi-dc-buser-width = <0x1>;
+                        xlnx,number-of-rd-addr-brk = <0x1>;
+                        xlnx,m-axi-ic-thread-id-width = <0x1>;
+                        xlnx,dcache-addr-tag = <0x0>;
+                        xlnx,s12-axis-protocol = "GENERIC";
+                        xlnx,reset-msr-ie = <0x0>;
+                        xlnx,instance = "design_1_microblaze_0_0";
+                        i-cache-size = <0x2000>;
+                        xlnx,num-sync-ff-clk = <0x2>;
+                        xlnx,m12-axis-protocol = "GENERIC";
+                        xlnx,dcache-line-len = <0x4>;
+                        xlnx,g-use-exceptions = <0x1>;
+                        xlnx,s9-axis-data-width = <0x20>;
+                        xlnx,allow-dcache-wr = <0x1>;
+                        xlnx,use-barrel = <0x1>;
+                        xlnx,s7-axis-data-width = <0x20>;
+                        xlnx,s5-axis-data-width = <0x20>;
+                        xlnx,icache-line-len = <0x4>;
+                        xlnx,base-vectors = <0xf0240000>;
+                        xlnx,s3-axis-data-width = <0x20>;
+                        xlnx,div-zero-exception = <0x1>;
+                        xlnx,dcache-use-writeback = <0x0>;
+                        xlnx,s1-axis-data-width = <0x20>;
+                        xlnx,m3-axis-protocol = "GENERIC";
+                        xlnx,fsl-exception = <0x0>;
+                        xlnx,m-axi-dc-wuser-width = <0x1>;
+                        xlnx,data-size = <0x20>;
+                        xlnx,m-axi-dp-thread-id-width = <0x1>;
+                        xlnx,dcache-byte-size = <0x2000>;
+                        xlnx,i-lmb-mon = <0x0>;
+                        i-cache-baseaddr = <0x0>;
+                        xlnx,m8-axis-protocol = "GENERIC";
+                        xlnx,s1-axis-protocol = "GENERIC";
+                        xlnx,reset-msr-ee = <0x0>;
+                        xlnx,icache-victims = <0x0>;
+                        xlnx,pc-width = <0x20>;
+                        xlnx,async-interrupt = <0x1>;
+                        xlnx,m-axi-ip-addr-width = <0x20>;
+                        xlnx,use-interrupt = <0x1>;
+                        xlnx,number-of-wr-addr-brk = <0x1>;
+                        xlnx,dynamic-bus-sizing = <0x0>;
+                        xlnx,m-axi-dc-data-width = <0x20>;
+                        xlnx,interrupt-mon = <0x0>;
+                        xlnx,iaddr-size = <0x20>;
+                        xlnx,s6-axis-protocol = "GENERIC";
+                        xlnx,use-msr-instr = <0x1>;
+                        xlnx,s11-axis-protocol = "GENERIC";
+                        xlnx,lockstep-master = <0x0>;
+                        xlnx,freq = <0x1312d000>;
+                        xlnx,num-sync-ff-clk-irq = <0x1>;
+                        xlnx,ic-axi-mon = <0x0>;
+                        xlnx,icache-always-used = <0x0>;
+                        xlnx,m14-axis-data-width = <0x20>;
+                        xlnx,m11-axis-protocol = "GENERIC";
+                        xlnx,use-ext-nm-brk = <0x0>;
+                        xlnx,m12-axis-data-width = <0x20>;
+                        xlnx,m10-axis-data-width = <0x20>;
+                        xlnx,async-wakeup = <0x3>;
+                        xlnx,use-icache = <0x0>;
+                        xlnx,edge-is-positive = <0x1>;
+                        xlnx,m9-axis-data-width = <0x20>;
+                        xlnx,interconnect = <0x2>;
+                        xlnx,debug-latency-counters = <0x1>;
+                        xlnx,edk-iptype = "PROCESSOR";
+                        xlnx,m7-axis-data-width = <0x20>;
+                        xlnx,cpu-clk-freq-hz = <0x1fc9f08>;
+                        xlnx,m5-axis-data-width = <0x20>;
+                        xlnx,m2-axis-protocol = "GENERIC";
+                        xlnx,fpu-exception = <0x0>;
+                        xlnx,m3-axis-data-width = <0x20>;
+                        xlnx,debug-event-counters = <0x5>;
+                        xlnx,m1-axis-data-width = <0x20>;
+                        xlnx,m-axi-ic-user-value = <0x1f>;
+                        xlnx,addr-size = <0x20>;
+                        xlnx,debug-external-trace = <0x0>;
+                        xlnx,reset-msr-bip = <0x1>;
+                        xlnx,m-axi-d-bus-exception = <0x1>;
+                        xlnx,s14-axis-data-width = <0x20>;
+                        xlnx,m7-axis-protocol = "GENERIC";
+                        xlnx,s12-axis-data-width = <0x20>;
+                        xlnx,s0-axis-protocol = "GENERIC";
+                        xlnx,s10-axis-data-width = <0x20>;
+                        xlnx,dp-axi-mon = <0x0>;
+                        xlnx,reset-msr-ice = <0x0>;
+                        xlnx,endianness = <0x1>;
+                        xlnx,reset-msr-eip = <0x0>;
+                        xlnx,m-axi-i-bus-exception = <0x0>;
+                        xlnx,mmu-privileged-instr = <0x0>;
+                        xlnx,m-axi-dc-aruser-width = <0x5>;
+                        d-cache-line-size = <0x10>;
+                        xlnx,fault-tolerant = <0x1>;
+                        xlnx,s5-axis-protocol = "GENERIC";
+                        xlnx,m-axi-ic-ruser-width = <0x1>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,s10-axis-protocol = "GENERIC";
+                        xlnx,d-lmb-mon = <0x0>;
+                        xlnx,m-axi-ic-aruser-width = <0x5>;
+                        xlnx,optimization = <0x0>;
+                        xlnx,m10-axis-protocol = "GENERIC";
+                        d-cache-highaddr = <0x3fffffff>;
+                        xlnx,s15-axis-protocol = "GENERIC";
+                        xlnx,m-axi-ic-addr-width = <0x20>;
+                        xlnx,m-axi-ic-buser-width = <0x1>;
+                        xlnx,imprecise-exceptions = <0x0>;
+                        xlnx,number-of-pc-brk = <0x2>;
+                        xlnx,mmu-itlb-size = <0x2>;
+                        xlnx,m-axi-ip-thread-id-width = <0x1>;
+                        xlnx,use-branch-target-cache = <0x0>;
+                        xlnx,m15-axis-protocol = "GENERIC";
+                        xlnx,icache-force-tag-lutram = <0x0>;
+                        xlnx,dcache-data-width = <0x0>;
+                        xlnx,lockstep-select = <0x0>;
+                        xlnx,i-lmb = <0x1>;
+                        xlnx,m1-axis-protocol = "GENERIC";
+                        xlnx,avoid-primitives = <0x0>;
+                        xlnx,area-optimized = <0x0>;
+                        xlnx,use-pcmp-instr = <0x1>;
+                        d-cache-size = <0x2000>;
+                        xlnx,m-axi-ip-data-width = <0x20>;
+                        xlnx,num-sync-ff-dbg-clk = <0x1>;
+                        xlnx,m6-axis-protocol = "GENERIC";
+                        xlnx,use-stack-protection = <0x1>;
+                        xlnx,pss-ref-clk-freq = <0x1fc9f08>;
+                        xlnx,m-axi-dc-awuser-width = <0x5>;
+                        xlnx,icache-streams = <0x0>;
+                        xlnx,i-axi = <0x0>;
+                        xlnx,m-axi-ic-wuser-width = <0x1>;
+                        xlnx,m-axi-dp-addr-width = <0x20>;
+                        xlnx,use-dcache = <0x0>;
+                        xlnx,edk-special = "microblaze";
+                        xlnx,s8-axis-data-width = <0x20>;
+                        xlnx,s4-axis-protocol = "GENERIC";
+                        xlnx,s6-axis-data-width = <0x20>;
+                        xlnx,m-axi-ic-awuser-width = <0x5>;
+                        xlnx,s4-axis-data-width = <0x20>;
+                        xlnx,mmu-tlb-access = <0x3>;
+                        bus-handle = <0x2>;
+                        xlnx,cache-byte-size = <0x2000>;
+                        xlnx,s2-axis-data-width = <0x20>;
+                        xlnx,branch-target-cache-size = <0x0>;
+                        xlnx,reset-msr = <0x0>;
+                        xlnx,m-axi-dc-user-signals = <0x0>;
+                        xlnx,use-extended-fsl-instr = <0x0>;
+                        xlnx,s0-axis-data-width = <0x20>;
+                        xlnx,daddr-size = <0x20>;
+                        xlnx,debug-enabled = <0x1>;
+                        xlnx,use-ext-brk = <0x0>;
+                        xlnx,sco = <0x0>;
+                        xlnx,s9-axis-protocol = "GENERIC";
+                        xlnx,debug-interface = <0x0>;
+                        xlnx,m-axi-dc-exclusive-access = <0x0>;
+                        xlnx,d-lmb = <0x1>;
+                        xlnx,enable-discrete-ports = <0x0>;
+                        xlnx,mmu-zones = <0x10>;
+                        xlnx,s14-axis-protocol = "GENERIC";
+                        xlnx,use-config-reset = <0x0>;
+                        xlnx,m-axi-ic-user-signals = <0x0>;
+                        xlnx,dc-axi-mon = <0x0>;
+                        xlnx,use-div = <0x1>;
+                        xlnx,m14-axis-protocol = "GENERIC";
+                        xlnx,use-reorder-instr = <0x1>;
+                        xlnx,m-axi-dp-exclusive-access = <0x0>;
+                        xlnx,use-mmu = <0x0>;
+                        xlnx,interrupt-is-edge = <0x0>;
+                        xlnx,dcache-force-tag-lutram = <0x0>;
+                        xlnx,m0-axis-protocol = "GENERIC";
+                        xlnx,m-axi-dc-thread-id-width = <0x1>;
+                        xlnx,addr-tag-bits = <0x0>;
+                        xlnx,d-axi = <0x1>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "pmc-microblaze";
+                };
+        };
+
+        cpus_asu: cpus_asu@0 {
+                phandle = <0x13c>;
+                #ranges-size-cells = <0x1>;
+                #ranges-address-cells = <0x1>;
+                address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
+                 <0x0 &NoC_C0_C1_ddr_memory 0x0 0x80000000>,
+                 <0xedd10000 &mmi_dcdma 0xedd10000 0x1000>,
+                 <0xeb310000 &ipi_asu 0xeb310000 0x10000>,
+                 <0xbbf00000 &ps_wizard_0_ps11_0_ocm_ram_0_memory 0xbbf00000 0x80000>,
+                 <0xbbf80000 &ps_wizard_0_ps11_0_ocm_ram_1_memory 0xbbf80000 0x80000>,
+                 <0xbbe00000 &ps_wizard_0_ps11_0_ocm_ram_2_memory 0xbbe00000 0x80000>,
+                 <0xbbe80000 &ps_wizard_0_ps11_0_ocm_ram_3_memory 0xbbe80000 0x80000>,
+                 <0xa0000000 &ps_wizard_0_mmi_0_mmi_pcie_region_0 0xa0000000 0x10000000>,
+                 <0xea460000 &ps_wizard_0_ps11_0_lpd_systmr_read 0xea460000 0x10000>,
+                 <0xea470000 &ps_wizard_0_ps11_0_lpd_systmr_ctrl 0xea470000 0x10000>,
+                 <0xeaa00000 &ps_wizard_0_ps11_0_ocm_ctrl_3 0xeaa00000 0x10000>,
+                 <0xeaa10000 &ps_wizard_0_ps11_0_ocm_xmpu_3 0xeaa10000 0x10000>,
+                 <0xeb400000 &ps_wizard_0_ps11_0_ocm_xmpu_0 0xeb400000 0x10000>,
+                 <0xeb410000 &ps_wizard_0_ps11_0_lpd_slcr_0 0xeb410000 0x100000>,
+                 <0xeb510000 &ps_wizard_0_ps11_0_lpd_slcr_secure_0 0xeb510000 0x40000>,
+                 <0xeb5d0000 &ps_wizard_0_ps11_0_ocm_ctrl_0 0xeb5d0000 0x10000>,
+                 <0xeb5e0000 &ps_wizard_0_ps11_0_crl_0 0xeb5e0000 0x300000>,
+                 <0xeb960000 &ps_wizard_0_ps11_0_ocm_ctrl_1 0xeb960000 0x10000>,
+                 <0xeb980000 &ps_wizard_0_ps11_0_ocm_xmpu_1 0xeb980000 0x10000>,
+                 <0xeb990000 &ps_wizard_0_ps11_0_lpd_xppu_0 0xeb990000 0x10000>,
+                 <0xeb9b0000 &ps_wizard_0_ps11_0_lpd_afi_0 0xeb9b0000 0x10000>,
+                 <0xeb9d0000 &ps_wizard_0_ps11_0_ocm_ctrl_2 0xeb9d0000 0x10000>,
+                 <0xeb9e0000 &ps_wizard_0_ps11_0_ocm_xmpu_2 0xeb9e0000 0x10000>,
+                 <0xeba00000 &r52_0a_atcm_global 0xeba00000 0x10000>,
+                 <0xeba10000 &r52_0a_btcm_global 0xeba10000 0x8000>,
+                 <0xeba20000 &r52_0a_ctcm_global 0xeba20000 0x8000>,
+                 <0xeba40000 &r52_1a_atcm_global 0xeba40000 0x10000>,
+                 <0xeba50000 &r52_1a_btcm_global 0xeba50000 0x8000>,
+                 <0xeba60000 &r52_1a_ctcm_global 0xeba60000 0x8000>,
+                 <0xeba80000 &r52_0b_atcm_global 0xeba80000 0x10000>,
+                 <0xeba90000 &r52_0b_btcm_global 0xeba90000 0x8000>,
+                 <0xebaa0000 &r52_0b_ctcm_global 0xebaa0000 0x8000>,
+                 <0xebac0000 &r52_1b_atcm_global 0xebac0000 0x10000>,
+                 <0xebad0000 &r52_1b_btcm_global 0xebad0000 0x8000>,
+                 <0xebae0000 &r52_1b_ctcm_global 0xebae0000 0x8000>,
+                 <0xebb00000 &r52_0c_atcm_global 0xebb00000 0x10000>,
+                 <0xebb10000 &r52_0c_btcm_global 0xebb10000 0x8000>,
+                 <0xebb20000 &r52_0c_ctcm_global 0xebb20000 0x8000>,
+                 <0xebb40000 &r52_1c_atcm_global 0xebb40000 0x10000>,
+                 <0xebb50000 &r52_1c_btcm_global 0xebb50000 0x8000>,
+                 <0xebb60000 &r52_1c_ctcm_global 0xebb60000 0x8000>,
+                 <0xebb80000 &r52_0d_atcm_global 0xebb80000 0x10000>,
+                 <0xebb90000 &r52_0d_btcm_global 0xebb90000 0x8000>,
+                 <0xebba0000 &r52_0d_ctcm_global 0xebba0000 0x8000>,
+                 <0xebbc0000 &r52_1d_atcm_global 0xebbc0000 0x10000>,
+                 <0xebbd0000 &r52_1d_btcm_global 0xebbd0000 0x8000>,
+                 <0xebbe0000 &r52_1d_ctcm_global 0xebbe0000 0x8000>,
+                 <0xebc00000 &r52_0e_atcm_global 0xebc00000 0x10000>,
+                 <0xebc10000 &r52_0e_btcm_global 0xebc10000 0x8000>,
+                 <0xebc20000 &r52_0e_ctcm_global 0xebc20000 0x8000>,
+                 <0xebc40000 &r52_1e_atcm_global 0xebc40000 0x10000>,
+                 <0xebc50000 &r52_1e_btcm_global 0xebc50000 0x8000>,
+                 <0xebc60000 &r52_1e_ctcm_global 0xebc60000 0x8000>,
+                 <0xebd80000 &ps_wizard_0_ps11_0_sdma_0 0xebd80000 0x10000>,
+                 <0xebd90000 &ps_wizard_0_ps11_0_sdma_1 0xebd90000 0x10000>,
+                 <0xebda0000 &ps_wizard_0_ps11_0_sdma_2 0xebda0000 0x10000>,
+                 <0xebdb0000 &ps_wizard_0_ps11_0_sdma_3 0xebdb0000 0x10000>,
+                 <0xebdc0000 &ps_wizard_0_ps11_0_sdma_4 0xebdc0000 0x10000>,
+                 <0xebdd0000 &ps_wizard_0_ps11_0_sdma_5 0xebdd0000 0x10000>,
+                 <0xebde0000 &ps_wizard_0_ps11_0_sdma_6 0xebde0000 0x10000>,
+                 <0xebdf0000 &ps_wizard_0_ps11_0_sdma_7 0xebdf0000 0x10000>,
+                 <0xebe8c000 &asu_dma0 0xebe8c000 0x1000>,
+                 <0xec200000 &ps_wizard_0_ps11_0_crf_0 0xec200000 0x100000>,
+                 <0xec400000 &ps_wizard_0_ps11_0_intfpd_asild_config 0xec400000 0x100000>,
+                 <0xec500000 &ps_wizard_0_ps11_0_intfpd_asilb_config 0xec500000 0x100000>,
+                 <0xec810000 &ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0 0xec810000 0x10000>,
+                 <0xec820000 &ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0 0xec820000 0x10000>,
+                 <0xec830000 &ps_wizard_0_ps11_0_fpd_cmn_xmpu 0xec830000 0x10000>,
+                 <0xec8c0000 &ps_wizard_0_ps11_0_fpd_slcr_0 0xec8c0000 0x10000>,
+                 <0xec8e0000 &ps_wizard_0_ps11_0_fpd_slcr_secure_0 0xec8e0000 0x10000>,
+                 <0xec910000 &ps_wizard_0_ps11_0_fpd_systmr_read 0xec910000 0x10000>,
+                 <0xec920000 &ps_wizard_0_ps11_0_fpd_systmr_ctrl 0xec920000 0x10000>,
+                 <0xecc00000 &ps_wizard_0_ps11_0_apu_0 0xecc00000 0x10000>,
+                 <0xecc20000 &ps_wizard_0_ps11_0_fpd_splitter_0 0xecc20000 0x10000>,
+                 <0xecd00000 &ps_wizard_0_ps11_0_apu_1 0xecd00000 0x10000>,
+                 <0xecd20000 &ps_wizard_0_ps11_0_fpd_splitter_1 0xecd20000 0x10000>,
+                 <0xece00000 &ps_wizard_0_ps11_0_apu_2 0xece00000 0x10000>,
+                 <0xece20000 &ps_wizard_0_ps11_0_fpd_splitter_2 0xece20000 0x10000>,
+                 <0xecf00000 &ps_wizard_0_ps11_0_apu_3 0xecf00000 0x10000>,
+                 <0xecf20000 &ps_wizard_0_ps11_0_fpd_splitter_3 0xecf20000 0x10000>,
+                 <0xed000000 &gpu 0xed000000 0x800000>,
+                 <0xed800000 &ps_wizard_0_mmi_0_mmi_pcie0 0xed800000 0x80000>,
+                 <0xed900000 &ps_wizard_0_mmi_0_mmi_gtyp_cfg 0xed900000 0x20000>,
+                 <0xed920000 &mmi_10gbe 0xed920000 0x10000>,
+                 <0xed930000 &ps_wizard_0_mmi_0_mmi_pipe_gem_slcr 0xed930000 0x1000>,
+                 <0xed931000 &mdb_pcie0 0xed931000 0x8000>,
+                 <0xeda00000 &ps_wizard_0_mmi_0_mmi_common 0xeda00000 0x300000>,
+                 <0xedd00000 &mmi_dc 0xedd00000 0x10000>,
+                 <0xedd10000 &ps_wizard_0_mmi_0_mmi_dpdma 0xedd10000 0x10000>,
+                 <0xede00000 &mmi_dptx 0xede00000 0x40000>,
+                 <0xede40000 &ps_wizard_0_mmi_0_mmi_usb3phy_crpara 0xede40000 0x40000>,
+                 <0xede80000 &ps_wizard_0_mmi_0_mmi_trng 0xede80000 0x10000>,
+                 <0xede90000 &ps_wizard_0_mmi_0_mmi_udh_pll 0xede90000 0x10000>,
+                 <0xedea0000 &ps_wizard_0_mmi_0_mmi_udh_slcr 0xedea0000 0x10000>,
+                 <0xedeb0000 &ps_wizard_0_mmi_0_mmi_hdcp 0xedeb0000 0x8000>,
+                 <0xedeb8000 &usb3_dp_phy 0xedeb8000 0x4000>,
+                 <0xedebc000 &ps_wizard_0_mmi_0_mmi_usb2phy 0xedebc000 0x4000>,
+                 <0xedec0000 &mmi_dwc3 0xedec0000 0x130000>,
+                 <0xf1020000 &gpio1 0xf1020000 0x10000>,
+                 <0xf1110000 &ps_wizard_0_ps11_0_pmc_global_0 0xf1110000 0x50000>,
+                 <0xf1220000 &ps_wizard_0_ps11_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1220000 &ps_wizard_0_mmi_0_pmc_slave_boot 0xf1220000 0x10000>,
+                 <0xf1240000 &ps_wizard_0_ps11_0_pmc_efuse_ctrl 0xf1240000 0x10000>,
+                 <0xf1250000 &ps_wizard_0_ps11_0_pmc_efuse_cache 0xf1250000 0x10000>,
+                 <0xf1260000 &ps_wizard_0_ps11_0_crp_0 0xf1260000 0x10000>,
+                 <0xf12a0000 &rtc 0xf12a0000 0x10000>,
+                 <0xf1920000 &serial0 0xf1920000 0x10000>,
+                 <0xf1930000 &serial1 0xf1930000 0x10000>,
+                 <0xf1940000 &i2c0 0xf1940000 0x10000>,
+                 <0xf1950000 &i2c1 0xf1950000 0x10000>,
+                 <0xf1a20000 &ps_wizard_0_ps11_0_lpd_iou_slcr_0 0xf1a20000 0x20000>,
+                 <0xf1a40000 &ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0 0xf1a40000 0x10000>,
+                 <0xf1a50000 &gpio0 0xf1a50000 0x10000>,
+                 <0xf1c00000 &dwc3_1 0xf1c00000 0x100000>,
+                 <0xf1ef0000 &usb1 0xf1ef0000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_ps11_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf2100000 &ps_wizard_0_mmi_0_pmc_slave_boot_stream 0xf2100000 0x10000>,
+                 <0xf6000000 &ps_wizard_0_ps11_0_pmc_ram_npi 0xf6000000 0x2000000>,
+                 <0xebe00000 &ps_wizard_0_ps11_0_asu_ram_instr_cntlr 0xebe00000 0x40000>,
+                 <0xebe40000 &ps_wizard_0_ps11_0_asu_ram_data_cntlr 0xebe40000 0x20000>,
+                 <0xebe80000 &asu_iomodule0 0xebe80000 0x8000>,
+                 <0xebe88000 &ps_wizard_0_ps11_0_asu_aes 0xebe88000 0x2000>,
+                 <0xebe8a000 &ps_wizard_0_ps11_0_asu_keys 0xebe8a000 0x2000>,
+                 <0xebe8d000 &asu_dma1 0xebe8d000 0x1000>,
+                 <0xebe8e000 &ps_wizard_0_ps11_0_asu_local 0xebe8e000 0x2000>,
+                 <0xebea0000 &ps_wizard_0_ps11_0_asu_ram_instr_ecc_ctrl 0xebea0000 0x10000>,
+                 <0xebeb0000 &ps_wizard_0_ps11_0_asu_ram_data_ecc_ctrl 0xebeb0000 0x10000>,
+                 <0xebec0000 &ps_wizard_0_ps11_0_asu_tmr_manager 0xebec0000 0x10000>,
+                 <0xebed0000 &ps_wizard_0_ps11_0_asu_tmr_inject 0xebed0000 0x10000>,
+                 <0xebee0000 &ps_wizard_0_ps11_0_asu_tmr_trace 0xebee0000 0x10000>,
+                 <0xebef0000 &ps_wizard_0_ps11_0_asu_mdm_hsd 0xebef0000 0x10000>,
+                 <0xebf00000 &ps_wizard_0_ps11_0_asu_ecc 0xebf00000 0x10000>,
+                 <0xebf20000 &ps_wizard_0_ps11_0_asu_trng 0xebf20000 0x10000>,
+                 <0xebf30000 &ps_wizard_0_ps11_0_asu_sha2 0xebf30000 0x10000>,
+                 <0xebf40000 &ps_wizard_0_ps11_0_asu_sha3 0xebf40000 0x10000>,
+                 <0xebf50000 &ps_wizard_0_ps11_0_asu_rsa 0xebf50000 0x10000>,
+                 <0xebf60000 &ps_wizard_0_ps11_0_asu_xmpu 0xebf60000 0x10000>,
+                 <0xebf70000 &ps_wizard_0_ps11_0_intasu_config 0xebf70000 0xf000>,
+                 <0xebf7f000 &ps_wizard_0_ps11_0_intasu_gpv 0xebf7f000 0x1000>,
+                 <0xebf80000 &ps_wizard_0_ps11_0_asu_global 0xebf80000 0x20000>;
+                compatible = "cpus,cluster";
+                #size-cells = <0x0>;
+                #address-cells = <0x1>;
+
+                asu: cpu@0 {
+                        phandle = <0x13d>;
+                        xlnx,imprecise-exceptions = <0x0>;
+                        xlnx,number-of-pc-brk = <0x2>;
+                        xlnx,freq = <0x17d77462>;
+                        xlnx,use-branch-target-cache = <0x0>;
+                        xlnx,num-sync-ff-clk-irq = <0x0>;
+                        xlnx,fsl-links = <0x0>;
+                        timebase-frequency = <0x17d77462>;
+                        xlnx,i-lmb = <0x1>;
+                        xlnx,use-ext-nm-brk = <0x0>;
+                        xlnx,num-sync-ff-trace-clk = <0x0>;
+                        xlnx,use-compression = <0x1>;
+                        xlnx,number-of-rd-addr-brk = <0x1>;
+                        xlnx,async-wakeup = <0x0>;
+                        xlnx,use-icache = <0x0>;
+                        xlnx,edge-is-positive = <0x1>;
+                        xlnx,use-fpu = <0x0>;
+                        xlnx,num-sync-ff-dbg-clk = <0x0>;
+                        xlnx,interconnect = <0x2>;
+                        xlnx,hartid = <0x0>;
+                        xlnx,debug-latency-counters = <0x0>;
+                        xlnx,debug-enable = <0x1>;
+                        xlnx,num-sync-ff-clk = <0x0>;
+                        xlnx,cpu-clk-freq-hz = <0x17d77462>;
+                        xlnx,i-axi = <0x1>;
+                        xlnx,use-atomic = <0x1>;
+                        xlnx,num-sync-ff-clk-debug = <0x0>;
+                        xlnx,debug-event-counters = <0x0>;
+                        xlnx,use-muldiv = <0x1>;
+                        xlnx,use-dcache = <0x0>;
+                        xlnx,m-axi-d-bus-exception = <0x1>;
+                        xlnx,base-vectors = <0xebe00000>;
+                        xlnx,ecc-use-ce-exception = <0x0>;
+                        xlnx,use-bitman-s = <0x0>;
+                        xlnx,impid = <0x12>;
+                        xlnx,fsl-exception = <0x0>;
+                        xlnx,use-ext-brk = <0x0>;
+                        xlnx,m-axi-i-bus-exception = <0x1>;
+                        clock-frequency = <0x17d77462>;
+                        xlnx,d-lmb = <0x1>;
+                        xlnx,use-sleep = <0x1>;
+                        xlnx,ill-instr-exception = <0x2>;
+                        xlnx,fault-tolerant = <0x0>;
+                        xlnx,data-size = <0x20>;
+                        xlnx,use-config-reset = <0x1>;
+                        xlnx,trace = <0x1>;
+                        xlnx,timestamp-clk-freq = <0x5f5dd19>;
+                        xlnx,use-bitman-c = <0x0>;
+                        xlnx,use-bitman-b = <0x0>;
+                        xlnx,use-bitman-a = <0x0>;
+                        xlnx,m-axi-dp-exclusive-access = <0x1>;
+                        xlnx,use-mmu = <0x0>;
+                        xlnx,pc-width = <0x20>;
+                        xlnx,interrupt-is-edge = <0x0>;
+                        xlnx,async-interrupt = <0x0>;
+                        xlnx,optimization = <0x0>;
+                        xlnx,ip-name = "asu";
+                        xlnx,use-interrupt = <0x1>;
+                        xlnx,temporal-depth = <0x2>;
+                        xlnx,number-of-wr-addr-brk = <0x1>;
+                        xlnx,pmp-entries = <0x0>;
+                        xlnx,d-axi = <0x1>;
+                        reg = <0x0>;
+                        device_type = "cpu";
+                        compatible = "xlnx,asu-microblaze_riscv";
+                };
+        };
+
         aliases {
                 nvmem0 = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/eeprom@54";
                 ethernet0 = "/axi/ethernet@f1a60000";
@@ -638,9 +2954,11 @@
                 i2c4 = "/axi/i2c@f1980000";
                 i2c3 = "/axi/i2c@f1970000";
                 i2c2 = "/axi/i2c@f1950000";
+                i2c1 = "/axi/i2c@f1940000";
                 mmc1 = "/axi/mmc@f1050000";
                 mmc0 = "/axi/mmc@f1040000";
                 serial1 = "/axi/serial@f1930000";
+                serial0 = "/axi/serial@f1920000";
         };
 
         firmware {
@@ -1861,6 +4179,22 @@
                         compatible = "xlnx,pmc-gpio-1.0";
                 };
 
+                i2c0: i2c@f1940000 {
+                        phandle = <0xa3>;
+                        xlnx,name = "ps_wizard_0_ps11_0_i2c_0";
+                        xlnx,iic-board-interface = "custom";
+                        xlnx,ip-name = "i2c";
+                        xlnx,i2c-clk-freq-hz = <0x98961be>;
+                        xlnx,clock-freq = <0x98961be>;
+                        power-domains = <&scmi_devpd 0xf>;
+                        clocks = <&scmi_clk 0x47>;
+                        interrupts = <0x0 0x15 0x4>;
+                        interrupt-parent = <&imux>;
+                        reg = <0x0 0xf1940000 0x0 0x1000>;
+                        status = "okay";
+                        compatible = "cdns,i2c-r1p14";
+                };
+
                 i2c1: i2c@f1950000 {
                         phandle = <0xa4>;
                         clock-frequency = <0x61a80>;
@@ -2458,6 +4792,31 @@
                         compatible = "xlnx,versal-net-emmc";
                 };
 
+                serial0: serial@f1920000 {
+                        phandle = <0xa1>;
+                        xlnx,name = "ps_wizard_0_ps11_0_sbsauart_0";
+                        xlnx,uart-clk-freq-hz = <0x5f5dd19>;
+                        port-number = <0x0>;
+                        cts-override;
+                        xlnx,baudrate = <0x1c200>;
+                        xlnx,ip-name = "sbsauart";
+                        xlnx,has-modem = <0x0>;
+                        xlnx,uart-board-interface = "custom";
+                        xlnx,clock-freq = <0x5f5dd19>;
+                        device_type = "serial";
+                        power-domains = <&scmi_devpd 0x13>;
+                        clocks = <&scmi_clk 0x3a>,
+                         <&scmi_clk 0x34>;
+                        clock-names = "uartclk", "apb_pclk";
+                        reg-io-width = <0x4>;
+                        interrupts = <0x0 0x19 0x4>;
+                        interrupt-parent = <&imux>;
+                        reg = <0x0 0xf1920000 0x0 0x1000>;
+                        status = "okay";
+                        compatible = "arm,pl011", "arm,primecell";
+                        bootph-all;
+                };
+
                 serial1: serial@f1930000 {
                         phandle = <0xa2>;
                         xlnx,name = "ps_wizard_0_ps11_0_sbsauart_1";
@@ -2825,6 +5184,28 @@
                         reg = <0x0 0xf1e70000 0x0 0x1000>;
                         timer-width = <0x20>;
                         interrupts = <0x0 0x2c 0x4 0x0 0x2c 0x4 0x0 0x2c 0x4>;
+                        interrupt-parent = <&imux>;
+                        status = "okay";
+                        compatible = "cdns,ttc";
+                };
+
+                ttc2: timer@f1e80000 {
+                        phandle = <0xb0>;
+                        xlnx,name = "ps_wizard_0_ps11_0_ttc_2";
+                        xlnx,ttc-clk0-clksrc = "APB";
+                        xlnx,ttc-clk1-freq-hz = <0x8f0cba9>;
+                        xlnx,ttc-clk0-freq-hz = <0x8f0cba9>;
+                        xlnx,ip-name = "ttc";
+                        xlnx,ttc-clk2-clksrc = "APB";
+                        xlnx,clock-freq = <0x8f0cba9>;
+                        xlnx,ttc-clk1-clksrc = "APB";
+                        xlnx,ttc-clk2-freq-hz = <0x8f0cba9>;
+                        xlnx,ttc-board-interface = "custom";
+                        power-domains = <&scmi_devpd 0x18>;
+                        clocks = <&scmi_clk 0x13>;
+                        reg = <0x0 0xf1e80000 0x0 0x1000>;
+                        timer-width = <0x20>;
+                        interrupts = <0x0 0x2d 0x4 0x0 0x2d 0x4 0x0 0x2d 0x4>;
                         interrupt-parent = <&imux>;
                         status = "okay";
                         compatible = "cdns,ttc";
@@ -9645,6 +12026,7 @@
                 ttc5 = "/axi/timer@f1eb0000";
                 ttc4 = "/axi/timer@f1ea0000";
                 ttc3 = "/axi/timer@f1e90000";
+                ttc2 = "/axi/timer@f1e80000";
                 ttc1 = "/axi/timer@f1e70000";
                 ttc0 = "/axi/timer@f1e60000";
                 sysmon0 = "/axi/sysmon@f1270000";
@@ -9652,6 +12034,7 @@
                 spi0 = "/axi/spi@f19c0000";
                 smmu = "/axi/iommu@ec000000";
                 serial1 = "/axi/serial@f1930000";
+                serial0 = "/axi/serial@f1920000";
                 sdhci1 = "/axi/mmc@f1050000";
                 sdhci0 = "/axi/mmc@f1040000";
                 rtc = "/axi/rtc@f12a0000";
@@ -9686,6 +12069,7 @@
                 eeprom = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/eeprom@54";
                 tca6416_u37 = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/gpio@20";
                 i2c1 = "/axi/i2c@f1950000";
+                i2c0 = "/axi/i2c@f1940000";
                 gpio1 = "/axi/gpio@f1020000";
                 gpio0 = "/axi/gpio@f1a50000";
                 mmi_10gbe = "/axi/ethernet@ed920000";
@@ -9767,6 +12151,30 @@
                 scmi_reset = "/firmware/scmi/protocol@16";
                 scmi = "/firmware/scmi";
                 psci = "/firmware/psci";
+                asu = "/cpus_asu@0/cpu@0";
+                cpus_asu = "/cpus_asu@0";
+                pmc_0 = "/cpus_microblaze@0/cpu@0";
+                cpus_microblaze_0 = "/cpus_microblaze@0";
+                cortexr52_9 = "/cpus-r52@9/cpu@0";
+                cpus_r52_9 = "/cpus-r52@9";
+                cortexr52_8 = "/cpus-r52@8/cpu@0";
+                cpus_r52_8 = "/cpus-r52@8";
+                cortexr52_7 = "/cpus-r52@7/cpu@0";
+                cpus_r52_7 = "/cpus-r52@7";
+                cortexr52_6 = "/cpus-r52@6/cpu@0";
+                cpus_r52_6 = "/cpus-r52@6";
+                cortexr52_5 = "/cpus-r52@5/cpu@0";
+                cpus_r52_5 = "/cpus-r52@5";
+                cortexr52_4 = "/cpus-r52@4/cpu@0";
+                cpus_r52_4 = "/cpus-r52@4";
+                cortexr52_3 = "/cpus-r52@3/cpu@0";
+                cpus_r52_3 = "/cpus-r52@3";
+                cortexr52_2 = "/cpus-r52@2/cpu@0";
+                cpus_r52_2 = "/cpus-r52@2";
+                cortexr52_1 = "/cpus-r52@1/cpu@0";
+                cpus_r52_1 = "/cpus-r52@1";
+                cortexr52_0 = "/cpus-r52@0/cpu@0";
+                cpus_r52_0 = "/cpus-r52@0";
                 cpu_opp_table = "/opp-table";
                 llc = "/cpus-a78@0/l4-cache";
                 l3_3 = "/cpus-a78@0/l3-3-cache";
@@ -9800,7 +12208,19 @@
                         model = "AMD Versal VEK385 revB";
                         memory = <0x0 0x20000000 0x0 0x20000 0x0 0xbeef 0x0 0x80000000 0x8 0x0 0x1 0x80000000 0x500 0x0 0x2 0x0 0x600 0x0 0x1 0x0 0x0 0xbbf00000 0x0 0x80000 0x0 0xbbf80000 0x0 0x80000 0x0 0xbbe00000 0x0 0x80000 0x0 0xbbe80000 0x0 0x80000>;
                         id = <0x0>;
-                        cpus = <&cpus_a78 0xff 0x0>;
+                        cpus = <&cpus_a78 0xff 0x0>,
+                         <&cpus_r52_0 0x1 0x0>,
+                         <&cpus_r52_1 0x1 0x0>,
+                         <&cpus_r52_2 0x1 0x0>,
+                         <&cpus_r52_3 0x1 0x0>,
+                         <&cpus_r52_4 0x1 0x0>,
+                         <&cpus_r52_5 0x1 0x0>,
+                         <&cpus_r52_6 0x1 0x0>,
+                         <&cpus_r52_7 0x1 0x0>,
+                         <&cpus_r52_8 0x1 0x0>,
+                         <&cpus_r52_9 0x1 0x0>,
+                         <&cpus_microblaze_0 0x1 0x0>,
+                         <&cpus_asu 0x1 0x0>;
                         compatible = "openamp,domain-v1,devices";
                         board = "amd,versal2-vek385-revB";
 
@@ -9811,6 +12231,7 @@
                                 spi0 = "/axi/spi@f1010000";
                                 serial2 = "/axi/coresight@f0800000";
                                 serial1 = "/axi/serial@f1930000";
+                                serial0 = "/axi/serial@f1920000";
                                 nvmem0 = "/axi/i2c@f1950000/i2c-arbitrator@72/i2c-arb/eeprom@54";
                                 mmc1 = "/axi/mmc@f1050000";
                                 mmc0 = "/axi/mmc@f1040000";
@@ -9821,6 +12242,7 @@
                                 i2c4 = "/axi/i2c@f1980000";
                                 i2c3 = "/axi/i2c@f1970000";
                                 i2c2 = "/axi/i2c@f1950000";
+                                i2c1 = "/axi/i2c@f1940000";
                                 i2c0 = "/axi/i2c@f1000000";
                                 ethernet0 = "/axi/ethernet@f1a60000";
                         };
@@ -9830,6 +12252,7 @@
                         phandle = <0x2be>;
                         lopper,memory-keep-all = <0x1>;
                         access-json = "[{\"dev\": \"interrupt-controller@e2000000\", \"label\": \"gic_a78\"}, {\"dev\": \"gpu@ed000000\", \"label\": \"gpu\"}, {\"dev\": \"mmi_dptx@ede00000\", \"label\": \"mmi_dptx\"}, {\"dev\": \"dma-controller@edd10000\", \"label\": \"mmi_dcdma\"}, {\"dev\": \"mmi_dc@edd00000\", \"label\": \"mmi_dc\"}, {\"dev\": \"dma-controller@ebd00000\", \"label\": \"adma0\"}, {\"dev\": \"dma-controller@ebd10000\", \"label\": \"adma1\"}, {\"dev\": \"dma-controller@ebd20000\", \"label\": \"adma2\"}, {\"dev\": \"dma-controller@ebd30000\", \"label\": \"adma3\"}, {\"dev\": \"dma-controller@ebd40000\", \"label\": \"adma4\"}, {\"dev\": \"dma-controller@ebd50000\", \"label\": \"adma5\"}, {\"dev\": \"dma-controller@ebd60000\", \"label\": \"adma6\"}, {\"dev\": \"dma-controller@ebd70000\", \"label\": \"adma7\"}, {\"dev\": \"can@f19e0000\", \"label\": \"can0\"}, {\"dev\": \"can@f19f0000\", \"label\": \"can1\"}, {\"dev\": \"can@f1a00000\", \"label\": \"can2\"}, {\"dev\": \"can@f1a10000\", \"label\": \"can3\"}, {\"dev\": \"can@f1a90000\", \"label\": \"can4\", \"status\": \"disabled\"}, {\"dev\": \"can@f1aa0000\", \"label\": \"can5\", \"status\": \"disabled\"}, {\"dev\": \"pmcdma@f11c0000\", \"label\": \"dma0\"}, {\"dev\": \"pmcdma@f11d0000\", \"label\": \"dma1\"}, {\"dev\": \"asudma@ebe8c000\", \"label\": \"asu_dma0\"}, {\"dev\": \"asudma@ebe8d000\", \"label\": \"asu_dma1\"}, {\"dev\": \"ethernet@f1a60000\", \"label\": \"gem0\"}, {\"dev\": \"ethernet@f1a70000\", \"label\": \"gem1\", \"status\": \"disabled\"}, {\"dev\": \"ethernet@ed920000\", \"label\": \"mmi_10gbe\"}, {\"dev\": \"gpio@f1a50000\", \"label\": \"gpio0\"}, {\"dev\": \"gpio@f1020000\", \"label\": \"gpio1\"}, {\"bootph\": \"all\", \"dev\": \"i2c@f1950000\", \"label\": \"i2c1\"}, {\"dev\": \"i2c@f1960000\", \"label\": \"i2c2\", \"status\": \"disabled\"}, {\"dev\": \"i2c@f1970000\", \"label\": \"i2c3\", \"status\": \"disabled\"}, {\"dev\": \"i2c@f1980000\", \"label\": \"i2c4\", \"status\": \"disabled\"}, {\"dev\": \"i2c@f1990000\", \"label\": \"i2c5\", \"status\": \"disabled\"}, {\"dev\": \"i2c@f19a0000\", \"label\": \"i2c6\", \"status\": \"disabled\"}, {\"dev\": \"i2c@f19b0000\", \"label\": \"i2c7\", \"status\": \"disabled\"}, {\"dev\": \"i2c@f1000000\", \"label\": \"i2c8\"}, {\"dev\": \"i3c@f1948000\", \"label\": \"i3c0\", \"status\": \"disabled\"}, {\"dev\": \"i3c@f1958000\", \"label\": \"i3c1\", \"status\": \"disabled\"}, {\"dev\": \"i3c@f1968000\", \"label\": \"i3c2\", \"status\": \"disabled\"}, {\"dev\": \"i3c@f1978000\", \"label\": \"i3c3\", \"status\": \"disabled\"}, {\"dev\": \"i3c@f1988000\", \"label\": \"i3c4\", \"status\": \"disabled\"}, {\"dev\": \"i3c@f1998000\", \"label\": \"i3c5\", \"status\": \"disabled\"}, {\"dev\": \"i3c@f19a8000\", \"label\": \"i3c6\", \"status\": \"disabled\"}, {\"dev\": \"i3c@f19b8000\", \"label\": \"i3c7\", \"status\": \"disabled\"}, {\"dev\": \"i3c@f1008000\", \"label\": \"i3c8\", \"status\": \"disabled\"}, {\"dev\": \"iomodule@f0300000\", \"label\": \"iomodule0\"}, {\"dev\": \"iomodule@ebe80000\", \"label\": \"asu_iomodule0\"}, {\"dev\": \"spi@f1010000\", \"label\": \"ospi\"}, {\"dev\": \"watchdog@f03f0000\", \"label\": \"pmc_wwdt\", \"status\": \"disabled\"}, {\"dev\": \"rng@f1230000\", \"label\": \"trng\"}, {\"dev\": \"cframe@f12d0000\", \"label\": \"pmc_cfi_cframe_0\"}, {\"dev\": \"cfu_apb@f12b0000\", \"label\": \"pmc_cfu_apb_0\"}, {\"dev\": \"ppu1_mdm@f0310000\", \"label\": \"pmc_ppu1_mdm_0\"}, {\"dev\": \"spi@f1030000\", \"label\": \"qspi\", \"status\": \"disabled\"}, {\"dev\": \"rtc@f12a0000\", \"label\": \"rtc\"}, {\"dev\": \"mmc@f1040000\", \"label\": \"sdhci0\", \"status\": \"disabled\"}, {\"dev\": \"mmc@f1050000\", \"label\": \"sdhci1\", \"status\": \"disabled\"}, {\"bootph\": \"all\", \"dev\": \"serial@f1930000\", \"label\": \"serial1\"}, {\"dev\": \"spi@f19c0000\", \"label\": \"spi0\", \"status\": \"disabled\"}, {\"dev\": \"spi@f19d0000\", \"label\": \"spi1\", \"status\": \"disabled\"}, {\"dev\": \"sysmon@f1270000\", \"label\": \"sysmon0\"}, {\"dev\": \"timer@f1e60000\", \"label\": \"ttc0\"}, {\"dev\": \"timer@f1e70000\", \"label\": \"ttc1\"}, {\"dev\": \"timer@f1ea0000\", \"label\": \"ttc4\"}, {\"dev\": \"timer@f1eb0000\", \"label\": \"ttc5\"}, {\"dev\": \"timer@f1ec0000\", \"label\": \"ttc6\"}, {\"dev\": \"timer@f1ed0000\", \"label\": \"ttc7\"}, {\"dev\": \"ufs@f10b0000\", \"label\": \"ufshc\"}, {\"dev\": \"usb@f1ee0000\", \"label\": \"usb0\", \"status\": \"disabled\"}, {\"dev\": \"usb@f1ef0000\", \"label\": \"usb1\"}, {\"dev\": \"phy@edeb8000\", \"label\": \"usb3_dp_phy\"}, {\"dev\": \"pcie@ed931000\", \"label\": \"mdb_pcie0\"}, {\"dev\": \"pcie@ed939000\", \"label\": \"mdb_pcie1\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@ecc10000\", \"label\": \"wwdt0\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@ecd10000\", \"label\": \"wwdt1\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@ece10000\", \"label\": \"wwdt2\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@ecf10000\", \"label\": \"wwdt3\", \"status\": \"disabled\"}, {\"dev\": \"edac@f2014050\", \"label\": \"xilsem_edac\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@eb000000\", \"label\": \"lpd_wwdt0\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@eb010000\", \"label\": \"lpd_wwdt1\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@eb020000\", \"label\": \"lpd_wwdt2\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@eb030000\", \"label\": \"lpd_wwdt3\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@eb040000\", \"label\": \"lpd_wwdt4\", \"status\": \"disabled\"}, {\"dev\": \"coresight@f0800000\", \"label\": \"coresight\"}, {\"dev\": \"mailbox@eb330000\", \"label\": \"ipi0\"}, {\"dev\": \"mailbox@eb370000\", \"label\": \"ipi4\"}, {\"dev\": \"mailbox@eb380000\", \"label\": \"ipi5\"}, {\"dev\": \"mailbox@eb3a0000\", \"label\": \"ipi6\"}, {\"dev\": \"mailbox@eb3b0000\", \"label\": \"ipi_nobuf1\"}, {\"dev\": \"mailbox@eb3b2000\", \"label\": \"ipi_nobuf3\"}, {\"dev\": \"mailbox@eb3b3000\", \"label\": \"ipi_nobuf4\"}, {\"dev\": \"mailbox@eb3b4000\", \"label\": \"ipi_nobuf5\"}, {\"dev\": \"mailbox@eb3b5000\", \"label\": \"ipi_nobuf6\"}, {\"dev\": \"mailbox@eb310000\", \"label\": \"ipi_asu\"}, {\"dev\": \"mailbox@eb320000\", \"label\": \"ipi_pmc\"}, {\"dev\": \"mailbox@eb390000\", \"label\": \"ipi_pmc_nobuf\"}, {\"dev\": \"r52_0b_atcm_global@eba80000\", \"label\": \"r52_0b_atcm_global\"}, {\"dev\": \"r52_0b_btcm_global@eba90000\", \"label\": \"r52_0b_btcm_global\"}, {\"dev\": \"r52_0b_ctcm_global@ebaa0000\", \"label\": \"r52_0b_ctcm_global\"}, {\"dev\": \"r52_0c_atcm_global@ebb00000\", \"label\": \"r52_0c_atcm_global\"}, {\"dev\": \"r52_0c_btcm_global@ebb10000\", \"label\": \"r52_0c_btcm_global\"}, {\"dev\": \"r52_0c_ctcm_global@ebb20000\", \"label\": \"r52_0c_ctcm_global\"}, {\"dev\": \"r52_0d_atcm_global@ebb80000\", \"label\": \"r52_0d_atcm_global\"}, {\"dev\": \"r52_0d_btcm_global@ebb90000\", \"label\": \"r52_0d_btcm_global\"}, {\"dev\": \"r52_0d_ctcm_global@ebba0000\", \"label\": \"r52_0d_ctcm_global\"}, {\"dev\": \"r52_0e_atcm_global@ebc00000\", \"label\": \"r52_0e_atcm_global\"}, {\"dev\": \"r52_0e_btcm_global@ebc10000\", \"label\": \"r52_0e_btcm_global\"}, {\"dev\": \"r52_0e_ctcm_global@ebc20000\", \"label\": \"r52_0e_ctcm_global\"}, {\"dev\": \"r52_1a_atcm_global@eba40000\", \"label\": \"r52_1a_atcm_global\"}, {\"dev\": \"r52_1a_btcm_global@eba50000\", \"label\": \"r52_1a_btcm_global\"}, {\"dev\": \"r52_1a_ctcm_global@eba60000\", \"label\": \"r52_1a_ctcm_global\"}, {\"dev\": \"r52_1b_atcm_global@ebac0000\", \"label\": \"r52_1b_atcm_global\"}, {\"dev\": \"r52_1b_btcm_global@ebad0000\", \"label\": \"r52_1b_btcm_global\"}, {\"dev\": \"r52_1b_ctcm_global@ebae0000\", \"label\": \"r52_1b_ctcm_global\"}, {\"dev\": \"r52_1c_atcm_global@ebb40000\", \"label\": \"r52_1c_atcm_global\"}, {\"dev\": \"r52_1c_btcm_global@ebb50000\", \"label\": \"r52_1c_btcm_global\"}, {\"dev\": \"r52_1c_ctcm_global@ebb60000\", \"label\": \"r52_1c_ctcm_global\"}, {\"dev\": \"r52_1d_atcm_global@ebbc0000\", \"label\": \"r52_1d_atcm_global\"}, {\"dev\": \"r52_1d_btcm_global@ebbd0000\", \"label\": \"r52_1d_btcm_global\"}, {\"dev\": \"r52_1d_ctcm_global@ebbe0000\", \"label\": \"r52_1d_ctcm_global\"}, {\"dev\": \"r52_1e_atcm_global@ebc40000\", \"label\": \"r52_1e_atcm_global\"}, {\"dev\": \"r52_1e_btcm_global@ebc50000\", \"label\": \"r52_1e_btcm_global\"}, {\"dev\": \"r52_1e_ctcm_global@ebc60000\", \"label\": \"r52_1e_ctcm_global\"}, {\"dev\": \"ps-wizard-0-mmi-0-cpm-cdx-dpu-high@100000000000\", \"label\": \"ps_wizard_0_mmi_0_cpm_cdx_dpu_high\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-common@eda00000\", \"label\": \"ps_wizard_0_mmi_0_mmi_common\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-dpdma@edd10000\", \"label\": \"ps_wizard_0_mmi_0_mmi_dpdma\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-gtyp-cfg@ed900000\", \"label\": \"ps_wizard_0_mmi_0_mmi_gtyp_cfg\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-hdcp@edeb0000\", \"label\": \"ps_wizard_0_mmi_0_mmi_hdcp\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-pcie0@ed800000\", \"label\": \"ps_wizard_0_mmi_0_mmi_pcie0\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-pipe-gem-slcr@ed930000\", \"label\": \"ps_wizard_0_mmi_0_mmi_pipe_gem_slcr\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-trng@ede80000\", \"label\": \"ps_wizard_0_mmi_0_mmi_trng\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-udh-pll@ede90000\", \"label\": \"ps_wizard_0_mmi_0_mmi_udh_pll\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-udh-slcr@edea0000\", \"label\": \"ps_wizard_0_mmi_0_mmi_udh_slcr\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-usb2phy@edebc000\", \"label\": \"ps_wizard_0_mmi_0_mmi_usb2phy\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-usb3phy-crpara@ede40000\", \"label\": \"ps_wizard_0_mmi_0_mmi_usb3phy_crpara\"}, {\"dev\": \"ps-wizard-0-mmi-0-mmi-pcie-region-0@a0000000\", \"label\": \"ps_wizard_0_mmi_0_mmi_pcie_region_0\"}, {\"dev\": \"ps-wizard-0-mmi-0-pmc-slave-boot@f1220000\", \"label\": \"ps_wizard_0_mmi_0_pmc_slave_boot\"}, {\"dev\": \"ps-wizard-0-mmi-0-pmc-slave-boot-stream@f2100000\", \"label\": \"ps_wizard_0_mmi_0_pmc_slave_boot_stream\"}, {\"dev\": \"ps-wizard-0-mmi-0-r52-tcm-alias@0\", \"label\": \"ps_wizard_0_mmi_0_r52_tcm_alias\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-aes@f11e0000\", \"label\": \"ps_wizard_0_ps11_0_pmc_aes\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-aes@ebe88000\", \"label\": \"ps_wizard_0_ps11_0_asu_aes\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-ecc@ebf00000\", \"label\": \"ps_wizard_0_ps11_0_asu_ecc\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-global@ebf80000\", \"label\": \"ps_wizard_0_ps11_0_asu_global\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-keys@ebe8a000\", \"label\": \"ps_wizard_0_ps11_0_asu_keys\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-local@ebe8e000\", \"label\": \"ps_wizard_0_ps11_0_asu_local\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-mdm-hsd@ebef0000\", \"label\": \"ps_wizard_0_ps11_0_asu_mdm_hsd\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-ram-data-cntlr@ebe40000\", \"label\": \"ps_wizard_0_ps11_0_asu_ram_data_cntlr\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-ram-data-ecc-ctrl@ebeb0000\", \"label\": \"ps_wizard_0_ps11_0_asu_ram_data_ecc_ctrl\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-ram-instr-cntlr@ebe00000\", \"label\": \"ps_wizard_0_ps11_0_asu_ram_instr_cntlr\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-ram-instr-ecc-ctrl@ebea0000\", \"label\": \"ps_wizard_0_ps11_0_asu_ram_instr_ecc_ctrl\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-rsa@ebf50000\", \"label\": \"ps_wizard_0_ps11_0_asu_rsa\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-sha2@ebf30000\", \"label\": \"ps_wizard_0_ps11_0_asu_sha2\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-sha3@ebf40000\", \"label\": \"ps_wizard_0_ps11_0_asu_sha3\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-tmr-inject@ebed0000\", \"label\": \"ps_wizard_0_ps11_0_asu_tmr_inject\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-tmr-manager@ebec0000\", \"label\": \"ps_wizard_0_ps11_0_asu_tmr_manager\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-tmr-trace@ebee0000\", \"label\": \"ps_wizard_0_ps11_0_asu_tmr_trace\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-trng@ebf20000\", \"label\": \"ps_wizard_0_ps11_0_asu_trng\"}, {\"dev\": \"ps-wizard-0-ps11-0-asu-xmpu@ebf60000\", \"label\": \"ps_wizard_0_ps11_0_asu_xmpu\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-bbram-ctrl@f11f0000\", \"label\": \"ps_wizard_0_ps11_0_pmc_bbram_ctrl\"}, {\"dev\": \"ps-wizard-0-ps11-0-cpm-cdx-dpu-high@100000000000\", \"label\": \"ps_wizard_0_ps11_0_cpm_cdx_dpu_high\"}, {\"dev\": \"ps-wizard-0-ps11-0-crf-0@ec200000\", \"label\": \"ps_wizard_0_ps11_0_crf_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-crl-0@eb5e0000\", \"label\": \"ps_wizard_0_ps11_0_crl_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-crp-0@f1260000\", \"label\": \"ps_wizard_0_ps11_0_crp_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-coresight-fpd-stm@f0c40000\", \"label\": \"ps_wizard_0_ps11_0_coresight_fpd_stm\"}, {\"dev\": \"ps-wizard-0-ps11-0-coresight-lpd-atm@f08f0000\", \"label\": \"ps_wizard_0_ps11_0_coresight_lpd_atm\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-rsa@f1200000\", \"label\": \"ps_wizard_0_ps11_0_pmc_rsa\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-efuse-cache@f1250000\", \"label\": \"ps_wizard_0_ps11_0_pmc_efuse_cache\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-efuse-ctrl@f1240000\", \"label\": \"ps_wizard_0_ps11_0_pmc_efuse_ctrl\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-afi-0@ec880000\", \"label\": \"ps_wizard_0_ps11_0_fpd_afi_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-afi-1@ec890000\", \"label\": \"ps_wizard_0_ps11_0_fpd_afi_1\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-afi-2@ec8a0000\", \"label\": \"ps_wizard_0_ps11_0_fpd_afi_2\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-afi-3@ec8b0000\", \"label\": \"ps_wizard_0_ps11_0_fpd_afi_3\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-afi-mem-0@b0000000\", \"label\": \"ps_wizard_0_ps11_0_fpd_afi_mem_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-apu-0@ecc00000\", \"label\": \"ps_wizard_0_ps11_0_apu_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-apu-1@ecd00000\", \"label\": \"ps_wizard_0_ps11_0_apu_1\"}, {\"dev\": \"ps-wizard-0-ps11-0-apu-2@ece00000\", \"label\": \"ps_wizard_0_ps11_0_apu_2\"}, {\"dev\": \"ps-wizard-0-ps11-0-apu-3@ecf00000\", \"label\": \"ps_wizard_0_ps11_0_apu_3\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-cmn@f8000000\", \"label\": \"ps_wizard_0_ps11_0_fpd_cmn\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-cmn-xmpu@ec830000\", \"label\": \"ps_wizard_0_ps11_0_fpd_cmn_xmpu\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-slcr-0@ec8c0000\", \"label\": \"ps_wizard_0_ps11_0_fpd_slcr_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-slcr-secure-0@ec8e0000\", \"label\": \"ps_wizard_0_ps11_0_fpd_slcr_secure_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-slv-asilb-xmpu-0@ec820000\", \"label\": \"ps_wizard_0_ps11_0_fpd_slv_asilb_xmpu_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-slv-asild-xmpu-0@ec810000\", \"label\": \"ps_wizard_0_ps11_0_fpd_slv_asild_xmpu_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-splitter-0@ecc20000\", \"label\": \"ps_wizard_0_ps11_0_fpd_splitter_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-splitter-1@ecd20000\", \"label\": \"ps_wizard_0_ps11_0_fpd_splitter_1\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-splitter-2@ece20000\", \"label\": \"ps_wizard_0_ps11_0_fpd_splitter_2\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-splitter-3@ecf20000\", \"label\": \"ps_wizard_0_ps11_0_fpd_splitter_3\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-systmr-ctrl@ec920000\", \"label\": \"ps_wizard_0_ps11_0_fpd_systmr_ctrl\"}, {\"dev\": \"ps-wizard-0-ps11-0-fpd-systmr-read@ec910000\", \"label\": \"ps_wizard_0_ps11_0_fpd_systmr_read\"}, {\"dev\": \"ps-wizard-0-ps11-0-intasu-config@ebf70000\", \"label\": \"ps_wizard_0_ps11_0_intasu_config\"}, {\"dev\": \"ps-wizard-0-ps11-0-intasu-gpv@ebf7f000\", \"label\": \"ps_wizard_0_ps11_0_intasu_gpv\"}, {\"dev\": \"ps-wizard-0-ps11-0-intfpd-asilb-config@ec500000\", \"label\": \"ps_wizard_0_ps11_0_intfpd_asilb_config\"}, {\"dev\": \"ps-wizard-0-ps11-0-intfpd-asilb-gpv@ec804000\", \"label\": \"ps_wizard_0_ps11_0_intfpd_asilb_gpv\"}, {\"dev\": \"ps-wizard-0-ps11-0-intfpd-asild-config@ec400000\", \"label\": \"ps_wizard_0_ps11_0_intfpd_asild_config\"}, {\"dev\": \"ps-wizard-0-ps11-0-intfpd-asild-gpv@ec800000\", \"label\": \"ps_wizard_0_ps11_0_intfpd_asild_gpv\"}, {\"dev\": \"ps-wizard-0-ps11-0-ipi-buffer@eb3f0000\", \"label\": \"ps_wizard_0_ps11_0_ipi_buffer\"}, {\"dev\": \"ps-wizard-0-ps11-0-lpd-afi-0@eb9b0000\", \"label\": \"ps_wizard_0_ps11_0_lpd_afi_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-lpd-iou-secure-slcr-0@f1a40000\", \"label\": \"ps_wizard_0_ps11_0_lpd_iou_secure_slcr_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-lpd-iou-slcr-0@f1a20000\", \"label\": \"ps_wizard_0_ps11_0_lpd_iou_slcr_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-lpd-slcr-0@eb410000\", \"label\": \"ps_wizard_0_ps11_0_lpd_slcr_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-lpd-slcr-secure-0@eb510000\", \"label\": \"ps_wizard_0_ps11_0_lpd_slcr_secure_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-lpd-systmr-ctrl@ea470000\", \"label\": \"ps_wizard_0_ps11_0_lpd_systmr_ctrl\"}, {\"dev\": \"ps-wizard-0-ps11-0-lpd-systmr-read@ea460000\", \"label\": \"ps_wizard_0_ps11_0_lpd_systmr_read\"}, {\"dev\": \"ps-wizard-0-ps11-0-lpd-xppu-0@eb990000\", \"label\": \"ps_wizard_0_ps11_0_lpd_xppu_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-noc-pcie-0@a0000000\", \"label\": \"ps_wizard_0_ps11_0_noc_pcie_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-ocm-ctrl-0@eb5d0000\", \"label\": \"ps_wizard_0_ps11_0_ocm_ctrl_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-ocm-xmpu-0@eb400000\", \"label\": \"ps_wizard_0_ps11_0_ocm_xmpu_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-ocm-ctrl-1@eb960000\", \"label\": \"ps_wizard_0_ps11_0_ocm_ctrl_1\"}, {\"dev\": \"ps-wizard-0-ps11-0-ocm-xmpu-1@eb980000\", \"label\": \"ps_wizard_0_ps11_0_ocm_xmpu_1\"}, {\"dev\": \"ps-wizard-0-ps11-0-ocm-ctrl-2@eb9d0000\", \"label\": \"ps_wizard_0_ps11_0_ocm_ctrl_2\"}, {\"dev\": \"ps-wizard-0-ps11-0-ocm-xmpu-2@eb9e0000\", \"label\": \"ps_wizard_0_ps11_0_ocm_xmpu_2\"}, {\"dev\": \"ps-wizard-0-ps11-0-ocm-ctrl-3@eaa00000\", \"label\": \"ps_wizard_0_ps11_0_ocm_ctrl_3\"}, {\"dev\": \"ps-wizard-0-ps11-0-ocm-xmpu-3@eaa10000\", \"label\": \"ps_wizard_0_ps11_0_ocm_xmpu_3\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-global-0@f1110000\", \"label\": \"ps_wizard_0_ps11_0_pmc_global_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-ram@f2000000\", \"label\": \"ps_wizard_0_ps11_0_pmc_ram\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-ram-npi@f6000000\", \"label\": \"ps_wizard_0_ps11_0_pmc_ram_npi\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-slave-boot@f1220000\", \"label\": \"ps_wizard_0_ps11_0_pmc_slave_boot\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-slave-boot-stream@f2100000\", \"label\": \"ps_wizard_0_ps11_0_pmc_slave_boot_stream\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-xmpu-0@f12f0000\", \"label\": \"ps_wizard_0_ps11_0_pmc_xmpu_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-xppu-0@f1310000\", \"label\": \"ps_wizard_0_ps11_0_pmc_xppu_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-xppu-npi-0@f1300000\", \"label\": \"ps_wizard_0_ps11_0_pmc_xppu_npi_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-tmr-inject-0@f0083000\", \"label\": \"ps_wizard_0_ps11_0_pmc_tmr_inject_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-ram-data-cntlr@f0280000\", \"label\": \"ps_wizard_0_ps11_0_pmc_ram_data_cntlr\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-ram-instr-cntlr@f0200000\", \"label\": \"ps_wizard_0_ps11_0_pmc_ram_instr_cntlr\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-tmr-manager-0@f0303000\", \"label\": \"ps_wizard_0_ps11_0_pmc_tmr_manager_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-r52-tcm-alias@0\", \"label\": \"ps_wizard_0_ps11_0_r52_tcm_alias\"}, {\"dev\": \"ps-wizard-0-ps11-0-rpu-a@eb580000\", \"label\": \"ps_wizard_0_ps11_0_rpu_a\"}, {\"dev\": \"ps-wizard-0-ps11-0-rpu-b@eb590000\", \"label\": \"ps_wizard_0_ps11_0_rpu_b\"}, {\"dev\": \"ps-wizard-0-ps11-0-rpu-c@eb5a0000\", \"label\": \"ps_wizard_0_ps11_0_rpu_c\"}, {\"dev\": \"ps-wizard-0-ps11-0-rpu-d@eb5b0000\", \"label\": \"ps_wizard_0_ps11_0_rpu_d\"}, {\"dev\": \"ps-wizard-0-ps11-0-rpu-e@eb5c0000\", \"label\": \"ps_wizard_0_ps11_0_rpu_e\"}, {\"dev\": \"ps-wizard-0-ps11-0-sdma-0@ebd80000\", \"label\": \"ps_wizard_0_ps11_0_sdma_0\"}, {\"dev\": \"ps-wizard-0-ps11-0-sdma-1@ebd90000\", \"label\": \"ps_wizard_0_ps11_0_sdma_1\"}, {\"dev\": \"ps-wizard-0-ps11-0-sdma-2@ebda0000\", \"label\": \"ps_wizard_0_ps11_0_sdma_2\"}, {\"dev\": \"ps-wizard-0-ps11-0-sdma-3@ebdb0000\", \"label\": \"ps_wizard_0_ps11_0_sdma_3\"}, {\"dev\": \"ps-wizard-0-ps11-0-sdma-4@ebdc0000\", \"label\": \"ps_wizard_0_ps11_0_sdma_4\"}, {\"dev\": \"ps-wizard-0-ps11-0-sdma-5@ebdd0000\", \"label\": \"ps_wizard_0_ps11_0_sdma_5\"}, {\"dev\": \"ps-wizard-0-ps11-0-sdma-6@ebde0000\", \"label\": \"ps_wizard_0_ps11_0_sdma_6\"}, {\"dev\": \"ps-wizard-0-ps11-0-sdma-7@ebdf0000\", \"label\": \"ps_wizard_0_ps11_0_sdma_7\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-sha2@f1800000\", \"label\": \"ps_wizard_0_ps11_0_pmc_sha2\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-sha3@f1210000\", \"label\": \"ps_wizard_0_ps11_0_pmc_sha3\"}, {\"dev\": \"ps-wizard-0-ps11-0-pmc-ufs-0@f10a0000\", \"label\": \"ps_wizard_0_ps11_0_pmc_ufs_0\"}, {\"dev\": \"vcu2@e8000000\", \"label\": \"VCU_hier_vcu2_0\"}, {\"dev\": \"ai-engine@20000000000\", \"label\": \"ai_engine_0\"}, {\"dev\": \"ISP-hier-visp-ss-tile0-visp-ip@e8500000\", \"label\": \"ISP_hier_visp_ss_tile0_visp_ip\"}, {\"dev\": \"ISP-hier-visp-ss-tile1-visp-ip@e8600000\", \"label\": \"ISP_hier_visp_ss_tile1_visp_ip\"}, {\"dev\": \"ISP-hier-visp-ss-tile2-visp-ip@e8700000\", \"label\": \"ISP_hier_visp_ss_tile2_visp_ip\"}, {\"dev\": \"ale2xx@e8040000\", \"label\": \"encoder\"}, {\"dev\": \"ald3xx@e8080000\", \"label\": \"decoder\"}, {\"dev\": \"psci\"}, {\"bootph\": \"all\", \"dev\": \"scmi\"}, {\"bootph\": \"all\", \"dev\": \"versal2_firmware\"}, {\"dev\": \"ipi0\", \"label\": \"ipi0\"}, {\"dev\": \"ipi1\", \"label\": \"ipi1\"}, {\"dev\": \"ipi2\", \"label\": \"ipi2\"}, {\"dev\": \"ipi3\", \"label\": \"ipi3\"}, {\"dev\": \"ipi4\", \"label\": \"ipi4\"}, {\"dev\": \"ipi5\", \"label\": \"ipi5\"}, {\"dev\": \"ipi6\", \"label\": \"ipi6\"}, {\"dev\": \"ipi_nobuf1\", \"label\": \"ipi_nobuf1\"}, {\"dev\": \"ipi_nobuf2\", \"label\": \"ipi_nobuf2\"}, {\"dev\": \"ipi_nobuf3\", \"label\": \"ipi_nobuf3\"}, {\"dev\": \"ipi_nobuf4\", \"label\": \"ipi_nobuf4\"}, {\"dev\": \"ipi_nobuf5\", \"label\": \"ipi_nobuf5\"}, {\"dev\": \"ipi_nobuf6\", \"label\": \"ipi_nobuf6\"}, {\"dev\": \"ipi_asu\", \"label\": \"ipi_asu\"}, {\"dev\": \"ipi_pmc\", \"label\": \"ipi_pmc\"}, {\"dev\": \"ipi_pmc_nobuf\", \"label\": \"ipi_pmc_nobuf\"}, {\"dev\": \"ps_wizard_0_ps11_0_ipi_buffer\", \"label\": \"ps_wizard_0_ps11_0_ipi_buffer\"}, {\"dev\": \"cpu_opp_table\", \"label\": \"cpu_opp_table\"}, {\"dev\": \"fpga\", \"label\": \"fpga\"}, {\"dev\": \"timer\", \"label\": \"timer\"}, {\"dev\": \"versal_fpga\", \"label\": \"versal_fpga\"}, {\"dev\": \"amba_rpu\", \"label\": \"amba_rpu\"}, {\"dev\": \"sensor0\", \"label\": \"sensor0\"}, {\"dev\": \"scmi_buf\", \"label\": \"scmi_buf\"}, {\"dev\": \"zynqmp-ipi\"}, {\"dev\": \"pwm-fan\"}, {\"dev\": \"usb_hub_delay\", \"label\": \"usb_hub_delay\"}, {\"dev\": \"vdd_usb_hub\", \"label\": \"vdd_usb_hub\"}, {\"dev\": \"vdd2_usb_hub\", \"label\": \"vdd2_usb_hub\"}, {\"dev\": \"can0_phy\", \"label\": \"can0_phy\"}, {\"dev\": \"can1_phy\", \"label\": \"can1_phy\"}, {\"dev\": \"__lopper-phandles__\"}, {\"dev\": \"iommu@ec000000\"}, {\"dev\": \"mmi-usb\"}, {\"dev\": \"mmi_gpu_slcr@ed720000\"}, {\"dev\": \"physical-memory-group-manager\"}, {\"dev\": \"timer@f1e90000\"}, {\"dev\": \"mailbox@eb360000\"}, {\"dev\": \"libmetal_uio_desc0@99c8000\"}, {\"dev\": \"libmetal_uio_desc1@99cc000\"}, {\"dev\": \"libmetal_uio_data@99d0000\"}, {\"dev\": \"visp_mbox_rpu_6\", \"flags\": 0}, {\"dev\": \"visp_mbox_rpu_7\", \"flags\": 0}, {\"dev\": \"visp_mbox_rpu_8\", \"flags\": 0}, {\"dev\": \"visp_mbox_rpu_9\", \"flags\": 0}]";
+                        lopper,access-keep-all = <0x1>;
                         os,type = "linux";
                         cpus = <&cpus_a78 0xff 0x3>;
                         lopper,activate = "linux";
@@ -10181,7 +12604,10 @@
                         core_num = <0x0>;
                         cpu_config_str = "split";
                         rpu_pd_val = <0xd9 0x0>;
-                        access = <&ipi1 0x0>,
+                        cpus = <&cpus_r52_0 0x1 0x80000003>;
+                        access = <&serial0 0x0>,
+                         <&ttc2 0x0>,
+                         <&ipi1 0x0>,
                          <&ipi_nobuf2 0x0>,
                          <&r52_0a_atcm_global 0x0>,
                          <&r52_0a_btcm_global 0x0>,
@@ -10217,7 +12643,10 @@
                         cpu_config_str = "split";
                         rpu_pd_val = <0xd9 0x1>;
                         os,type = "baremetal";
-                        access = <&ttc3 0x0>,
+                        cpus = <&cpus_r52_1 0x1 0x80000003>;
+                        access = <&serial0 0x0>,
+                         <&i2c0 0x0>,
+                         <&ttc3 0x0>,
                          <&ipi2 0x0>,
                          <&libmetal_uio_desc099c8000 0x0>,
                          <&libmetal_uio_desc199cc000 0x0>,
