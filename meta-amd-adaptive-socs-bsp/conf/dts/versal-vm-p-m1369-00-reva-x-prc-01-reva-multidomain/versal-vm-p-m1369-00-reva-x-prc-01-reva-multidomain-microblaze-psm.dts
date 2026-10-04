@@ -32,7 +32,7 @@
         };
 
         cpus_microblaze_1: cpus_microblaze@1 {
-                phandle = <0x9c>;
+                phandle = <0x9e>;
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
@@ -120,7 +120,7 @@
                 #ranges-size-cells = <0x1>;
 
                 psv_psm_0: cpu@0 {
-                        phandle = <0x9d>;
+                        phandle = <0x9f>;
                         compatible = "psm-microblaze";
                         device_type = "cpu";
                         reg = <0x1>;
@@ -407,12 +407,12 @@
         };
 
         versal_fpga: versal-fpga {
-                phandle = <0x7b>;
+                phandle = <0x7d>;
                 compatible = "xlnx,versal-fpga";
         };
 
         sensor0: versal-thermal-sensor {
-                phandle = <0x7d>;
+                phandle = <0x7f>;
                 compatible = "xlnx,versal-thermal";
                 #thermal-sensor-cells = <0x1>;
                 io-channels = <&sysmon0 0x0>;
@@ -504,7 +504,7 @@
                 bootph-all;
 
                 imux: interrupt-multiplex {
-                        phandle = <0x7c>;
+                        phandle = <0x7e>;
                         compatible = "interrupt-multiplex";
                         #address-cells = <0x0>;
                         #interrupt-cells = <0x3>;
@@ -515,21 +515,23 @@
                          <0x3e 0x4 0x0 &smmu 0x0>,
                          <0x0 0x33 0x0 &i2c1 0x4>,
                          <0x43 0x4 0x0 &fpd_xmpu 0x0>,
+                         <0x0 0x33 0x0 &imux 0x4 0x0 0x80>,
                          <0x0 0x33 0x0 &can0_clk 0x4>,
-                         <0x0 0x33 0x0 &imux 0x4 0x0 0x7d>,
-                         <0x0 0x33 0x0 &sensor0 0x4>,
+                         <0x0 0x33 0x0 &versal_fpga 0x4>,
                          <0x0 0x33 0x0 &ttc1 0x4>,
                          <0x48 0x4 0x0 &ps_wizard_0_pmcps_0_psv_pmc_global_0 0x0>,
+                         <0x0 0x33 0x0 &rtc_clk 0x4>,
                          <0x74 0x0 0x15 &amba 0x0>,
                          <0x0 0x74 0x0 &ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0 0x4>,
                          <0x3e 0x4 0x0 &smmu 0x0>,
                          <0x0 0x74 0x0 &i2c1 0x4>,
                          <0x43 0x4 0x0 &fpd_xmpu 0x0>,
+                         <0x0 0x74 0x0 &imux 0x4 0x0 0x80>,
                          <0x0 0x74 0x0 &can0_clk 0x4>,
-                         <0x0 0x74 0x0 &imux 0x4 0x0 0x7d>,
-                         <0x0 0x74 0x0 &sensor0 0x4>,
+                         <0x0 0x74 0x0 &versal_fpga 0x4>,
                          <0x0 0x74 0x0 &ttc1 0x4>,
-                         <0x48 0x4 0x0 &ps_wizard_0_pmcps_0_psv_pmc_global_0 0x0>;
+                         <0x48 0x4 0x0 &ps_wizard_0_pmcps_0_psv_pmc_global_0 0x0>,
+                         <0x0 0x74 0x0 &rtc_clk 0x4>;
                 };
 
                 can0: can@ff060000 {
@@ -788,7 +790,7 @@
                         xlnx,enet-clk-freq-hz = <0x7735464>;
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ethernet_0";
-                        phy-handle = <0x80>;
+                        phy-handle = <0x82>;
 
                         mdio: mdio {
                                 phandle = <0xad>;
@@ -796,7 +798,7 @@
                                 #size-cells = <0x0>;
 
                                 phy1: phy@1 {
-                                        phandle = <0x80>;
+                                        phandle = <0x82>;
                                         compatible = "ethernet-phy-id2000.a231";
                                         reg = <0x1>;
                                         ti,rx-internal-delay = <0xb>;
@@ -806,7 +808,7 @@
                                 };
 
                                 phy2: phy@2 {
-                                        phandle = <0x81>;
+                                        phandle = <0x83>;
                                         compatible = "ethernet-phy-id2000.a231";
                                         reg = <0x2>;
                                         ti,rx-internal-delay = <0xb>;
@@ -845,7 +847,7 @@
                         xlnx,enet-clk-freq-hz = <0x7735464>;
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ethernet_1";
-                        phy-handle = <0x81>;
+                        phy-handle = <0x83>;
                 };
 
                 i2c1: i2c@ff030000 {
@@ -1456,7 +1458,7 @@
                         };
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_aes: ps_wizard_0_pmcps_0_psv_pmc_aes@f11e0000 {
+                ps_wizard_0_pmcps_0_psv_pmc_aes: ps-wizard-0-pmcps-0-psv-pmc-aes@f11e0000 {
                         phandle = <0x21>;
                         compatible = "xlnx,psv-pmc-aes-11.0";
                         status = "okay";
@@ -1465,7 +1467,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_aes";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl: ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl@f11f0000 {
+                ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl: ps-wizard-0-pmcps-0-psv-pmc-bbram-ctrl@f11f0000 {
                         phandle = <0x22>;
                         compatible = "xlnx,psv-pmc-bbram-ctrl-11.0";
                         status = "okay";
@@ -1474,7 +1476,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl";
                 };
 
-                ps_wizard_0_pmcps_0_psv_crf_0: ps_wizard_0_pmcps_0_psv_crf_0@fd1a0000 {
+                ps_wizard_0_pmcps_0_psv_crf_0: ps-wizard-0-pmcps-0-psv-crf-0@fd1a0000 {
                         phandle = <0x35>;
                         compatible = "xlnx,psv-crf-11.0";
                         status = "okay";
@@ -1483,7 +1485,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_crf_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_crl_0: ps_wizard_0_pmcps_0_psv_crl_0@ff5e0000 {
+                ps_wizard_0_pmcps_0_psv_crl_0: ps-wizard-0-pmcps-0-psv-crl-0@ff5e0000 {
                         phandle = <0x51>;
                         compatible = "xlnx,psv-crl-11.0";
                         status = "okay";
@@ -1492,7 +1494,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_crl_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_crp_0: ps_wizard_0_pmcps_0_psv_crp_0@f1260000 {
+                ps_wizard_0_pmcps_0_psv_crp_0: ps-wizard-0-pmcps-0-psv-crp-0@f1260000 {
                         phandle = <0x29>;
                         compatible = "xlnx,psv-crp-11.0";
                         status = "okay";
@@ -1501,7 +1503,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_crp_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_rsa: ps_wizard_0_pmcps_0_psv_pmc_rsa@f1200000 {
+                ps_wizard_0_pmcps_0_psv_pmc_rsa: ps-wizard-0-pmcps-0-psv-pmc-rsa@f1200000 {
                         phandle = <0x23>;
                         compatible = "xlnx,psv-pmc-rsa-11.0";
                         status = "okay";
@@ -1510,7 +1512,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_rsa";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_efuse_cache: ps_wizard_0_pmcps_0_psv_pmc_efuse_cache@f1250000 {
+                ps_wizard_0_pmcps_0_psv_pmc_efuse_cache: ps-wizard-0-pmcps-0-psv-pmc-efuse-cache@f1250000 {
                         phandle = <0x28>;
                         compatible = "xlnx,psv-pmc-efuse-cache-11.0";
                         status = "okay";
@@ -1519,7 +1521,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_efuse_cache";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl: ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl@f1240000 {
+                ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl: ps-wizard-0-pmcps-0-psv-pmc-efuse-ctrl@f1240000 {
                         phandle = <0x27>;
                         compatible = "xlnx,psv-pmc-efuse-ctrl-11.0";
                         status = "okay";
@@ -1528,7 +1530,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_afi_0: ps_wizard_0_pmcps_0_psv_fpd_afi_0@fd360000 {
+                ps_wizard_0_pmcps_0_psv_fpd_afi_0: ps-wizard-0-pmcps-0-psv-fpd-afi-0@fd360000 {
                         phandle = <0x36>;
                         compatible = "xlnx,psv-fpd-afi-11.0";
                         status = "okay";
@@ -1537,7 +1539,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_afi_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_afi_2: ps_wizard_0_pmcps_0_psv_fpd_afi_2@fd380000 {
+                ps_wizard_0_pmcps_0_psv_fpd_afi_2: ps-wizard-0-pmcps-0-psv-fpd-afi-2@fd380000 {
                         phandle = <0x37>;
                         compatible = "xlnx,psv-fpd-afi-11.0";
                         status = "okay";
@@ -1546,7 +1548,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_afi_2";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_cci_0: ps_wizard_0_pmcps_0_psv_fpd_cci_0@fd5e0000 {
+                ps_wizard_0_pmcps_0_psv_fpd_cci_0: ps-wizard-0-pmcps-0-psv-fpd-cci-0@fd5e0000 {
                         phandle = <0x3a>;
                         compatible = "xlnx,psv-fpd-cci-11.0";
                         status = "okay";
@@ -1555,7 +1557,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_cci_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_gpv_0: ps_wizard_0_pmcps_0_psv_fpd_gpv_0@fd700000 {
+                ps_wizard_0_pmcps_0_psv_fpd_gpv_0: ps-wizard-0-pmcps-0-psv-fpd-gpv-0@fd700000 {
                         phandle = <0x3e>;
                         compatible = "xlnx,psv-fpd-gpv-11.0";
                         status = "okay";
@@ -1564,7 +1566,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_gpv_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_slcr_0: ps_wizard_0_pmcps_0_psv_fpd_slcr_0@fd610000 {
+                ps_wizard_0_pmcps_0_psv_fpd_slcr_0: ps-wizard-0-pmcps-0-psv-fpd-slcr-0@fd610000 {
                         phandle = <0x3c>;
                         compatible = "xlnx,psv-fpd-slcr-11.0";
                         status = "okay";
@@ -1573,7 +1575,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_slcr_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0: ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0@fd690000 {
+                ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0: ps-wizard-0-pmcps-0-psv-fpd-slcr-secure-0@fd690000 {
                         phandle = <0x3d>;
                         compatible = "xlnx,psv-fpd-slcr-secure-11.0";
                         status = "okay";
@@ -1582,7 +1584,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_smmu_0: ps_wizard_0_pmcps_0_psv_fpd_smmu_0@fd5f0000 {
+                ps_wizard_0_pmcps_0_psv_fpd_smmu_0: ps-wizard-0-pmcps-0-psv-fpd-smmu-0@fd5f0000 {
                         phandle = <0x3b>;
                         compatible = "xlnx,psv-fpd-smmu-11.0";
                         status = "okay";
@@ -1591,7 +1593,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_smmu_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_scntr_0: ps_wizard_0_pmcps_0_psv_scntr_0@ff130000 {
+                ps_wizard_0_pmcps_0_psv_scntr_0: ps-wizard-0-pmcps-0-psv-scntr-0@ff130000 {
                         phandle = <0x4d>;
                         compatible = "xlnx,psv-scntr-11.0";
                         status = "okay";
@@ -1600,7 +1602,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_scntr_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_scntrs_0: ps_wizard_0_pmcps_0_psv_scntrs_0@ff140000 {
+                ps_wizard_0_pmcps_0_psv_scntrs_0: ps-wizard-0-pmcps-0-psv-scntrs-0@ff140000 {
                         phandle = <0x4e>;
                         compatible = "xlnx,psv-scntrs-11.0";
                         status = "okay";
@@ -1609,7 +1611,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_scntrs_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_afi_0: ps_wizard_0_pmcps_0_psv_lpd_afi_0@ff9b0000 {
+                ps_wizard_0_pmcps_0_psv_lpd_afi_0: ps-wizard-0-pmcps-0-psv-lpd-afi-0@ff9b0000 {
                         phandle = <0x56>;
                         compatible = "xlnx,psv-lpd-afi-11.0";
                         status = "okay";
@@ -1618,7 +1620,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_afi_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0: ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0@ff0a0000 {
+                ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0: ps-wizard-0-pmcps-0-psv-lpd-iou-secure-slcr-0@ff0a0000 {
                         phandle = <0x46>;
                         compatible = "xlnx,psv-lpd-iou-secure-slcr-11.0";
                         status = "okay";
@@ -1627,7 +1629,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0: ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0@ff080000 {
+                ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0: ps-wizard-0-pmcps-0-psv-lpd-iou-slcr-0@ff080000 {
                         phandle = <0x45>;
                         compatible = "xlnx,psv-lpd-iou-slcr-11.0";
                         status = "okay";
@@ -1636,7 +1638,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_slcr_0: ps_wizard_0_pmcps_0_psv_lpd_slcr_0@ff410000 {
+                ps_wizard_0_pmcps_0_psv_lpd_slcr_0: ps-wizard-0-pmcps-0-psv-lpd-slcr-0@ff410000 {
                         phandle = <0x4f>;
                         compatible = "xlnx,psv-lpd-slcr-11.0";
                         status = "okay";
@@ -1645,7 +1647,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_slcr_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0: ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0@ff510000 {
+                ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0: ps-wizard-0-pmcps-0-psv-lpd-slcr-secure-0@ff510000 {
                         phandle = <0x50>;
                         compatible = "xlnx,psv-lpd-slcr-secure-11.0";
                         status = "okay";
@@ -1654,7 +1656,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_ocm_ctrl: ps_wizard_0_pmcps_0_psv_ocm_ctrl@ff960000 {
+                ps_wizard_0_pmcps_0_psv_ocm_ctrl: ps-wizard-0-pmcps-0-psv-ocm-ctrl@ff960000 {
                         phandle = <0x52>;
                         compatible = "xlnx,psv-ocm-11.0";
                         status = "okay";
@@ -1665,7 +1667,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ocm_ctrl";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_global_0: ps_wizard_0_pmcps_0_psv_pmc_global_0@f1110000 {
+                ps_wizard_0_pmcps_0_psv_pmc_global_0: ps-wizard-0-pmcps-0-psv-pmc-global-0@f1110000 {
                         phandle = <0x1e>;
                         compatible = "xlnx,psv-pmc-global-11.0";
                         xlnx,npi-err-inj = <0x0>;
@@ -1684,7 +1686,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_global_0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_ram_npi: ps_wizard_0_pmcps_0_psv_pmc_ram_npi@f6000000 {
+                ps_wizard_0_pmcps_0_psv_pmc_ram_npi: ps-wizard-0-pmcps-0-psv-pmc-ram-npi@f6000000 {
                         phandle = <0x32>;
                         compatible = "xlnx,psv-pmc-ram-npi-11.0";
                         status = "okay";
@@ -1693,7 +1695,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_ram_npi";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_slave_boot: ps_wizard_0_pmcps_0_psv_pmc_slave_boot@f1220000 {
+                ps_wizard_0_pmcps_0_psv_pmc_slave_boot: ps-wizard-0-pmcps-0-psv-pmc-slave-boot@f1220000 {
                         phandle = <0x25>;
                         xlnx,device-id = <0x0>;
                         compatible = "xlnx,psv-pmc-slave-boot-11.0";
@@ -1703,7 +1705,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_slave_boot";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream: ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream@f2100000 {
+                ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream: ps-wizard-0-pmcps-0-psv-pmc-slave-boot-stream@f2100000 {
                         phandle = <0x31>;
                         xlnx,device-id = <0x0>;
                         compatible = "xlnx,psv-pmc-slave-boot-stream-11.0";
@@ -1713,7 +1715,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream";
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_global_reg: ps_wizard_0_pmcps_0_psv_psm_global_reg@ffc90000 {
+                ps_wizard_0_pmcps_0_psv_psm_global_reg: ps-wizard-0-pmcps-0-psv-psm-global-reg@ffc90000 {
                         phandle = <0x60>;
                         compatible = "xlnx,psv-psm-global-reg-11.0";
                         status = "okay";
@@ -1722,7 +1724,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_psm_global_reg";
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_iomodule_0: ps_wizard_0_pmcps_0_psv_psm_iomodule_0@ffc80000 {
+                ps_wizard_0_pmcps_0_psv_psm_iomodule_0: ps-wizard-0-pmcps-0-psv-psm-iomodule-0@ffc80000 {
                         phandle = <0x6f>;
                         xlnx,gpo4-size = <0x20>;
                         xlnx,tmr = <0x0>;
@@ -1837,7 +1839,7 @@
                         xlnx,lmb-awidth = <0x20>;
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0: ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0@ffcd0000 {
+                ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0: ps-wizard-0-pmcps-0-psv-psm-tmr-inject-0@ffcd0000 {
                         phandle = <0x71>;
                         compatible = "xlnx,tmr-inject-11.0", "xlnx,tmr-inject-1.0";
                         xlnx,cpu-id = <0x1>;
@@ -1853,7 +1855,7 @@
                         xlnx,lmb-awidth = <0x20>;
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0: ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0@ffcc0000 {
+                ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0: ps-wizard-0-pmcps-0-psv-psm-tmr-manager-0@ffcc0000 {
                         phandle = <0x70>;
                         xlnx,edk-special = "BRAM_CTRL";
                         xlnx,use-debug-disable = <0x0>;
@@ -1889,7 +1891,7 @@
                         xlnx,lmb-awidth = <0x20>;
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr: ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr@ffc20000 {
+                ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr: ps-wizard-0-pmcps-0-psv-psm-ram-data-cntlr@ffc20000 {
                         phandle = <0x6e>;
                         xlnx,edk-special = "BRAM_CTRL";
                         xlnx,write-access = <0x2>;
@@ -1922,7 +1924,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr";
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr: ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr@ffc00000 {
+                ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr: ps-wizard-0-pmcps-0-psv-psm-ram-instr-cntlr@ffc00000 {
                         phandle = <0x6d>;
                         xlnx,edk-special = "BRAM_CTRL";
                         xlnx,write-access = <0x2>;
@@ -1955,7 +1957,7 @@
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_sha: ps_wizard_0_pmcps_0_psv_pmc_sha@f1210000 {
+                ps_wizard_0_pmcps_0_psv_pmc_sha: ps-wizard-0-pmcps-0-psv-pmc-sha@f1210000 {
                         phandle = <0x24>;
                         compatible = "xlnx,psv-pmc-sha-11.0";
                         status = "okay";
@@ -2070,7 +2072,7 @@
         };
 
         pl_alt_ref: pl-alt-ref {
-                phandle = <0x98>;
+                phandle = <0x9a>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -2079,7 +2081,7 @@
         };
 
         ref: ref {
-                phandle = <0x97>;
+                phandle = <0x99>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -2088,7 +2090,7 @@
         };
 
         rtc_clk: rtc-clk {
-                phandle = <0x82>;
+                phandle = <0x84>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -2097,7 +2099,7 @@
         };
 
         can0_clk: can0-clk {
-                phandle = <0x7e>;
+                phandle = <0x80>;
                 #clock-cells = <0x0>;
                 compatible = "fixed-factor-clock";
                 clocks = <&versal_clk 0x60>;
@@ -2107,7 +2109,7 @@
         };
 
         can1_clk: can1-clk {
-                phandle = <0x7f>;
+                phandle = <0x81>;
                 #clock-cells = <0x0>;
                 compatible = "fixed-factor-clock";
                 clocks = <&versal_clk 0x61>;
@@ -2142,7 +2144,7 @@
                         };
 
                         versal_reset: reset-controller {
-                                phandle = <0x83>;
+                                phandle = <0x85>;
                                 compatible = "xlnx,versal-reset";
                                 #reset-cells = <0x1>;
                         };
@@ -2338,40 +2340,40 @@
                 ipi_psm_to_ipi_pmc = "/axi/mailbox@ff310000/child@ff320000";
                 ipi_psm_to_ipi_pmc_nobuf = "/axi/mailbox@ff310000/child@ff390000";
                 ipi_psm_to_ipi_psm = "/axi/mailbox@ff310000/child@ff310000";
-                ps_wizard_0_pmcps_0_psv_pmc_aes = "/axi/ps_wizard_0_pmcps_0_psv_pmc_aes@f11e0000";
-                ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl = "/axi/ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl@f11f0000";
-                ps_wizard_0_pmcps_0_psv_crf_0 = "/axi/ps_wizard_0_pmcps_0_psv_crf_0@fd1a0000";
-                ps_wizard_0_pmcps_0_psv_crl_0 = "/axi/ps_wizard_0_pmcps_0_psv_crl_0@ff5e0000";
-                ps_wizard_0_pmcps_0_psv_crp_0 = "/axi/ps_wizard_0_pmcps_0_psv_crp_0@f1260000";
-                ps_wizard_0_pmcps_0_psv_pmc_rsa = "/axi/ps_wizard_0_pmcps_0_psv_pmc_rsa@f1200000";
-                ps_wizard_0_pmcps_0_psv_pmc_efuse_cache = "/axi/ps_wizard_0_pmcps_0_psv_pmc_efuse_cache@f1250000";
-                ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl = "/axi/ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl@f1240000";
-                ps_wizard_0_pmcps_0_psv_fpd_afi_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_afi_0@fd360000";
-                ps_wizard_0_pmcps_0_psv_fpd_afi_2 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_afi_2@fd380000";
-                ps_wizard_0_pmcps_0_psv_fpd_cci_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_cci_0@fd5e0000";
-                ps_wizard_0_pmcps_0_psv_fpd_gpv_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_gpv_0@fd700000";
-                ps_wizard_0_pmcps_0_psv_fpd_slcr_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_slcr_0@fd610000";
-                ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0@fd690000";
-                ps_wizard_0_pmcps_0_psv_fpd_smmu_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_smmu_0@fd5f0000";
-                ps_wizard_0_pmcps_0_psv_scntr_0 = "/axi/ps_wizard_0_pmcps_0_psv_scntr_0@ff130000";
-                ps_wizard_0_pmcps_0_psv_scntrs_0 = "/axi/ps_wizard_0_pmcps_0_psv_scntrs_0@ff140000";
-                ps_wizard_0_pmcps_0_psv_lpd_afi_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_afi_0@ff9b0000";
-                ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0@ff0a0000";
-                ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0@ff080000";
-                ps_wizard_0_pmcps_0_psv_lpd_slcr_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_slcr_0@ff410000";
-                ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0@ff510000";
-                ps_wizard_0_pmcps_0_psv_ocm_ctrl = "/axi/ps_wizard_0_pmcps_0_psv_ocm_ctrl@ff960000";
-                ps_wizard_0_pmcps_0_psv_pmc_global_0 = "/axi/ps_wizard_0_pmcps_0_psv_pmc_global_0@f1110000";
-                ps_wizard_0_pmcps_0_psv_pmc_ram_npi = "/axi/ps_wizard_0_pmcps_0_psv_pmc_ram_npi@f6000000";
-                ps_wizard_0_pmcps_0_psv_pmc_slave_boot = "/axi/ps_wizard_0_pmcps_0_psv_pmc_slave_boot@f1220000";
-                ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream = "/axi/ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream@f2100000";
-                ps_wizard_0_pmcps_0_psv_psm_global_reg = "/axi/ps_wizard_0_pmcps_0_psv_psm_global_reg@ffc90000";
-                ps_wizard_0_pmcps_0_psv_psm_iomodule_0 = "/axi/ps_wizard_0_pmcps_0_psv_psm_iomodule_0@ffc80000";
-                ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0 = "/axi/ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0@ffcd0000";
-                ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0 = "/axi/ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0@ffcc0000";
-                ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr = "/axi/ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr@ffc20000";
-                ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr = "/axi/ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr@ffc00000";
-                ps_wizard_0_pmcps_0_psv_pmc_sha = "/axi/ps_wizard_0_pmcps_0_psv_pmc_sha@f1210000";
+                ps_wizard_0_pmcps_0_psv_pmc_aes = "/axi/ps-wizard-0-pmcps-0-psv-pmc-aes@f11e0000";
+                ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl = "/axi/ps-wizard-0-pmcps-0-psv-pmc-bbram-ctrl@f11f0000";
+                ps_wizard_0_pmcps_0_psv_crf_0 = "/axi/ps-wizard-0-pmcps-0-psv-crf-0@fd1a0000";
+                ps_wizard_0_pmcps_0_psv_crl_0 = "/axi/ps-wizard-0-pmcps-0-psv-crl-0@ff5e0000";
+                ps_wizard_0_pmcps_0_psv_crp_0 = "/axi/ps-wizard-0-pmcps-0-psv-crp-0@f1260000";
+                ps_wizard_0_pmcps_0_psv_pmc_rsa = "/axi/ps-wizard-0-pmcps-0-psv-pmc-rsa@f1200000";
+                ps_wizard_0_pmcps_0_psv_pmc_efuse_cache = "/axi/ps-wizard-0-pmcps-0-psv-pmc-efuse-cache@f1250000";
+                ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl = "/axi/ps-wizard-0-pmcps-0-psv-pmc-efuse-ctrl@f1240000";
+                ps_wizard_0_pmcps_0_psv_fpd_afi_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-afi-0@fd360000";
+                ps_wizard_0_pmcps_0_psv_fpd_afi_2 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-afi-2@fd380000";
+                ps_wizard_0_pmcps_0_psv_fpd_cci_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-cci-0@fd5e0000";
+                ps_wizard_0_pmcps_0_psv_fpd_gpv_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-gpv-0@fd700000";
+                ps_wizard_0_pmcps_0_psv_fpd_slcr_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-slcr-0@fd610000";
+                ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-slcr-secure-0@fd690000";
+                ps_wizard_0_pmcps_0_psv_fpd_smmu_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-smmu-0@fd5f0000";
+                ps_wizard_0_pmcps_0_psv_scntr_0 = "/axi/ps-wizard-0-pmcps-0-psv-scntr-0@ff130000";
+                ps_wizard_0_pmcps_0_psv_scntrs_0 = "/axi/ps-wizard-0-pmcps-0-psv-scntrs-0@ff140000";
+                ps_wizard_0_pmcps_0_psv_lpd_afi_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-afi-0@ff9b0000";
+                ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-iou-secure-slcr-0@ff0a0000";
+                ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-iou-slcr-0@ff080000";
+                ps_wizard_0_pmcps_0_psv_lpd_slcr_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-slcr-0@ff410000";
+                ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-slcr-secure-0@ff510000";
+                ps_wizard_0_pmcps_0_psv_ocm_ctrl = "/axi/ps-wizard-0-pmcps-0-psv-ocm-ctrl@ff960000";
+                ps_wizard_0_pmcps_0_psv_pmc_global_0 = "/axi/ps-wizard-0-pmcps-0-psv-pmc-global-0@f1110000";
+                ps_wizard_0_pmcps_0_psv_pmc_ram_npi = "/axi/ps-wizard-0-pmcps-0-psv-pmc-ram-npi@f6000000";
+                ps_wizard_0_pmcps_0_psv_pmc_slave_boot = "/axi/ps-wizard-0-pmcps-0-psv-pmc-slave-boot@f1220000";
+                ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream = "/axi/ps-wizard-0-pmcps-0-psv-pmc-slave-boot-stream@f2100000";
+                ps_wizard_0_pmcps_0_psv_psm_global_reg = "/axi/ps-wizard-0-pmcps-0-psv-psm-global-reg@ffc90000";
+                ps_wizard_0_pmcps_0_psv_psm_iomodule_0 = "/axi/ps-wizard-0-pmcps-0-psv-psm-iomodule-0@ffc80000";
+                ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0 = "/axi/ps-wizard-0-pmcps-0-psv-psm-tmr-inject-0@ffcd0000";
+                ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0 = "/axi/ps-wizard-0-pmcps-0-psv-psm-tmr-manager-0@ffcc0000";
+                ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr = "/axi/ps-wizard-0-pmcps-0-psv-psm-ram-data-cntlr@ffc20000";
+                ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr = "/axi/ps-wizard-0-pmcps-0-psv-psm-ram-instr-cntlr@ffc00000";
+                ps_wizard_0_pmcps_0_psv_pmc_sha = "/axi/ps-wizard-0-pmcps-0-psv-pmc-sha@f1210000";
                 psv_r5_0_atcm_global = "/psv_r5_0_atcm_global@ffe00000";
                 psv_r5_1_atcm_global = "/psv_r5_1_atcm_global@ffe90000";
                 psv_r5_1_btcm_global = "/psv_r5_1_btcm_global@ffeb0000";

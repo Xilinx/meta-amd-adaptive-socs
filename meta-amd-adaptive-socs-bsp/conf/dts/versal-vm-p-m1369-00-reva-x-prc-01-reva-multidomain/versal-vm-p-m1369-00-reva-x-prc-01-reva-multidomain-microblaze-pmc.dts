@@ -32,7 +32,7 @@
         };
 
         cpus_microblaze_0: cpus_microblaze@0 {
-                phandle = <0x9a>;
+                phandle = <0x9c>;
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
@@ -72,7 +72,7 @@
                 #ranges-size-cells = <0x1>;
 
                 psv_pmc_0: cpu@0 {
-                        phandle = <0x9b>;
+                        phandle = <0x9d>;
                         compatible = "pmc-microblaze";
                         device_type = "cpu";
                         reg = <0x0>;
@@ -359,12 +359,12 @@
         };
 
         versal_fpga: versal-fpga {
-                phandle = <0x7b>;
+                phandle = <0x7d>;
                 compatible = "xlnx,versal-fpga";
         };
 
         sensor0: versal-thermal-sensor {
-                phandle = <0x7d>;
+                phandle = <0x7f>;
                 compatible = "xlnx,versal-thermal";
                 #thermal-sensor-cells = <0x1>;
                 io-channels = <&sysmon0 0x0>;
@@ -456,7 +456,7 @@
                 bootph-all;
 
                 imux: interrupt-multiplex {
-                        phandle = <0x7c>;
+                        phandle = <0x7e>;
                         compatible = "interrupt-multiplex";
                         #address-cells = <0x0>;
                         #interrupt-cells = <0x3>;
@@ -464,16 +464,18 @@
                         interrupt-map-mask = <0x0 0xffff 0x0>;
                         interrupt-map = <0x33 0x0 0x15 &amba 0x0>,
                          <0x0 0x33 0x0 &i2c1 0x4>,
+                         <0x0 0x33 0x0 &imux 0x4 0x0 0x80>,
                          <0x0 0x33 0x0 &can0_clk 0x4>,
-                         <0x0 0x33 0x0 &imux 0x4 0x0 0x7d>,
-                         <0x0 0x33 0x0 &sensor0 0x4>,
+                         <0x0 0x33 0x0 &versal_fpga 0x4>,
                          <0x0 0x33 0x0 &ttc1 0x4>,
+                         <0x0 0x33 0x0 &rtc_clk 0x4>,
                          <0x74 0x0 0x15 &amba 0x0>,
                          <0x0 0x74 0x0 &i2c1 0x4>,
+                         <0x0 0x74 0x0 &imux 0x4 0x0 0x80>,
                          <0x0 0x74 0x0 &can0_clk 0x4>,
-                         <0x0 0x74 0x0 &imux 0x4 0x0 0x7d>,
-                         <0x0 0x74 0x0 &sensor0 0x4>,
-                         <0x0 0x74 0x0 &ttc1 0x4>;
+                         <0x0 0x74 0x0 &versal_fpga 0x4>,
+                         <0x0 0x74 0x0 &ttc1 0x4>,
+                         <0x0 0x74 0x0 &rtc_clk 0x4>;
                 };
 
                 lpd_dma_chan0: dma-controller@ffa80000 {
@@ -664,7 +666,7 @@
                         xlnx,enet-clk-freq-hz = <0x7735464>;
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ethernet_0";
-                        phy-handle = <0x80>;
+                        phy-handle = <0x82>;
 
                         mdio: mdio {
                                 phandle = <0xad>;
@@ -672,7 +674,7 @@
                                 #size-cells = <0x0>;
 
                                 phy1: phy@1 {
-                                        phandle = <0x80>;
+                                        phandle = <0x82>;
                                         compatible = "ethernet-phy-id2000.a231";
                                         reg = <0x1>;
                                         ti,rx-internal-delay = <0xb>;
@@ -682,7 +684,7 @@
                                 };
 
                                 phy2: phy@2 {
-                                        phandle = <0x81>;
+                                        phandle = <0x83>;
                                         compatible = "ethernet-phy-id2000.a231";
                                         reg = <0x2>;
                                         ti,rx-internal-delay = <0xb>;
@@ -721,7 +723,7 @@
                         xlnx,enet-clk-freq-hz = <0x7735464>;
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ethernet_1";
-                        phy-handle = <0x81>;
+                        phy-handle = <0x83>;
                 };
 
                 i2c1: i2c@ff030000 {
@@ -1578,7 +1580,7 @@
         };
 
         pl_alt_ref: pl-alt-ref {
-                phandle = <0x98>;
+                phandle = <0x9a>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -1587,7 +1589,7 @@
         };
 
         ref: ref {
-                phandle = <0x97>;
+                phandle = <0x99>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -1596,7 +1598,7 @@
         };
 
         rtc_clk: rtc-clk {
-                phandle = <0x82>;
+                phandle = <0x84>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -1605,7 +1607,7 @@
         };
 
         can0_clk: can0-clk {
-                phandle = <0x7e>;
+                phandle = <0x80>;
                 #clock-cells = <0x0>;
                 compatible = "fixed-factor-clock";
                 clocks = <&versal_clk 0x60>;
@@ -1615,7 +1617,7 @@
         };
 
         can1_clk: can1-clk {
-                phandle = <0x7f>;
+                phandle = <0x81>;
                 #clock-cells = <0x0>;
                 compatible = "fixed-factor-clock";
                 clocks = <&versal_clk 0x61>;
@@ -1650,7 +1652,7 @@
                         };
 
                         versal_reset: reset-controller {
-                                phandle = <0x83>;
+                                phandle = <0x85>;
                                 compatible = "xlnx,versal-reset";
                                 #reset-cells = <0x1>;
                         };

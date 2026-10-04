@@ -23,7 +23,7 @@
         };
 
         cpus_a72: cpus {
-                phandle = <0xa5>;
+                phandle = <0xa7>;
                 #ranges-size-cells = <0x2>;
                 #ranges-address-cells = <0x2>;
                 compatible = "cpus,cluster";
@@ -31,7 +31,7 @@
                 #address-cells = <0x1>;
 
                 psv_cortexa72_0: cpu@0 {
-                        phandle = <0x9f>;
+                        phandle = <0xa1>;
                         bus-handle = <0x1>;
                         cpu-frequency = <0x53724e00>;
                         xlnx,cpu-clk-freq-hz = <0x53724e00>;
@@ -57,7 +57,7 @@
                 };
 
                 psv_cortexa72_1: cpu@1 {
-                        phandle = <0xa1>;
+                        phandle = <0xa3>;
                         bus-handle = <0x1>;
                         cpu-frequency = <0x53724e00>;
                         xlnx,cpu-clk-freq-hz = <0x53724e00>;
@@ -172,12 +172,12 @@
         };
 
         versal_fpga: versal-fpga {
-                phandle = <0x87>;
+                phandle = <0x89>;
                 compatible = "xlnx,versal-fpga";
         };
 
         sensor0: versal-thermal-sensor {
-                phandle = <0x89>;
+                phandle = <0x8b>;
                 io-channel-names = "sysmon-temp-channel";
                 io-channels = <&sysmon0 0x9>;
                 #thermal-sensor-cells = <0x1>;
@@ -461,7 +461,7 @@
 
                 gem0: ethernet@ff0c0000 {
                         phandle = <0x55>;
-                        phy-handle = <0x8c>;
+                        phy-handle = <0x8e>;
                         xlnx,enet-slcr-100mbps-div0 = <0xa>;
                         xlnx,enet-clk-freq-hz = <0x773545d>;
                         xlnx,eth-mode = "RGMII";
@@ -495,7 +495,7 @@
                                 #address-cells = <0x1>;
 
                                 phy0: ethernet-phy@1 {
-                                        phandle = <0x8c>;
+                                        phandle = <0x8e>;
                                         reset-gpios = <&gpio0 0xc 0x1>;
                                         reset-deassert-us = <0x118>;
                                         reset-assert-us = <0x64>;
@@ -599,23 +599,6 @@
                         reg = <0x0 0xff030000 0x0 0x1000>;
                         status = "okay";
                         compatible = "cdns,i2c-r1p14";
-                };
-
-                i2c2: i2c@f1000000 {
-                        phandle = <0x26>;
-                        xlnx,ip-name = "psv_pmc_i2c";
-                        xlnx,i2c-clk-freq-hz = <0x5f5dd19>;
-                        xlnx,clock-freq = <0x5f5dd19>;
-                        power-domains = <&versal_firmware 0x1822402d>;
-                        clocks = <&versal_clk 0x3e>;
-                        #size-cells = <0x0>;
-                        #address-cells = <0x1>;
-                        clock-frequency = <0x186a0>;
-                        interrupt-parent = <&gic>;
-                        interrupts = <0x0 0x7b 0x4>;
-                        reg = <0x0 0xf1000000 0x0 0x1000>;
-                        status = "okay";
-                        compatible = "cdns,i2c-r1p14";
 
                         tcal6408_pcie: gpio@20 {
                                 phandle = <0xbd>;
@@ -657,6 +640,23 @@
                                         };
                                 };
                         };
+                };
+
+                i2c2: i2c@f1000000 {
+                        phandle = <0x26>;
+                        xlnx,ip-name = "psv_pmc_i2c";
+                        xlnx,i2c-clk-freq-hz = <0x5f5dd19>;
+                        xlnx,clock-freq = <0x5f5dd19>;
+                        power-domains = <&versal_firmware 0x1822402d>;
+                        clocks = <&versal_clk 0x3e>;
+                        #size-cells = <0x0>;
+                        #address-cells = <0x1>;
+                        clock-frequency = <0x186a0>;
+                        interrupt-parent = <&gic>;
+                        interrupts = <0x0 0x7b 0x4>;
+                        reg = <0x0 0xf1000000 0x0 0x1000>;
+                        status = "okay";
+                        compatible = "cdns,i2c-r1p14";
                 };
 
                 mc0: memory-controller@f6150000 {
@@ -1429,7 +1429,7 @@
                         device_type = "pci";
 
                         pcie_intc_0: interrupt-controller {
-                                phandle = <0x91>;
+                                phandle = <0x93>;
                                 interrupt-controller;
                                 #interrupt-cells = <0x1>;
                                 #address-cells = <0x0>;
@@ -1494,7 +1494,7 @@
                                         reg = <0x1>;
 
                                         fpd_funnel_in_port1: endpoint {
-                                                phandle = <0x9e>;
+                                                phandle = <0xa0>;
                                                 remote-endpoint = <&apu_etf_out_port>;
                                         };
                                 };
@@ -1505,7 +1505,7 @@
                                 port {
 
                                         fpd_funnel_out_port: endpoint {
-                                                phandle = <0x95>;
+                                                phandle = <0x97>;
                                                 remote-endpoint = <&fpd_etf_in_port>;
                                         };
                                 };
@@ -1525,7 +1525,7 @@
                                 port {
 
                                         fpd_etf_in_port: endpoint {
-                                                phandle = <0x94>;
+                                                phandle = <0x96>;
                                                 remote-endpoint = <&fpd_funnel_out_port>;
                                         };
                                 };
@@ -1536,7 +1536,7 @@
                                 port {
 
                                         fpd_etf_out_port: endpoint {
-                                                phandle = <0x97>;
+                                                phandle = <0x99>;
                                                 remote-endpoint = <&replicator_in_port>;
                                         };
                                 };
@@ -1556,7 +1556,7 @@
                                 port {
 
                                         replicator_in_port: endpoint {
-                                                phandle = <0x96>;
+                                                phandle = <0x98>;
                                                 remote-endpoint = <&fpd_etf_out_port>;
                                         };
                                 };
@@ -1570,7 +1570,7 @@
                                         reg = <0x0>;
 
                                         replicator_out_port0: endpoint {
-                                                phandle = <0x99>;
+                                                phandle = <0x9b>;
                                                 remote-endpoint = <&etr_in_port>;
                                         };
                                 };
@@ -1590,7 +1590,7 @@
                                 port {
 
                                         etr_in_port: endpoint {
-                                                phandle = <0x98>;
+                                                phandle = <0x9a>;
                                                 remote-endpoint = <&replicator_out_port0>;
                                         };
                                 };
@@ -1613,7 +1613,7 @@
                                         reg = <0x0>;
 
                                         funnel_in_port0: endpoint {
-                                                phandle = <0xa0>;
+                                                phandle = <0xa2>;
                                                 remote-endpoint = <&etm0_out_port>;
                                         };
                                 };
@@ -1622,7 +1622,7 @@
                                         reg = <0x1>;
 
                                         funnel_in_port1: endpoint {
-                                                phandle = <0xa2>;
+                                                phandle = <0xa4>;
                                                 remote-endpoint = <&etm1_out_port>;
                                         };
                                 };
@@ -1633,7 +1633,7 @@
                                 port {
 
                                         funnel_out_port: endpoint {
-                                                phandle = <0x9d>;
+                                                phandle = <0x9f>;
                                                 remote-endpoint = <&etf_in_port>;
                                         };
                                 };
@@ -1653,7 +1653,7 @@
                                 port {
 
                                         etf_in_port: endpoint {
-                                                phandle = <0x9c>;
+                                                phandle = <0x9e>;
                                                 remote-endpoint = <&funnel_out_port>;
                                         };
                                 };
@@ -1664,7 +1664,7 @@
                                 port {
 
                                         apu_etf_out_port: endpoint {
-                                                phandle = <0x93>;
+                                                phandle = <0x95>;
                                                 remote-endpoint = <&fpd_funnel_in_port1>;
                                         };
                                 };
@@ -1695,7 +1695,7 @@
                                 port {
 
                                         etm0_out_port: endpoint {
-                                                phandle = <0x9a>;
+                                                phandle = <0x9c>;
                                                 remote-endpoint = <&funnel_in_port0>;
                                         };
                                 };
@@ -1726,7 +1726,7 @@
                                 port {
 
                                         etm1_out_port: endpoint {
-                                                phandle = <0x9b>;
+                                                phandle = <0x9d>;
                                                 remote-endpoint = <&funnel_in_port1>;
                                         };
                                 };
@@ -2336,7 +2336,7 @@
                         compatible = "xlnx,coresight-1.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_cpm6: ps_wizard_0_pmcps_0_psv_cpm6@fc000000 {
+                ps_wizard_0_pmcps_0_psv_cpm6: ps-wizard-0-pmcps-0-psv-cpm6@fc000000 {
                         phandle = <0x40>;
                         reg = <0x0 0xfc000000 0x0 0x1000000>;
                         xlnx,ip-name = "psv_cpm6";
@@ -2380,7 +2380,7 @@
                         xlnx,ip-name = "psv_acpu_gic";
 
                         gic_its: msi-controller@f9020000 {
-                                phandle = <0x92>;
+                                phandle = <0x94>;
                                 compatible = "arm,gic-v3-its";
                                 status = "disabled";
                                 msi-controller;
@@ -2491,7 +2491,7 @@
         };
 
         pl_alt_ref: pl-alt-ref {
-                phandle = <0xa4>;
+                phandle = <0xa6>;
                 clock-output-names = "pl_alt_ref_clk";
                 clock-frequency = <0x1fca055>;
                 #clock-cells = <0x0>;
@@ -2500,7 +2500,7 @@
         };
 
         ref: ref {
-                phandle = <0xa3>;
+                phandle = <0xa5>;
                 clock-output-names = "ref_clk";
                 clock-frequency = <0x1fca055>;
                 #clock-cells = <0x0>;
@@ -2509,7 +2509,7 @@
         };
 
         rtc_clk: rtc-clk {
-                phandle = <0x8d>;
+                phandle = <0x8f>;
                 clock-output-names = "rtc_clk";
                 clock-frequency = <0x8000>;
                 #clock-cells = <0x0>;
@@ -2518,7 +2518,7 @@
         };
 
         can0_clk: can0-clk {
-                phandle = <0x8a>;
+                phandle = <0x8c>;
                 clock-output-names = "can0_clk";
                 clock-mult = <0x1>;
                 clock-div = <0x2>;
@@ -2528,7 +2528,7 @@
         };
 
         can1_clk: can1-clk {
-                phandle = <0x8b>;
+                phandle = <0x8d>;
                 clock-output-names = "can1_clk";
                 clock-mult = <0x1>;
                 clock-div = <0x2>;
@@ -2563,7 +2563,7 @@
                         };
 
                         versal_reset: reset-controller {
-                                phandle = <0x8e>;
+                                phandle = <0x90>;
                                 #reset-cells = <0x1>;
                                 compatible = "xlnx,versal-reset";
                         };
@@ -2709,7 +2709,7 @@
         };
 
         aliases {
-                nvmem0 = "/axi/i2c@f1000000/i2c-arbitrator@72/i2c-arb/eeprom@54";
+                nvmem0 = "/axi/i2c@ff030000/i2c-arbitrator@72/i2c-arb/eeprom@54";
                 rtc0 = "/axi/rtc@f12a0000";
                 usb0 = "/axi/usb@ff9d0000";
                 mmc0 = "/axi/mmc@f1050000";
@@ -2723,7 +2723,7 @@
         };
 
         vdd_usb_hub: regulator-vdd-usb-hub {
-                phandle = <0x8f>;
+                phandle = <0x91>;
                 regulator-boot-on;
                 regulator-always-on;
                 regulator-max-microvolt = <0x325aa0>;
@@ -2733,7 +2733,7 @@
         };
 
         vdd2_usb_hub: regulator-vdd2-usb-hub {
-                phandle = <0x90>;
+                phandle = <0x92>;
                 regulator-boot-on;
                 regulator-always-on;
                 regulator-max-microvolt = <0x124f80>;
@@ -2781,12 +2781,12 @@
                 gpio0 = "/axi/gpio@ff0b0000";
                 gpio1 = "/axi/gpio@f1020000";
                 i2c0 = "/axi/i2c@ff020000";
+                tcal6408_pcie = "/axi/i2c@ff030000/gpio@20";
+                rc31312_i2c = "/axi/i2c@ff030000/i2c-mux@73/i2c@0";
+                eeprom = "/axi/i2c@ff030000/i2c-arbitrator@72/i2c-arb/eeprom@54";
+                i2carb1 = "/axi/i2c@ff030000/i2c-arbitrator@72/i2c-arb";
+                i2carb = "/axi/i2c@ff030000/i2c-arbitrator@72";
                 i2c1 = "/axi/i2c@ff030000";
-                tcal6408_pcie = "/axi/i2c@f1000000/gpio@20";
-                rc31312_i2c = "/axi/i2c@f1000000/i2c-mux@73/i2c@0";
-                eeprom = "/axi/i2c@f1000000/i2c-arbitrator@72/i2c-arb/eeprom@54";
-                i2carb1 = "/axi/i2c@f1000000/i2c-arbitrator@72/i2c-arb";
-                i2carb = "/axi/i2c@f1000000/i2c-arbitrator@72";
                 i2c2 = "/axi/i2c@f1000000";
                 mc0 = "/axi/memory-controller@f6150000";
                 mc1 = "/axi/memory-controller@f62c0000";
@@ -2902,7 +2902,7 @@
                 ipi_6_to_ipi_psm = "/axi/mailbox@ff3a0000/child@ff310000";
                 ipi6 = "/axi/mailbox@ff3a0000";
                 coresight = "/axi/coresight@f0800000";
-                ps_wizard_0_pmcps_0_psv_cpm6 = "/axi/ps_wizard_0_pmcps_0_psv_cpm6@fc000000";
+                ps_wizard_0_pmcps_0_psv_cpm6 = "/axi/ps-wizard-0-pmcps-0-psv-cpm6@fc000000";
                 libmetal_uio_desc099c8000 = "/axi/libmetal_uio_desc0@99c8000";
                 libmetal_uio_desc199cc000 = "/axi/libmetal_uio_desc1@99cc000";
                 libmetal_uio_data99d0000 = "/axi/libmetal_uio_data@99d0000";

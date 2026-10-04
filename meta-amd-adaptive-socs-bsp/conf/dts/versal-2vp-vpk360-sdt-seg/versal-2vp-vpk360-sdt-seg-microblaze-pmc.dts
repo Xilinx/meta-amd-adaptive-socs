@@ -34,7 +34,7 @@
         };
 
         cpus_microblaze_0: cpus_microblaze@0 {
-                phandle = <0xa6>;
+                phandle = <0xa8>;
                 #address-cells = <0x1>;
                 #size-cells = <0x0>;
                 compatible = "cpus,cluster";
@@ -77,7 +77,7 @@
                 #ranges-size-cells = <0x1>;
 
                 psv_pmc_0: cpu@0 {
-                        phandle = <0xa7>;
+                        phandle = <0xa9>;
                         compatible = "pmc-microblaze";
                         device_type = "cpu";
                         reg = <0x0>;
@@ -365,12 +365,12 @@
         };
 
         versal_fpga: versal-fpga {
-                phandle = <0x87>;
+                phandle = <0x89>;
                 compatible = "xlnx,versal-fpga";
         };
 
         sensor0: versal-thermal-sensor {
-                phandle = <0x89>;
+                phandle = <0x8b>;
                 compatible = "xlnx,versal-thermal";
                 #thermal-sensor-cells = <0x1>;
                 io-channels = <&sysmon0 0x9>;
@@ -462,7 +462,7 @@
                 bootph-all;
 
                 imux: interrupt-multiplex {
-                        phandle = <0x88>;
+                        phandle = <0x8a>;
                         compatible = "interrupt-multiplex";
                         #address-cells = <0x0>;
                         #interrupt-cells = <0x3>;
@@ -471,7 +471,7 @@
                         interrupt-map = <0x3f 0x0 0x15 &amba 0x0>,
                          <0x43 0x4 0x0 &pmc_cfu_apb_0 0x0>,
                          <0x81 0x0 0x14 &amba 0x0>,
-                         <0x0 0x81 0x0 &vdd_usb_hub 0x4>,
+                         <0x0 0x81 0x0 &rtc_clk 0x4>,
                          <0x0 0x81 0x0 &lpd_dma_chan6 0x4>;
                 };
 
@@ -663,7 +663,7 @@
                         xlnx,enet-clk-freq-hz = <0x773545d>;
                         xlnx,enet-slcr-100mbps-div0 = <0xa>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ethernet_0";
-                        phy-handle = <0x8c>;
+                        phy-handle = <0x8e>;
 
                         mdio: mdio {
                                 phandle = <0xbb>;
@@ -671,7 +671,7 @@
                                 #size-cells = <0x0>;
 
                                 phy0: ethernet-phy@1 {
-                                        phandle = <0x8c>;
+                                        phandle = <0x8e>;
                                         reg = <0x1>;
                                         compatible = "ethernet-phy-id2000.a231";
                                         ti,rx-internal-delay = <0x8>;
@@ -760,24 +760,6 @@
                         xlnx,ip-name = "psv_i2c";
                         xlnx,iic-board-interface = "custom";
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_i2c_1";
-                };
-
-                i2c2: i2c@f1000000 {
-                        phandle = <0x26>;
-                        compatible = "cdns,i2c-r1p14";
-                        status = "okay";
-                        reg = <0x0 0xf1000000 0x0 0x1000>;
-                        interrupts = <0x0 0x7b 0x4>;
-                        interrupt-parent = <&imux>;
-                        clock-frequency = <0x186a0>;
-                        #address-cells = <0x1>;
-                        #size-cells = <0x0>;
-                        clocks = <&versal_clk 0x3e>;
-                        power-domains = <&versal_firmware 0x1822402d>;
-                        xlnx,clock-freq = <0x5f5dd19>;
-                        xlnx,i2c-clk-freq-hz = <0x5f5dd19>;
-                        xlnx,ip-name = "psv_pmc_i2c";
-                        xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_i2c_0";
 
                         tcal6408_pcie: gpio@20 {
                                 phandle = <0xbd>;
@@ -819,6 +801,24 @@
                                         };
                                 };
                         };
+                };
+
+                i2c2: i2c@f1000000 {
+                        phandle = <0x26>;
+                        compatible = "cdns,i2c-r1p14";
+                        status = "okay";
+                        reg = <0x0 0xf1000000 0x0 0x1000>;
+                        interrupts = <0x0 0x7b 0x4>;
+                        interrupt-parent = <&imux>;
+                        clock-frequency = <0x186a0>;
+                        #address-cells = <0x1>;
+                        #size-cells = <0x0>;
+                        clocks = <&versal_clk 0x3e>;
+                        power-domains = <&versal_firmware 0x1822402d>;
+                        xlnx,clock-freq = <0x5f5dd19>;
+                        xlnx,i2c-clk-freq-hz = <0x5f5dd19>;
+                        xlnx,ip-name = "psv_pmc_i2c";
+                        xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_i2c_0";
                 };
 
                 ocm: memory-controller@ff960000 {
@@ -1831,7 +1831,7 @@
         };
 
         pl_alt_ref: pl-alt-ref {
-                phandle = <0xa4>;
+                phandle = <0xa6>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -1840,7 +1840,7 @@
         };
 
         ref: ref {
-                phandle = <0xa3>;
+                phandle = <0xa5>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -1849,7 +1849,7 @@
         };
 
         rtc_clk: rtc-clk {
-                phandle = <0x8d>;
+                phandle = <0x8f>;
                 bootph-all;
                 compatible = "fixed-clock";
                 #clock-cells = <0x0>;
@@ -1858,7 +1858,7 @@
         };
 
         can0_clk: can0-clk {
-                phandle = <0x8a>;
+                phandle = <0x8c>;
                 #clock-cells = <0x0>;
                 compatible = "fixed-factor-clock";
                 clocks = <&versal_clk 0x60>;
@@ -1868,7 +1868,7 @@
         };
 
         can1_clk: can1-clk {
-                phandle = <0x8b>;
+                phandle = <0x8d>;
                 #clock-cells = <0x0>;
                 compatible = "fixed-factor-clock";
                 clocks = <&versal_clk 0x61>;
@@ -1903,7 +1903,7 @@
                         };
 
                         versal_reset: reset-controller {
-                                phandle = <0x8e>;
+                                phandle = <0x90>;
                                 compatible = "xlnx,versal-reset";
                                 #reset-cells = <0x1>;
                         };
@@ -2015,11 +2015,11 @@
                 ethernet0 = "/axi/ethernet@ff0c0000";
                 mmc0 = "/axi/mmc@f1050000";
                 usb0 = "/axi/usb@ff9d0000";
-                nvmem0 = "/axi/i2c@f1000000/i2c-arbitrator@72/i2c-arb/eeprom@54";
+                nvmem0 = "/axi/i2c@ff030000/i2c-arbitrator@72/i2c-arb/eeprom@54";
         };
 
         vdd_usb_hub: regulator-vdd-usb-hub {
-                phandle = <0x8f>;
+                phandle = <0x91>;
                 compatible = "regulator-fixed";
                 regulator-name = "vdd_usb_hub";
                 regulator-min-microvolt = <0x325aa0>;
@@ -2029,7 +2029,7 @@
         };
 
         vdd2_usb_hub: regulator-vdd2-usb-hub {
-                phandle = <0x90>;
+                phandle = <0x92>;
                 compatible = "regulator-fixed";
                 regulator-name = "vdd2_usb_hub";
                 regulator-min-microvolt = <0x124f80>;
@@ -2073,12 +2073,12 @@
                 gpio1 = "/axi/gpio@f1020000";
                 i2c0 = "/axi/i2c@ff020000";
                 i2c1 = "/axi/i2c@ff030000";
+                tcal6408_pcie = "/axi/i2c@ff030000/gpio@20";
+                rc31312_i2c = "/axi/i2c@ff030000/i2c-mux@73/i2c@0";
+                i2carb = "/axi/i2c@ff030000/i2c-arbitrator@72";
+                i2carb1 = "/axi/i2c@ff030000/i2c-arbitrator@72/i2c-arb";
+                eeprom = "/axi/i2c@ff030000/i2c-arbitrator@72/i2c-arb/eeprom@54";
                 i2c2 = "/axi/i2c@f1000000";
-                tcal6408_pcie = "/axi/i2c@f1000000/gpio@20";
-                rc31312_i2c = "/axi/i2c@f1000000/i2c-mux@73/i2c@0";
-                i2carb = "/axi/i2c@f1000000/i2c-arbitrator@72";
-                i2carb1 = "/axi/i2c@f1000000/i2c-arbitrator@72/i2c-arb";
-                eeprom = "/axi/i2c@f1000000/i2c-arbitrator@72/i2c-arb/eeprom@54";
                 ocm = "/axi/memory-controller@ff960000";
                 sdhci1 = "/axi/mmc@f1050000";
                 serial0 = "/axi/serial@ff000000";

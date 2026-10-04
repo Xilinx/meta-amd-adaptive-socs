@@ -21,7 +21,7 @@
         };
 
         cpus_a72: cpus-a72@0 {
-                phandle = <0x99>;
+                phandle = <0x9b>;
                 #ranges-size-cells = <0x2>;
                 #ranges-address-cells = <0x2>;
                 address-map = <0x0 0xf0000000 &amba 0x0 0xf0000000 0x0 0x10000000>,
@@ -128,7 +128,7 @@
                 #address-cells = <0x1>;
 
                 psv_cortexa72_0: cpu@0 {
-                        phandle = <0x93>;
+                        phandle = <0x95>;
                         bus-handle = <0x1>;
                         cpu-frequency = <0x3b9aca00>;
                         xlnx,cpu-clk-freq-hz = <0x3b9aca00>;
@@ -154,7 +154,7 @@
                 };
 
                 psv_cortexa72_1: cpu@1 {
-                        phandle = <0x95>;
+                        phandle = <0x97>;
                         bus-handle = <0x1>;
                         cpu-frequency = <0x3b9aca00>;
                         xlnx,cpu-clk-freq-hz = <0x3b9aca00>;
@@ -204,7 +204,7 @@
         };
 
         cpus_microblaze_0: cpus_microblaze@0 {
-                phandle = <0x9a>;
+                phandle = <0x9c>;
                 #ranges-size-cells = <0x1>;
                 #ranges-address-cells = <0x1>;
                 address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
@@ -244,7 +244,7 @@
                 #address-cells = <0x1>;
 
                 psv_pmc_0: cpu@0 {
-                        phandle = <0x9b>;
+                        phandle = <0x9d>;
                         xlnx,unaligned-exceptions = <0x1>;
                         xlnx,m-axi-dc-user-value = <0x1f>;
                         xlnx,dcache-victims = <0x0>;
@@ -474,7 +474,7 @@
         };
 
         cpus_microblaze_1: cpus_microblaze@1 {
-                phandle = <0x9c>;
+                phandle = <0x9e>;
                 #ranges-size-cells = <0x1>;
                 #ranges-address-cells = <0x1>;
                 address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
@@ -562,7 +562,7 @@
                 #address-cells = <0x1>;
 
                 psv_psm_0: cpu@0 {
-                        phandle = <0x9d>;
+                        phandle = <0x9f>;
                         xlnx,unaligned-exceptions = <0x1>;
                         xlnx,m-axi-dc-user-value = <0x1f>;
                         xlnx,dcache-victims = <0x0>;
@@ -792,7 +792,7 @@
         };
 
         cpus_r5_0: cpus-r5@0 {
-                phandle = <0x9e>;
+                phandle = <0xa0>;
                 #ranges-size-cells = <0x1>;
                 #ranges-address-cells = <0x1>;
                 address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
@@ -900,8 +900,18 @@
                 #size-cells = <0x0>;
                 #address-cells = <0x1>;
 
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&psv_cortexr5_0>;
+                                };
+                        };
+                };
+
                 psv_cortexr5_0: cpu@0 {
-                        phandle = <0x9f>;
+                        phandle = <0x7a>;
                         cpu-frequency = <0x17d77462>;
                         xlnx,cpu-clk-freq-hz = <0x17d77462>;
                         bus-handle = <0x1>;
@@ -919,7 +929,7 @@
         };
 
         cpus_r5_1: cpus-r5@1 {
-                phandle = <0xa0>;
+                phandle = <0xa1>;
                 #ranges-size-cells = <0x1>;
                 #ranges-address-cells = <0x1>;
                 address-map = <0xf0000000 &amba 0xf0000000 0x10000000>,
@@ -1027,8 +1037,18 @@
                 #size-cells = <0x0>;
                 #address-cells = <0x1>;
 
-                psv_cortexr5_1: cpu@1 {
-                        phandle = <0xa1>;
+                cpu-map {
+
+                        cluster0 {
+
+                                core0 {
+                                        cpu = <&psv_cortexr5_1>;
+                                };
+                        };
+                };
+
+                psv_cortexr5_1: cpu@0 {
+                        phandle = <0x7c>;
                         cpu-frequency = <0x17d77462>;
                         xlnx,cpu-clk-freq-hz = <0x17d77462>;
                         bus-handle = <0x1>;
@@ -1039,7 +1059,7 @@
                         xlnx,is-cache-coherent = <0x0>;
                         power-domains = <&versal_firmware 0x18110006>;
                         operating-points-v2 = <&cpu_opp_table>;
-                        reg = <0x1>;
+                        reg = <0x0>;
                         device_type = "cpu";
                         compatible = "arm,cortex-r5";
                 };
@@ -1111,12 +1131,12 @@
         };
 
         versal_fpga: versal-fpga {
-                phandle = <0x7b>;
+                phandle = <0x7d>;
                 compatible = "xlnx,versal-fpga";
         };
 
         sensor0: versal-thermal-sensor {
-                phandle = <0x7d>;
+                phandle = <0x7f>;
                 io-channel-names = "sysmon-temp-channel";
                 io-channels = <&sysmon0 0x0>;
                 #thermal-sensor-cells = <0x1>;
@@ -1205,7 +1225,7 @@
                         compatible = "arm,gic-v3";
 
                         gic_its: msi-controller@f9020000 {
-                                phandle = <0x85>;
+                                phandle = <0x87>;
                                 reg = <0x0 0xf9020000 0x0 0x20000>;
                                 #msi-cells = <0x1>;
                                 msi-controller;
@@ -1246,7 +1266,7 @@
                 compatible = "simple-bus";
 
                 imux: interrupt-multiplex {
-                        phandle = <0x7c>;
+                        phandle = <0x7e>;
                         interrupt-map = <0x0 0x14 0x0 &gic_a72 0x0 0x14 0x1>,
                          <0x0 0x15 0x0 &gic_a72 0x0 0x15 0x1>,
                          <0x0 0x6a 0x0 &gic_a72 0x0 0x6a 0x4>,
@@ -1558,7 +1578,7 @@
 
                 gem0: ethernet@ff0c0000 {
                         phandle = <0x47>;
-                        phy-handle = <0x80>;
+                        phy-handle = <0x82>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ethernet_0";
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         xlnx,enet-clk-freq-hz = <0x7735464>;
@@ -1592,7 +1612,7 @@
                                 #address-cells = <0x1>;
 
                                 phy1: phy@1 {
-                                        phandle = <0x80>;
+                                        phandle = <0x82>;
                                         ti,dp83867-rxctrl-strap-quirk;
                                         ti,fifo-depth = <0x1>;
                                         ti,tx-internal-delay = <0xa>;
@@ -1602,7 +1622,7 @@
                                 };
 
                                 phy2: phy@2 {
-                                        phandle = <0x81>;
+                                        phandle = <0x83>;
                                         ti,dp83867-rxctrl-strap-quirk;
                                         ti,fifo-depth = <0x1>;
                                         ti,tx-internal-delay = <0xa>;
@@ -1615,7 +1635,7 @@
 
                 gem1: ethernet@ff0d0000 {
                         phandle = <0x48>;
-                        phy-handle = <0x81>;
+                        phy-handle = <0x83>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ethernet_1";
                         xlnx,enet-slcr-100mbps-div0 = <0x23>;
                         xlnx,enet-clk-freq-hz = <0x7735464>;
@@ -2260,7 +2280,7 @@
                         device_type = "pci";
 
                         pcie_intc_0: interrupt-controller {
-                                phandle = <0x84>;
+                                phandle = <0x86>;
                                 interrupt-controller;
                                 #interrupt-cells = <0x1>;
                                 #address-cells = <0x0>;
@@ -2294,7 +2314,7 @@
                         device_type = "pci";
 
                         pcie_intc_2: interrupt-controller {
-                                phandle = <0x86>;
+                                phandle = <0x88>;
                                 interrupt-controller;
                                 #interrupt-cells = <0x1>;
                                 #address-cells = <0x0>;
@@ -3295,7 +3315,7 @@
                 };
 
                 ipi2: mailbox@ff350000 {
-                        phandle = <0x7a>;
+                        phandle = <0x7b>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ipi_2";
                         xlnx,bit-position = <0x4>;
                         xlnx,int-id = <0x40>;
@@ -4088,7 +4108,7 @@
                         compatible = "xlnx,coresight-1.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_aes: ps_wizard_0_pmcps_0_psv_pmc_aes@f11e0000 {
+                ps_wizard_0_pmcps_0_psv_pmc_aes: ps-wizard-0-pmcps-0-psv-pmc-aes@f11e0000 {
                         phandle = <0x21>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_aes";
                         reg = <0x0 0xf11e0000 0x0 0x10000>;
@@ -4097,7 +4117,7 @@
                         compatible = "xlnx,psv-pmc-aes-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl: ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl@f11f0000 {
+                ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl: ps-wizard-0-pmcps-0-psv-pmc-bbram-ctrl@f11f0000 {
                         phandle = <0x22>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl";
                         reg = <0x0 0xf11f0000 0x0 0x10000>;
@@ -4106,7 +4126,7 @@
                         compatible = "xlnx,psv-pmc-bbram-ctrl-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_crf_0: ps_wizard_0_pmcps_0_psv_crf_0@fd1a0000 {
+                ps_wizard_0_pmcps_0_psv_crf_0: ps-wizard-0-pmcps-0-psv-crf-0@fd1a0000 {
                         phandle = <0x35>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_crf_0";
                         reg = <0x0 0xfd1a0000 0x0 0x140000>;
@@ -4115,7 +4135,7 @@
                         compatible = "xlnx,psv-crf-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_crl_0: ps_wizard_0_pmcps_0_psv_crl_0@ff5e0000 {
+                ps_wizard_0_pmcps_0_psv_crl_0: ps-wizard-0-pmcps-0-psv-crl-0@ff5e0000 {
                         phandle = <0x51>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_crl_0";
                         reg = <0x0 0xff5e0000 0x0 0x300000>;
@@ -4124,7 +4144,7 @@
                         compatible = "xlnx,psv-crl-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_crp_0: ps_wizard_0_pmcps_0_psv_crp_0@f1260000 {
+                ps_wizard_0_pmcps_0_psv_crp_0: ps-wizard-0-pmcps-0-psv-crp-0@f1260000 {
                         phandle = <0x29>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_crp_0";
                         reg = <0x0 0xf1260000 0x0 0x10000>;
@@ -4133,7 +4153,7 @@
                         compatible = "xlnx,psv-crp-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_a720_cti: ps_wizard_0_pmcps_0_psv_coresight_a720_cti@f0d10000 {
+                ps_wizard_0_pmcps_0_psv_coresight_a720_cti: ps-wizard-0-pmcps-0-psv-coresight-a720-cti@f0d10000 {
                         phandle = <0x14>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_a720_cti";
                         reg = <0x0 0xf0d10000 0x0 0x10000>;
@@ -4142,7 +4162,7 @@
                         compatible = "xlnx,psv-coresight-a720-cti-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_a720_dbg: ps_wizard_0_pmcps_0_psv_coresight_a720_dbg@f0d00000 {
+                ps_wizard_0_pmcps_0_psv_coresight_a720_dbg: ps-wizard-0-pmcps-0-psv-coresight-a720-dbg@f0d00000 {
                         phandle = <0x13>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_a720_dbg";
                         reg = <0x0 0xf0d00000 0x0 0x10000>;
@@ -4151,7 +4171,7 @@
                         compatible = "xlnx,psv-coresight-a720-dbg-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_a720_etm: ps_wizard_0_pmcps_0_psv_coresight_a720_etm@f0d30000 {
+                ps_wizard_0_pmcps_0_psv_coresight_a720_etm: ps-wizard-0-pmcps-0-psv-coresight-a720-etm@f0d30000 {
                         phandle = <0x16>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_a720_etm";
                         reg = <0x0 0xf0d30000 0x0 0x10000>;
@@ -4160,7 +4180,7 @@
                         compatible = "xlnx,psv-coresight-a720-etm-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_a720_pmu: ps_wizard_0_pmcps_0_psv_coresight_a720_pmu@f0d20000 {
+                ps_wizard_0_pmcps_0_psv_coresight_a720_pmu: ps-wizard-0-pmcps-0-psv-coresight-a720-pmu@f0d20000 {
                         phandle = <0x15>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_a720_pmu";
                         reg = <0x0 0xf0d20000 0x0 0x10000>;
@@ -4169,7 +4189,7 @@
                         compatible = "xlnx,psv-coresight-a720-pmu-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_a721_cti: ps_wizard_0_pmcps_0_psv_coresight_a721_cti@f0d50000 {
+                ps_wizard_0_pmcps_0_psv_coresight_a721_cti: ps-wizard-0-pmcps-0-psv-coresight-a721-cti@f0d50000 {
                         phandle = <0x18>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_a721_cti";
                         reg = <0x0 0xf0d50000 0x0 0x10000>;
@@ -4178,7 +4198,7 @@
                         compatible = "xlnx,psv-coresight-a721-cti-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_a721_dbg: ps_wizard_0_pmcps_0_psv_coresight_a721_dbg@f0d40000 {
+                ps_wizard_0_pmcps_0_psv_coresight_a721_dbg: ps-wizard-0-pmcps-0-psv-coresight-a721-dbg@f0d40000 {
                         phandle = <0x17>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_a721_dbg";
                         reg = <0x0 0xf0d40000 0x0 0x10000>;
@@ -4187,7 +4207,7 @@
                         compatible = "xlnx,psv-coresight-a721-dbg-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_a721_etm: ps_wizard_0_pmcps_0_psv_coresight_a721_etm@f0d70000 {
+                ps_wizard_0_pmcps_0_psv_coresight_a721_etm: ps-wizard-0-pmcps-0-psv-coresight-a721-etm@f0d70000 {
                         phandle = <0x1a>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_a721_etm";
                         reg = <0x0 0xf0d70000 0x0 0x10000>;
@@ -4196,7 +4216,7 @@
                         compatible = "xlnx,psv-coresight-a721-etm-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_a721_pmu: ps_wizard_0_pmcps_0_psv_coresight_a721_pmu@f0d60000 {
+                ps_wizard_0_pmcps_0_psv_coresight_a721_pmu: ps-wizard-0-pmcps-0-psv-coresight-a721-pmu@f0d60000 {
                         phandle = <0x19>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_a721_pmu";
                         reg = <0x0 0xf0d60000 0x0 0x10000>;
@@ -4205,7 +4225,7 @@
                         compatible = "xlnx,psv-coresight-a721-pmu-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_apu_cti: ps_wizard_0_pmcps_0_psv_coresight_apu_cti@f0ca0000 {
+                ps_wizard_0_pmcps_0_psv_coresight_apu_cti: ps-wizard-0-pmcps-0-psv-coresight-apu-cti@f0ca0000 {
                         phandle = <0x12>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_apu_cti";
                         reg = <0x0 0xf0ca0000 0x0 0x10000>;
@@ -4214,7 +4234,7 @@
                         compatible = "xlnx,psv-coresight-apu-cti-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_apu_ela: ps_wizard_0_pmcps_0_psv_coresight_apu_ela@f0c60000 {
+                ps_wizard_0_pmcps_0_psv_coresight_apu_ela: ps-wizard-0-pmcps-0-psv-coresight-apu-ela@f0c60000 {
                         phandle = <0x11>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_apu_ela";
                         reg = <0x0 0xf0c60000 0x0 0x10000>;
@@ -4223,7 +4243,7 @@
                         compatible = "xlnx,psv-coresight-apu-ela-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_apu_etf: ps_wizard_0_pmcps_0_psv_coresight_apu_etf@f0c30000 {
+                ps_wizard_0_pmcps_0_psv_coresight_apu_etf: ps-wizard-0-pmcps-0-psv-coresight-apu-etf@f0c30000 {
                         phandle = <0x10>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_apu_etf";
                         reg = <0x0 0xf0c30000 0x0 0x10000>;
@@ -4232,7 +4252,7 @@
                         compatible = "xlnx,psv-coresight-apu-etf-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_apu_fun: ps_wizard_0_pmcps_0_psv_coresight_apu_fun@f0c20000 {
+                ps_wizard_0_pmcps_0_psv_coresight_apu_fun: ps-wizard-0-pmcps-0-psv-coresight-apu-fun@f0c20000 {
                         phandle = <0xf>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_apu_fun";
                         reg = <0x0 0xf0c20000 0x0 0x10000>;
@@ -4241,7 +4261,7 @@
                         compatible = "xlnx,psv-coresight-apu-fun-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_fpd_atm: ps_wizard_0_pmcps_0_psv_coresight_fpd_atm@f0b80000 {
+                ps_wizard_0_pmcps_0_psv_coresight_fpd_atm: ps-wizard-0-pmcps-0-psv-coresight-fpd-atm@f0b80000 {
                         phandle = <0xe>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_fpd_atm";
                         reg = <0x0 0xf0b80000 0x0 0x10000>;
@@ -4250,7 +4270,7 @@
                         compatible = "xlnx,psv-coresight-fpd-atm-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_fpd_stm: ps_wizard_0_pmcps_0_psv_coresight_fpd_stm@f0b70000 {
+                ps_wizard_0_pmcps_0_psv_coresight_fpd_stm: ps-wizard-0-pmcps-0-psv-coresight-fpd-stm@f0b70000 {
                         phandle = <0xd>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_fpd_stm";
                         reg = <0x0 0xf0b70000 0x0 0x10000>;
@@ -4259,7 +4279,7 @@
                         compatible = "xlnx,psv-coresight-fpd-stm-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_coresight_lpd_atm: ps_wizard_0_pmcps_0_psv_coresight_lpd_atm@f0980000 {
+                ps_wizard_0_pmcps_0_psv_coresight_lpd_atm: ps-wizard-0-pmcps-0-psv-coresight-lpd-atm@f0980000 {
                         phandle = <0xc>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_coresight_lpd_atm";
                         reg = <0x0 0xf0980000 0x0 0x10000>;
@@ -4268,7 +4288,7 @@
                         compatible = "xlnx,psv-coresight-lpd-atm-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_rsa: ps_wizard_0_pmcps_0_psv_pmc_rsa@f1200000 {
+                ps_wizard_0_pmcps_0_psv_pmc_rsa: ps-wizard-0-pmcps-0-psv-pmc-rsa@f1200000 {
                         phandle = <0x23>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_rsa";
                         reg = <0x0 0xf1200000 0x0 0x10000>;
@@ -4277,7 +4297,7 @@
                         compatible = "xlnx,psv-pmc-rsa-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_efuse_cache: ps_wizard_0_pmcps_0_psv_pmc_efuse_cache@f1250000 {
+                ps_wizard_0_pmcps_0_psv_pmc_efuse_cache: ps-wizard-0-pmcps-0-psv-pmc-efuse-cache@f1250000 {
                         phandle = <0x28>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_efuse_cache";
                         reg = <0x0 0xf1250000 0x0 0x10000>;
@@ -4286,7 +4306,7 @@
                         compatible = "xlnx,psv-pmc-efuse-cache-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl: ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl@f1240000 {
+                ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl: ps-wizard-0-pmcps-0-psv-pmc-efuse-ctrl@f1240000 {
                         phandle = <0x27>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl";
                         reg = <0x0 0xf1240000 0x0 0x10000>;
@@ -4295,7 +4315,7 @@
                         compatible = "xlnx,psv-pmc-efuse-ctrl-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_afi_0: ps_wizard_0_pmcps_0_psv_fpd_afi_0@fd360000 {
+                ps_wizard_0_pmcps_0_psv_fpd_afi_0: ps-wizard-0-pmcps-0-psv-fpd-afi-0@fd360000 {
                         phandle = <0x36>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_afi_0";
                         reg = <0x0 0xfd360000 0x0 0x10000>;
@@ -4304,7 +4324,7 @@
                         compatible = "xlnx,psv-fpd-afi-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_afi_2: ps_wizard_0_pmcps_0_psv_fpd_afi_2@fd380000 {
+                ps_wizard_0_pmcps_0_psv_fpd_afi_2: ps-wizard-0-pmcps-0-psv-fpd-afi-2@fd380000 {
                         phandle = <0x37>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_afi_2";
                         reg = <0x0 0xfd380000 0x0 0x10000>;
@@ -4313,7 +4333,7 @@
                         compatible = "xlnx,psv-fpd-afi-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_afi_mem_0: ps_wizard_0_pmcps_0_psv_fpd_afi_mem_0@a4000000 {
+                ps_wizard_0_pmcps_0_psv_fpd_afi_mem_0: ps-wizard-0-pmcps-0-psv-fpd-afi-mem-0@a4000000 {
                         phandle = <0x128>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_afi_mem_0";
                         reg = <0x0 0xa4000000 0x0 0xc000000>;
@@ -4322,7 +4342,7 @@
                         compatible = "xlnx,psv-fpd-afi-mem-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_afi_mem_2: ps_wizard_0_pmcps_0_psv_fpd_afi_mem_2@b0000000 {
+                ps_wizard_0_pmcps_0_psv_fpd_afi_mem_2: ps-wizard-0-pmcps-0-psv-fpd-afi-mem-2@b0000000 {
                         phandle = <0x129>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_afi_mem_2";
                         reg = <0x0 0xb0000000 0x0 0x10000000>;
@@ -4331,7 +4351,7 @@
                         compatible = "xlnx,psv-fpd-afi-mem-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_apu_0: ps_wizard_0_pmcps_0_psv_apu_0@fd5c0000 {
+                ps_wizard_0_pmcps_0_psv_apu_0: ps-wizard-0-pmcps-0-psv-apu-0@fd5c0000 {
                         phandle = <0x39>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_apu_0";
                         reg = <0x0 0xfd5c0000 0x0 0x10000>;
@@ -4340,7 +4360,7 @@
                         compatible = "xlnx,psv-apu-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_cci_0: ps_wizard_0_pmcps_0_psv_fpd_cci_0@fd5e0000 {
+                ps_wizard_0_pmcps_0_psv_fpd_cci_0: ps-wizard-0-pmcps-0-psv-fpd-cci-0@fd5e0000 {
                         phandle = <0x3a>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_cci_0";
                         reg = <0x0 0xfd5e0000 0x0 0x10000>;
@@ -4349,7 +4369,7 @@
                         compatible = "xlnx,psv-fpd-cci-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_gpv_0: ps_wizard_0_pmcps_0_psv_fpd_gpv_0@fd700000 {
+                ps_wizard_0_pmcps_0_psv_fpd_gpv_0: ps-wizard-0-pmcps-0-psv-fpd-gpv-0@fd700000 {
                         phandle = <0x3e>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_gpv_0";
                         reg = <0x0 0xfd700000 0x0 0x100000>;
@@ -4358,7 +4378,7 @@
                         compatible = "xlnx,psv-fpd-gpv-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_slcr_0: ps_wizard_0_pmcps_0_psv_fpd_slcr_0@fd610000 {
+                ps_wizard_0_pmcps_0_psv_fpd_slcr_0: ps-wizard-0-pmcps-0-psv-fpd-slcr-0@fd610000 {
                         phandle = <0x3c>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_slcr_0";
                         reg = <0x0 0xfd610000 0x0 0x10000>;
@@ -4367,7 +4387,7 @@
                         compatible = "xlnx,psv-fpd-slcr-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0: ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0@fd690000 {
+                ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0: ps-wizard-0-pmcps-0-psv-fpd-slcr-secure-0@fd690000 {
                         phandle = <0x3d>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0";
                         reg = <0x0 0xfd690000 0x0 0x10000>;
@@ -4376,7 +4396,7 @@
                         compatible = "xlnx,psv-fpd-slcr-secure-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_fpd_smmu_0: ps_wizard_0_pmcps_0_psv_fpd_smmu_0@fd5f0000 {
+                ps_wizard_0_pmcps_0_psv_fpd_smmu_0: ps-wizard-0-pmcps-0-psv-fpd-smmu-0@fd5f0000 {
                         phandle = <0x3b>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_fpd_smmu_0";
                         reg = <0x0 0xfd5f0000 0x0 0x10000>;
@@ -4385,7 +4405,7 @@
                         compatible = "xlnx,psv-fpd-smmu-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_scntr_0: ps_wizard_0_pmcps_0_psv_scntr_0@ff130000 {
+                ps_wizard_0_pmcps_0_psv_scntr_0: ps-wizard-0-pmcps-0-psv-scntr-0@ff130000 {
                         phandle = <0x4d>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_scntr_0";
                         reg = <0x0 0xff130000 0x0 0x10000>;
@@ -4394,7 +4414,7 @@
                         compatible = "xlnx,psv-scntr-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_scntrs_0: ps_wizard_0_pmcps_0_psv_scntrs_0@ff140000 {
+                ps_wizard_0_pmcps_0_psv_scntrs_0: ps-wizard-0-pmcps-0-psv-scntrs-0@ff140000 {
                         phandle = <0x4e>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_scntrs_0";
                         reg = <0x0 0xff140000 0x0 0x10000>;
@@ -4403,7 +4423,7 @@
                         compatible = "xlnx,psv-scntrs-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_ipi_buffer: ps_wizard_0_pmcps_0_psv_ipi_buffer@ff3f0000 {
+                ps_wizard_0_pmcps_0_psv_ipi_buffer: ps-wizard-0-pmcps-0-psv-ipi-buffer@ff3f0000 {
                         phandle = <0x12a>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ipi_buffer";
                         reg = <0x0 0xff3f0000 0x0 0x10000>;
@@ -4412,7 +4432,7 @@
                         compatible = "xlnx,psv-ipi-buffer-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_afi_0: ps_wizard_0_pmcps_0_psv_lpd_afi_0@ff9b0000 {
+                ps_wizard_0_pmcps_0_psv_lpd_afi_0: ps-wizard-0-pmcps-0-psv-lpd-afi-0@ff9b0000 {
                         phandle = <0x56>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_afi_0";
                         reg = <0x0 0xff9b0000 0x0 0x10000>;
@@ -4421,7 +4441,7 @@
                         compatible = "xlnx,psv-lpd-afi-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_afi_mem_0: ps_wizard_0_pmcps_0_psv_lpd_afi_mem_0@80000000 {
+                ps_wizard_0_pmcps_0_psv_lpd_afi_mem_0: ps-wizard-0-pmcps-0-psv-lpd-afi-mem-0@80000000 {
                         phandle = <0x12b>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_afi_mem_0";
                         reg = <0x0 0x80000000 0x0 0x20000000>;
@@ -4430,7 +4450,7 @@
                         compatible = "xlnx,psv-lpd-afi-mem-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0: ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0@ff0a0000 {
+                ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0: ps-wizard-0-pmcps-0-psv-lpd-iou-secure-slcr-0@ff0a0000 {
                         phandle = <0x46>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0";
                         reg = <0x0 0xff0a0000 0x0 0x10000>;
@@ -4439,7 +4459,7 @@
                         compatible = "xlnx,psv-lpd-iou-secure-slcr-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0: ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0@ff080000 {
+                ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0: ps-wizard-0-pmcps-0-psv-lpd-iou-slcr-0@ff080000 {
                         phandle = <0x45>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0";
                         reg = <0x0 0xff080000 0x0 0x20000>;
@@ -4448,7 +4468,7 @@
                         compatible = "xlnx,psv-lpd-iou-slcr-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_slcr_0: ps_wizard_0_pmcps_0_psv_lpd_slcr_0@ff410000 {
+                ps_wizard_0_pmcps_0_psv_lpd_slcr_0: ps-wizard-0-pmcps-0-psv-lpd-slcr-0@ff410000 {
                         phandle = <0x4f>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_slcr_0";
                         reg = <0x0 0xff410000 0x0 0x100000>;
@@ -4457,7 +4477,7 @@
                         compatible = "xlnx,psv-lpd-slcr-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0: ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0@ff510000 {
+                ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0: ps-wizard-0-pmcps-0-psv-lpd-slcr-secure-0@ff510000 {
                         phandle = <0x50>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0";
                         reg = <0x0 0xff510000 0x0 0x40000>;
@@ -4466,7 +4486,7 @@
                         compatible = "xlnx,psv-lpd-slcr-secure-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_ocm_ctrl: ps_wizard_0_pmcps_0_psv_ocm_ctrl@ff960000 {
+                ps_wizard_0_pmcps_0_psv_ocm_ctrl: ps-wizard-0-pmcps-0-psv-ocm-ctrl@ff960000 {
                         phandle = <0x52>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_ocm_ctrl";
                         reg = <0x0 0xff960000 0x0 0x10000>;
@@ -4477,7 +4497,7 @@
                         compatible = "xlnx,psv-ocm-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_global_0: ps_wizard_0_pmcps_0_psv_pmc_global_0@f1110000 {
+                ps_wizard_0_pmcps_0_psv_pmc_global_0: ps-wizard-0-pmcps-0-psv-pmc-global-0@f1110000 {
                         phandle = <0x1e>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_global_0";
                         xlnx,cram-err-inj = <0x0>;
@@ -4496,7 +4516,7 @@
                         compatible = "xlnx,psv-pmc-global-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_ram: ps_wizard_0_pmcps_0_psv_pmc_ram@f2000000 {
+                ps_wizard_0_pmcps_0_psv_pmc_ram: ps-wizard-0-pmcps-0-psv-pmc-ram@f2000000 {
                         phandle = <0x12c>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_ram";
                         reg = <0x0 0xf2000000 0x0 0x20000>;
@@ -4505,7 +4525,7 @@
                         compatible = "xlnx,psv-pmc-ram-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_ram_npi: ps_wizard_0_pmcps_0_psv_pmc_ram_npi@f6000000 {
+                ps_wizard_0_pmcps_0_psv_pmc_ram_npi: ps-wizard-0-pmcps-0-psv-pmc-ram-npi@f6000000 {
                         phandle = <0x32>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_ram_npi";
                         reg = <0x0 0xf6000000 0x0 0x2000000>;
@@ -4514,7 +4534,7 @@
                         compatible = "xlnx,psv-pmc-ram-npi-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_slave_boot: ps_wizard_0_pmcps_0_psv_pmc_slave_boot@f1220000 {
+                ps_wizard_0_pmcps_0_psv_pmc_slave_boot: ps-wizard-0-pmcps-0-psv-pmc-slave-boot@f1220000 {
                         phandle = <0x25>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_slave_boot";
                         reg = <0x0 0xf1220000 0x0 0x10000>;
@@ -4524,7 +4544,7 @@
                         xlnx,device-id = <0x0>;
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream: ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream@f2100000 {
+                ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream: ps-wizard-0-pmcps-0-psv-pmc-slave-boot-stream@f2100000 {
                         phandle = <0x31>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream";
                         reg = <0x0 0xf2100000 0x0 0x10000>;
@@ -4534,7 +4554,7 @@
                         xlnx,device-id = <0x0>;
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0: ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0@f0083000 {
+                ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0: ps-wizard-0-pmcps-0-psv-pmc-tmr-inject-0@f0083000 {
                         phandle = <0x12d>;
                         xlnx,lmb-awidth = <0x20>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0";
@@ -4550,7 +4570,7 @@
                         compatible = "xlnx,tmr-inject-11.0", "xlnx,tmr-inject-1.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr: ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr@f0240000 {
+                ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr: ps-wizard-0-pmcps-0-psv-pmc-ram-data-cntlr@f0240000 {
                         phandle = <0x12e>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr";
                         xlnx,lmb-awidth = <0x20>;
@@ -4583,7 +4603,7 @@
                         xlnx,edk-special = "BRAM_CTRL";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr: ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr@f0200000 {
+                ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr: ps-wizard-0-pmcps-0-psv-pmc-ram-instr-cntlr@f0200000 {
                         phandle = <0x12f>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr";
                         xlnx,lmb-awidth = <0x20>;
@@ -4616,7 +4636,7 @@
                         xlnx,edk-special = "BRAM_CTRL";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0: ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0@f0283000 {
+                ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0: ps-wizard-0-pmcps-0-psv-pmc-tmr-manager-0@f0283000 {
                         phandle = <0x130>;
                         xlnx,lmb-awidth = <0x20>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0";
@@ -4652,7 +4672,7 @@
                         xlnx,edk-special = "BRAM_CTRL";
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_global_reg: ps_wizard_0_pmcps_0_psv_psm_global_reg@ffc90000 {
+                ps_wizard_0_pmcps_0_psv_psm_global_reg: ps-wizard-0-pmcps-0-psv-psm-global-reg@ffc90000 {
                         phandle = <0x60>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_psm_global_reg";
                         reg = <0x0 0xffc90000 0x0 0xf000>;
@@ -4661,7 +4681,7 @@
                         compatible = "xlnx,psv-psm-global-reg-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_iomodule_0: ps_wizard_0_pmcps_0_psv_psm_iomodule_0@ffc80000 {
+                ps_wizard_0_pmcps_0_psv_psm_iomodule_0: ps-wizard-0-pmcps-0-psv-psm-iomodule-0@ffc80000 {
                         phandle = <0x6f>;
                         xlnx,lmb-awidth = <0x20>;
                         xlnx,io-mask = <0xfffe0000>;
@@ -4776,7 +4796,7 @@
                         xlnx,gpo4-size = <0x20>;
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0: ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0@ffcd0000 {
+                ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0: ps-wizard-0-pmcps-0-psv-psm-tmr-inject-0@ffcd0000 {
                         phandle = <0x71>;
                         xlnx,lmb-awidth = <0x20>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0";
@@ -4792,7 +4812,7 @@
                         compatible = "xlnx,tmr-inject-11.0", "xlnx,tmr-inject-1.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0: ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0@ffcc0000 {
+                ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0: ps-wizard-0-pmcps-0-psv-psm-tmr-manager-0@ffcc0000 {
                         phandle = <0x70>;
                         xlnx,lmb-awidth = <0x20>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0";
@@ -4828,7 +4848,7 @@
                         xlnx,edk-special = "BRAM_CTRL";
                 };
 
-                ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep: ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep@ffe10000 {
+                ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep: ps-wizard-0-pmcps-0-psv-r5-0-atcm-lockstep@ffe10000 {
                         phandle = <0x131>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep";
                         reg = <0x0 0xffe10000 0x0 0x10000>;
@@ -4838,7 +4858,7 @@
                         compatible = "xlnx,psv-r5-0-atcm-lockstep-11.0", "mmio-sram";
                 };
 
-                ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep: ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep@ffe30000 {
+                ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep: ps-wizard-0-pmcps-0-psv-r5-0-btcm-lockstep@ffe30000 {
                         phandle = <0x132>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep";
                         reg = <0x0 0xffe30000 0x0 0x10000>;
@@ -4848,7 +4868,7 @@
                         compatible = "xlnx,psv-r5-0-btcm-lockstep-11.0", "mmio-sram";
                 };
 
-                ps_wizard_0_pmcps_0_psv_r5_0_data_cache: ps_wizard_0_pmcps_0_psv_r5_0_data_cache@ffe50000 {
+                ps_wizard_0_pmcps_0_psv_r5_0_data_cache: ps-wizard-0-pmcps-0-psv-r5-0-data-cache@ffe50000 {
                         phandle = <0x77>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_0_data_cache";
                         reg = <0x0 0xffe50000 0x0 0x10000>;
@@ -4857,7 +4877,7 @@
                         compatible = "xlnx,psv-r5-0-data-cache-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_r5_0_instruction_cache: ps_wizard_0_pmcps_0_psv_r5_0_instruction_cache@ffe40000 {
+                ps_wizard_0_pmcps_0_psv_r5_0_instruction_cache: ps-wizard-0-pmcps-0-psv-r5-0-instruction-cache@ffe40000 {
                         phandle = <0x76>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_0_instruction_cache";
                         reg = <0x0 0xffe40000 0x0 0x10000>;
@@ -4866,7 +4886,7 @@
                         compatible = "xlnx,psv-r5-0-instruction-cache-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_r5_1_data_cache: ps_wizard_0_pmcps_0_psv_r5_1_data_cache@ffed0000 {
+                ps_wizard_0_pmcps_0_psv_r5_1_data_cache: ps-wizard-0-pmcps-0-psv-r5-1-data-cache@ffed0000 {
                         phandle = <0x79>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_1_data_cache";
                         reg = <0x0 0xffed0000 0x0 0x10000>;
@@ -4875,7 +4895,7 @@
                         compatible = "xlnx,psv-r5-1-data-cache-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_r5_1_instruction_cache: ps_wizard_0_pmcps_0_psv_r5_1_instruction_cache@ffec0000 {
+                ps_wizard_0_pmcps_0_psv_r5_1_instruction_cache: ps-wizard-0-pmcps-0-psv-r5-1-instruction-cache@ffec0000 {
                         phandle = <0x78>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_r5_1_instruction_cache";
                         reg = <0x0 0xffec0000 0x0 0x10000>;
@@ -4884,7 +4904,7 @@
                         compatible = "xlnx,psv-r5-1-instruction-cache-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr: ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr@ffc20000 {
+                ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr: ps-wizard-0-pmcps-0-psv-psm-ram-data-cntlr@ffc20000 {
                         phandle = <0x6e>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr";
                         xlnx,lmb-awidth = <0x20>;
@@ -4917,7 +4937,7 @@
                         xlnx,edk-special = "BRAM_CTRL";
                 };
 
-                ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr: ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr@ffc00000 {
+                ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr: ps-wizard-0-pmcps-0-psv-psm-ram-instr-cntlr@ffc00000 {
                         phandle = <0x6d>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr";
                         xlnx,lmb-awidth = <0x20>;
@@ -4950,7 +4970,7 @@
                         xlnx,edk-special = "BRAM_CTRL";
                 };
 
-                ps_wizard_0_pmcps_0_psv_rpu_0: ps_wizard_0_pmcps_0_psv_rpu_0@ff9a0000 {
+                ps_wizard_0_pmcps_0_psv_rpu_0: ps-wizard-0-pmcps-0-psv-rpu-0@ff9a0000 {
                         phandle = <0x55>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_rpu_0";
                         reg = <0x0 0xff9a0000 0x0 0x10000>;
@@ -4959,7 +4979,7 @@
                         compatible = "xlnx,psv-rpu-11.0";
                 };
 
-                ps_wizard_0_pmcps_0_psv_pmc_sha: ps_wizard_0_pmcps_0_psv_pmc_sha@f1210000 {
+                ps_wizard_0_pmcps_0_psv_pmc_sha: ps-wizard-0-pmcps-0-psv-pmc-sha@f1210000 {
                         phandle = <0x24>;
                         xlnx,name = "ps_wizard_0_pmcps_0_psv_pmc_sha";
                         reg = <0x0 0xf1210000 0x0 0x10000>;
@@ -5167,7 +5187,7 @@
                                         reg = <0x1>;
 
                                         fpd_funnel_in_port1: endpoint {
-                                                phandle = <0x92>;
+                                                phandle = <0x94>;
                                                 remote-endpoint = <&apu_etf_out_port>;
                                         };
                                 };
@@ -5178,7 +5198,7 @@
                                 port {
 
                                         fpd_funnel_out_port: endpoint {
-                                                phandle = <0x89>;
+                                                phandle = <0x8b>;
                                                 remote-endpoint = <&fpd_etf_in_port>;
                                         };
                                 };
@@ -5198,7 +5218,7 @@
                                 port {
 
                                         fpd_etf_in_port: endpoint {
-                                                phandle = <0x88>;
+                                                phandle = <0x8a>;
                                                 remote-endpoint = <&fpd_funnel_out_port>;
                                         };
                                 };
@@ -5209,7 +5229,7 @@
                                 port {
 
                                         fpd_etf_out_port: endpoint {
-                                                phandle = <0x8b>;
+                                                phandle = <0x8d>;
                                                 remote-endpoint = <&replicator_in_port>;
                                         };
                                 };
@@ -5229,7 +5249,7 @@
                                 port {
 
                                         replicator_in_port: endpoint {
-                                                phandle = <0x8a>;
+                                                phandle = <0x8c>;
                                                 remote-endpoint = <&fpd_etf_out_port>;
                                         };
                                 };
@@ -5243,7 +5263,7 @@
                                         reg = <0x0>;
 
                                         replicator_out_port0: endpoint {
-                                                phandle = <0x8d>;
+                                                phandle = <0x8f>;
                                                 remote-endpoint = <&etr_in_port>;
                                         };
                                 };
@@ -5263,7 +5283,7 @@
                                 port {
 
                                         etr_in_port: endpoint {
-                                                phandle = <0x8c>;
+                                                phandle = <0x8e>;
                                                 remote-endpoint = <&replicator_out_port0>;
                                         };
                                 };
@@ -5286,7 +5306,7 @@
                                         reg = <0x0>;
 
                                         funnel_in_port0: endpoint {
-                                                phandle = <0x94>;
+                                                phandle = <0x96>;
                                                 remote-endpoint = <&etm0_out_port>;
                                         };
                                 };
@@ -5295,7 +5315,7 @@
                                         reg = <0x1>;
 
                                         funnel_in_port1: endpoint {
-                                                phandle = <0x96>;
+                                                phandle = <0x98>;
                                                 remote-endpoint = <&etm1_out_port>;
                                         };
                                 };
@@ -5306,7 +5326,7 @@
                                 port {
 
                                         funnel_out_port: endpoint {
-                                                phandle = <0x91>;
+                                                phandle = <0x93>;
                                                 remote-endpoint = <&etf_in_port>;
                                         };
                                 };
@@ -5326,7 +5346,7 @@
                                 port {
 
                                         etf_in_port: endpoint {
-                                                phandle = <0x90>;
+                                                phandle = <0x92>;
                                                 remote-endpoint = <&funnel_out_port>;
                                         };
                                 };
@@ -5337,7 +5357,7 @@
                                 port {
 
                                         apu_etf_out_port: endpoint {
-                                                phandle = <0x87>;
+                                                phandle = <0x89>;
                                                 remote-endpoint = <&fpd_funnel_in_port1>;
                                         };
                                 };
@@ -5368,7 +5388,7 @@
                                 port {
 
                                         etm0_out_port: endpoint {
-                                                phandle = <0x8e>;
+                                                phandle = <0x90>;
                                                 remote-endpoint = <&funnel_in_port0>;
                                         };
                                 };
@@ -5399,7 +5419,7 @@
                                 port {
 
                                         etm1_out_port: endpoint {
-                                                phandle = <0x8f>;
+                                                phandle = <0x91>;
                                                 remote-endpoint = <&funnel_in_port1>;
                                         };
                                 };
@@ -5408,7 +5428,7 @@
         };
 
         pl_alt_ref: pl-alt-ref {
-                phandle = <0x98>;
+                phandle = <0x9a>;
                 clock-output-names = "pl_alt_ref_clk";
                 clock-frequency = <0x1fca055>;
                 #clock-cells = <0x0>;
@@ -5417,7 +5437,7 @@
         };
 
         ref: ref {
-                phandle = <0x97>;
+                phandle = <0x99>;
                 clock-output-names = "ref_clk";
                 clock-frequency = <0x1fca055>;
                 #clock-cells = <0x0>;
@@ -5426,7 +5446,7 @@
         };
 
         rtc_clk: rtc-clk {
-                phandle = <0x82>;
+                phandle = <0x84>;
                 clock-output-names = "rtc_clk";
                 clock-frequency = <0x8000>;
                 #clock-cells = <0x0>;
@@ -5435,7 +5455,7 @@
         };
 
         can0_clk: can0-clk {
-                phandle = <0x7e>;
+                phandle = <0x80>;
                 clock-output-names = "can0_clk";
                 clock-mult = <0x1>;
                 clock-div = <0x2>;
@@ -5445,7 +5465,7 @@
         };
 
         can1_clk: can1-clk {
-                phandle = <0x7f>;
+                phandle = <0x81>;
                 clock-output-names = "can1_clk";
                 clock-mult = <0x1>;
                 clock-div = <0x2>;
@@ -5480,7 +5500,7 @@
                         };
 
                         versal_reset: reset-controller {
-                                phandle = <0x83>;
+                                phandle = <0x85>;
                                 #reset-cells = <0x1>;
                                 compatible = "xlnx,versal-reset";
                         };
@@ -5691,72 +5711,72 @@
                 psv_r5_1_atcm_global = "/psv_r5_1_atcm_global@ffe90000";
                 psv_r5_0_btcm_global = "/psv_r5_0_btcm_global@ffe20000";
                 psv_r5_0_atcm_global = "/psv_r5_0_atcm_global@ffe00000";
-                ps_wizard_0_pmcps_0_psv_pmc_sha = "/axi/ps_wizard_0_pmcps_0_psv_pmc_sha@f1210000";
-                ps_wizard_0_pmcps_0_psv_rpu_0 = "/axi/ps_wizard_0_pmcps_0_psv_rpu_0@ff9a0000";
-                ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr = "/axi/ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr@ffc00000";
-                ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr = "/axi/ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr@ffc20000";
-                ps_wizard_0_pmcps_0_psv_r5_1_instruction_cache = "/axi/ps_wizard_0_pmcps_0_psv_r5_1_instruction_cache@ffec0000";
-                ps_wizard_0_pmcps_0_psv_r5_1_data_cache = "/axi/ps_wizard_0_pmcps_0_psv_r5_1_data_cache@ffed0000";
-                ps_wizard_0_pmcps_0_psv_r5_0_instruction_cache = "/axi/ps_wizard_0_pmcps_0_psv_r5_0_instruction_cache@ffe40000";
-                ps_wizard_0_pmcps_0_psv_r5_0_data_cache = "/axi/ps_wizard_0_pmcps_0_psv_r5_0_data_cache@ffe50000";
-                ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep = "/axi/ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep@ffe30000";
-                ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep = "/axi/ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep@ffe10000";
-                ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0 = "/axi/ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0@ffcc0000";
-                ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0 = "/axi/ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0@ffcd0000";
-                ps_wizard_0_pmcps_0_psv_psm_iomodule_0 = "/axi/ps_wizard_0_pmcps_0_psv_psm_iomodule_0@ffc80000";
-                ps_wizard_0_pmcps_0_psv_psm_global_reg = "/axi/ps_wizard_0_pmcps_0_psv_psm_global_reg@ffc90000";
-                ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0 = "/axi/ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0@f0283000";
-                ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr = "/axi/ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr@f0200000";
-                ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr = "/axi/ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr@f0240000";
-                ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0 = "/axi/ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0@f0083000";
-                ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream = "/axi/ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream@f2100000";
-                ps_wizard_0_pmcps_0_psv_pmc_slave_boot = "/axi/ps_wizard_0_pmcps_0_psv_pmc_slave_boot@f1220000";
-                ps_wizard_0_pmcps_0_psv_pmc_ram_npi = "/axi/ps_wizard_0_pmcps_0_psv_pmc_ram_npi@f6000000";
-                ps_wizard_0_pmcps_0_psv_pmc_ram = "/axi/ps_wizard_0_pmcps_0_psv_pmc_ram@f2000000";
-                ps_wizard_0_pmcps_0_psv_pmc_global_0 = "/axi/ps_wizard_0_pmcps_0_psv_pmc_global_0@f1110000";
-                ps_wizard_0_pmcps_0_psv_ocm_ctrl = "/axi/ps_wizard_0_pmcps_0_psv_ocm_ctrl@ff960000";
-                ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0@ff510000";
-                ps_wizard_0_pmcps_0_psv_lpd_slcr_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_slcr_0@ff410000";
-                ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0@ff080000";
-                ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0@ff0a0000";
-                ps_wizard_0_pmcps_0_psv_lpd_afi_mem_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_afi_mem_0@80000000";
-                ps_wizard_0_pmcps_0_psv_lpd_afi_0 = "/axi/ps_wizard_0_pmcps_0_psv_lpd_afi_0@ff9b0000";
-                ps_wizard_0_pmcps_0_psv_ipi_buffer = "/axi/ps_wizard_0_pmcps_0_psv_ipi_buffer@ff3f0000";
-                ps_wizard_0_pmcps_0_psv_scntrs_0 = "/axi/ps_wizard_0_pmcps_0_psv_scntrs_0@ff140000";
-                ps_wizard_0_pmcps_0_psv_scntr_0 = "/axi/ps_wizard_0_pmcps_0_psv_scntr_0@ff130000";
-                ps_wizard_0_pmcps_0_psv_fpd_smmu_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_smmu_0@fd5f0000";
-                ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0@fd690000";
-                ps_wizard_0_pmcps_0_psv_fpd_slcr_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_slcr_0@fd610000";
-                ps_wizard_0_pmcps_0_psv_fpd_gpv_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_gpv_0@fd700000";
-                ps_wizard_0_pmcps_0_psv_fpd_cci_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_cci_0@fd5e0000";
-                ps_wizard_0_pmcps_0_psv_apu_0 = "/axi/ps_wizard_0_pmcps_0_psv_apu_0@fd5c0000";
-                ps_wizard_0_pmcps_0_psv_fpd_afi_mem_2 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_afi_mem_2@b0000000";
-                ps_wizard_0_pmcps_0_psv_fpd_afi_mem_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_afi_mem_0@a4000000";
-                ps_wizard_0_pmcps_0_psv_fpd_afi_2 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_afi_2@fd380000";
-                ps_wizard_0_pmcps_0_psv_fpd_afi_0 = "/axi/ps_wizard_0_pmcps_0_psv_fpd_afi_0@fd360000";
-                ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl = "/axi/ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl@f1240000";
-                ps_wizard_0_pmcps_0_psv_pmc_efuse_cache = "/axi/ps_wizard_0_pmcps_0_psv_pmc_efuse_cache@f1250000";
-                ps_wizard_0_pmcps_0_psv_pmc_rsa = "/axi/ps_wizard_0_pmcps_0_psv_pmc_rsa@f1200000";
-                ps_wizard_0_pmcps_0_psv_coresight_lpd_atm = "/axi/ps_wizard_0_pmcps_0_psv_coresight_lpd_atm@f0980000";
-                ps_wizard_0_pmcps_0_psv_coresight_fpd_stm = "/axi/ps_wizard_0_pmcps_0_psv_coresight_fpd_stm@f0b70000";
-                ps_wizard_0_pmcps_0_psv_coresight_fpd_atm = "/axi/ps_wizard_0_pmcps_0_psv_coresight_fpd_atm@f0b80000";
-                ps_wizard_0_pmcps_0_psv_coresight_apu_fun = "/axi/ps_wizard_0_pmcps_0_psv_coresight_apu_fun@f0c20000";
-                ps_wizard_0_pmcps_0_psv_coresight_apu_etf = "/axi/ps_wizard_0_pmcps_0_psv_coresight_apu_etf@f0c30000";
-                ps_wizard_0_pmcps_0_psv_coresight_apu_ela = "/axi/ps_wizard_0_pmcps_0_psv_coresight_apu_ela@f0c60000";
-                ps_wizard_0_pmcps_0_psv_coresight_apu_cti = "/axi/ps_wizard_0_pmcps_0_psv_coresight_apu_cti@f0ca0000";
-                ps_wizard_0_pmcps_0_psv_coresight_a721_pmu = "/axi/ps_wizard_0_pmcps_0_psv_coresight_a721_pmu@f0d60000";
-                ps_wizard_0_pmcps_0_psv_coresight_a721_etm = "/axi/ps_wizard_0_pmcps_0_psv_coresight_a721_etm@f0d70000";
-                ps_wizard_0_pmcps_0_psv_coresight_a721_dbg = "/axi/ps_wizard_0_pmcps_0_psv_coresight_a721_dbg@f0d40000";
-                ps_wizard_0_pmcps_0_psv_coresight_a721_cti = "/axi/ps_wizard_0_pmcps_0_psv_coresight_a721_cti@f0d50000";
-                ps_wizard_0_pmcps_0_psv_coresight_a720_pmu = "/axi/ps_wizard_0_pmcps_0_psv_coresight_a720_pmu@f0d20000";
-                ps_wizard_0_pmcps_0_psv_coresight_a720_etm = "/axi/ps_wizard_0_pmcps_0_psv_coresight_a720_etm@f0d30000";
-                ps_wizard_0_pmcps_0_psv_coresight_a720_dbg = "/axi/ps_wizard_0_pmcps_0_psv_coresight_a720_dbg@f0d00000";
-                ps_wizard_0_pmcps_0_psv_coresight_a720_cti = "/axi/ps_wizard_0_pmcps_0_psv_coresight_a720_cti@f0d10000";
-                ps_wizard_0_pmcps_0_psv_crp_0 = "/axi/ps_wizard_0_pmcps_0_psv_crp_0@f1260000";
-                ps_wizard_0_pmcps_0_psv_crl_0 = "/axi/ps_wizard_0_pmcps_0_psv_crl_0@ff5e0000";
-                ps_wizard_0_pmcps_0_psv_crf_0 = "/axi/ps_wizard_0_pmcps_0_psv_crf_0@fd1a0000";
-                ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl = "/axi/ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl@f11f0000";
-                ps_wizard_0_pmcps_0_psv_pmc_aes = "/axi/ps_wizard_0_pmcps_0_psv_pmc_aes@f11e0000";
+                ps_wizard_0_pmcps_0_psv_pmc_sha = "/axi/ps-wizard-0-pmcps-0-psv-pmc-sha@f1210000";
+                ps_wizard_0_pmcps_0_psv_rpu_0 = "/axi/ps-wizard-0-pmcps-0-psv-rpu-0@ff9a0000";
+                ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr = "/axi/ps-wizard-0-pmcps-0-psv-psm-ram-instr-cntlr@ffc00000";
+                ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr = "/axi/ps-wizard-0-pmcps-0-psv-psm-ram-data-cntlr@ffc20000";
+                ps_wizard_0_pmcps_0_psv_r5_1_instruction_cache = "/axi/ps-wizard-0-pmcps-0-psv-r5-1-instruction-cache@ffec0000";
+                ps_wizard_0_pmcps_0_psv_r5_1_data_cache = "/axi/ps-wizard-0-pmcps-0-psv-r5-1-data-cache@ffed0000";
+                ps_wizard_0_pmcps_0_psv_r5_0_instruction_cache = "/axi/ps-wizard-0-pmcps-0-psv-r5-0-instruction-cache@ffe40000";
+                ps_wizard_0_pmcps_0_psv_r5_0_data_cache = "/axi/ps-wizard-0-pmcps-0-psv-r5-0-data-cache@ffe50000";
+                ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep = "/axi/ps-wizard-0-pmcps-0-psv-r5-0-btcm-lockstep@ffe30000";
+                ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep = "/axi/ps-wizard-0-pmcps-0-psv-r5-0-atcm-lockstep@ffe10000";
+                ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0 = "/axi/ps-wizard-0-pmcps-0-psv-psm-tmr-manager-0@ffcc0000";
+                ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0 = "/axi/ps-wizard-0-pmcps-0-psv-psm-tmr-inject-0@ffcd0000";
+                ps_wizard_0_pmcps_0_psv_psm_iomodule_0 = "/axi/ps-wizard-0-pmcps-0-psv-psm-iomodule-0@ffc80000";
+                ps_wizard_0_pmcps_0_psv_psm_global_reg = "/axi/ps-wizard-0-pmcps-0-psv-psm-global-reg@ffc90000";
+                ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0 = "/axi/ps-wizard-0-pmcps-0-psv-pmc-tmr-manager-0@f0283000";
+                ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr = "/axi/ps-wizard-0-pmcps-0-psv-pmc-ram-instr-cntlr@f0200000";
+                ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr = "/axi/ps-wizard-0-pmcps-0-psv-pmc-ram-data-cntlr@f0240000";
+                ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0 = "/axi/ps-wizard-0-pmcps-0-psv-pmc-tmr-inject-0@f0083000";
+                ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream = "/axi/ps-wizard-0-pmcps-0-psv-pmc-slave-boot-stream@f2100000";
+                ps_wizard_0_pmcps_0_psv_pmc_slave_boot = "/axi/ps-wizard-0-pmcps-0-psv-pmc-slave-boot@f1220000";
+                ps_wizard_0_pmcps_0_psv_pmc_ram_npi = "/axi/ps-wizard-0-pmcps-0-psv-pmc-ram-npi@f6000000";
+                ps_wizard_0_pmcps_0_psv_pmc_ram = "/axi/ps-wizard-0-pmcps-0-psv-pmc-ram@f2000000";
+                ps_wizard_0_pmcps_0_psv_pmc_global_0 = "/axi/ps-wizard-0-pmcps-0-psv-pmc-global-0@f1110000";
+                ps_wizard_0_pmcps_0_psv_ocm_ctrl = "/axi/ps-wizard-0-pmcps-0-psv-ocm-ctrl@ff960000";
+                ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-slcr-secure-0@ff510000";
+                ps_wizard_0_pmcps_0_psv_lpd_slcr_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-slcr-0@ff410000";
+                ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-iou-slcr-0@ff080000";
+                ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-iou-secure-slcr-0@ff0a0000";
+                ps_wizard_0_pmcps_0_psv_lpd_afi_mem_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-afi-mem-0@80000000";
+                ps_wizard_0_pmcps_0_psv_lpd_afi_0 = "/axi/ps-wizard-0-pmcps-0-psv-lpd-afi-0@ff9b0000";
+                ps_wizard_0_pmcps_0_psv_ipi_buffer = "/axi/ps-wizard-0-pmcps-0-psv-ipi-buffer@ff3f0000";
+                ps_wizard_0_pmcps_0_psv_scntrs_0 = "/axi/ps-wizard-0-pmcps-0-psv-scntrs-0@ff140000";
+                ps_wizard_0_pmcps_0_psv_scntr_0 = "/axi/ps-wizard-0-pmcps-0-psv-scntr-0@ff130000";
+                ps_wizard_0_pmcps_0_psv_fpd_smmu_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-smmu-0@fd5f0000";
+                ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-slcr-secure-0@fd690000";
+                ps_wizard_0_pmcps_0_psv_fpd_slcr_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-slcr-0@fd610000";
+                ps_wizard_0_pmcps_0_psv_fpd_gpv_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-gpv-0@fd700000";
+                ps_wizard_0_pmcps_0_psv_fpd_cci_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-cci-0@fd5e0000";
+                ps_wizard_0_pmcps_0_psv_apu_0 = "/axi/ps-wizard-0-pmcps-0-psv-apu-0@fd5c0000";
+                ps_wizard_0_pmcps_0_psv_fpd_afi_mem_2 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-afi-mem-2@b0000000";
+                ps_wizard_0_pmcps_0_psv_fpd_afi_mem_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-afi-mem-0@a4000000";
+                ps_wizard_0_pmcps_0_psv_fpd_afi_2 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-afi-2@fd380000";
+                ps_wizard_0_pmcps_0_psv_fpd_afi_0 = "/axi/ps-wizard-0-pmcps-0-psv-fpd-afi-0@fd360000";
+                ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl = "/axi/ps-wizard-0-pmcps-0-psv-pmc-efuse-ctrl@f1240000";
+                ps_wizard_0_pmcps_0_psv_pmc_efuse_cache = "/axi/ps-wizard-0-pmcps-0-psv-pmc-efuse-cache@f1250000";
+                ps_wizard_0_pmcps_0_psv_pmc_rsa = "/axi/ps-wizard-0-pmcps-0-psv-pmc-rsa@f1200000";
+                ps_wizard_0_pmcps_0_psv_coresight_lpd_atm = "/axi/ps-wizard-0-pmcps-0-psv-coresight-lpd-atm@f0980000";
+                ps_wizard_0_pmcps_0_psv_coresight_fpd_stm = "/axi/ps-wizard-0-pmcps-0-psv-coresight-fpd-stm@f0b70000";
+                ps_wizard_0_pmcps_0_psv_coresight_fpd_atm = "/axi/ps-wizard-0-pmcps-0-psv-coresight-fpd-atm@f0b80000";
+                ps_wizard_0_pmcps_0_psv_coresight_apu_fun = "/axi/ps-wizard-0-pmcps-0-psv-coresight-apu-fun@f0c20000";
+                ps_wizard_0_pmcps_0_psv_coresight_apu_etf = "/axi/ps-wizard-0-pmcps-0-psv-coresight-apu-etf@f0c30000";
+                ps_wizard_0_pmcps_0_psv_coresight_apu_ela = "/axi/ps-wizard-0-pmcps-0-psv-coresight-apu-ela@f0c60000";
+                ps_wizard_0_pmcps_0_psv_coresight_apu_cti = "/axi/ps-wizard-0-pmcps-0-psv-coresight-apu-cti@f0ca0000";
+                ps_wizard_0_pmcps_0_psv_coresight_a721_pmu = "/axi/ps-wizard-0-pmcps-0-psv-coresight-a721-pmu@f0d60000";
+                ps_wizard_0_pmcps_0_psv_coresight_a721_etm = "/axi/ps-wizard-0-pmcps-0-psv-coresight-a721-etm@f0d70000";
+                ps_wizard_0_pmcps_0_psv_coresight_a721_dbg = "/axi/ps-wizard-0-pmcps-0-psv-coresight-a721-dbg@f0d40000";
+                ps_wizard_0_pmcps_0_psv_coresight_a721_cti = "/axi/ps-wizard-0-pmcps-0-psv-coresight-a721-cti@f0d50000";
+                ps_wizard_0_pmcps_0_psv_coresight_a720_pmu = "/axi/ps-wizard-0-pmcps-0-psv-coresight-a720-pmu@f0d20000";
+                ps_wizard_0_pmcps_0_psv_coresight_a720_etm = "/axi/ps-wizard-0-pmcps-0-psv-coresight-a720-etm@f0d30000";
+                ps_wizard_0_pmcps_0_psv_coresight_a720_dbg = "/axi/ps-wizard-0-pmcps-0-psv-coresight-a720-dbg@f0d00000";
+                ps_wizard_0_pmcps_0_psv_coresight_a720_cti = "/axi/ps-wizard-0-pmcps-0-psv-coresight-a720-cti@f0d10000";
+                ps_wizard_0_pmcps_0_psv_crp_0 = "/axi/ps-wizard-0-pmcps-0-psv-crp-0@f1260000";
+                ps_wizard_0_pmcps_0_psv_crl_0 = "/axi/ps-wizard-0-pmcps-0-psv-crl-0@ff5e0000";
+                ps_wizard_0_pmcps_0_psv_crf_0 = "/axi/ps-wizard-0-pmcps-0-psv-crf-0@fd1a0000";
+                ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl = "/axi/ps-wizard-0-pmcps-0-psv-pmc-bbram-ctrl@f11f0000";
+                ps_wizard_0_pmcps_0_psv_pmc_aes = "/axi/ps-wizard-0-pmcps-0-psv-pmc-aes@f11e0000";
                 coresight = "/axi/coresight@f0800000";
                 ipi_6_to_ipi_psm = "/axi/mailbox@ff3a0000/child@ff310000";
                 ipi_6_to_ipi_pmc_nobuf = "/axi/mailbox@ff3a0000/child@ff390000";
@@ -5950,7 +5970,7 @@
                 fpga = "/fpga-region";
                 dcc = "/dcc";
                 cpu_opp_table = "/opp-table-cpu";
-                psv_cortexr5_1 = "/cpus-r5@1/cpu@1";
+                psv_cortexr5_1 = "/cpus-r5@1/cpu@0";
                 cpus_r5_1 = "/cpus-r5@1";
                 psv_cortexr5_0 = "/cpus-r5@0/cpu@0";
                 cpus_r5_0 = "/cpus-r5@0";
@@ -5999,7 +6019,7 @@
                 APU_Linux {
                         phandle = <0x162>;
                         lopper,memory-keep-all = <0x1>;
-                        access-json = "[{\"dev\": \"interrupt-controller@f9000000\", \"label\": \"gic_a72\"}, {\"dev\": \"can@ff060000\", \"label\": \"can0\", \"pm_node\": \"PM_DEV_CAN_FD_0\"}, {\"dev\": \"can@ff070000\", \"label\": \"can1\", \"pm_node\": \"PM_DEV_CAN_FD_1\"}, {\"dev\": \"cci@fd000000\", \"label\": \"cci\"}, {\"dev\": \"dma-controller@ffa80000\", \"label\": \"lpd_dma_chan0\", \"pm_node\": \"PM_DEV_ADMA_0\"}, {\"dev\": \"dma-controller@ffa90000\", \"label\": \"lpd_dma_chan1\", \"pm_node\": \"PM_DEV_ADMA_1\"}, {\"dev\": \"dma-controller@ffaa0000\", \"label\": \"lpd_dma_chan2\", \"pm_node\": \"PM_DEV_ADMA_2\"}, {\"dev\": \"dma-controller@ffab0000\", \"label\": \"lpd_dma_chan3\", \"pm_node\": \"PM_DEV_ADMA_3\"}, {\"dev\": \"dma-controller@ffac0000\", \"label\": \"lpd_dma_chan4\", \"pm_node\": \"PM_DEV_ADMA_4\"}, {\"dev\": \"dma-controller@ffad0000\", \"label\": \"lpd_dma_chan5\", \"pm_node\": \"PM_DEV_ADMA_5\"}, {\"dev\": \"dma-controller@ffae0000\", \"label\": \"lpd_dma_chan6\", \"pm_node\": \"PM_DEV_ADMA_6\"}, {\"dev\": \"dma-controller@ffaf0000\", \"label\": \"lpd_dma_chan7\", \"pm_node\": \"PM_DEV_ADMA_7\"}, {\"dev\": \"ethernet@ff0c0000\", \"label\": \"gem0\", \"pm_node\": \"PM_DEV_GEM_0\"}, {\"dev\": \"ethernet@ff0d0000\", \"label\": \"gem1\", \"pm_node\": \"PM_DEV_GEM_1\"}, {\"dev\": \"gpio@ff0b0000\", \"label\": \"gpio0\", \"pm_node\": \"PM_DEV_GPIO\", \"status\": \"disabled\"}, {\"dev\": \"gpio@f1020000\", \"label\": \"gpio1\", \"pm_node\": \"PM_DEV_GPIO_PMC\", \"status\": \"disabled\"}, {\"dev\": \"i2c@ff020000\", \"label\": \"i2c0\", \"pm_node\": \"PM_DEV_I2C_0\", \"status\": \"disabled\"}, {\"dev\": \"i2c@ff030000\", \"label\": \"i2c1\", \"pm_node\": \"PM_DEV_I2C_1\"}, {\"dev\": \"i2c@f1000000\", \"label\": \"i2c2\", \"pm_node\": \"PM_DEV_I2C_PMC\"}, {\"dev\": \"memory-controller@f6150000\", \"label\": \"mc0\", \"status\": \"disabled\"}, {\"dev\": \"memory-controller@f62c0000\", \"label\": \"mc1\", \"status\": \"disabled\"}, {\"dev\": \"memory-controller@f6430000\", \"label\": \"mc2\", \"status\": \"disabled\"}, {\"dev\": \"memory-controller@f65a0000\", \"label\": \"mc3\", \"status\": \"disabled\"}, {\"dev\": \"memory-controller@ff960000\", \"label\": \"ocm\"}, {\"dev\": \"rtc@f12a0000\", \"label\": \"rtc\", \"pm_node\": \"PM_DEV_RTC\"}, {\"dev\": \"mmc@f1040000\", \"label\": \"sdhci0\", \"pm_node\": \"PM_DEV_SDIO_0\", \"status\": \"disabled\"}, {\"dev\": \"mmc@f1050000\", \"label\": \"sdhci1\", \"pm_node\": \"PM_DEV_SDIO_1\"}, {\"bootph\": \"all\", \"dev\": \"serial@ff010000\", \"label\": \"serial1\", \"pm_node\": \"PM_DEV_UART_1\", \"status\": \"disabled\"}, {\"dev\": \"spi@f1010000\", \"label\": \"ospi\", \"pm_node\": \"PM_DEV_OSPI\", \"status\": \"disabled\"}, {\"dev\": \"spi@f1030000\", \"label\": \"qspi\", \"pm_node\": \"PM_DEV_QSPI\"}, {\"dev\": \"spi@ff040000\", \"label\": \"spi0\", \"pm_node\": \"PM_DEV_SPI_0\", \"status\": \"disabled\"}, {\"dev\": \"spi@ff050000\", \"label\": \"spi1\", \"pm_node\": \"PM_DEV_SPI_1\", \"status\": \"disabled\"}, {\"dev\": \"sysmon@f1270000\", \"label\": \"sysmon0\"}, {\"dev\": \"sysmon@109270000\", \"label\": \"sysmon1\", \"status\": \"disabled\"}, {\"dev\": \"sysmon@111270000\", \"label\": \"sysmon2\", \"status\": \"disabled\"}, {\"dev\": \"sysmon@119270000\", \"label\": \"sysmon3\", \"status\": \"disabled\"}, {\"dev\": \"timer@ff0f0000\", \"label\": \"ttc1\", \"pm_node\": \"PM_DEV_TTC_1\"}, {\"dev\": \"timer@ff110000\", \"label\": \"ttc3\", \"pm_node\": \"PM_DEV_TTC_3\"}, {\"dev\": \"usb@ff9d0000\", \"label\": \"usb0\", \"pm_node\": \"PM_DEV_USB_0\"}, {\"dev\": \"pci@fca10000\", \"label\": \"cpm_pciea\", \"status\": \"disabled\"}, {\"dev\": \"pcie@fcdd0000\", \"label\": \"cpm5_pcie\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@fd4d0000\", \"label\": \"watchdog\", \"pm_node\": \"PM_DEV_SWDT_FPD\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@ff120000\", \"label\": \"watchdog1\", \"pm_node\": \"PM_DEV_SWDT_LPD\", \"status\": \"disabled\"}, {\"dev\": \"edac@f2014050\", \"label\": \"xilsem_edac\", \"status\": \"disabled\"}, {\"dev\": \"pmcdma@f11c0000\", \"label\": \"dma0\"}, {\"dev\": \"pmcdma@f11d0000\", \"label\": \"dma1\"}, {\"dev\": \"rng@f1230000\", \"label\": \"trng\"}, {\"dev\": \"cframe@f12d0000\", \"label\": \"pmc_cfi_cframe_0\"}, {\"dev\": \"cfu_apb@f12b0000\", \"label\": \"pmc_cfu_apb_0\"}, {\"dev\": \"ppu1_mdm@f0310000\", \"label\": \"pmc_ppu1_mdm_0\"}, {\"dev\": \"iomodule@f0280000\", \"label\": \"iomodule0\"}, {\"dev\": \"mailbox@ff320000\", \"label\": \"ipi_pmc\"}, {\"dev\": \"mailbox@ff390000\", \"label\": \"ipi_pmc_nobuf\"}, {\"dev\": \"mailbox@ff310000\", \"label\": \"ipi_psm\"}, {\"dev\": \"mailbox@ff330000\", \"label\": \"ipi0\"}, {\"dev\": \"mailbox@ff360000\", \"label\": \"ipi3\"}, {\"dev\": \"mailbox@ff370000\", \"label\": \"ipi4\"}, {\"dev\": \"mailbox@ff3a0000\", \"label\": \"ipi6\"}, {\"dev\": \"coresight@f0800000\", \"label\": \"coresight\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_aes@f11e0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_aes\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl@f11f0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_crf_0@fd1a0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_crf_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_crl_0@ff5e0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_crl_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_crp_0@f1260000\", \"label\": \"ps_wizard_0_pmcps_0_psv_crp_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_cti@f0d10000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_cti\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_dbg@f0d00000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_dbg\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_etm@f0d30000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_etm\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_pmu@f0d20000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_pmu\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_cti@f0d50000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_cti\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_dbg@f0d40000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_dbg\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_etm@f0d70000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_etm\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_pmu@f0d60000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_pmu\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_cti@f0ca0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_cti\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_ela@f0c60000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_ela\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_etf@f0c30000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_etf\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_fun@f0c20000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_fun\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_fpd_atm@f0b80000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_fpd_atm\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_fpd_stm@f0b70000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_fpd_stm\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_coresight_lpd_atm@f0980000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_lpd_atm\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_rsa@f1200000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_rsa\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_efuse_cache@f1250000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_efuse_cache\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl@f1240000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_0@fd360000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_2@fd380000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_2\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_mem_0@a4000000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_mem_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_mem_2@b0000000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_mem_2\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_apu_0@fd5c0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_apu_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_fpd_cci_0@fd5e0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_cci_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_fpd_gpv_0@fd700000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_gpv_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_fpd_slcr_0@fd610000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_slcr_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0@fd690000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_fpd_smmu_0@fd5f0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_smmu_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_scntr_0@ff130000\", \"label\": \"ps_wizard_0_pmcps_0_psv_scntr_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_scntrs_0@ff140000\", \"label\": \"ps_wizard_0_pmcps_0_psv_scntrs_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_ipi_buffer@ff3f0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_ipi_buffer\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_lpd_afi_0@ff9b0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_afi_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_lpd_afi_mem_0@80000000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_afi_mem_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0@ff0a0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0@ff080000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_lpd_slcr_0@ff410000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_slcr_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0@ff510000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_ocm_ctrl@ff960000\", \"label\": \"ps_wizard_0_pmcps_0_psv_ocm_ctrl\", \"pm_node\": \"PM_DEV_OCM_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_global_0@f1110000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_global_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_ram@f2000000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_ram\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_ram_npi@f6000000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_ram_npi\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_slave_boot@f1220000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_slave_boot\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream@f2100000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0@f0083000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr@f0240000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr@f0200000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0@f0283000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_psm_global_reg@ffc90000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_global_reg\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_psm_iomodule_0@ffc80000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_iomodule_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0@ffcd0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0@ffcc0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep@ffe10000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep\", \"pm_node\": \"PM_DEV_TCM_0_A\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep@ffe30000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep\", \"pm_node\": \"PM_DEV_TCM_0_B\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_r5_0_data_cache@ffe50000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_0_data_cache\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_r5_0_instruction_cache@ffe40000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_0_instruction_cache\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_r5_1_data_cache@ffed0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_1_data_cache\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_r5_1_instruction_cache@ffec0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_1_instruction_cache\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr@ffc20000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr@ffc00000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_rpu_0@ff9a0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_rpu_0\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_pmc_sha@f1210000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_sha\"}, {\"bootph\": \"all\", \"dev\": \"versal_firmware\"}, {\"dev\": \"ipi_pmc\", \"label\": \"ipi_pmc\"}, {\"dev\": \"ipi_pmc_nobuf\", \"label\": \"ipi_pmc_nobuf\"}, {\"dev\": \"ipi_psm\", \"label\": \"ipi_psm\"}, {\"dev\": \"ipi0\", \"label\": \"ipi0\"}, {\"dev\": \"ipi1\", \"label\": \"ipi1\"}, {\"dev\": \"ipi2\", \"label\": \"ipi2\"}, {\"dev\": \"ipi3\", \"label\": \"ipi3\"}, {\"dev\": \"ipi4\", \"label\": \"ipi4\"}, {\"dev\": \"ipi5\", \"label\": \"ipi5\"}, {\"dev\": \"ipi6\", \"label\": \"ipi6\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_ipi_buffer\", \"label\": \"ps_wizard_0_pmcps_0_psv_ipi_buffer\"}, {\"dev\": \"l2\", \"label\": \"l2\"}, {\"dev\": \"cpu_opp_table\", \"label\": \"cpu_opp_table\"}, {\"bootph\": \"all\", \"dev\": \"dcc\", \"label\": \"dcc\"}, {\"dev\": \"fpga\", \"label\": \"fpga\"}, {\"dev\": \"psci\", \"label\": \"psci\"}, {\"dev\": \"pmu\"}, {\"dev\": \"timer\", \"label\": \"timer\"}, {\"dev\": \"versal_fpga\", \"label\": \"versal_fpga\"}, {\"dev\": \"sensor0\", \"label\": \"sensor0\"}, {\"bootph\": \"all\", \"dev\": \"amba_rpu\", \"label\": \"amba_rpu\"}, {\"dev\": \"psv_r5_0_atcm_global\", \"label\": \"psv_r5_0_atcm_global\", \"pm_node\": \"PM_DEV_TCM_0_A\"}, {\"dev\": \"psv_r5_0_btcm_global\", \"label\": \"psv_r5_0_btcm_global\", \"pm_node\": \"PM_DEV_TCM_0_B\"}, {\"dev\": \"psv_r5_1_atcm_global\", \"label\": \"psv_r5_1_atcm_global\", \"pm_node\": \"PM_DEV_TCM_1_A\"}, {\"dev\": \"psv_r5_1_btcm_global\", \"label\": \"psv_r5_1_btcm_global\", \"pm_node\": \"PM_DEV_TCM_1_B\"}, {\"dev\": \"amba_xppu\", \"label\": \"amba_xppu\"}, {\"dev\": \"amba_xmpu\", \"label\": \"amba_xmpu\"}, {\"dev\": \"__lopper-phandles__\"}, {\"dev\": \"iommu@fd800000\"}, {\"dev\": \"serial@ff000000\"}, {\"dev\": \"timer@ff100000\"}, {\"dev\": \"mailbox@ff380000\"}, {\"dev\": \"libmetal_uio_desc0@99c8000\"}, {\"dev\": \"libmetal_uio_desc1@99cc000\"}, {\"dev\": \"libmetal_uio_data@99d0000\"}]";
+                        access-json = "[{\"dev\": \"interrupt-controller@f9000000\", \"label\": \"gic_a72\"}, {\"dev\": \"can@ff060000\", \"label\": \"can0\", \"pm_node\": \"PM_DEV_CAN_FD_0\"}, {\"dev\": \"can@ff070000\", \"label\": \"can1\", \"pm_node\": \"PM_DEV_CAN_FD_1\"}, {\"dev\": \"cci@fd000000\", \"label\": \"cci\"}, {\"dev\": \"dma-controller@ffa80000\", \"label\": \"lpd_dma_chan0\", \"pm_node\": \"PM_DEV_ADMA_0\"}, {\"dev\": \"dma-controller@ffa90000\", \"label\": \"lpd_dma_chan1\", \"pm_node\": \"PM_DEV_ADMA_1\"}, {\"dev\": \"dma-controller@ffaa0000\", \"label\": \"lpd_dma_chan2\", \"pm_node\": \"PM_DEV_ADMA_2\"}, {\"dev\": \"dma-controller@ffab0000\", \"label\": \"lpd_dma_chan3\", \"pm_node\": \"PM_DEV_ADMA_3\"}, {\"dev\": \"dma-controller@ffac0000\", \"label\": \"lpd_dma_chan4\", \"pm_node\": \"PM_DEV_ADMA_4\"}, {\"dev\": \"dma-controller@ffad0000\", \"label\": \"lpd_dma_chan5\", \"pm_node\": \"PM_DEV_ADMA_5\"}, {\"dev\": \"dma-controller@ffae0000\", \"label\": \"lpd_dma_chan6\", \"pm_node\": \"PM_DEV_ADMA_6\"}, {\"dev\": \"dma-controller@ffaf0000\", \"label\": \"lpd_dma_chan7\", \"pm_node\": \"PM_DEV_ADMA_7\"}, {\"dev\": \"ethernet@ff0c0000\", \"label\": \"gem0\", \"pm_node\": \"PM_DEV_GEM_0\"}, {\"dev\": \"ethernet@ff0d0000\", \"label\": \"gem1\", \"pm_node\": \"PM_DEV_GEM_1\"}, {\"dev\": \"gpio@ff0b0000\", \"label\": \"gpio0\", \"pm_node\": \"PM_DEV_GPIO\", \"status\": \"disabled\"}, {\"dev\": \"gpio@f1020000\", \"label\": \"gpio1\", \"pm_node\": \"PM_DEV_GPIO_PMC\", \"status\": \"disabled\"}, {\"dev\": \"i2c@ff020000\", \"label\": \"i2c0\", \"pm_node\": \"PM_DEV_I2C_0\", \"status\": \"disabled\"}, {\"dev\": \"i2c@ff030000\", \"label\": \"i2c1\", \"pm_node\": \"PM_DEV_I2C_1\"}, {\"dev\": \"i2c@f1000000\", \"label\": \"i2c2\", \"pm_node\": \"PM_DEV_I2C_PMC\"}, {\"dev\": \"memory-controller@f6150000\", \"label\": \"mc0\", \"status\": \"disabled\"}, {\"dev\": \"memory-controller@f62c0000\", \"label\": \"mc1\", \"status\": \"disabled\"}, {\"dev\": \"memory-controller@f6430000\", \"label\": \"mc2\", \"status\": \"disabled\"}, {\"dev\": \"memory-controller@f65a0000\", \"label\": \"mc3\", \"status\": \"disabled\"}, {\"dev\": \"memory-controller@ff960000\", \"label\": \"ocm\"}, {\"dev\": \"rtc@f12a0000\", \"label\": \"rtc\", \"pm_node\": \"PM_DEV_RTC\"}, {\"dev\": \"mmc@f1040000\", \"label\": \"sdhci0\", \"pm_node\": \"PM_DEV_SDIO_0\", \"status\": \"disabled\"}, {\"dev\": \"mmc@f1050000\", \"label\": \"sdhci1\", \"pm_node\": \"PM_DEV_SDIO_1\"}, {\"bootph\": \"all\", \"dev\": \"serial@ff010000\", \"label\": \"serial1\", \"pm_node\": \"PM_DEV_UART_1\", \"status\": \"disabled\"}, {\"dev\": \"spi@f1010000\", \"label\": \"ospi\", \"pm_node\": \"PM_DEV_OSPI\", \"status\": \"disabled\"}, {\"dev\": \"spi@f1030000\", \"label\": \"qspi\", \"pm_node\": \"PM_DEV_QSPI\"}, {\"dev\": \"spi@ff040000\", \"label\": \"spi0\", \"pm_node\": \"PM_DEV_SPI_0\", \"status\": \"disabled\"}, {\"dev\": \"spi@ff050000\", \"label\": \"spi1\", \"pm_node\": \"PM_DEV_SPI_1\", \"status\": \"disabled\"}, {\"dev\": \"sysmon@f1270000\", \"label\": \"sysmon0\"}, {\"dev\": \"sysmon@109270000\", \"label\": \"sysmon1\", \"status\": \"disabled\"}, {\"dev\": \"sysmon@111270000\", \"label\": \"sysmon2\", \"status\": \"disabled\"}, {\"dev\": \"sysmon@119270000\", \"label\": \"sysmon3\", \"status\": \"disabled\"}, {\"dev\": \"timer@ff0f0000\", \"label\": \"ttc1\", \"pm_node\": \"PM_DEV_TTC_1\"}, {\"dev\": \"timer@ff110000\", \"label\": \"ttc3\", \"pm_node\": \"PM_DEV_TTC_3\"}, {\"dev\": \"usb@ff9d0000\", \"label\": \"usb0\", \"pm_node\": \"PM_DEV_USB_0\"}, {\"dev\": \"pci@fca10000\", \"label\": \"cpm_pciea\", \"status\": \"disabled\"}, {\"dev\": \"pcie@fcdd0000\", \"label\": \"cpm5_pcie\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@fd4d0000\", \"label\": \"watchdog\", \"pm_node\": \"PM_DEV_SWDT_FPD\", \"status\": \"disabled\"}, {\"dev\": \"watchdog@ff120000\", \"label\": \"watchdog1\", \"pm_node\": \"PM_DEV_SWDT_LPD\", \"status\": \"disabled\"}, {\"dev\": \"edac@f2014050\", \"label\": \"xilsem_edac\", \"status\": \"disabled\"}, {\"dev\": \"pmcdma@f11c0000\", \"label\": \"dma0\"}, {\"dev\": \"pmcdma@f11d0000\", \"label\": \"dma1\"}, {\"dev\": \"rng@f1230000\", \"label\": \"trng\"}, {\"dev\": \"cframe@f12d0000\", \"label\": \"pmc_cfi_cframe_0\"}, {\"dev\": \"cfu_apb@f12b0000\", \"label\": \"pmc_cfu_apb_0\"}, {\"dev\": \"ppu1_mdm@f0310000\", \"label\": \"pmc_ppu1_mdm_0\"}, {\"dev\": \"iomodule@f0280000\", \"label\": \"iomodule0\"}, {\"dev\": \"mailbox@ff320000\", \"label\": \"ipi_pmc\"}, {\"dev\": \"mailbox@ff390000\", \"label\": \"ipi_pmc_nobuf\"}, {\"dev\": \"mailbox@ff310000\", \"label\": \"ipi_psm\"}, {\"dev\": \"mailbox@ff330000\", \"label\": \"ipi0\"}, {\"dev\": \"mailbox@ff360000\", \"label\": \"ipi3\"}, {\"dev\": \"mailbox@ff370000\", \"label\": \"ipi4\"}, {\"dev\": \"mailbox@ff3a0000\", \"label\": \"ipi6\"}, {\"dev\": \"coresight@f0800000\", \"label\": \"coresight\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-aes@f11e0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_aes\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-bbram-ctrl@f11f0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_bbram_ctrl\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-crf-0@fd1a0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_crf_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-crl-0@ff5e0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_crl_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-crp-0@f1260000\", \"label\": \"ps_wizard_0_pmcps_0_psv_crp_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-a720-cti@f0d10000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_cti\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-a720-dbg@f0d00000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_dbg\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-a720-etm@f0d30000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_etm\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-a720-pmu@f0d20000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a720_pmu\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-a721-cti@f0d50000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_cti\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-a721-dbg@f0d40000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_dbg\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-a721-etm@f0d70000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_etm\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-a721-pmu@f0d60000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_a721_pmu\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-apu-cti@f0ca0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_cti\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-apu-ela@f0c60000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_ela\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-apu-etf@f0c30000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_etf\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-apu-fun@f0c20000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_apu_fun\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-fpd-atm@f0b80000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_fpd_atm\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-fpd-stm@f0b70000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_fpd_stm\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-coresight-lpd-atm@f0980000\", \"label\": \"ps_wizard_0_pmcps_0_psv_coresight_lpd_atm\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-rsa@f1200000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_rsa\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-efuse-cache@f1250000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_efuse_cache\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-efuse-ctrl@f1240000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_efuse_ctrl\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-fpd-afi-0@fd360000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-fpd-afi-2@fd380000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_2\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-fpd-afi-mem-0@a4000000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_mem_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-fpd-afi-mem-2@b0000000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_afi_mem_2\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-apu-0@fd5c0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_apu_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-fpd-cci-0@fd5e0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_cci_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-fpd-gpv-0@fd700000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_gpv_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-fpd-slcr-0@fd610000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_slcr_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-fpd-slcr-secure-0@fd690000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_slcr_secure_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-fpd-smmu-0@fd5f0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_fpd_smmu_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-scntr-0@ff130000\", \"label\": \"ps_wizard_0_pmcps_0_psv_scntr_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-scntrs-0@ff140000\", \"label\": \"ps_wizard_0_pmcps_0_psv_scntrs_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-ipi-buffer@ff3f0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_ipi_buffer\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-lpd-afi-0@ff9b0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_afi_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-lpd-afi-mem-0@80000000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_afi_mem_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-lpd-iou-secure-slcr-0@ff0a0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_iou_secure_slcr_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-lpd-iou-slcr-0@ff080000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_iou_slcr_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-lpd-slcr-0@ff410000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_slcr_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-lpd-slcr-secure-0@ff510000\", \"label\": \"ps_wizard_0_pmcps_0_psv_lpd_slcr_secure_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-ocm-ctrl@ff960000\", \"label\": \"ps_wizard_0_pmcps_0_psv_ocm_ctrl\", \"pm_node\": \"PM_DEV_OCM_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-global-0@f1110000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_global_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-ram@f2000000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_ram\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-ram-npi@f6000000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_ram_npi\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-slave-boot@f1220000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_slave_boot\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-slave-boot-stream@f2100000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_slave_boot_stream\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-tmr-inject-0@f0083000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_tmr_inject_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-ram-data-cntlr@f0240000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_ram_data_cntlr\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-ram-instr-cntlr@f0200000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_ram_instr_cntlr\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-tmr-manager-0@f0283000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_tmr_manager_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-psm-global-reg@ffc90000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_global_reg\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-psm-iomodule-0@ffc80000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_iomodule_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-psm-tmr-inject-0@ffcd0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_tmr_inject_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-psm-tmr-manager-0@ffcc0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_tmr_manager_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-r5-0-atcm-lockstep@ffe10000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_0_atcm_lockstep\", \"pm_node\": \"PM_DEV_TCM_0_A\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-r5-0-btcm-lockstep@ffe30000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_0_btcm_lockstep\", \"pm_node\": \"PM_DEV_TCM_0_B\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-r5-0-data-cache@ffe50000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_0_data_cache\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-r5-0-instruction-cache@ffe40000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_0_instruction_cache\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-r5-1-data-cache@ffed0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_1_data_cache\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-r5-1-instruction-cache@ffec0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_r5_1_instruction_cache\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-psm-ram-data-cntlr@ffc20000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_ram_data_cntlr\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-psm-ram-instr-cntlr@ffc00000\", \"label\": \"ps_wizard_0_pmcps_0_psv_psm_ram_instr_cntlr\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-rpu-0@ff9a0000\", \"label\": \"ps_wizard_0_pmcps_0_psv_rpu_0\"}, {\"dev\": \"ps-wizard-0-pmcps-0-psv-pmc-sha@f1210000\", \"label\": \"ps_wizard_0_pmcps_0_psv_pmc_sha\"}, {\"bootph\": \"all\", \"dev\": \"versal_firmware\"}, {\"dev\": \"ipi_pmc\", \"label\": \"ipi_pmc\"}, {\"dev\": \"ipi_pmc_nobuf\", \"label\": \"ipi_pmc_nobuf\"}, {\"dev\": \"ipi_psm\", \"label\": \"ipi_psm\"}, {\"dev\": \"ipi0\", \"label\": \"ipi0\"}, {\"dev\": \"ipi1\", \"label\": \"ipi1\"}, {\"dev\": \"ipi2\", \"label\": \"ipi2\"}, {\"dev\": \"ipi3\", \"label\": \"ipi3\"}, {\"dev\": \"ipi4\", \"label\": \"ipi4\"}, {\"dev\": \"ipi5\", \"label\": \"ipi5\"}, {\"dev\": \"ipi6\", \"label\": \"ipi6\"}, {\"dev\": \"ps_wizard_0_pmcps_0_psv_ipi_buffer\", \"label\": \"ps_wizard_0_pmcps_0_psv_ipi_buffer\"}, {\"dev\": \"l2\", \"label\": \"l2\"}, {\"dev\": \"cpu_opp_table\", \"label\": \"cpu_opp_table\"}, {\"bootph\": \"all\", \"dev\": \"dcc\", \"label\": \"dcc\"}, {\"dev\": \"fpga\", \"label\": \"fpga\"}, {\"dev\": \"psci\", \"label\": \"psci\"}, {\"dev\": \"pmu\"}, {\"dev\": \"timer\", \"label\": \"timer\"}, {\"dev\": \"versal_fpga\", \"label\": \"versal_fpga\"}, {\"dev\": \"sensor0\", \"label\": \"sensor0\"}, {\"bootph\": \"all\", \"dev\": \"amba_rpu\", \"label\": \"amba_rpu\"}, {\"dev\": \"psv_r5_0_atcm_global\", \"label\": \"psv_r5_0_atcm_global\", \"pm_node\": \"PM_DEV_TCM_0_A\"}, {\"dev\": \"psv_r5_0_btcm_global\", \"label\": \"psv_r5_0_btcm_global\", \"pm_node\": \"PM_DEV_TCM_0_B\"}, {\"dev\": \"psv_r5_1_atcm_global\", \"label\": \"psv_r5_1_atcm_global\", \"pm_node\": \"PM_DEV_TCM_1_A\"}, {\"dev\": \"psv_r5_1_btcm_global\", \"label\": \"psv_r5_1_btcm_global\", \"pm_node\": \"PM_DEV_TCM_1_B\"}, {\"dev\": \"amba_xppu\", \"label\": \"amba_xppu\"}, {\"dev\": \"amba_xmpu\", \"label\": \"amba_xmpu\"}, {\"dev\": \"__lopper-phandles__\"}, {\"dev\": \"iommu@fd800000\"}, {\"dev\": \"serial@ff000000\"}, {\"dev\": \"timer@ff100000\"}, {\"dev\": \"mailbox@ff380000\"}, {\"dev\": \"libmetal_uio_desc0@99c8000\"}, {\"dev\": \"libmetal_uio_desc1@99cc000\"}, {\"dev\": \"libmetal_uio_data@99d0000\"}]";
                         lopper,access-keep-all = <0x1>;
                         os,type = "linux";
                         cpus = <&cpus_a72 0x3 0x80000003>;
@@ -6259,7 +6279,7 @@
                 R5_1_BAREMETAL {
                         phandle = <0x15f>;
                         access-json = "[{\"dev\": \"serial@ff000000\"}, {\"dev\": \"psv(_|-)rpu(_|-)0@ff9a0000$\"}, {\"dev\": \"timer@ff100000\"}, {\"dev\": \"mailbox@ff350000\"}, {\"dev\": \"psv_r5_1_atcm_global@ffe90000\"}, {\"dev\": \"libmetal_uio_desc0@99c8000\"}, {\"dev\": \"libmetal_uio_desc1@99cc000\"}, {\"dev\": \"libmetal_uio_data@99d0000\"}, {\"dev\": \"libmetal_desc0@99c8000\"}, {\"dev\": \"libmetal_desc1@99cc000\"}, {\"dev\": \"libmetal_data@99d0000\"}]";
-                        core_num = <0x1>;
+                        core_num = <0x0>;
                         cpu_config_str = "split";
                         rpu_pd_val = <0x66 0x18110006>;
                         os,type = "baremetal";
