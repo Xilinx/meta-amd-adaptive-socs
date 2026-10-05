@@ -13,6 +13,10 @@ files, multiconfig files, system device tree files, boot pdi, kernel configurati
 fragments, series configuration compiler(.scc) files etc. This layer also supports
 to enable Xen hypervisor.
 
+* **meta-amd-adaptive-socs-zephyr-bsp**: layer containing AMD Adaptive SoC's Zephyr
+BSP machine configuration files for FPGA's (MicroBlaze-V) and Adaptive SoC's
+evaluation boards.
+
 > **Note:** Additional information on AMD Adaptive SoC's and FPGA's can be found at:
 	https://www.amd.com/en/products/adaptive-socs-and-fpgas.html
 
@@ -45,7 +49,7 @@ https://docs.yoctoproject.org/dev/contributor-guide/submit-changes.html#
 `git format-patch -s --subject-prefix="meta-amd-adaptive-socs][<BRANCH_NAME>][PATCH" -1`
 
 **Example:**
-`git format-patch -s --subject-prefix="meta-amd-adaptive-socs][scarthgap][PATCH" -1`
+`git format-patch -s --subject-prefix="meta-amd-adaptive-socs][wrynose][PATCH" -1`
 
 **Maintainers:**
 

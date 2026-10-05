@@ -6,7 +6,7 @@ layers.
 The following instructions require OE-Core meta and BitBake. Poky provides these
 components, however they can be acquired separately.
 
-> **Pre-requisites:** See [Preparing Build Host](https://docs.yoctoproject.org/5.0.8/singleindex.html#preparing-the-build-host) documentation.
+> **Pre-requisites:** See [Preparing Build Host](https://docs.yoctoproject.org/singleindex.html#preparing-the-build-host) documentation.
 
 1. Follow [Building Instructions](https://github.com/Xilinx/meta-xilinx/blob/master/README.building.md)
    upto step 5.
@@ -24,8 +24,19 @@ $ bitbake-layers add-layer ./<path-to-layer>/meta-amd-adaptive-socs/meta-amd-ada
 $ bitbake-layers add-layer ./<path-to-layer>/meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp
 ```
 
+   Optionally, to build Zephyr for AMD FPGA(MicroBlaze-V) and Adaptive SoC's eval
+   boards, also add the meta-amd-adaptive-socs-zephyr-bsp layer. This layer
+   additionally requires meta-zephyr(meta-zephyr-core) and the meta-xilinx
+   meta-amd-zephyr layer, see
+   [meta-amd-adaptive-socs-zephyr-bsp/README.md](meta-amd-adaptive-socs-zephyr-bsp/README.md)
+   for the full dependency list.
+```
+$ bitbake-layers add-layer ./<path-to-layer>/meta-amd-adaptive-socs/meta-amd-adaptive-socs-zephyr-bsp
+```
+
 4. Continue [Building Instructions]([../README.building.md](https://github.com/Xilinx/meta-xilinx/blob/master/README.building.md)) from step 5(skip step 7).
 
 * For list of available SDT target machines see meta layer conf/machine/*.conf file.
 
   * [meta-amd-adaptive-socs-bsp machine conf file](meta-amd-adaptive-socs-bsp/conf/machine)
+  * [meta-amd-adaptive-socs-zephyr-bsp machine conf file](meta-amd-adaptive-socs-zephyr-bsp/conf/machine)
