@@ -26,9 +26,9 @@ machine:
             comment: "Enable meta-xilinx-imgrcvry if available"
             op: 'conf/enable-xilinx-imgrcvry.conf'
         EXTRA_OECMAKE:append:pn-xilplmi:
-            comment: 'Enables the restoration of the multi-boot register for A/B firmware platforms'
+            comment: 'Restore the multi-boot register for A/B firmware and drop the JTAG and Security features'
             op: '='
-            val: ' -DXILPLMI_pm_restore_multiboot=ON'
+            val: ' -DXILPLMI_pm_restore_multiboot=ON -DXILPLMI_plm_auth_jtag_en=OFF -DXILPLMI_plm_rsa_en=OFF -DXILPLMI_plm_ecdsa_en=OFF -DXILPLMI_plm_puf_en=OFF -DXILPLMI_plm_ocp_en=OFF -DXILPLMI_plm_ocp_key_mgmt_en=OFF'
         CFLAGS:append:pn-image-selector:
             comment: 'Enable Push Button support'
             op: '='
