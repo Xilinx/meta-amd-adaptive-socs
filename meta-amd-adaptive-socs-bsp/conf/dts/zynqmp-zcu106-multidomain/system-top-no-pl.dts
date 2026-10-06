@@ -1292,7 +1292,9 @@
                 };
         };
 
-        timer {
+        arm_generic_timer: timer {
+                phandle = <0x199>;
+                label = "arm_generic_timer";
                 compatible = "arm,armv8-timer";
                 interrupt-parent = <&imux>;
                 interrupts = <0x1 0xd 0xf08 0x1 0xe 0xf08 0x1 0xb 0xf08 0x1 0xa 0xf08>;
@@ -6917,6 +6919,7 @@
                 ref48 = "/ref48M";
                 refhdmi = "/refhdmi";
                 dpcon_in = "/dpcon/port/endpoint";
+                arm_generic_timer = "/timer";
                 libmetal_uio_desc099c8000 = "/axi/libmetal_uio_desc0@99c8000";
                 libmetal_uio_desc199cc000 = "/axi/libmetal_uio_desc1@99cc000";
                 libmetal_uio_data99d0000 = "/axi/libmetal_uio_data@99d0000";
@@ -6986,7 +6989,10 @@
                         phandle = <0x192>;
                         compatible = "openamp,domain-v1";
                         zephyr-version = "4.3";
-                        access = <&ipi1 0x0>;
+                        access = <&ipi1 0x0>,
+                         <&ttc0 0x0>,
+                         <&psu_r5_0_atcm 0x0>,
+                         <&psu_r5_0_btcm 0x0>;
                         sram = <0x0 0x9800000 0x0 0x20000 0x0 0x0 0x0 0x10000 0x0 0x20000 0x0 0x10000>;
                         reserved-memory = <0x18c 0x18d 0x18e 0x18f 0x190 0x191>;
                         cpus = <&cpus_r5_0 0x1 0x80000000>;
@@ -7008,7 +7014,7 @@
                         linker-section-stack = <0x7f>;
                         linker-section-resource-table = <0x191>;
                         linker-section-resource-table-offset = <0x0>;
-                        access-json = "[{\"dev\": \"ipi1\"}]";
+                        access-json = "[{\"dev\": \"ipi1\"}, {\"dev\": \"ttc0\"}, {\"dev\": \"psu(_|-)r5(_|-)0(_|-)atcm(@0){0,1}$\"}, {\"dev\": \"psu(_|-)r5(_|-)0(_|-)btcm(@20000){0,1}$\"}]";
 
                         domain-to-domain {
                                 compatible = "openamp,domain-to-domain-v1";
@@ -7120,21 +7126,21 @@
                 };
 
                 libmetal_desc0: libmetal_desc0@99c8000 {
-                        phandle = <0x199>;
+                        phandle = <0x19a>;
                         label = "libmetal_desc0";
                         no-map;
                         reg = <0x0 0x99c8000 0x0 0x4000>;
                 };
 
                 libmetal_desc1: libmetal_desc1@99cc000 {
-                        phandle = <0x19a>;
+                        phandle = <0x19b>;
                         label = "libmetal_desc1";
                         no-map;
                         reg = <0x0 0x99cc000 0x0 0x4000>;
                 };
 
                 libmetal_data: libmetal_data@99d0000 {
-                        phandle = <0x19b>;
+                        phandle = <0x19c>;
                         label = "libmetal_data";
                         no-map;
                         reg = <0x0 0x99d0000 0x0 0x40000>;
