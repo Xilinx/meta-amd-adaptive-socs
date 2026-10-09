@@ -2527,6 +2527,7 @@
                         compatible = "uio";
                         status = "okay";
                         linux,uio-name = "libmetal-ipi";
+                        libmetal,uio-ipi-bitmask = <0x10>;
 
                         ipi_3_to_ipi_asu: child@eb310000 {
                                 phandle = <0x175>;
@@ -3513,6 +3514,7 @@
                         reg = <0x0 0x9888000 0x0 0x78000>;
                         no-map;
                         label = "vdev0buffer";
+                        compatible = "shared-dma-pool";
                 };
 
                 rsctbl: rsctbl@9800000 {
@@ -3980,5 +3982,32 @@
                 NoC_C2_C3_ddr_memory = "/memory@50000000000";
                 pwm_fan = "/pwm-fan";
                 usb_hub_delay = "/enable-delay";
+        };
+
+        remoteproc@eba00000 {
+                compatible = "xlnx,versal-net-r52fss";
+                #address-cells = <0x2>;
+                #size-cells = <0x2>;
+                xlnx,cluster-mode = <0x0>;
+                ranges = <0x0 0x0 0x0 0xeba00000 0x0 0x10000 0x0 0x10000 0x0 0xeba10000 0x0 0x8000 0x0 0x18000 0x0 0xeba20000 0x0 0x8000>;
+
+                r52f@0 {
+                        compatible = "xlnx,versal2-r52f";
+                        power-domains = <&scmi_devpd 0x0>,
+                         <&scmi_devpd 0x44>,
+                         <&scmi_devpd 0x45>,
+                         <&scmi_devpd 0x46>;
+                        reg = <0x0 0x0 0x0 0x10000 0x0 0x10000 0x0 0x8000 0x0 0x18000 0x0 0x8000>;
+                        reg-names = "atcm0", "btcm0", "ctcm0";
+                        memory-region = <&trace_buffer>,
+                         <&rsctbl>,
+                         <&vdev0buffer>,
+                         <&vdev0vring0>,
+                         <&vdev0vring1>,
+                         <&ddrboot>;
+                        mboxes = <&ipi_1_nobuf_to_ipi_2_nobuf 0x0>,
+                         <&ipi_1_nobuf_to_ipi_2_nobuf 0x1>;
+                        mbox-names = "tx", "rx";
+                };
         };
 };
