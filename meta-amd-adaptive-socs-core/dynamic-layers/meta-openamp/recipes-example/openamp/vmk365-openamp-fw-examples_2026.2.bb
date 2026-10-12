@@ -4,8 +4,8 @@ DESCRIPTION = "Pre-built Cortex-R52 Zephyr OpenAMP firmware demo payload for the
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-2ve-2vm-vmk365-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10110607/external/openamp-zephyr-demo/versal-2ve-2vm-vmk365-multidomain_openamp-zephyr-demo_10110607.tar.gz"
-SRC_URI[sha256sum] = "12eaaa6aece836fa01560c662277ced8172ea917f8c9a1a464538a88fc82b7d6"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10120532/external/openamp-zephyr-demo/versal-2ve-2vm-vmk365-multidomain_openamp-zephyr-demo_10120532.tar.gz"
+SRC_URI[sha256sum] = "f5ca804342292b25338647e9eb6c30cb89c08636885371dd240d63454da567cd"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa78-common = "${MACHINE}"
