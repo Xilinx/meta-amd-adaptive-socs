@@ -9,8 +9,8 @@ applications load onto the RPU on the AMD Versal Series Gen 2 VEK385 \
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-2ve-2vm-vek385-revb-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10120532/external/openamp-zephyr-demo/versal-2ve-2vm-vek385-revb-multidomain_openamp-zephyr-demo_10120532.tar.gz"
-SRC_URI[sha256sum] = "bac50319e8cf833c96b7aa5bb889fa331d145814cab9c87594f5482c8237def9"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10130555/external/openamp-zephyr-demo/versal-2ve-2vm-vek385-revb-multidomain_openamp-zephyr-demo_10130555.tar.gz"
+SRC_URI[sha256sum] = "f293fd74b92c6c1b32f2f2712787d74ff1059eebb5917a45de958788738f97e0"
 
 COMPATIBLE_MACHINE = "^$"                                                          
 COMPATIBLE_MACHINE:amd-cortexa78-common = "${MACHINE}"
