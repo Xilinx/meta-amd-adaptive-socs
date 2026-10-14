@@ -484,6 +484,46 @@
                 };
         };
 
+        psv_r5_0_atcm_global: psv_r5_0_atcm_global@ffe00000 {
+                phandle = <0x8b>;
+                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
+                power-domains = <&versal_firmware 0x1831800b>;
+                reg = <0x0 0xffe00000 0x0 0x10000>;
+                status = "okay";
+                xlnx,ip-name = "psv_tcm_global";
+                xlnx,name = "CIPS_0_pspmc_0_psv_r5_0_atcm_global";
+        };
+
+        psv_r5_0_btcm_global: psv_r5_0_btcm_global@ffe20000 {
+                phandle = <0x162>;
+                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
+                power-domains = <&versal_firmware 0x1831800c>;
+                reg = <0x0 0xffe20000 0x0 0x10000>;
+                status = "okay";
+                xlnx,ip-name = "psv_tcm_global";
+                xlnx,name = "CIPS_0_pspmc_0_psv_r5_0_btcm_global";
+        };
+
+        psv_r5_1_atcm_global: psv_r5_1_atcm_global@ffe90000 {
+                phandle = <0x8c>;
+                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
+                power-domains = <&versal_firmware 0x1831800d>;
+                reg = <0x0 0xffe90000 0x0 0x10000>;
+                status = "okay";
+                xlnx,ip-name = "psv_tcm_global";
+                xlnx,name = "CIPS_0_pspmc_0_psv_r5_1_atcm_global";
+        };
+
+        psv_r5_1_btcm_global: psv_r5_1_btcm_global@ffeb0000 {
+                phandle = <0x8d>;
+                compatible = "xlnx,psv-tcm-global-1.0", "mmio-sram";
+                power-domains = <&versal_firmware 0x1831800e>;
+                reg = <0x0 0xffeb0000 0x0 0x10000>;
+                status = "okay";
+                xlnx,ip-name = "psv_tcm_global";
+                xlnx,name = "CIPS_0_pspmc_0_psv_r5_1_btcm_global";
+        };
+
         amba_xppu: indirect-bus@1 {
                 phandle = <0x163>;
                 compatible = "indirect-bus";
@@ -766,6 +806,10 @@
                 ipi_2_to_ipi_pmc_nobuf = "/axi/mailbox@ff350000/child@ff390000";
                 ipi_2_to_ipi_psm = "/axi/mailbox@ff350000/child@ff310000";
                 CIPS_0_pspmc_0_psv_rpu_0 = "/axi/CIPS-0-pspmc-0-psv-rpu-0@ff9a0000";
+                psv_r5_0_atcm_global = "/psv_r5_0_atcm_global@ffe00000";
+                psv_r5_0_btcm_global = "/psv_r5_0_btcm_global@ffe20000";
+                psv_r5_1_atcm_global = "/psv_r5_1_atcm_global@ffe90000";
+                psv_r5_1_btcm_global = "/psv_r5_1_btcm_global@ffeb0000";
                 amba_xppu = "/indirect-bus@1";
                 lpd_xppu = "/indirect-bus@1/xppu@ff990000";
                 pmc_xppu = "/indirect-bus@1/xppu@f1310000";
@@ -854,6 +898,10 @@
                          <&versal_fpga 0x0>,
                          <&sensor0 0x0>,
                          <&amba_rpu 0x0>,
+                         <&psv_r5_0_atcm_global 0x0>,
+                         <&psv_r5_0_btcm_global 0x0>,
+                         <&psv_r5_1_atcm_global 0x0>,
+                         <&psv_r5_1_btcm_global 0x0>,
                          <&amba_xppu 0x0>,
                          <&amba_xmpu 0x0>,
                          <&serial0 0x0>,
@@ -875,7 +923,9 @@
 
                                         relation0 {
                                                 remote = <0x18e>;
-                                                elfload = <&rproc0>,
+                                                elfload = <&psv_r5_0_atcm_global>,
+                                                 <&psv_r5_0_btcm_global>,
+                                                 <&rproc0>,
                                                  <&trace_buffer>,
                                                  <&rsctbl>;
                                         };
@@ -908,7 +958,9 @@
                         phandle = <0x18e>;
                         compatible = "openamp,domain-v1";
                         zephyr-version = "4.3";
-                        access = <&serial0 0x0>;
+                        access = <&serial0 0x0>,
+                         <&psv_r5_0_atcm_global 0x0>,
+                         <&psv_r5_0_btcm_global 0x0>;
                         sram = <0x0 0x9800000 0x0 0x20000 0x0 0x0 0x0 0x10000 0x0 0x20000 0x0 0x10000>;
                         reserved-memory = <0x188 0x189 0x18a 0x18b 0x18c 0x18d>;
                         lopper,activate = "zephyr";
@@ -954,6 +1006,7 @@
                          <&CIPS_0_pspmc_0_psv_rpu_0 0x0>,
                          <&ttc2 0x0>,
                          <&ipi2 0x0>,
+                         <&psv_r5_1_atcm_global 0x0>,
                          <&libmetal_uio_desc099c8000 0x0>,
                          <&libmetal_uio_desc199cc000 0x0>,
                          <&libmetal_uio_data99d0000 0x0>,

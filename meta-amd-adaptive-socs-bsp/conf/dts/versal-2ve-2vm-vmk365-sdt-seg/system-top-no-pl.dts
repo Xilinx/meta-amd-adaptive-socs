@@ -4069,6 +4069,7 @@
                         xlnx,route-through-fpd = <0x0>;
                         xlnx,coherency = <0x0>;
                         xlnx,name = "ps_wizard_0_ps11_0_usb_0";
+                        dma-coherent;
 
                         dwc3_0: usb@f1b00000 {
                                 phandle = <0x9b>;
@@ -4087,11 +4088,23 @@
                                 xlnx,is-cache-coherent = <0x0>;
                                 xlnx,ip-name = "usb_xhci";
                                 xlnx,name = "ps_wizard_0_ps11_0_usb_xhci_0";
+                                dr_mode = "host";
+                                maximum-speed = "high-speed";
+                                dma-coherent;
+                                #address-cells = <0x1>;
+                                #size-cells = <0x0>;
+
+                                hub_2_0: hub@1 {
+                                        phandle = <0x142>;
+                                        compatible = "usb424,2744";
+                                        reg = <0x1>;
+                                        reset-gpios = <&usb_hub_delay 0x0 0x2710 0x2710>;
+                                };
                         };
                 };
 
                 usb1: usb@f1ef0000 {
-                        phandle = <0x142>;
+                        phandle = <0x143>;
                         compatible = "xlnx,versal-dwc3";
                         status = "disabled";
                         reg = <0x0 0xf1ef0000 0x0 0x100>;
@@ -4104,10 +4117,9 @@
                          <&scmi_clk 0x50>;
                         power-domains = <&scmi_devpd 0x2a>;
                         resets = <&scmi_reset 0x16>;
-                        dma-coherent;
 
                         dwc3_1: usb@f1c00000 {
-                                phandle = <0x143>;
+                                phandle = <0x144>;
                                 compatible = "snps,dwc3";
                                 status = "disabled";
                                 reg = <0x0 0xf1c00000 0x0 0x10000>;
@@ -4120,18 +4132,6 @@
                                 snps,usb3_lpm_capable;
                                 clock-names = "ref";
                                 clocks = <&scmi_clk 0x50>;
-                                dr_mode = "host";
-                                maximum-speed = "high-speed";
-                                dma-coherent;
-                                #address-cells = <0x1>;
-                                #size-cells = <0x0>;
-
-                                hub_2_0: hub@1 {
-                                        phandle = <0x144>;
-                                        compatible = "usb424,2744";
-                                        reg = <0x1>;
-                                        reset-gpios = <&usb_hub_delay 0x0 0x2710 0x2710>;
-                                };
                         };
                 };
 
@@ -8414,9 +8414,9 @@
                 ufshc = "/axi/ufs@f10b0000";
                 usb0 = "/axi/usb@f1ee0000";
                 dwc3_0 = "/axi/usb@f1ee0000/usb@f1b00000";
+                hub_2_0 = "/axi/usb@f1ee0000/usb@f1b00000/hub@1";
                 usb1 = "/axi/usb@f1ef0000";
                 dwc3_1 = "/axi/usb@f1ef0000/usb@f1c00000";
-                hub_2_0 = "/axi/usb@f1ef0000/usb@f1c00000/hub@1";
                 usb_mmi = "/axi/mmi-usb";
                 mmi_dwc3 = "/axi/mmi-usb/usb@edec0000";
                 usb3_dp_phy = "/axi/phy@edeb8000";

@@ -8,8 +8,8 @@ evaluation kit."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-vmk180-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10130555/external/openamp-zephyr-demo/versal-vmk180-multidomain_openamp-zephyr-demo_10130555.tar.gz"
-SRC_URI[sha256sum] = "42730d7b0ea0c34d21da33ecaed94aa267a21d1b8544a1f1b8b01097aa9a1db0"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10140754/external/openamp-zephyr-demo/versal-vmk180-multidomain_openamp-zephyr-demo_10140754.tar.gz"
+SRC_URI[sha256sum] = "5f5f4964400a51e0c5288851043ad337986510feb0c6b15b07f1cee109d41ba6"
 
 OPENAMPFW_PKGDIR_SUFFIX = "openamp-zephyr-demo"
 require conf/includes/openamp-fw-example.inc

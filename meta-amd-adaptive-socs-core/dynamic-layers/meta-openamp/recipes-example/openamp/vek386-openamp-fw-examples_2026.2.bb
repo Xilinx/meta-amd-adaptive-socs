@@ -7,8 +7,8 @@ applications load onto the RPU on the AMD VEK386 board."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${S}/versal-2ve-2vm-vek386-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10130555/external/openamp-zephyr-demo/versal-2ve-2vm-vek386-multidomain_openamp-zephyr-demo_10130555.tar.gz"
-SRC_URI[sha256sum] = "519e794caf502ad4717caafa2a7b0da3617271886b994a0160418b86074f910b"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10140754/external/openamp-zephyr-demo/versal-2ve-2vm-vek386-multidomain_openamp-zephyr-demo_10140754.tar.gz"
+SRC_URI[sha256sum] = "e7bd64243e7be22d5a8ae372a0ee3fd698a73ff3f1638206c4fa4ed7bc3c859f"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa78-common = "${MACHINE}"

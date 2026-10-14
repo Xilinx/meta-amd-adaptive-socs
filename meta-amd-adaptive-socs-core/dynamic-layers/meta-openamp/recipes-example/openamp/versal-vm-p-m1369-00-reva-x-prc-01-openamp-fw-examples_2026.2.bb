@@ -9,8 +9,8 @@ SOM mounted on the X-PRC-01 carrier."
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/versal-vm-p-m1369-00-reva-x-prc-01-reva-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10130555/external/openamp-zephyr-demo/versal-vm-p-m1369-00-reva-x-prc-01-reva-multidomain_openamp-zephyr-demo_10130555.tar.gz"
-SRC_URI[sha256sum] = "62937a9db66045ce4c90beb6db5e2a784662dbe1291300ffac4f7bbf7f7a51bd"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10140754/external/openamp-zephyr-demo/versal-vm-p-m1369-00-reva-x-prc-01-reva-multidomain_openamp-zephyr-demo_10140754.tar.gz"
+SRC_URI[sha256sum] = "aa2cd33d00e9a6e97333aed975007125257778548bc52330ff51ab61aa3909bb"
 
 OPENAMPFW_BOARD = "versal-vm-p-m1369-00-reva-x-prc-01"
 OPENAMPFW_PKGDIR_SUFFIX = "openamp-zephyr-demo"
