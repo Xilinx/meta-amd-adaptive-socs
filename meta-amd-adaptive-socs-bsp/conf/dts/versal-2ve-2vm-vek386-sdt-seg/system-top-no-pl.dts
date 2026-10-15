@@ -3265,6 +3265,11 @@
                 #size-cells = <0x2>;
         };
 
+        pmu {
+                compatible = "arm,cortex-a78-pmu";
+                interrupts = <0x1 0x7 0x4>;
+        };
+
         timer: timer {
                 phandle = <0x15e>;
                 compatible = "arm,armv8-timer";
@@ -3664,6 +3669,7 @@
                         interrupt-parent = <&imux>;
                         clock-names = "pixel_clk";
                         clocks = <&scmi_clk 0x67>;
+                        power-domains = <&scmi_devpd 0x42>;
                         xlnx,ip-name = "mmi_udh_dp";
                         xlnx,dp-lanes = <0x2>;
                         xlnx,edp-en = <0x0>;
@@ -3722,6 +3728,7 @@
                         clock-names = "axi_clk";
                         #dma-cells = <0x1>;
                         clocks = <&scmi_clk 0x6a>;
+                        power-domains = <&scmi_devpd 0x40>;
                 };
 
                 mmi_dc: mmi_dc@edd00000 {
@@ -3745,6 +3752,7 @@
                         clocks = <&scmi_clk 0x65>,
                          <&scmi_clk 0x67>,
                          <&scmi_clk 0x6b>;
+                        power-domains = <&scmi_devpd 0x40>;
                         resets = <&scmi_reset 0x18>;
                         xlnx,vid-intfc-mode = "Native";
                         xlnx,dc-presentation-mode = "Non_Live";
