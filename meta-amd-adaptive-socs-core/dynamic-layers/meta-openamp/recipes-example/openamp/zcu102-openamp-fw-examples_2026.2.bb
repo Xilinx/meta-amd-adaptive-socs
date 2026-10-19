@@ -4,8 +4,8 @@ DESCRIPTION = "Pre-built Cortex-R5 Zephyr OpenAMP firmware demo payload for the 
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/zynqmp-zcu102-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10180550/external/openamp-zephyr-demo/zynqmp-zcu102-multidomain_openamp-zephyr-demo_10180550.tar.gz"
-SRC_URI[sha256sum] = "1ac6723fe0d1f092d76ad7f75bf997dffa30a3879b5229a28851fe00a8be64c0"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10190543/external/openamp-zephyr-demo/zynqmp-zcu102-multidomain_openamp-zephyr-demo_10190543.tar.gz"
+SRC_URI[sha256sum] = "93415a569c93fb67912a2bffb3deba454d0c23cb728393b419b0af419e663dda"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa53-mali-common = "${MACHINE}"
