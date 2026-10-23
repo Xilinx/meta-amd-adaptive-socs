@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "b9586bd1e20b018fdfb5b94cece2bddf9218b1dc37074f1df09ebb556b
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa72-common = "${MACHINE}"
-COMPATIBLE_MACHINE:versal-vpk360-sdt-seg = "${MACHINE}"
+COMPATIBLE_MACHINE:versal-2vp-vpk360-sdt-seg = "${MACHINE}"
 # When do_unpack is executed it will extract tar file with original directory
 # name so set the FW_DIR pointing to pdi and dtsi files.
 FW_DIR = "vpk360-pl-bram-gpio-fw"
