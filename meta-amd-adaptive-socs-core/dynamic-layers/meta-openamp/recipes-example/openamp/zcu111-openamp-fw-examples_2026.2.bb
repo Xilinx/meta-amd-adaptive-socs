@@ -3,8 +3,8 @@ DESCRIPTION = " RPU SIDE OpenAMP RPU FW for Zehyr Demo "
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${UNPACKDIR}/zynqmp-zcu111-multidomain_openamp-zephyr-demo/LICENSE.md;md5=0b96a4c07d631aa5141bd3f058ba43b0"
 
-SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10220242/external/openamp-zephyr-demo/zynqmp-zcu111-multidomain_openamp-zephyr-demo_10220242.tar.gz"
-SRC_URI[sha256sum] = "24135e591309ccec998d5fc2b42d6bdaaa2052e9ec2b6d7550932339c5659ac2"
+SRC_URI = "https://edf.amd.com/sswreleases/rel-v2026.2/edf_files/2026.2/10230747/external/openamp-zephyr-demo/zynqmp-zcu111-multidomain_openamp-zephyr-demo_10230747.tar.gz"
+SRC_URI[sha256sum] = "7a47db1507aa2dbaab94c47947c07b8b19c67eb17a0fd3a800dc29de977edc87"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:amd-cortexa53-common = "${MACHINE}"
